@@ -1,0 +1,154 @@
+/**
+ * Quadrate pe — Componente Waitlist / Convocatoria Piloto
+ * Formulario de captura y acceso anticipado accesible y modular (BEM).
+ */
+
+.waitlist {
+  padding-block: clamp(var(--space-10), 7vw, var(--space-20));
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.waitlist__container {
+  max-width: 640px;
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.waitlist__header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.waitlist__eyebrow {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+  margin-bottom: var(--space-2);
+}
+
+.waitlist__title {
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.waitlist__description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.waitlist__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  background-color: var(--color-bg-base);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
+}
+
+.waitlist__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.waitlist__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.waitlist__label-required {
+  color: var(--color-status-error);
+}
+
+.waitlist__input,
+.waitlist__select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.waitlist__input:focus,
+.waitlist__select:focus {
+  outline: none;
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 3px var(--color-accent-focus);
+}
+
+.waitlist__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.waitlist__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-4) var(--space-6);
+  margin-top: var(--space-2);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-contrast);
+  background-color: var(--color-accent-primary);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.waitlist__submit:hover:not(:disabled),
+.waitlist__submit:focus-visible:not(:disabled) {
+  background-color: var(--color-accent-hover);
+  outline: 2px solid var(--color-accent-focus);
+  outline-offset: 2px;
+}
+
+.waitlist__submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Región de Feedback Dinámico Accesible (a11y) */
+.waitlist__feedback {
+  display: none;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-sm);
+}
+
+.waitlist__feedback--visible {
+  display: block;
+}
+
+.waitlist__feedback--success {
+  color: var(--color-status-success);
+  background-color: var(--color-status-success-bg);
+  border: 1px solid var(--color-status-success);
+}
+
+.waitlist__feedback--error {
+  color: var(--color-status-error);
+  background-color: var(--color-status-error-bg);
+  border: 1px solid var(--color-status-error);
+}
+
+@media (min-width: 640px) {
+  .waitlist__form {
+    padding: var(--space-8);
+  }
+}

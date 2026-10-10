@@ -17,3 +17,4 @@ npm-debug.log*
 .codegraph/
 dist/
 .cache/
+install.cmd

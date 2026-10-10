@@ -1,0 +1,75 @@
+/**
+ * Quadrate pe — Componente Stats
+ * Banda de métricas display monumental minimalista (BEM).
+ */
+
+.stats {
+  padding-block: clamp(var(--space-6), 4vw, var(--space-10));
+  background-color: var(--color-bg-base);
+}
+
+.stats__container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(var(--space-4), 3vw, var(--space-8));
+  align-items: start;
+  justify-items: center;
+  text-align: center;
+}
+
+.stats__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.stats__number {
+  display: block;
+  font-family: var(--font-family-display);
+  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-text-primary);
+  letter-spacing: -0.03em;
+  text-align: center;
+  margin-bottom: var(--space-3);
+}
+
+.stats__label {
+  display: block;
+  font-family: var(--font-family-sans);
+  font-size: clamp(0.75rem, 1.05vw, 0.9375rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  text-align: center;
+  white-space: nowrap;
+  margin-bottom: var(--space-2);
+}
+
+.stats__detail {
+  display: block;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+  max-width: 30ch;
+  text-align: center;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .stats__grid {
+    gap: var(--space-10);
+  }
+}

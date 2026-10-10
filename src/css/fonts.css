@@ -1,0 +1,13 @@
+/**
+ * Quadrate pe — Tipografía Autoalojada (Self-hosted)
+ * Satoshi (Fontshare / Indian Type Foundry)
+ * Licencia: Libre para uso comercial y personal.
+ */
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}

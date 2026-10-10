@@ -1,0 +1,112 @@
+/**
+ * Quadrate pe — Componente Caseta (Panel de Playas Aliadas)
+ * Panel de digitalización operativa para cocheras en alto contraste (BEM).
+ */
+
+.caseta {
+  max-width: var(--container-max-width);
+  width: calc(100% - (var(--container-padding-inline) * 2));
+  margin-inline: auto;
+  padding: clamp(var(--space-8), 5vw, var(--space-12));
+  background-color: var(--color-bg-contrast);
+  color: var(--color-text-contrast);
+  border: 1px solid var(--color-border-contrast);
+  border-radius: clamp(20px, 3vw, 32px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.caseta__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.caseta__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.caseta__eyebrow {
+  display: inline-flex;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-contrast);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-pill);
+  width: fit-content;
+}
+
+.caseta__title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  color: var(--color-text-contrast);
+}
+
+.caseta__lead {
+  font-size: var(--font-size-base);
+  color: var(--color-text-contrast-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+.caseta__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.caseta__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border-contrast);
+}
+
+.caseta__item-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-contrast);
+}
+
+.caseta__item-detail {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-contrast-muted);
+  line-height: var(--line-height-normal);
+}
+
+.caseta__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.caseta__figure {
+  width: 100%;
+  max-width: 320px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.caseta__image {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.45));
+}
+
+@media (min-width: 900px) {
+  .caseta__grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-12);
+  }
+}

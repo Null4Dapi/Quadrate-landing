@@ -1,0 +1,106 @@
+/**
+ * Quadrate pe — Componente Rates / Transparencia
+ * Desglose editorial de transparencia tarifaria y reglas de cobro justo (BEM).
+ */
+
+.rates {
+  padding-block: clamp(var(--space-10), 6vw, var(--space-16));
+  background-color: var(--color-bg-base);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.rates__container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.rates__header {
+  max-width: 640px;
+  margin-bottom: var(--space-8);
+}
+
+.rates__eyebrow {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+  margin-bottom: var(--space-2);
+}
+
+.rates__title {
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.rates__description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.rates__breakdown {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+}
+
+.rates__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.rates__row:last-child {
+  border-bottom: none;
+}
+
+.rates__row-category {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.rates__row-rule {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.rates__row-impact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent-primary);
+  background-color: var(--color-bg-accent-subtle);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-xs);
+  width: fit-content;
+}
+
+/* Tablet y Desktop (768px+) */
+@media (min-width: 768px) {
+  .rates__row {
+    grid-template-columns: 1.2fr 2fr 1.5fr;
+    align-items: center;
+    gap: var(--space-6);
+    padding-block: var(--space-6);
+  }
+
+  .rates__row-impact {
+    justify-self: end;
+  }
+}

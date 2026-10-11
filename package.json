@@ -1,0 +1,12 @@
+{
+  "name": "quadrate-landing",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Quadrate pe — Localización Inteligente y Gestión de Estacionamientos en Lima",
+  "scripts": {
+    "build:react": "node scripts/compilar-react.cjs",
+    "start": "node scripts/servidor-local.cjs"
+  },
+  "author": "Quadrate pe",
+  "license": "MIT"
+}

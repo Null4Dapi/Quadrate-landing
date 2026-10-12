@@ -19,8 +19,9 @@
       </a>
       <nav id="navegacion-principal" class="header__nav" aria-label="Navegación principal">
         <ul class="header__nav-list" role="tablist">
-          <li class="header__nav-item" role="presentation"><a href="#conductores" class="header__nav-link header__nav-link--active" role="tab" id="tab-conductores" aria-selected="true" aria-controls="vista-conductores">Cómo funciona</a></li>
+          <li class="header__nav-item" role="presentation"><a href="#conductores" class="header__nav-link header__nav-link--active" role="tab" id="tab-conductores" aria-selected="true" aria-controls="vista-conductores" data-tab-target="conductores">Cómo funciona</a></li>
           <li class="header__nav-item" role="presentation"><a href="#app" class="header__nav-link">App</a></li>
+          <li class="header__nav-item" role="presentation"><button type="button" class="header__nav-link header__nav-link--button header__nav-link--tab" role="tab" id="tab-live" aria-selected="false" aria-controls="vista-live" data-tab-target="live">Quadrate Live</button></li>
           <li class="header__nav-item" role="presentation"><a href="#tarifas" class="header__nav-link">Tarifas</a></li>
           <li class="header__nav-item" role="presentation"><button type="button" class="header__nav-link header__nav-link--button header__nav-link--tab" role="tab" id="tab-afiliar" aria-selected="false" aria-controls="vista-afiliacion" data-tab-target="afiliacion">Afiliar cochera</button></li>
         </ul>
@@ -57,21 +58,9 @@
     <section id="metricas" class="stats" aria-label="Métricas de impacto proyectado">
       <div class="stats__container">
         <div class="stats__grid">
-          <article class="stats__item">
-            <span class="stats__number">80%</span>
-            <h3 class="stats__label">Reducción de búsqueda</h3>
-            <p class="stats__detail">Menos circulación improductiva (cruising) saturando arterias viales.</p>
-          </article>
-          <article class="stats__item">
-            <span class="stats__number">&lt; 3s</span>
-            <h3 class="stats__label">Validación en garita</h3>
-            <p class="stats__detail">Lectura digital instantánea de pases QR sin frenar el flujo vehicular.</p>
-          </article>
-          <article class="stats__item">
-            <span class="stats__number">100%</span>
-            <h3 class="stats__label">Tarifas transparentes</h3>
-            <p class="stats__detail">Desglose estricto por hora y fracciones de 15 minutos reglamentarias.</p>
-          </article>
+          <article class="stats__item"><span class="stats__number">80%</span><h3 class="stats__label">Reducción de búsqueda</h3><p class="stats__detail">Menos circulación improductiva (cruising) saturando arterias viales.</p></article>
+          <article class="stats__item"><span class="stats__number">&lt; 3s</span><h3 class="stats__label">Validación en garita</h3><p class="stats__detail">Lectura digital instantánea de pases QR sin frenar el flujo vehicular.</p></article>
+          <article class="stats__item"><span class="stats__number">100%</span><h3 class="stats__label">Tarifas transparentes</h3><p class="stats__detail">Desglose estricto por hora y fracciones de 15 minutos reglamentarias.</p></article>
         </div>
       </div>
     </section>
@@ -228,8 +217,13 @@
     </section>
   </section>
 
-  <!-- Pestaña 2: Vista Integrada para Afiliación de Cocheras -->
-    <section id="vista-afiliacion" class="tab-view tab-view--affiliation affiliation-view" role="tabpanel" aria-labelledby="tab-afiliar" hidden>
+  <!-- Pestaña 2: Vista Interactiva Quadrate Live (React) -->
+  <section id="vista-live" class="tab-view quadrate-live" role="tabpanel" aria-labelledby="tab-live" hidden>
+    <div id="quadrate-live-root"></div>
+  </section>
+
+  <!-- Pestaña 3: Vista Integrada para Afiliación de Cocheras -->
+  <section id="vista-afiliacion" class="tab-view tab-view--affiliation affiliation-view" role="tabpanel" aria-labelledby="tab-afiliar" hidden>
       <div class="affiliation-view__container">
         <header class="affiliation-view__header">
           <span class="affiliation-view__eyebrow">Red de Playas Aliadas</span>
@@ -290,6 +284,8 @@
     </div>
   </footer>
 
-  <script type="module" src="src/js/main.js?v=0.0.7"></script>
+  <script src="src/assets/vendor/react.production.min.js"></script>
+  <script src="src/assets/vendor/react-dom.production.min.js"></script>
+  <script type="module" src="src/js/main.js?v=0.1.0"></script>
 </body>
 </html>

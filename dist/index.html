@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111e">
+  <meta name="description" content="Encuentra tu lugar en la ciudad con ParkGO. Conectamos a conductores que buscan estacionamiento con propietarios que tienen un espacio para ellos.">
+  <meta property="og:title" content="ParkGO · Tu lugar en la ciudad">
+  <meta property="og:description" content="Menos vueltas. Más ciudad. Una app para encontrar estacionamiento y darle movimiento a tu espacio.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://parkgo-recorrido.madodessigner22.chatgpt.site/assets/city.webp">
+  <link rel="canonical" href="https://parkgo-recorrido.madodessigner22.chatgpt.site/">
+  <title>ParkGO · Tu lugar en la ciudad</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/city.webp" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conductores">Saltar el recorrido</a>
+  <header class="header" id="header">
+    <a class="brand" href="#inicio" aria-label="ParkGO, inicio"><svg viewBox="0 0 32 38" aria-hidden="true"><path d="M16 1C7.7 1 1 7.6 1 15.8 1 27 16 37 16 37s15-10 15-21.2C31 7.6 24.3 1 16 1Z" fill="currentColor"/><path d="M11 9h7a6 6 0 0 1 0 12h-3v5h-4V9Zm4 4v4h3a2 2 0 0 0 0-4h-3Z" fill="#07111e"/></svg><span>park<span class="brand-go">go</span></span></a>
+    <nav class="desktop-nav" aria-label="Navegación principal"><a href="#conductores">Conductores</a><a href="#propietarios">Propietarios</a><a href="#como-funciona">Cómo funciona</a></nav>
+    <a class="header-cta" href="#explora">Conoce la app <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span></button>
+  </header>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Navegación móvil" hidden><a href="#conductores">Conductores</a><a href="#propietarios">Propietarios</a><a href="#como-funciona">Cómo funciona</a><a href="#explora">Conoce la app ↗</a></nav>
+  <main>
+    <section class="journey" id="inicio" aria-label="Un recorrido con ParkGO">
+      <div class="journey-stage" id="journey-stage">
+        <div class="scene-stack" aria-hidden="true">
+          <div class="scene is-active" data-scene="0"><img src="assets/city.webp" alt="" width="1536" height="864" fetchpriority="high"><video muted playsinline preload="none" tabindex="-1"></video></div>
+          <div class="scene" data-scene="1"><img src="assets/entrance.webp" alt="" width="1536" height="864" decoding="async"><video muted playsinline preload="none" tabindex="-1"></video></div>
+          <div class="scene" data-scene="2"><img src="assets/parked.webp" alt="" width="1536" height="864" decoding="async"><video muted playsinline preload="none" tabindex="-1"></video></div>
+          <div class="scene" data-scene="3"><img src="assets/owner.webp" alt="" width="1536" height="864" decoding="async"><video muted playsinline preload="none" tabindex="-1"></video></div>
+        </div>
+        <div class="journey-shade" aria-hidden="true"></div>
+        <div class="journey-grain" aria-hidden="true"></div>
+        <div class="journey-copy">
+          <article class="story is-active" data-story="0">
+            <p class="eyebrow"><span class="status-dot"></span> TU LUGAR EN LA CIUDAD</p>
+            <h1>Menos vueltas.<br><span>Más ciudad.</span></h1>
+            <p class="story-description">Tu tiempo es para vivirla.<br>Encuentra dónde estacionar con ParkGO.</p>
+            <div class="story-actions"><button class="button button-light" data-goto="1">Encuentra tu lugar <span aria-hidden="true">↗</span></button><a class="text-link light" href="#propietarios">Tengo un estacionamiento <span aria-hidden="true">↗</span></a></div>
+            <p class="story-note"><span class="mini-pin" aria-hidden="true">⌖</span> Conductores y estacionamientos, conectados.</p>
+          </article>
+          <article class="story" data-story="1" aria-hidden="true" inert>
+            <p class="eyebrow"><span class="status-dot"></span> 01 / ENCUENTRA</p>
+            <h2>Un espacio.<br><span>A tu alcance.</span></h2>
+            <p class="story-description">Consulta estacionamientos cerca de tu destino y revisa su disponibilidad en tiempo real.</p>
+            <div class="story-actions"><a class="button button-light" href="#explora" data-role-link="driver">Explora la experiencia <span aria-hidden="true">↗</span></a></div>
+            <p class="story-note">Ubicación · Disponibilidad · Tu próximo destino</p>
+          </article>
+          <article class="story" data-story="2" aria-hidden="true" inert>
+            <p class="eyebrow"><span class="status-dot"></span> 02 / LLEGA</p>
+            <h2>Ya llegaste.<br><span>Ahora disfruta.</span></h2>
+            <p class="story-description">Encuentra el estacionamiento que te funciona y sigue con lo que de verdad importa.</p>
+            <div class="story-actions"><a class="button button-light" href="#conductores">Conoce cómo funciona <span aria-hidden="true">↗</span></a></div>
+            <p class="story-note">La ciudad te espera. Tu lugar también.</p>
+          </article>
+          <article class="story" data-story="3" aria-hidden="true" inert>
+            <p class="eyebrow"><span class="status-dot"></span> 03 / CONECTA</p>
+            <h2>Tu espacio.<br><span>Su destino.</span></h2>
+            <p class="story-description">¿Tienes un estacionamiento? Dale un lugar en ParkGO y conecta con conductores que buscan dónde llegar.</p>
+            <div class="story-actions"><a class="button button-light" href="#propietarios">Conoce el lado propietario <span aria-hidden="true">↗</span></a></div>
+            <p class="story-note">Una misma app. Dos formas de avanzar.</p>
+          </article>
+        </div>
+        <nav class="journey-rail" aria-label="Etapas del recorrido"><button class="rail-button active" data-goto="0" aria-label="Ir al inicio" aria-current="step"><span>La ciudad</span><i></i></button><button class="rail-button" data-goto="1" aria-label="Ir a encuentra tu lugar"><span>Tu lugar</span><i></i></button><button class="rail-button" data-goto="2" aria-label="Ir a llegada"><span>Llegaste</span><i></i></button><button class="rail-button" data-goto="3" aria-label="Ir a propietarios"><span>Tu espacio</span><i></i></button></nav>
+        <div class="journey-bottom"><button class="scroll-hint" id="scroll-hint" data-goto="1"><span class="scroll-line" aria-hidden="true"></span><span>DESLIZA PARA DESCUBRIR</span></button><span class="journey-counter"><b id="scene-counter">01</b><span>/ 04</span></span><button class="motion-toggle" id="motion-toggle" aria-pressed="false" aria-label="Reducir las animaciones"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4v12M13 4v12"/></svg><span>Movimiento</span></button></div>
+        <div class="journey-progress" aria-hidden="true"><span id="journey-progress"></span></div>
+      </div>
+    </section>
+
+    <section class="intro section-padding" id="conductores">
+      <div class="section-top reveal"><p class="eyebrow dark"><span class="label-line"></span> PARA LOS QUE SE MUEVEN</p><span class="section-index">01 — CONDUCTORES</span></div>
+      <div class="intro-grid"><h2 class="display-heading reveal">El plan es llegar.<br><span class="muted">No dar vueltas.</span></h2><div class="intro-copy reveal"><p>Una reunión, una salida, un día cualquiera. ParkGO te ayuda a encontrar estacionamiento para que sigas con tu plan.</p><a class="text-link dark" href="#explora" data-role-link="driver">Mira cómo se siente <span aria-hidden="true">↗</span></a></div></div>
+      <div class="benefit-line reveal"><div><span class="feature-icon" aria-hidden="true">⌖</span><h3>Cerca de tu destino</h3><p>Encuentra opciones donde las necesitas.</p></div><div><span class="feature-icon" aria-hidden="true">◷</span><h3>Disponibilidad a la vista</h3><p>Consulta espacios antes de llegar.</p></div><div><span class="feature-icon" aria-hidden="true">↗</span><h3>Sigue con tu día</h3><p>Elige tu lugar y vuelve a tu plan.</p></div></div>
+    </section>
+
+    <section class="explore section-padding" id="explora">
+      <div class="explore-content reveal"><p class="eyebrow dark"><span class="label-line"></span> UNA APP. DOS PERSPECTIVAS.</p><h2 class="display-heading">Todo empieza<br>con <span class="blue-text">un lugar.</span></h2><div class="role-tabs" role="tablist" aria-label="Elige tu experiencia"><button id="driver-tab" role="tab" aria-selected="true" aria-controls="driver-panel" data-role="driver">Soy conductor</button><button id="owner-tab" role="tab" aria-selected="false" aria-controls="owner-panel" data-role="owner" tabindex="-1">Tengo un estacionamiento</button></div>
+        <div id="driver-panel" class="role-panel" role="tabpanel" aria-labelledby="driver-tab"><h3>Busca. Encuentra. Llega.</h3><p>Explora esta vista de ejemplo y descubre cómo ParkGO conecta tu destino con un espacio disponible.</p><ol class="tour-steps" aria-label="Pasos de la demostración"><li><button class="tour-step active" data-step="0" aria-pressed="true"><span>01</span><div><b>Busca tu destino</b><small>Todo empieza con adónde quieres ir.</small></div><i aria-hidden="true">↗</i></button></li><li><button class="tour-step" data-step="1" aria-pressed="false"><span>02</span><div><b>Revisa tus opciones</b><small>Ubicación y disponibilidad en un vistazo.</small></div><i aria-hidden="true">↗</i></button></li><li><button class="tour-step" data-step="2" aria-pressed="false"><span>03</span><div><b>Encuentra tu llegada</b><small>Visualiza el estacionamiento elegido.</small></div><i aria-hidden="true">↗</i></button></li></ol></div>
+        <div id="owner-panel" class="role-panel" role="tabpanel" aria-labelledby="owner-tab" hidden><h3>Dale movimiento a tu espacio.</h3><p>Tu estacionamiento puede ser justo lo que alguien está buscando. Preséntalo en la app y mantén su información al día.</p><ol class="owner-steps"><li><span>01</span><div><b>Presenta tu estacionamiento</b><small>Agrega su nombre y ubicación.</small></div></li><li><span>02</span><div><b>Informa tu disponibilidad</b><small>Ayuda a los conductores a decidir.</small></div></li><li><span>03</span><div><b>Hazte visible en el mapa</b><small>Conecta con quienes están cerca.</small></div></li></ol></div>
+      </div>
+      <div class="device-stage reveal"><span class="orbit orbit-one" aria-hidden="true"></span><span class="orbit orbit-two" aria-hidden="true"></span><span class="device-caption">UN VISTAZO A PARKGO</span><div class="phone" id="phone"><div class="phone-notch" aria-hidden="true"></div><div class="phone-status" aria-hidden="true"><span>9:41</span><span>▮▮▮ &nbsp; ▰</span></div>
+          <div class="phone-driver" id="phone-driver"><div class="phone-top"><span class="phone-brand">park<span>go</span></span><button class="avatar" type="button" aria-label="Información de la demostración" data-info>PG</button></div><div class="phone-heading"><p id="phone-greeting">TU PRÓXIMO DESTINO</p><h3 id="phone-title">¿Dónde estacionamos?</h3></div><form class="demo-search" id="demo-search"><span aria-hidden="true">⌕</span><label class="sr-only" for="destination">Destino de ejemplo</label><input id="destination" name="destination" placeholder="Busca un destino" maxlength="45" autocomplete="off"><button type="submit" aria-label="Buscar destino de ejemplo">↗</button></form>
+          <div class="map-viewport"><svg class="map-svg" viewBox="0 0 300 310" role="img" aria-label="Mapa ilustrativo, no representa disponibilidad real"><rect width="300" height="310" fill="#eef1f0"/><g fill="#e1e6e4"><path d="M8 0h53v66H8zM79 0h56v66H79zM153 0h59v66h-59zM231 0h69v66h-69zM8 91h54v58H8zM80 92h55v56H80zM153 92h59v56h-59zM233 91h67v57h-67zM8 173h54v64H8zM80 173h55v64H80zM153 173h59v64h-59zM230 173h70v64h-70zM8 263h54v47H8zM80 263h55v47H80zM153 263h59v47h-59zM231 263h69v47h-69z"/></g><path d="M-15 27C32 65 51 100 43 143c-8 44 6 88 57 104 48 15 98 32 122 68" stroke="#d8e7d4" stroke-width="24" fill="none"/><path d="M70 0v310M145 0v310M221 0v310M0 80h300M0 160h300M0 250h300" stroke="white" stroke-width="13" fill="none"/><path d="M70 276V160h151V107" class="map-route" fill="none" stroke="#2867e9" stroke-width="4" stroke-dasharray="5 6"/><g class="map-you"><circle cx="70" cy="276" r="19" fill="#2867e9" opacity=".12"/><circle cx="70" cy="276" r="7" fill="#2867e9" stroke="white" stroke-width="3"/></g></svg><button class="map-pin pin-one" data-parking="0" aria-label="Ver estacionamiento de ejemplo A">P</button><button class="map-pin pin-two selected" data-parking="1" aria-label="Ver estacionamiento de ejemplo B">P</button><button class="map-pin pin-three" data-parking="2" aria-label="Ver estacionamiento de ejemplo C">P</button><span class="map-demo-label">MAPA ILUSTRATIVO</span></div>
+          <div class="parking-result"><span class="available"><i></i> Vista de ejemplo</span><h4 id="parking-name">Un lugar cerca de ti</h4><p id="parking-detail">Elige un punto en el mapa para explorar.</p><button id="parking-action">Ver estacionamiento <span>↗</span></button></div><div class="phone-nav" aria-hidden="true"><span class="selected">⌖<small>Explorar</small></span><span>♡<small>Guardados</small></span><span>◉<small>Mi cuenta</small></span></div></div>
+          <div class="phone-owner" id="phone-owner" hidden><div class="phone-top"><span class="phone-brand">park<span>go</span></span><span class="avatar">PG</span></div><div class="phone-heading"><p>MI ESTACIONAMIENTO</p><h3>Todo, en su lugar.</h3></div><div class="owner-photo"><img src="assets/parked.webp" alt="Vista de un estacionamiento de ejemplo" width="300" height="140" loading="lazy"><span>VISTA DE EJEMPLO</span></div><div class="owner-dashboard"><div class="dashboard-title"><div><small>ESTACIONAMIENTO</small><h4>Mi espacio</h4></div><span class="owner-open" id="owner-status">Visible</span></div><div class="availability-demo"><p>Espacios disponibles</p><div><b id="space-count">8</b><span>de 12 · ejemplo</span></div><input type="range" min="0" max="12" value="8" id="spaces-range" aria-label="Cambiar espacios disponibles en la demostración"><small>Mueve el control para explorar</small></div><button id="owner-visibility" class="owner-visibility" aria-pressed="true">Visible en el mapa <span>✓</span></button><p class="owner-demo-note">Demostración interactiva.<br>Los cambios solo afectan a esta vista.</p></div></div>
+        </div><div class="floating-note" id="floating-note"><span class="note-dot"></span><div><b>Tu lugar está cerca.</b><small>Descubre la experiencia ParkGO</small></div></div></div>
+    </section>
+
+    <section class="owner-section" id="propietarios"><div class="owner-image"><img src="assets/owner.webp" alt="Propietario de un estacionamiento consultando su celular" width="1536" height="864" loading="lazy"><span class="image-corner-label">EL OTRO LADO DE UNA BUENA LLEGADA.</span></div><div class="owner-copy"><p class="eyebrow"><span class="label-line"></span> PARA DUEÑOS DE ESTACIONAMIENTOS</p><h2 class="display-heading reveal">Tú tienes<br>el espacio.<br><span>Hagamos<br>la conexión.</span></h2><p class="reveal">Hay alguien buscando un lugar como el tuyo. Registra tu estacionamiento en ParkGO y permite que los conductores te encuentren desde su celular.</p><a class="button button-blue reveal" href="#explora" data-role-link="owner">Mira cómo publicar tu espacio <span aria-hidden="true">↗</span></a></div></section>
+
+    <section class="how-section section-padding" id="como-funciona"><div class="section-top reveal"><p class="eyebrow dark"><span class="label-line"></span> ASÍ DE SIMPLE</p><span class="section-index">02 — UNA MISMA CONEXIÓN</span></div><div class="how-title reveal"><h2 class="display-heading">La ciudad funciona<br>mejor <span class="blue-text">conectada.</span></h2><p>Una app que acerca a quien busca un estacionamiento con quien tiene un lugar disponible.</p></div><div class="connection-story reveal"><div class="connection-end"><span class="connection-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="m8 23 3-10h18l3 10v8H8v-8Zm0 0h24M13 28h1m12 0h1M12 32v3m16-3v3"/></svg></span><h3>Buscas un lugar</h3><p>El conductor consulta las opciones cerca de su destino.</p></div><div class="connection-path" aria-hidden="true"><span></span><b>park<span>go</span></b><span></span></div><div class="connection-end"><span class="connection-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="7" y="7" width="26" height="26" rx="7"/><path d="M17 28V13h6a5 5 0 0 1 0 10h-6"/></svg></span><h3>Tienes un espacio</h3><p>El propietario publica su estacionamiento en la aplicación.</p></div></div></section>
+
+    <section class="faq-section section-padding" id="preguntas"><div class="faq-title reveal"><p class="eyebrow dark"><span class="label-line"></span> ANTES DE LLEGAR</p><h2 class="display-heading">Las cosas,<br><span class="muted">claras.</span></h2></div><div class="faq-list reveal"><details><summary>¿Qué es ParkGO?<span aria-hidden="true">+</span></summary><p>Es una aplicación móvil que conecta a conductores que buscan estacionamiento con propietarios que quieren mostrar su espacio en la app.</p></details><details><summary>¿Cómo encuentro estacionamiento?<span aria-hidden="true">+</span></summary><p>Buscas tu destino, consultas las opciones y revisas la disponibilidad reportada por los estacionamientos. Así puedes elegir el lugar que mejor se ajusta a tu llegada.</p></details><details><summary>¿La disponibilidad se consulta en tiempo real?<span aria-hidden="true">+</span></summary><p>Sí, esa es la experiencia que ofrece ParkGO: consultar la disponibilidad actualizada de los estacionamientos. Los espacios pueden variar mientras te desplazas. El mapa de esta página es una demostración ilustrativa.</p></details><details><summary>¿Puedo poner mi estacionamiento en ParkGO?<span aria-hidden="true">+</span></summary><p>Sí. La experiencia para propietarios permite registrar el estacionamiento, informar su ubicación y presentar su disponibilidad para que los conductores puedan encontrarlo.</p></details><details><summary>¿Puedo probar la experiencia en esta página?<span aria-hidden="true">+</span></summary><p>Sí. En «Conoce la app» puedes alternar entre conductor y propietario. Es una demostración de la experiencia: sus espacios y ubicaciones son ejemplos y no generan reservas ni publicaciones reales.</p></details></div></section>
+
+    <section class="closing"><div class="closing-image" aria-hidden="true"></div><div class="closing-content reveal"><p class="eyebrow">NOS VEMOS EN TU PRÓXIMO DESTINO</p><h2>La ciudad es tuya.<br><span>Encuentra tu lugar.</span></h2><a class="button button-light" href="#explora" data-role-link="driver">Conoce ParkGO <span aria-hidden="true">↗</span></a></div><a class="back-top" href="#inicio" aria-label="Volver arriba">↑</a></section>
+  </main>
+  <footer class="footer"><a class="brand" href="#inicio" aria-label="ParkGO, volver al inicio"><span>park<span class="brand-go">go</span></span></a><p>Un lugar para cada llegada.</p><div><a href="#conductores">Conductores</a><a href="#propietarios">Propietarios</a><a href="#preguntas">Preguntas</a></div><small>© 2026 ParkGO</small></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="info-dialog"><button class="dialog-close" id="dialog-close" aria-label="Cerrar información">×</button><span class="dialog-mark">P</span><p class="eyebrow dark">UN VISTAZO A LA EXPERIENCIA</p><h2>Explora ParkGO.</h2><p>Esta es una demostración de la app. Puedes buscar un destino de ejemplo, elegir un punto en el mapa y cambiar a la vista del propietario.</p><p>Las ubicaciones y los espacios mostrados son ilustrativos. No se crean reservas ni se publican estacionamientos desde esta página.</p><button class="button button-blue" id="dialog-done">Entendido <span aria-hidden="true">↗</span></button></dialog>
+</body>
+</html>

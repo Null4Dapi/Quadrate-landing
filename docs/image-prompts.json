@@ -1,0 +1,32 @@
+{
+  "generator": "ImageGen integrado",
+  "project": "ParkGO",
+  "assets": [
+    {
+      "name": "city",
+      "prompt": "Use case: photorealistic-natural. Create an original ultra-wide landscape cinematic photograph for a premium Peruvian parking mobile app website called ParkGO. No website layout, no typography. Blue hour in a believable contemporary Lima coastal city boulevard, refined apartment facades, a few palm trees, subtle Pacific haze and warm lights. Main subject: one elegant compact metallic cobalt-blue crossover with completely unbranded bodywork and simple silver wheels, front three-quarter side view driving gently toward the right, positioned in the right half / bottom-right of frame. Strong architectural perspective and road leading toward an urban parking building. Left 45 percent is calmer dark architectural negative space for white HTML headlines. Photorealistic automotive advertising, natural physical lighting, restrained palette of deep midnight navy, blue ambient light and warm off-white, rich realistic surface detail, not sci-fi, not cyberpunk. 16:9 wide composition, highest detail, no visible logos, no words, no watermarks, no fake interface, no excessive light trails."
+    },
+    {
+      "name": "entrance",
+      "prompt": "Use case: photorealistic-natural. Original cinematic landscape photograph, 16:9, for the second step of a premium parking app scroll journey in contemporary Lima Peru. Eye-level dolly camera approaching a tasteful modern urban parking entrance with clean concrete, warm lights, matte dark-blue pillars and a small universal white P parking symbol. A single unbranded metallic cobalt-blue compact crossover with silver wheels is in the right half of the frame approaching the entrance, seen rear three-quarter view. Indoor parking visible beyond with crisp bay lines. Architecture believable and welcoming, no luxury hypercar, no sci-fi. Consistent blue-hour ambient lighting outside and warm ivory inside, premium real automotive advertising photography, deep midnight navy and electric-blue accent palette. Leave left third visually calm with shadowed architecture for website copy. No written words except optional simple P symbol, no people closeup, no watermark, no fake UI. Natural depth, sharp realistic geometry."
+    },
+    {
+      "name": "parked",
+      "prompt": "Use case: photorealistic-natural. Original cinematic 16:9 landscape photograph for the third stage of a premium Peruvian parking app website scroll journey. Camera is now inside a bright elegant modern parking structure with clean concrete columns, blue column bases, architectural strip lights, regular white bay markings and beautiful depth. One unbranded metallic cobalt-blue compact crossover with silver wheels is neatly parked in a bay in the right half of frame, viewed from its front left corner, plenty of breathing room around it. No occupants visible. Nearby empty bay is clearly marked. Warm light from the city entrance in the deep background and cool blue ambient shadows, believable architecture, premium but accessible Peruvian city parking. Photorealistic high-end automotive photograph, no excessive neon, no sci-fi, no text, no logos, no UI. Left third low detail in deeper navy shadows so HTML copy can overlay."
+    },
+    {
+      "name": "owner",
+      "prompt": "Use case: photorealistic-natural. Create a premium editorial commercial landscape photograph 16:9 for the owner section of a Peruvian parking app landing. Adult Latin American Peruvian small business owner around 40, naturally dressed in a navy overshirt over a cream tee, standing in the right-center of the image at the entrance of a well-maintained urban parking lot in Lima, holding and looking at a smartphone with a relaxed authentic expression. Waist-up or mid-long framing, not a staged stock thumbs-up, detailed natural skin. Behind him several ordinary modern cars in orderly parking bays, concrete architecture, subtle blue accents, warm late afternoon light, realistic and optimistic. Leave left third calmer and darker with parking structure architectural texture. Sophisticated midnight-blue and soft cream palette, no logos, no text, no graphics, no watermark. High-end documentary advertising photography with shallow but readable background depth."
+    }
+  ],
+  "refinements": [
+    {
+      "asset": "entrance",
+      "instruction": "Conservar entorno, cámara e iluminación; usar city.png como referencia para mantener el mismo crossover azul y eliminar marcas."
+    },
+    {
+      "asset": "parked",
+      "instruction": "Conservar el estacionamiento y sus líneas; sustituir el auto por el mismo crossover azul de city.png, manteniendo proporciones y diseño."
+    }
+  ]
+}

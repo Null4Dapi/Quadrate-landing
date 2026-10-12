@@ -15,6 +15,5 @@ npm-debug.log*
 # Tooling and local cache
 .atl/
 .codegraph/
-dist/
 .cache/
 install.cmd

@@ -49,23 +49,52 @@ Sitio estático de alto rendimiento desarrollado con HTML5 semántico, CSS3 modu
 
 ---
 
-## Ejecución Local
+## Ejecución Local y Compilación React
 
-Dado que utiliza módulos ES nativos de JavaScript (`type="module"`), se recomienda ejecutar un servidor HTTP local para evitar restricciones de CORS del protocolo `file://`:
+El proyecto cuenta con scripts nativos en `package.json` sin bundlers pesados:
 
-### Opción 1: Python 3 (Sin dependencias)
+### 1. Iniciar Servidor Local
 ```bash
-python3 -m http.server 8000
+npm start
 ```
-Abrir en el navegador: [http://localhost:8000](http://localhost:8000)
+Inicia el servidor HTTP nativo en [http://localhost:3000](http://localhost:3000) con soporte para tipos MIME (HTML, CSS, JS módulos, WebP, WOFF2).
 
-### Opción 2: Node.js (npx serve)
+### 2. Compilar Componentes React (JSX → ES Modules)
 ```bash
-npx serve .
+npm run build:react
 ```
+Ejecuta `scripts/compilar-react.cjs` transpilando los archivos `.jsx` en `src/js/react/` a módulos `.js` estándar consumibles por el navegador con inyección de hooks.
 
-### Opción 3: Extensión Live Server de VS Code
-Hacer clic derecho sobre `index.html` y seleccionar **Open with Live Server**.
+---
+
+## Módulos React Integrados (Semana 6)
+
+1. **Tour Interactivo de Caseta (`CasetaTour` y `CasetaFila`):**
+   - **Props:** `<CasetaFila />` recibe `indice`, `titulo`, `detalle`, `estaActiva` y `alSeleccionar`.
+   - **Auto-play y Temporizador:** Rota automáticamente de característica cada 4 segundos mediante `setInterval`.
+   - **Limpieza de Recursos:** `useEffect` con `clearInterval` que libera el timer al desmontar o pausar.
+   - **Controles de Usuario:** Botones para **Pausar / Reanudar** (`active`) y **Reiniciar** al paso inicial.
+   - **Carga Simulada:** `useEffect` con `setTimeout` (800ms) y `clearTimeout` simulando conexión con garitas.
+
+2. **Demostrador en Vivo (`QuadrateLiveApp`):**
+   - **Estado y Eventos:** Filtros de cocheras por distrito, buscador reactivo y simulador de reserva por ETA.
+   - **Foco Programático (`useRef`):** Foco accesible en el buscador al limpiar texto (`✕`) y foco automático en el primer campo al conmutar a la pestaña de afiliación.
+
+---
+
+## Matriz de Pruebas de Aceptación (Laboratorio N.° 4)
+
+| ID | Prueba | Comportamiento en Quadrate pe | Estado |
+| :--- | :--- | :--- | :---: |
+| **LAB1** | Arranque e Integración | La landing page conserva intactas todas sus secciones previas y arranca en `http://localhost:3000`. | ✅ Aprobado |
+| **LAB2** | Carga Simulada | `CasetaTour` y `QuadrateLiveApp` aplican `setTimeout` y cancelan con `clearTimeout`. | ✅ Aprobado |
+| **LAB3** | Monitor / Timer Activo | El temporizador rota las características de caseta en intervalos continuos de 1 segundo. | ✅ Aprobado |
+| **LAB4** | Detener / Reactivar | Al presionar **Pausar**, se ejecuta `clearInterval` y el contador se detiene sin duplicarse al reanudar. | ✅ Aprobado |
+| **LAB5** | Reiniciar | Al presionar **Reiniciar**, el carrusel vuelve al paso 1 (índice 0) y el tiempo se restablece a 4s. | ✅ Aprobado |
+| **LAB6** | Limpieza al Desmontar | Al conmutar de pestaña en el header, los efectos limpian sus temporizadores pendientes. | ✅ Aprobado |
+| **LAB7** | Dependencias | El array `[estaReproduciendo]` garantiza que el efecto recree el intervalo solo al cambiar el estado de pausa. | ✅ Aprobado |
+| **LAB8** | Uso de `useRef` | Enfoca programáticamente inputs reales (buscador y formulario de afiliación) sin re-renders. | ✅ Aprobado |
+| **LAB9** | Consola Limpia | Ejecución fluida en navegador sin errores de sintaxis ni fugas de memoria. | ✅ Aprobado |
 
 ---
 

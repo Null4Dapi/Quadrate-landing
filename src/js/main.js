@@ -6,7 +6,7 @@
 import { inicializarCabeceraAdaptativa } from "./features/adaptive-header.js";
 import { inicializarMenuMovil } from "./features/mobile-menu.js";
 import { inicializarNavegacionPestanas } from "./features/tab-navigation.js";
-import { inicializarQuadrateLive } from "./react/quadrate-live.js";
+import { inicializarQuadrateLive, inicializarCasetaTour } from "./react/quadrate-live.js";
 import { CONFIGURACION_APP } from "./config.js";
 
 /**
@@ -21,6 +21,7 @@ function arrancarAplicacion() {
   inicializarMenuMovil();
   inicializarNavegacionPestanas();
   inicializarQuadrateLive();
+  inicializarCasetaTour();
 }
 
 if (document.readyState === "loading") {

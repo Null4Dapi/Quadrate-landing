@@ -23,6 +23,8 @@ const mapaComponentes = [
   { fuente: "tarjeta-cochera.jsx", destino: "tarjeta-cochera.js" },
   { fuente: "monitor-actividad.jsx", destino: "monitor-actividad.js" },
   { fuente: "simulador-reserva.jsx", destino: "simulador-reserva.js" },
+  { fuente: "caseta-fila.jsx", destino: "caseta-fila.js" },
+  { fuente: "caseta-tour.jsx", destino: "caseta-tour.js" },
   { fuente: "contenedor-live.jsx", destino: "contenedor-live.js" },
   { fuente: "quadrate-live-app.jsx", destino: "quadrate-live-app.js" },
   { fuente: "index.jsx", destino: "quadrate-live.js" },

@@ -13,8 +13,10 @@ const PATRON_TELEFONO_VALIDO = /^[0-9+() -]{7,15}$/;
  */
 export function inicializarNavegacionPestanas() {
   const vistaConductores = document.getElementById("vista-conductores");
+  const vistaLive = document.getElementById("vista-live");
   const vistaAfiliacion = document.getElementById("vista-afiliacion");
   const tabConductores = document.getElementById("tab-conductores");
+  const tabLive = document.getElementById("tab-live");
   const tabAfiliar = document.getElementById("tab-afiliar");
 
   if (!vistaConductores || !vistaAfiliacion) {
@@ -22,20 +24,30 @@ export function inicializarNavegacionPestanas() {
   }
 
   /**
-   * Conmuta la pestaña activa entre la vista principal y la vista de afiliación.
-   * @param {"conductores" | "afiliacion"} identificador
+   * Conmuta la pestaña activa entre la vista principal, Quadrate Live y afiliación.
+   * @param {"conductores" | "live" | "afiliacion"} identificador
    * @param {boolean} actualizarHash
    * @param {boolean} desplazarAlInicio
    */
   function conmutarPestana(identificador, actualizarHash = true, desplazarAlInicio = true) {
+    const esConductores = identificador === "conductores";
+    const esLive = identificador === "live";
     const esAfiliacion = identificador === "afiliacion";
 
-    vistaConductores.hidden = esAfiliacion;
+    vistaConductores.hidden = !esConductores;
+    if (vistaLive) {
+      vistaLive.hidden = !esLive;
+    }
     vistaAfiliacion.hidden = !esAfiliacion;
 
     if (tabConductores) {
-      tabConductores.setAttribute("aria-selected", esAfiliacion ? "false" : "true");
-      tabConductores.classList.toggle("header__nav-link--active", !esAfiliacion);
+      tabConductores.setAttribute("aria-selected", esConductores ? "true" : "false");
+      tabConductores.classList.toggle("header__nav-link--active", esConductores);
+    }
+
+    if (tabLive) {
+      tabLive.setAttribute("aria-selected", esLive ? "true" : "false");
+      tabLive.classList.toggle("header__nav-link--active", esLive);
     }
 
     if (tabAfiliar) {
@@ -43,12 +55,25 @@ export function inicializarNavegacionPestanas() {
       tabAfiliar.classList.toggle("header__nav-link--active", esAfiliacion);
     }
 
+    if (esAfiliacion) {
+      const inputNombre =
+        document.getElementById("afiliacion-nombre") ||
+        vistaAfiliacion.querySelector("input[name='nombre']");
+      if (inputNombre) {
+        setTimeout(() => inputNombre.focus(), 60);
+      }
+    }
+
     if (actualizarHash) {
       if (esAfiliacion) {
         if (window.location.hash !== "#afiliar-cochera") {
           window.location.hash = "afiliar-cochera";
         }
-      } else if (window.location.hash === "#afiliar-cochera") {
+      } else if (esLive) {
+        if (window.location.hash !== "#live") {
+          window.location.hash = "live";
+        }
+      } else if (window.location.hash === "#afiliar-cochera" || window.location.hash === "#live") {
         window.history.pushState(null, "", window.location.pathname);
       }
     }
@@ -65,10 +90,12 @@ export function inicializarNavegacionPestanas() {
       if (objetivo === "afiliacion") {
         evento.preventDefault();
         conmutarPestana("afiliacion", true, true);
-      } else if (objetivo === "conductores" && !vistaAfiliacion.hidden) {
-        // Solo conmutar si estábamos en afiliación
+      } else if (objetivo === "live") {
+        evento.preventDefault();
+        conmutarPestana("live", true, true);
+      } else if (objetivo === "conductores") {
         const href = disparador.getAttribute("href");
-        if (!href || href === "#") {
+        if (!href || href === "#" || href === "#conductores") {
           evento.preventDefault();
           conmutarPestana("conductores", true, true);
         }
@@ -81,15 +108,20 @@ export function inicializarNavegacionPestanas() {
     enlace.addEventListener("click", (evento) => {
       const destinoHash = enlace.getAttribute("href");
 
-      // Si el enlace apunta a afiliar cochera, se delega al tab switcher
       if (destinoHash === "#afiliar-cochera") {
         evento.preventDefault();
         conmutarPestana("afiliacion", true, true);
         return;
       }
 
-      // Si estábamos en la vista de afiliación, volver a la vista principal
-      if (!vistaAfiliacion.hidden) {
+      if (destinoHash === "#live") {
+        evento.preventDefault();
+        conmutarPestana("live", true, true);
+        return;
+      }
+
+      // Si estábamos en otra pestaña, volver a conductores para navegar anclas
+      if (vistaConductores.hidden) {
         conmutarPestana("conductores", false, false);
       }
 
@@ -110,12 +142,19 @@ export function inicializarNavegacionPestanas() {
 
   // Sincronizar estado inicial y cambio manual de hash en el historial
   window.addEventListener("hashchange", () => {
-    const deberiaSerAfiliacion = window.location.hash === "#afiliar-cochera";
-    conmutarPestana(deberiaSerAfiliacion ? "afiliacion" : "conductores", false, deberiaSerAfiliacion);
+    if (window.location.hash === "#afiliar-cochera") {
+      conmutarPestana("afiliacion", false, true);
+    } else if (window.location.hash === "#live") {
+      conmutarPestana("live", false, true);
+    } else {
+      conmutarPestana("conductores", false, false);
+    }
   });
 
   if (window.location.hash === "#afiliar-cochera") {
     conmutarPestana("afiliacion", false, false);
+  } else if (window.location.hash === "#live") {
+    conmutarPestana("live", false, false);
   }
 
   // Inicializar formulario de afiliación integrado
@@ -182,21 +221,11 @@ function configurarFormularioAfiliacion(formulario) {
 }
 
 function validarDatosAfiliacion(datos) {
-  if (!datos.nombre || datos.nombre.length < 3) {
-    return "Por favor ingresá un nombre y apellido válido.";
-  }
-  if (!datos.cochera || datos.cochera.length < 3) {
-    return "Por favor ingresá el nombre de tu cochera o playa.";
-  }
-  if (!datos.correo || !PATRON_CORREO_VALIDO.test(datos.correo)) {
-    return "Por favor ingresá un correo electrónico válido.";
-  }
-  if (!datos.telefono || !PATRON_TELEFONO_VALIDO.test(datos.telefono)) {
-    return "Por favor ingresá un número de teléfono o WhatsApp válido (al menos 7 dígitos).";
-  }
-  if (!datos.distrito) {
-    return "Por favor seleccioná el distrito de Lima donde opera tu cochera.";
-  }
+  if (!datos.nombre || datos.nombre.length < 3) return "Por favor ingresá un nombre y apellido válido.";
+  if (!datos.cochera || datos.cochera.length < 3) return "Por favor ingresá el nombre de tu cochera o playa.";
+  if (!datos.correo || !PATRON_CORREO_VALIDO.test(datos.correo)) return "Por favor ingresá un correo electrónico válido.";
+  if (!datos.telefono || !PATRON_TELEFONO_VALIDO.test(datos.telefono)) return "Por favor ingresá un número de teléfono o WhatsApp válido (al menos 7 dígitos).";
+  if (!datos.distrito) return "Por favor seleccioná el distrito de Lima donde opera tu cochera.";
   return null;
 }
 

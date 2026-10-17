@@ -6,6 +6,7 @@
 import { inicializarCabeceraAdaptativa } from "./features/adaptive-header.js";
 import { inicializarMenuMovil } from "./features/mobile-menu.js";
 import { inicializarNavegacionPestanas } from "./features/tab-navigation.js";
+import { inicializarQuadrateLive, inicializarCasetaTour } from "./react/quadrate-live.js";
 import { CONFIGURACION_APP } from "./config.js";
 
 /**
@@ -13,12 +14,14 @@ import { CONFIGURACION_APP } from "./config.js";
  */
 function arrancarAplicacion() {
   console.info(
-    `[${CONFIGURACION_APP.NOMBRE_PROYECTO}] Inicializado v${CONFIGURACION_APP.VERSION} - Entorno estático`
+    `[${CONFIGURACION_APP.NOMBRE_PROYECTO}] Inicializado v${CONFIGURACION_APP.VERSION} - Entorno React integrado`
   );
 
   inicializarCabeceraAdaptativa();
   inicializarMenuMovil();
   inicializarNavegacionPestanas();
+  inicializarQuadrateLive();
+  inicializarCasetaTour();
 }
 
 if (document.readyState === "loading") {

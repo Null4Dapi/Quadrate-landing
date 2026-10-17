@@ -55,6 +55,15 @@ export function inicializarNavegacionPestanas() {
       tabAfiliar.classList.toggle("header__nav-link--active", esAfiliacion);
     }
 
+    if (esAfiliacion) {
+      const inputNombre =
+        document.getElementById("afiliacion-nombre") ||
+        vistaAfiliacion.querySelector("input[name='nombre']");
+      if (inputNombre) {
+        setTimeout(() => inputNombre.focus(), 60);
+      }
+    }
+
     if (actualizarHash) {
       if (esAfiliacion) {
         if (window.location.hash !== "#afiliar-cochera") {
@@ -212,21 +221,11 @@ function configurarFormularioAfiliacion(formulario) {
 }
 
 function validarDatosAfiliacion(datos) {
-  if (!datos.nombre || datos.nombre.length < 3) {
-    return "Por favor ingresá un nombre y apellido válido.";
-  }
-  if (!datos.cochera || datos.cochera.length < 3) {
-    return "Por favor ingresá el nombre de tu cochera o playa.";
-  }
-  if (!datos.correo || !PATRON_CORREO_VALIDO.test(datos.correo)) {
-    return "Por favor ingresá un correo electrónico válido.";
-  }
-  if (!datos.telefono || !PATRON_TELEFONO_VALIDO.test(datos.telefono)) {
-    return "Por favor ingresá un número de teléfono o WhatsApp válido (al menos 7 dígitos).";
-  }
-  if (!datos.distrito) {
-    return "Por favor seleccioná el distrito de Lima donde opera tu cochera.";
-  }
+  if (!datos.nombre || datos.nombre.length < 3) return "Por favor ingresá un nombre y apellido válido.";
+  if (!datos.cochera || datos.cochera.length < 3) return "Por favor ingresá el nombre de tu cochera o playa.";
+  if (!datos.correo || !PATRON_CORREO_VALIDO.test(datos.correo)) return "Por favor ingresá un correo electrónico válido.";
+  if (!datos.telefono || !PATRON_TELEFONO_VALIDO.test(datos.telefono)) return "Por favor ingresá un número de teléfono o WhatsApp válido (al menos 7 dígitos).";
+  if (!datos.distrito) return "Por favor seleccioná el distrito de Lima donde opera tu cochera.";
   return null;
 }
 

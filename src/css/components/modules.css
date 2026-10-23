@@ -1,0 +1,115 @@
+/**
+ * Quadrate pe — Componente Módulos
+ * Lista editorial tipo manifiesto: filas asimétricas sin tarjetas uniformes (BEM).
+ * Nombre del módulo en display, beneficio en sans; alternancia de alineación por paridad.
+ */
+
+.modules {
+  padding-block: clamp(var(--space-12), 8vw, var(--space-20));
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.modules__container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.modules__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 640px;
+  margin-bottom: var(--space-10);
+}
+
+.modules__title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.02em;
+}
+
+.modules__description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.modules__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.modules__item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  padding-block: var(--space-8);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.modules__item:last-child {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.modules__name {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.modules__benefit {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  align-self: center;
+}
+
+/* Credencial referencial de la garita: glifo QR dibujado solo con CSS (sin imágenes) */
+.modules__chip {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  margin-inline-end: var(--space-4);
+  padding: 5px;
+  vertical-align: middle;
+  border: 2px solid var(--color-accent-primary);
+  border-radius: var(--radius-sm);
+  background-image: conic-gradient(
+    var(--color-accent-primary) 25%,
+    transparent 0 50%,
+    var(--color-accent-primary) 0 75%,
+    transparent 0
+  );
+  background-clip: content-box;
+  background-size: 11px 11px;
+}
+
+/* Tablet y Desktop: alternancia asimétrica de las filas del manifiesto */
+@media (min-width: 900px) {
+  .modules__item {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  .modules__item:nth-child(even) {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+
+  .modules__item:nth-child(even) .modules__name {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  .modules__item:nth-child(even) .modules__benefit {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}

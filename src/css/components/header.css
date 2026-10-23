@@ -1,7 +1,12 @@
 /**
  * Quadrate pe — Componente Header
  * Navegación semántica y cabecera responsiva con menú hamburguesa móvil (BEM).
+ * Las anclas de la página única respetan la altura de esta cabecera fija.
  */
+
+html {
+  scroll-padding-top: calc(var(--space-6) + 2.75rem);
+}
 
 .header {
   position: sticky;

@@ -1,4 +1,4 @@
-# Bitácora de Desarrollo Académico (docs/CHANGELOG.md)
+# Bitácora de Desarrollo Académico (docs/university/CHANGELOG.md)
 
 Registro cronológico interno del equipo para control de intervenciones, entregas y autoría sobre las guías de clase.
 

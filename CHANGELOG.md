@@ -4,11 +4,17 @@ Todos los cambios notables en este proyecto se documentan en este archivo bajo e
 
 ---
 
+## [Unreleased]
+
+### Cambiado
+- Centralizada la documentación técnica en `docs/`: `DESIGN.md` y un nuevo `ARCHITECTURE.md` que incorpora los presupuestos de rendimiento recuperados.
+- Actualizadas las instrucciones de agentes y el índice del proyecto para reflejar las nuevas rutas.
+
 ## [0.0.1] - 2026-10-03
 
 ### Añadido
 - Estructura base del proyecto estático monolítico preparado para migración a JSX/React.
-- Documentos de gobierno técnico y contexto: `AGENTS.md`, `DESIGN.md`, `PERFORMANCE.md` y `README.md`.
+- Documentos de gobierno técnico y contexto de la versión inicial: `AGENTS.md`, `DESIGN.md`, `PERFORMANCE.md` y `README.md`; posteriormente, rendimiento se integró en `docs/ARCHITECTURE.md`.
 - Sistema de tokens de diseño globales (`src/css/variables.css`) con estética editorial sobria y libre de clichés cyberpunk.
 - Reseteo CSS moderno (`src/css/reset.css`) y hoja de estilos modular orquestadora (`src/css/main.css`).
 - Módulos de estilo BEM por sección: `header.css`, `hero.css`, `features.css`, `rates.css`, `waitlist.css` y `footer.css`.

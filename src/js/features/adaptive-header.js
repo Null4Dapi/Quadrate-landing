@@ -51,7 +51,7 @@ function obtenerColorFondoEfectivo(elemento) {
 export function inicializarCabeceraAdaptativa() {
   const elementoCabecera = document.querySelector(".header");
   const listaSecciones = Array.from(
-    document.querySelectorAll("#vista-conductores > section, #vista-afiliacion, footer.footer")
+    document.querySelectorAll("main > section, footer.footer")
   );
 
   if (!elementoCabecera || listaSecciones.length === 0) {
@@ -125,11 +125,6 @@ export function inicializarCabeceraAdaptativa() {
    * Actualiza la clase activa del enlace de navegación según la posición de scroll.
    */
   function actualizarEnlaceActivo() {
-    const vistaAfiliacion = document.getElementById("vista-afiliacion");
-    if (vistaAfiliacion && !vistaAfiliacion.hidden) {
-      return;
-    }
-
     let mejorEnlace = null;
     let mejorVisibilidad = 0;
 

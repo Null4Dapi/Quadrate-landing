@@ -65,11 +65,17 @@ El agente debe actuar como un **arquitecto de software senior y docente**, guian
 
 1. **HTML Limpio:** Prohibido el uso de `<div>` innecesarios o anidados sin propósito semántico. Utilizar estrictamente `<header>`, `<nav>`, `<main>`, `<section id="...">`, `<article>`, `<figure>`, `<footer>`.
 2. **Cero Estilos o Scripts Embebidos:** Prohibido `style="..."` y JavaScript en línea (`onclick="..."`).
-3. **Límites de Líneas por Archivo (Regla Dura Universal):**
-   - `index.html`: Máximo 250 – 300 líneas.
-   - Archivos CSS (`*.css`): Máximo 150 – 200 líneas (1 archivo por bloque BEM).
-   - Archivos JS / JSX (`*.js`, `*.jsx`): Máximo 150 – 250 líneas (`main.js` < 80 líneas).
-   - **Ningún archivo del repositorio debe superar las 300 líneas bajo ninguna circunstancia.**
+3. **Límites de Líneas por Archivo (Regla Dura de Código):**
+
+   **Ámbito de aplicación:** el límite aplica EXCLUSIVAMENTE a archivos de código ejecutable (`*.html`, `*.css`, `*.js`, `*.jsx`, `*.cjs`).
+
+   **No aplica a:** documentación (`*.md` en cualquier carpeta), skills instalados (`.agents/skills/`), dependencias vendorizadas (`src/assets/vendor/`) ni material transcrito de origen externo (`docs/university/enunciados/`).
+
+   - **Techo duro:** ningún archivo de código debe superar las **400 líneas**.
+   - Los rangos por tipo son **objetivos de diseño**, no límites verificables:
+     - `index.html`: objetivo 250 – 300 líneas.
+     - Archivos CSS (`*.css`): objetivo 150 – 200 líneas (1 archivo por bloque BEM).
+     - Archivos JS / JSX (`*.js`, `*.jsx`): objetivo 150 – 250 líneas (`main.js` < 80 líneas).
 
 ---
 

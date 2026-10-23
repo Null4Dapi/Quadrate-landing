@@ -1,4 +1,4 @@
-# Guía de Diseño Visual y Restricciones Estéticas (DESIGN.md)
+# Guía de Diseño Visual y Restricciones Estéticas (`docs/DESIGN.md`)
 
 Este documento define los tokens visuales, directrices de maquetación y restricciones estilísticas para la landing page de **Quadrate pe**.
 

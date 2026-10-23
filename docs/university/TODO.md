@@ -1,4 +1,4 @@
-# Estado de Entregables Académicos (docs/TODO.md)
+# Estado de Entregables Académicos (docs/university/TODO.md)
 
 Semáforo de control interno del equipo para seguimiento de guías, enunciados y entregables.
 

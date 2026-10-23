@@ -77,7 +77,8 @@ El agente debe actuar como un **arquitecto de software senior y docente**, guian
 
 - **Datos Desacoplados:** Prohibido hardcodear textos promocionales en bloques HTML. Centralizar en `src/js/content.js` o fuentes de datos inmutables.
 - **Accesibilidad:** Imágenes con dimensiones explícitas (`width`, `height`), `alt` descriptivo y formato `.webp` o `.svg`. Botones de iconos con `aria-label`. Formularios con `<label>` asociados por `for`/`id` y feedback en `aria-live`. Componentes interactivos navegables por teclado (`tabIndex={0}`, manejo de `Enter` y `Espacio`).
-- **Presupuesto de Rendimiento:** Respetar presupuesto de carga (< 500 KB First Load) establecido en `PERFORMANCE.md`.
+- **Presupuesto de Rendimiento:** Respetar las metas y políticas de carga documentadas en `docs/ARCHITECTURE.md`.
+- **Contexto de Diseño Visual:** Antes de modificar la dirección visual, tokens o estilos de la landing, consultar `docs/DESIGN.md`.
 
 ---
 
@@ -99,9 +100,9 @@ Cuando el docente entrega una guía en clase para resolver en el momento:
 
 ---
 
-## 8. Contexto Jerárquico: Gestión Académica (`docs/AGENTS.md`)
+## 8. Contexto Jerárquico: Gestión Académica (`docs/university/AGENTS.md`)
 
-- **Subcarpeta `docs/`:** Toda intervención sobre guías de clase, enunciados, entregables o bitácoras académicas está gobernada de forma estricta por su propio archivo de Scoped Context: `docs/AGENTS.md`.
-- **Regla de Delegación:** Cuando el desarrollador o el agente trabajen en tareas universitarias, el agente debe leer y aplicar obligatoriamente las directivas de `docs/AGENTS.md` (Phase Gate de Etapa 1 a Etapa 2, Contrato Sagrado de Encabezados y Protocolo de Bitácora) antes de tocar cualquier archivo de documentación o código fuente asociado.
-
+- **Subcarpeta `docs/university/`:** Toda intervención sobre guías de clase, enunciados, entregables o bitácoras académicas está gobernada de forma estricta y exclusiva por su propio archivo de Scoped Context: `docs/university/AGENTS.md`.
+- **Documentación Técnica de Producto:** `docs/ARCHITECTURE.md` y `docs/DESIGN.md` contienen la documentación técnica viva del producto y siguen estándares profesionales de ingeniería de software, quedando exentos de los protocolos académicos (Phase Gate de Etapa 1/2 y Contrato de Encabezados).
+- **Regla de Delegación:** Cuando el desarrollador o el agente trabajen en tareas universitarias, el agente debe leer y aplicar obligatoriamente las directivas de `docs/university/AGENTS.md` (Phase Gate de Etapa 1 a Etapa 2, Contrato Sagrado de Encabezados y Protocolo de Bitácora) antes de tocar cualquier archivo de documentación o código fuente asociado.
 

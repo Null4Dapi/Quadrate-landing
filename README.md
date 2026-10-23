@@ -11,8 +11,10 @@ Sitio estático de alto rendimiento desarrollado con HTML5 semántico, CSS3 modu
 ```text
 ├── index.html           # Documento principal semántico
 ├── AGENTS.md            # Reglas técnicas y convenciones para agentes de IA
-├── DESIGN.md            # Tokens visuales y restricciones estéticas editoriales
-├── PERFORMANCE.md       # Metas de carga, Core Web Vitals y budgets
+├── docs/
+│   ├── ARCHITECTURE.md  # Arquitectura del sitio y políticas de rendimiento
+│   ├── DESIGN.md        # Tokens visuales y restricciones estéticas editoriales
+│   └── university/      # Guías, enunciados y entregables del curso
 ├── CHANGELOG.md         # Registro de cambios (Keep a Changelog)
 ├── README.md            # Este documento
 ├── src/
@@ -37,6 +39,7 @@ Sitio estático de alto rendimiento desarrollado con HTML5 semántico, CSS3 modu
 │   └── js/
 │       ├── config.js     # Configuración y constantes inmutables
 │       ├── content.js    # Textos, copys y datos crudos desacoplados
+│       ├── react/        # Componentes interactivos JSX y módulos compilados
 │       ├── services/     # Llamadas a red y wrappers API
 │       │   └── api.js
 │       ├── features/     # Lógica de componentes interactivos
@@ -46,6 +49,8 @@ Sitio estático de alto rendimiento desarrollado con HTML5 semántico, CSS3 modu
 │       │   └── waitlist.js
 │       └── main.js       # Punto de entrada e inicialización de listeners
 ```
+
+La documentación técnica del producto está en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) y [`docs/DESIGN.md`](docs/DESIGN.md). El flujo académico está aislado en [`docs/university/`](docs/university/), bajo sus propias instrucciones. Este README es el índice general; no hay otro README dentro de `docs/`.
 
 ---
 

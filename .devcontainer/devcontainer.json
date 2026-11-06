@@ -1,0 +1,77 @@
+{
+  "name": "Quadrate Landing",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Servidor local",
+      "onAutoForward": "openPreview"
+    }
+  },
+
+  "postCreateCommand": "npm install --if-present",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Tema y apariencia
+        "shadesofbuntu.flexoki-light",
+        "thang-nm.flow-icons",
+        "miguelsolorio.fluent-icons",
+
+        // Idioma
+        "ms-ceintl.vscode-language-pack-es",
+
+        // Markdown
+        "DavidAnson.vscode-markdownlint",
+
+        // Git y GitHub
+        "GitHub.vscode-pull-request-github",
+
+        // Assets y datos
+        "midudev.better-svg",
+        "aykutsarac.jsoncrack-vscode",
+
+        // Utilidades
+        "arthurlobo.easy-codesnap"
+      ],
+
+      "settings": {
+        // Tema activo
+        "workbench.colorTheme": "flexoki-light",
+        "workbench.iconTheme": "flow-dim",
+        "workbench.productIconTheme": "fluent-icons",
+        "workbench.startupEditor": "none",
+
+        // Editor
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+
+        // Markdown
+        "[markdown]": {
+          "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.fixAll.markdownlint": "explicit"
+          }
+        },
+
+        // Asociaciones de archivos
+        "workbench.editorAssociations": {
+          "*.copilotmd": "vscode.markdown.preview.editor",
+          "*.markdown": "default",
+          "*.md": "vscode.markdown.preview.editor",
+          "*.svg": "default"
+        },
+
+        // Git
+        "git.autofetch": true,
+
+        // Explorer
+        "explorer.confirmDragAndDrop": false
+      }
+    }
+  }
+}

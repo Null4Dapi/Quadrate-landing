@@ -44,11 +44,13 @@
           </h1>
           <p class="hero__description" data-texto="hero.descripcionCorta"></p>
           <div class="hero__actions">
-            <a href="#contacto" class="hero__button hero__button--primary" data-texto="hero.textoBotonPrincipal"></a>
+            <a href="demo.html" class="hero__button hero__button--primary" data-texto="hero.textoBotonPrincipal"></a>
           </div>
-          <div class="hero__app-notice">
-            <a href="#modulos" class="hero__app-label" data-texto="hero.textoEnlaceSecundario"></a>
-          </div>
+        </div>
+        <div class="hero__visual">
+          <figure class="hero__mockup-figure">
+            <img src="src/assets/mockup-iphone-lado.webp" alt="Mockup en perspectiva de la aplicación Quadrate pe en iPhone" width="772" height="1256" class="hero__mockup-image">
+          </figure>
         </div>
       </div>
     </section>
@@ -58,25 +60,14 @@
       <div class="app-showcase__container">
         <article class="app-showcase__card">
           <div class="app-showcase__content">
-            <h2 id="app-titulo" class="app-showcase__title">
-              <span class="app-showcase__title-line" data-texto="appEnAccion.tituloLinea1"></span>
-              <span class="app-showcase__title-line" data-texto="appEnAccion.tituloLinea2"></span>
-            </h2>
-            <p class="app-showcase__subtitle">
-              <span class="app-showcase__subtitle-line" data-texto="appEnAccion.subtituloLinea1"></span>
-              <span class="app-showcase__subtitle-line" data-texto="appEnAccion.subtituloLinea2"></span>
-            </p>
-            <div class="app-showcase__actions">
-              <a href="#contacto" class="app-showcase__button" data-texto="appEnAccion.botonTexto"></a>
-            </div>
+            <h2 id="app-titulo" class="app-showcase__title"><span class="app-showcase__title-line" data-texto="appEnAccion.tituloLinea1"></span><span class="app-showcase__title-line" data-texto="appEnAccion.tituloLinea2"></span></h2>
+            <p class="app-showcase__subtitle"><span class="app-showcase__subtitle-line" data-texto="appEnAccion.subtituloLinea1"></span><span class="app-showcase__subtitle-line" data-texto="appEnAccion.subtituloLinea2"></span></p>
+            <div class="app-showcase__actions"><a href="#contacto" class="app-showcase__button" data-texto="appEnAccion.botonTexto"></a></div>
           </div>
           <div class="app-showcase__visual">
             <figure class="app-showcase__figure" aria-hidden="true">
               <div class="app-showcase__device" data-screen="referencial">
-                <div class="app-showcase__screen-topbar">
-                  <span class="app-showcase__screen-marca" data-texto="appEnAccion.pantallaConductor.marca"></span>
-                  <span class="app-showcase__screen-estado" data-texto="appEnAccion.pantallaConductor.encabezadoEstado"></span>
-                </div>
+                <div class="app-showcase__screen-topbar"><span class="app-showcase__screen-marca" data-texto="appEnAccion.pantallaConductor.marca"></span><span class="app-showcase__screen-estado" data-texto="appEnAccion.pantallaConductor.encabezadoEstado"></span></div>
                 <div class="app-showcase__screen-map">
                   <span class="app-showcase__pin app-showcase__pin--a"><span class="app-showcase__pin-dot"></span><span class="app-showcase__pin-label" data-texto="appEnAccion.pantallaConductor.pinUno"></span></span>
                   <span class="app-showcase__pin app-showcase__pin--b app-showcase__pin--ocupado"><span class="app-showcase__pin-dot"></span><span class="app-showcase__pin-label" data-texto="appEnAccion.pantallaConductor.pinDos"></span></span>
@@ -94,87 +85,196 @@
       </div>
     </section>
 
-    <!-- Módulos: filas editoriales asimétricas, sin tarjetas uniformes -->
+    <!-- Módulos: Bento Grid interactivo y reactivo de cuatro módulos -->
     <section id="modulos" class="modules" aria-labelledby="modulos-titulo">
       <div class="modules__container">
         <header class="modules__header">
+          <span class="modules__eyebrow">Arquitectura del sistema</span>
           <h2 id="modulos-titulo" class="modules__title" data-texto="modulos.tituloSeccion"></h2>
           <p class="modules__description" data-texto="modulos.descripcionSeccion"></p>
         </header>
-        <ul class="modules__list">
-          <li class="modules__item">
-            <h3 class="modules__name" data-texto="modulos.filas.0.nombre"></h3>
-            <p class="modules__benefit"><span class="modules__chip" data-screen="referencial" aria-hidden="true"></span> <span data-texto="modulos.filas.0.beneficio"></span></p>
-          </li>
-          <li class="modules__item">
-            <h3 class="modules__name" data-texto="modulos.filas.1.nombre"></h3>
-            <p class="modules__benefit" data-texto="modulos.filas.1.beneficio"></p>
-          </li>
-          <li class="modules__item">
-            <h3 class="modules__name" data-texto="modulos.filas.2.nombre"></h3>
-            <p class="modules__benefit" data-texto="modulos.filas.2.beneficio"></p>
-          </li>
-          <li class="modules__item">
-            <h3 class="modules__name" data-texto="modulos.filas.3.nombre"></h3>
-            <p class="modules__benefit" data-texto="modulos.filas.3.beneficio"></p>
-          </li>
-        </ul>
+        <div class="modules__bento">
+          <!-- Tarjeta 1: Garita digital (Destacada, 2 columnas internas) -->
+          <article class="modules__card modules__card--featured" tabindex="0">
+            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.0.tag"></span></div>
+            <div class="modules__card-body">
+              <h3 class="modules__card-title" data-texto="modulos.filas.0.nombre"></h3>
+              <p class="modules__card-desc"><span class="modules__card-badge" data-texto="modulos.filas.0.badge"></span><span data-texto="modulos.filas.0.beneficio"></span></p>
+            </div>
+            <div class="modules__card-visual modules__visual--garita" aria-hidden="true">
+              <div class="modules__qr-box">
+                <div class="modules__qr-icon"></div>
+                <div class="modules__qr-plate-info"><span class="modules__qr-plate">Placa: BZ-492</span><span class="modules__qr-status">● Paso autorizado</span></div>
+              </div>
+            </div>
+          </article>
+          <!-- Tarjeta 2: Aforo en vivo -->
+          <article class="modules__card" tabindex="0">
+            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.1.tag"></span></div>
+            <div class="modules__card-body">
+              <h3 class="modules__card-title" data-texto="modulos.filas.1.nombre"></h3>
+              <p class="modules__card-desc" data-texto="modulos.filas.1.beneficio"></p>
+            </div>
+            <div class="modules__card-visual modules__visual--aforo" aria-hidden="true">
+              <div class="modules__gauge">
+                <div class="modules__gauge-header"><span class="modules__gauge-label">Cupo libre</span><span class="modules__gauge-value">18 plazas</span></div>
+                <div class="modules__gauge-bar"><div class="modules__gauge-fill"></div></div>
+              </div>
+            </div>
+          </article>
+          <!-- Tarjeta 3: Caja y liquidación -->
+          <article class="modules__card" tabindex="0">
+            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.2.tag"></span></div>
+            <div class="modules__card-body">
+              <h3 class="modules__card-title" data-texto="modulos.filas.2.nombre"></h3>
+              <p class="modules__card-desc" data-texto="modulos.filas.2.beneficio"></p>
+            </div>
+            <div class="modules__card-visual modules__visual--caja" aria-hidden="true">
+              <div class="modules__ledger">
+                <div class="modules__ledger-row"><span>Recaudación turno</span><strong>S/ 2,480.00</strong></div>
+                <div class="modules__ledger-status"><span class="modules__status-dot"></span> Reconciliación 100% digital</div>
+              </div>
+            </div>
+          </article>
+          <!-- Tarjeta 4: Demanda en tiempo real (Ancha, 2 columnas internas) -->
+          <article class="modules__card modules__card--wide" tabindex="0">
+            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.3.tag"></span></div>
+            <div class="modules__card-body">
+              <h3 class="modules__card-title" data-texto="modulos.filas.3.nombre"></h3>
+              <p class="modules__card-desc" data-texto="modulos.filas.3.beneficio"></p>
+            </div>
+            <div class="modules__card-visual modules__visual--demanda" aria-hidden="true">
+              <div class="modules__map-panel">
+                <div class="modules__map-header"><span class="modules__map-indicator">● Demanda activa</span><span class="modules__map-eta">ETA 8 min</span></div>
+                <div class="modules__route-badge"><span class="modules__route-origin">Lima Centro</span><span class="modules__route-arrow">→</span><span class="modules__route-dest">Cochera Destino</span></div>
+                <span class="modules__map-caption">Plaza reservada en trayecto con tarifa fija garantizada</span>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- Cómo funciona: secuencia numerada real -->
-    <section id="como-funciona" class="how-it-works" aria-labelledby="como-funciona-titulo">
-      <div class="how-it-works__container">
-        <header class="how-it-works__header">
-          <h2 id="como-funciona-titulo" class="how-it-works__title" data-texto="comoFunciona.tituloSeccion"></h2>
-          <p class="how-it-works__description" data-texto="comoFunciona.descripcionSeccion"></p>
+    <!-- Cómo funciona: Tour Interactivo de Caseta con telemetría y selector -->
+    <section id="como-funciona" class="caseta-section" aria-labelledby="como-funciona-titulo">
+      <div class="caseta">
+        <div class="caseta__grid">
+          <div class="caseta__content">
+            <span class="caseta__eyebrow" data-texto="comoFunciona.etiquetaSeccion"></span>
+            <h2 id="como-funciona-titulo" class="caseta__title" data-texto="comoFunciona.tituloSeccion"></h2>
+            <p class="caseta__lead" data-texto="comoFunciona.descripcionSeccion"></p>
+            <ul class="caseta__list" role="list">
+              <li class="caseta__item caseta__item--active" tabindex="0" role="button" aria-pressed="true"><h3 class="caseta__item-title" data-texto="comoFunciona.pasos.0.titulo"></h3><p class="caseta__item-detail" data-texto="comoFunciona.pasos.0.detalle"></p></li>
+              <li class="caseta__item" tabindex="0" role="button" aria-pressed="false"><h3 class="caseta__item-title" data-texto="comoFunciona.pasos.1.titulo"></h3><p class="caseta__item-detail" data-texto="comoFunciona.pasos.1.detalle"></p></li>
+              <li class="caseta__item" tabindex="0" role="button" aria-pressed="false"><h3 class="caseta__item-title" data-texto="comoFunciona.pasos.2.titulo"></h3><p class="caseta__item-detail" data-texto="comoFunciona.pasos.2.detalle"></p></li>
+            </ul>
+          </div>
+          <div class="caseta__visual">
+            <figure class="caseta__figure">
+              <img src="src/assets/caseta-mockup-checkin.svg" alt="Mockup interactivo del panel de caseta Quadrate pe" width="320" height="320" class="caseta__image">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tarifas: transparencia para las dos caras con tarjetas apilables reactivas -->
+    <section id="tarifas" class="rates" aria-labelledby="tarifas-titulo">
+      <div class="rates__container rates__layout">
+        <header class="rates__aside">
+          <span class="rates__eyebrow" data-texto="tarifas.etiquetaSeccion"></span>
+          <h2 id="tarifas-titulo" class="rates__title" data-texto="tarifas.tituloSeccion"></h2>
+          <p class="rates__description" data-texto="tarifas.descripcionSeccion"></p>
+          <ol class="rates__progress" aria-hidden="true">
+            <li class="rates__progress-item" data-rate="0" data-active=""><span class="rates__progress-number">01</span><span class="rates__progress-label" data-texto="tarifas.filas.0.categoria"></span></li>
+            <li class="rates__progress-item" data-rate="1"><span class="rates__progress-number">02</span><span class="rates__progress-label" data-texto="tarifas.filas.1.categoria"></span></li>
+            <li class="rates__progress-item" data-rate="2"><span class="rates__progress-number">03</span><span class="rates__progress-label" data-texto="tarifas.filas.2.categoria"></span></li>
+          </ol>
         </header>
-        <ol class="how-it-works__list">
-          <li class="how-it-works__step">
-            <h3 class="how-it-works__step-title" data-texto="comoFunciona.pasos.0.titulo"></h3>
-            <p class="how-it-works__step-detail" data-texto="comoFunciona.pasos.0.detalle"></p>
+        <ol class="rates__stack">
+          <li class="rates__card" data-rate="0" style="--rates-card-index: 0; --rates-covered: 0.000;">
+            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.0.tag"></span><span class="rates__card-number" aria-hidden="true">01 / 03</span></div>
+            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.0.categoria"></h3><p class="rates__card-description" data-texto="tarifas.filas.0.regla"></p></div>
+            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.0.impacto"></span></div>
           </li>
-          <li class="how-it-works__step">
-            <h3 class="how-it-works__step-title" data-texto="comoFunciona.pasos.1.titulo"></h3>
-            <p class="how-it-works__step-detail" data-texto="comoFunciona.pasos.1.detalle"></p>
+          <li class="rates__card" data-rate="1" style="--rates-card-index: 1; --rates-covered: 0.000;">
+            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.1.tag"></span><span class="rates__card-number" aria-hidden="true">02 / 03</span></div>
+            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.1.categoria"></h3><p class="rates__card-description" data-texto="tarifas.filas.1.regla"></p></div>
+            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.1.impacto"></span></div>
           </li>
-          <li class="how-it-works__step">
-            <h3 class="how-it-works__step-title" data-texto="comoFunciona.pasos.2.titulo"></h3>
-            <p class="how-it-works__step-detail" data-texto="comoFunciona.pasos.2.detalle"></p>
+          <li class="rates__card" data-rate="2" style="--rates-card-index: 2; --rates-covered: 0.000;">
+            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.2.tag"></span><span class="rates__card-number" aria-hidden="true">03 / 03</span></div>
+            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.2.categoria"></h3><p class="rates__card-description" data-texto="tarifas.filas.2.regla"></p></div>
+            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.2.impacto"></span></div>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- Tarifas: transparencia para las dos caras -->
-    <section id="tarifas" class="rates" aria-labelledby="tarifas-titulo">
-      <div class="rates__container">
-        <header class="rates__header">
-          <span class="rates__eyebrow" data-texto="tarifas.etiquetaSeccion"></span>
-          <h2 id="tarifas-titulo" class="rates__title" data-texto="tarifas.tituloSeccion"></h2>
-          <p class="rates__description" data-texto="tarifas.descripcionSeccion"></p>
-        </header>
-        <div class="rates__breakdown">
-          <article class="rates__row"><h3 class="rates__row-category" data-texto="tarifas.filas.0.categoria"></h3><p class="rates__row-rule" data-texto="tarifas.filas.0.regla"></p><span class="rates__row-impact" data-texto="tarifas.filas.0.impacto"></span></article>
-          <article class="rates__row"><h3 class="rates__row-category" data-texto="tarifas.filas.1.categoria"></h3><p class="rates__row-rule" data-texto="tarifas.filas.1.regla"></p><span class="rates__row-impact" data-texto="tarifas.filas.1.impacto"></span></article>
-          <article class="rates__row"><h3 class="rates__row-category" data-texto="tarifas.filas.2.categoria"></h3><p class="rates__row-rule" data-texto="tarifas.filas.2.regla"></p><span class="rates__row-impact" data-texto="tarifas.filas.2.impacto"></span></article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Manifiesto: tesis de la caseta digital (banda de contraste existente) -->
+    <!-- Manifiesto: Slider de Testimonios estilo Orbix Studio -->
     <section id="manifiesto" class="manifesto" aria-labelledby="manifiesto-titulo">
       <div class="manifesto__container">
-        <div class="manifesto__statement">
+        <header class="manifesto__header">
           <span class="manifesto__eyebrow" data-texto="manifiesto.etiqueta"></span>
-          <h2 id="manifiesto-titulo" class="manifesto__text" data-texto="manifiesto.declaracion"></h2>
+          <h2 id="manifiesto-titulo" class="manifesto__title" data-texto="manifiesto.titulo"></h2>
+          <p class="manifesto__lead" data-texto="manifiesto.descripcion"></p>
+        </header>
+        <div class="manifesto__slider" role="region" aria-label="Carrusel de testimonios de Quadrate pe">
+          <div class="manifesto__track">
+            <article class="manifesto__slide" aria-label="1 de 4">
+              <div class="manifesto__slide-top">
+                <div class="manifesto__author-card">
+                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.0.avatarInicial"></div>
+                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.0.nombre"></h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.0.rol"></p></div>
+                </div>
+                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.0.calificacion"></span></div>
+              </div>
+              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.0.cita"></blockquote>
+            </article>
+            <article class="manifesto__slide" aria-label="2 de 4">
+              <div class="manifesto__slide-top">
+                <div class="manifesto__author-card">
+                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.1.avatarInicial"></div>
+                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.1.nombre"></h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.1.rol"></p></div>
+                </div>
+                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.1.calificacion"></span></div>
+              </div>
+              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.1.cita"></blockquote>
+            </article>
+            <article class="manifesto__slide" aria-label="3 de 4">
+              <div class="manifesto__slide-top">
+                <div class="manifesto__author-card">
+                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.2.avatarInicial"></div>
+                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.2.nombre"></h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.2.rol"></p></div>
+                </div>
+                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.2.calificacion"></span></div>
+              </div>
+              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.2.cita"></blockquote>
+            </article>
+            <article class="manifesto__slide" aria-label="4 de 4">
+              <div class="manifesto__slide-top">
+                <div class="manifesto__author-card">
+                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.3.avatarInicial"></div>
+                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.3.nombre"></h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.3.rol"></p></div>
+                </div>
+                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.3.calificacion"></span></div>
+              </div>
+              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.3.cita"></blockquote>
+            </article>
+          </div>
         </div>
-        <aside class="manifesto__action-card">
-          <span class="manifesto__number" data-texto="manifiesto.metricaCifra"></span>
-          <h3 class="manifesto__label" data-texto="manifiesto.metricaRotulo"></h3>
-          <p class="manifesto__detail" data-texto="manifiesto.metricaDetalle"></p>
-          <a href="#contacto" class="manifesto__button" data-texto="manifiesto.botonAccion"></a>
-        </aside>
+        <div class="manifesto__controls">
+          <div class="manifesto__dots" role="tablist" aria-label="Controles de navegación de diapositivas">
+            <button type="button" class="manifesto__dot manifesto__dot--active" role="tab" aria-selected="true" aria-label="Ir a testimonio 1" data-slide="0"></button>
+            <button type="button" class="manifesto__dot" role="tab" aria-selected="false" aria-label="Ir a testimonio 2" data-slide="1"></button>
+            <button type="button" class="manifesto__dot" role="tab" aria-selected="false" aria-label="Ir a testimonio 3" data-slide="2"></button>
+            <button type="button" class="manifesto__dot" role="tab" aria-selected="false" aria-label="Ir a testimonio 4" data-slide="3"></button>
+          </div>
+          <div class="manifesto__arrows">
+            <button type="button" class="manifesto__btn-arrow" data-accion="anterior" aria-label="Testimonio anterior">←</button>
+            <button type="button" class="manifesto__btn-arrow" data-accion="siguiente" aria-label="Siguiente testimonio">→</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -187,14 +287,8 @@
           <p class="waitlist__description" data-texto="formularioEspera.descripcionFormulario"></p>
         </header>
         <form class="waitlist__form" novalidate>
-          <div class="waitlist__field">
-            <label for="lista-nombre" class="waitlist__label" data-texto="formularioEspera.campos.nombreLabel"></label>
-            <input type="text" id="lista-nombre" name="nombre" class="waitlist__input" autocomplete="name" data-placeholder="formularioEspera.campos.nombrePlaceholder">
-          </div>
-          <div class="waitlist__field">
-            <label for="lista-correo" class="waitlist__label" data-texto="formularioEspera.campos.correoLabel"></label>
-            <input type="email" id="lista-correo" name="correo" class="waitlist__input" autocomplete="email" data-placeholder="formularioEspera.campos.correoPlaceholder">
-          </div>
+          <div class="waitlist__field"><label for="lista-nombre" class="waitlist__label" data-texto="formularioEspera.campos.nombreLabel"></label><input type="text" id="lista-nombre" name="nombre" class="waitlist__input" autocomplete="name" data-placeholder="formularioEspera.campos.nombrePlaceholder"></div>
+          <div class="waitlist__field"><label for="lista-correo" class="waitlist__label" data-texto="formularioEspera.campos.correoLabel"></label><input type="email" id="lista-correo" name="correo" class="waitlist__input" autocomplete="email" data-placeholder="formularioEspera.campos.correoPlaceholder"></div>
           <div class="waitlist__field">
             <label for="lista-rol" class="waitlist__label" data-texto="formularioEspera.campos.rolLabel"></label>
             <select id="lista-rol" name="rol" class="waitlist__select">
@@ -203,10 +297,7 @@
               <option value="playa" data-texto="formularioEspera.campos.opcionesRol.1.texto"></option>
             </select>
           </div>
-          <div class="waitlist__field">
-            <label for="lista-detalle" class="waitlist__label" data-texto="formularioEspera.campos.vehiculoOCocheraLabel"></label>
-            <input type="text" id="lista-detalle" name="detalle" class="waitlist__input" data-placeholder="formularioEspera.campos.vehiculoOCocheraPlaceholder">
-          </div>
+          <div class="waitlist__field"><label for="lista-detalle" class="waitlist__label" data-texto="formularioEspera.campos.vehiculoOCocheraLabel"></label><input type="text" id="lista-detalle" name="detalle" class="waitlist__input" data-placeholder="formularioEspera.campos.vehiculoOCocheraPlaceholder"></div>
           <button type="submit" class="waitlist__submit" data-texto="formularioEspera.campos.botonEnvio"></button>
           <div class="waitlist__feedback" role="status" aria-live="polite"></div>
         </form>
@@ -216,20 +307,68 @@
 
   <footer class="footer">
     <div class="footer__container">
-      <div class="footer__main">
-        <div class="footer__brand"><span class="footer__logo-text">Quadrate</span><span class="footer__logo-badge">pe</span></div>
-        <p class="footer__description" data-texto="piePagina.descripcionMarca"></p>
-        <nav class="footer__links-nav" aria-label="Enlaces de navegación secundaria">
-          <a href="#app" class="footer__link" data-texto="piePagina.enlaces.0.etiqueta"></a>
-          <a href="#modulos" class="footer__link" data-texto="piePagina.enlaces.1.etiqueta"></a>
-          <a href="#tarifas" class="footer__link" data-texto="piePagina.enlaces.2.etiqueta"></a>
-          <a href="#contacto" class="footer__link" data-texto="piePagina.enlaces.3.etiqueta"></a>
-          <a href="mailto:contacto@quadrate.pe" class="footer__link" data-texto="piePagina.enlaces.4.etiqueta"></a>
-        </nav>
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="#inicio" class="footer__lockup" aria-label="Ir al inicio de Quadrate pe">
+            <span class="footer__logo-text">Quadrate</span>
+            <span class="footer__logo-badge">pe</span>
+          </a>
+          <p class="footer__statement" data-texto="piePagina.declaracionMarca"></p>
+          <div class="footer__actions">
+            <a href="#contacto" class="footer__cta">
+              <span data-texto="piePagina.botonAccion"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="footer__cta-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+          <div class="footer__socials">
+            <a class="footer__social" href="mailto:contacto@quadrate.pe" aria-label="Correo de soporte Quadrate pe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></a>
+            <a class="footer__social" href="https://github.com/Quadrate-pe" target="_blank" rel="noopener noreferrer" aria-label="Repositorio en GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a>
+            <a class="footer__social" href="https://x.com/QuadratePe" target="_blank" rel="noopener noreferrer" aria-label="Cuenta oficial en X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg></a>
+          </div>
+        </div>
+
+        <div class="footer__columns">
+          <div class="footer__column">
+            <h3 class="footer__column-title" data-texto="piePagina.columnas.producto.titulo"></h3>
+            <ul class="footer__column-list">
+              <li><a href="#app" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.0.etiqueta"></a></li>
+              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.1.etiqueta"></a></li>
+              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.2.etiqueta"></a></li>
+              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.3.etiqueta"></a></li><li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.4.etiqueta"></a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h3 class="footer__column-title" data-texto="piePagina.columnas.operacion.titulo"></h3>
+            <ul class="footer__column-list">
+              <li><a href="#como-funciona" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.0.etiqueta"></a></li>
+              <li><a href="#como-funciona" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.1.etiqueta"></a></li>
+              <li><a href="#tarifas" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.2.etiqueta"></a></li>
+              <li><a href="#tarifas" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.3.etiqueta"></a></li><li><a href="#manifiesto" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.4.etiqueta"></a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h3 class="footer__column-title" data-texto="piePagina.columnas.cobertura.titulo"></h3>
+            <ul class="footer__column-list">
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.0.etiqueta"></a></li>
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.1.etiqueta"></a></li>
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.2.etiqueta"></a></li>
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.3.etiqueta"></a></li><li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.4.etiqueta"></a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h3 class="footer__column-title" data-texto="piePagina.columnas.contacto.titulo"></h3>
+            <ul class="footer__column-list">
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.0.etiqueta"></a></li>
+              <li><a href="mailto:contacto@quadrate.pe" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.1.etiqueta"></a></li>
+              <li><a href="mailto:contacto@quadrate.pe" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.2.etiqueta"></a></li>
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.3.etiqueta"></a></li><li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.4.etiqueta"></a></li>
+            </ul>
+          </div>
+        </div>
       </div>
+
       <div class="footer__bottom">
         <p class="footer__copyright" data-texto="piePagina.derechosReservados"></p>
-        <small class="footer__meta" data-meta="version"></small>
       </div>
     </div>
   </footer>

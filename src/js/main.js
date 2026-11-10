@@ -8,6 +8,10 @@
 import { inicializarMenuMovil } from "./features/mobile-menu.js";
 import { inicializarFormularioListaEspera } from "./features/waitlist.js";
 import { inicializarCabeceraAdaptativa } from "./features/adaptive-header.js";
+import { inicializarPilaTarifas } from "./features/rates-stack.js";
+import { inicializarTypewriter } from "./features/typewriter.js";
+import { inicializarTourCaseta } from "./features/caseta-tour.js";
+import { inicializarSliderTestimonios } from "./features/testimonials-slider.js";
 import { CONTENIDO_LANDING } from "./content.js";
 import { CONFIGURACION_APP } from "./config.js";
 
@@ -56,6 +60,10 @@ function arrancarAplicacion() {
   inicializarMenuMovil();
   inicializarFormularioListaEspera();
   inicializarCabeceraAdaptativa();
+  inicializarPilaTarifas();
+  inicializarTypewriter();
+  inicializarTourCaseta();
+  inicializarSliderTestimonios();
   console.info(
     `[${CONFIGURACION_APP.NOMBRE_PROYECTO}] Página product-first inicializada · v${CONFIGURACION_APP.VERSION}`
   );

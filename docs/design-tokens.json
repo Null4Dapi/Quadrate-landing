@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "project": "Quadrate pe",
+    "title": "Espejo de design tokens",
+    "description": "Espejo máquina del sistema visual construido. Valores copiados verbatim; este archivo NO es fuente de verdad en runtime.",
+    "generated": "2026-10-23",
+    "convention": "camelCase 1:1: los grupos anidan el sufijo del custom property (--color-bg-base -> color.bg.base; --font-size-xs -> typography.scale.xs). Sufijos numéricos se conservan pegados al identificador (--radius-2xl -> radius2xl; --space-1 -> space1).",
+    "sources": {
+      "primary": "src/css/variables.css",
+      "also": [
+        "src/css/fonts.css",
+        "src/css/components/hero.css",
+        "index.html"
+      ]
+    },
+    "webfont": {
+      "family": "Satoshi",
+      "assetPath": "src/assets/fonts/Satoshi-Variable.woff2",
+      "format": "woff2",
+      "weights": "300 900",
+      "fontDisplay": "swap",
+      "selfHosted": true,
+      "preload": true,
+      "license": "Fontshare / Indian Type Foundry — libre para uso comercial y personal"
+    },
+    "shadowKernel": "Todas las sombras usan rgba(18, 22, 26, alfa) como kernel. No existe token hex de sombra en variables.css; no confundir este rgba con --color-bg-base."
+  },
+  "color": {
+    "bg": {
+      "base": "#f4f4f4",
+      "surface": "#ffffff",
+      "contrast": "#231212",
+      "contrastSoft": "#301a1a",
+      "subtle": "#ececec",
+      "accentSubtle": "#e3e2f7"
+    },
+    "text": {
+      "primary": "#231212",
+      "secondary": "#4d3d3d",
+      "muted": "#756767",
+      "contrast": "#ffffff",
+      "contrastMuted": "#c9bfbf"
+    },
+    "border": {
+      "subtle": "#e2e2e2",
+      "medium": "#d0d0d0",
+      "strong": "#9c9292",
+      "contrast": "#3a2222"
+    },
+    "accent": {
+      "primary": "#231212",
+      "hover": "#3d2323",
+      "focus": "rgba(35, 18, 18, 0.2)",
+      "secondary": "#e3e2f7"
+    },
+    "status": {
+      "success": "#1b7a4b",
+      "successBg": "#edf7f2",
+      "error": "#b91c1c",
+      "errorBg": "#fdf2f2",
+      "info": "#2b6cb0",
+      "infoBg": "#ebf8ff"
+    }
+  },
+  "typography": {
+    "families": {
+      "sans": "\"Satoshi\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+      "display": "\"Satoshi\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif",
+      "mono": "ui-monospace, \"SFMono-Regular\", Consolas, \"Liberation Mono\", Menlo, monospace"
+    },
+    "scale": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "md": "1.125rem",
+      "lg": "1.375rem",
+      "xl": "1.75rem",
+      "2xl": "2.25rem",
+      "3xl": "3rem",
+      "display": "clamp(2.25rem, 5.5vw, 3.75rem)",
+      "giant": "clamp(2.75rem, 7vw, 4.5rem)"
+    },
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "lineHeights": {
+      "tight": 1.15,
+      "snug": 1.3,
+      "normal": 1.5,
+      "relaxed": 1.65
+    },
+    "frozenDisplay": {
+      "status": "frozen",
+      "description": "Identidad tipográfica display del hero. Congelada por decisión del equipo (2026-10-23); no se propone modificación.",
+      "source": "src/css/components/hero.css — .hero__title",
+      "fontFamily": "var(--font-family-display)",
+      "fontSize": "clamp(2.125rem, 5.6vw, 4.35rem)",
+      "lineHeight": 1.04,
+      "letterSpacing": "-0.025em",
+      "textTransform": "uppercase",
+      "linePrimary": { "weight": 700, "whiteSpace": "nowrap" },
+      "lineAccent": { "weight": 400, "fontStyle": "italic" }
+    }
+  },
+  "spacing": {
+    "rhythm": "4px / 8px",
+    "space1": "0.25rem",
+    "space2": "0.5rem",
+    "space3": "0.75rem",
+    "space4": "1rem",
+    "space5": "1.25rem",
+    "space6": "1.5rem",
+    "space8": "2rem",
+    "space10": "2.5rem",
+    "space12": "3rem",
+    "space16": "4rem",
+    "space20": "5rem"
+  },
+  "radius": {
+    "radiusXs": "2px",
+    "radiusSm": "4px",
+    "radiusMd": "6px",
+    "radiusLg": "8px",
+    "radiusXl": "12px",
+    "radius2xl": "20px",
+    "radiusPill": "9999px"
+  },
+  "shadow": {
+    "subtle": "0 1px 2px rgba(18, 22, 26, 0.05)",
+    "card": "0 4px 12px rgba(18, 22, 26, 0.04), 0 1px 3px rgba(18, 22, 26, 0.06)",
+    "elevated": "0 12px 28px rgba(18, 22, 26, 0.08), 0 2px 6px rgba(18, 22, 26, 0.04)",
+    "floating": "0 12px 28px rgba(18, 22, 26, 0.12), 0 2px 8px rgba(18, 22, 26, 0.06)"
+  },
+  "motion": {
+    "transitionFast": "150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    "transitionBase": "250ms cubic-bezier(0.16, 1, 0.3, 1)"
+  },
+  "layout": {
+    "containerMaxWidth": "1160px",
+    "containerPaddingInline": "clamp(1rem, 4vw, 2.5rem)"
+  },
+  "evolution": {
+    "status": "proposal",
+    "pendingApproval": "Sí — dirección aprobada en conversación del equipo; la rampa concreta queda pendiente de aprobación visual final. Ningún valor de este bloque es vigente.",
+    "direction": "La familia near-black / marrón oscuro sale del sistema hacia una paleta cálida de ocre/tierra. La base clara #f4f4f4 se conserva.",
+    "replaces": [
+      "--color-bg-contrast",
+      "--color-bg-contrast-soft",
+      "--color-border-contrast",
+      "--color-accent-primary",
+      "--color-accent-hover"
+    ],
+    "keptNote": "--color-text-primary comparte el hex #231212 pero permanece vigente como tinta tipográfica de alto contraste; su salida se decidiría en otra iteración.",
+    "candidates": [
+      {
+        "id": "A",
+        "name": "ocre-tostado",
+        "status": "proposal",
+        "tokens": {
+          "--color-bg-contrast": "#3d280e",
+          "--color-bg-contrast-soft": "#5a3c14",
+          "--color-border-contrast": "#745625",
+          "--color-accent-primary": "#b8791f",
+          "--color-accent-hover": "#95601a"
+        }
+      },
+      {
+        "id": "B",
+        "name": "tierra-cafe",
+        "status": "proposal",
+        "tokens": {
+          "--color-bg-contrast": "#40270d",
+          "--color-bg-contrast-soft": "#5c3d18",
+          "--color-border-contrast": "#75512b",
+          "--color-accent-primary": "#b3621a",
+          "--color-accent-hover": "#8b4b15"
+        }
+      },
+      {
+        "id": "C",
+        "name": "oxido-arcilla",
+        "status": "proposal",
+        "tokens": {
+          "--color-bg-contrast": "#3a2218",
+          "--color-bg-contrast-soft": "#5c3826",
+          "--color-border-contrast": "#7a4f35",
+          "--color-accent-primary": "#bb5322",
+          "--color-accent-hover": "#8c3f1b"
+        }
+      }
+    ]
+  }
+}

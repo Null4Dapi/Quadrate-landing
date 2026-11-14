@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quadrate pe — Design Tokens · Referencia visual</title>
+<style>
+/* @font-face local: si el asset falta, font-display: swap + pilas nativas de respaldo cubren la vista. */
+@font-face{font-family:"Satoshi";src:url("../src/assets/fonts/Satoshi-Variable.woff2") format("woff2");font-weight:300 900;font-style:normal;font-display:swap}
+:root{
+  --ff-sans:"Satoshi",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --ff-display:"Satoshi",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --ff-mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  --bg-base:#f4f4f4;--bg-surface:#ffffff;--bg-contrast:#231212;--bg-contrast-soft:#301a1a;--bg-subtle:#ececec;--bg-accent:#e3e2f7;
+  --tx-primary:#231212;--tx-secondary:#4d3d3d;--tx-muted:#756767;--tx-contrast:#ffffff;--tx-contrast-muted:#c9bfbf;
+  --bd-subtle:#e2e2e2;--bd-medium:#d0d0d0;--bd-strong:#9c9292;--bd-contrast:#3a2222;--ac-hover:#3d2323;
+  --fz-xs:0.75rem;--fz-sm:0.875rem;--fz-base:1rem;--fz-md:1.125rem;--fz-lg:1.375rem;--fz-xl:1.75rem;--fz-2xl:2.25rem;--fz-3xl:3rem;
+  --fz-display:clamp(2.25rem,5.5vw,3.75rem);--fz-giant:clamp(2.75rem,7vw,4.5rem);
+  --lh-tight:1.15;--lh-snug:1.3;--lh-normal:1.5;
+  --r-xs:2px;--r-sm:4px;--r-md:6px;--r-lg:8px;--r-xl:12px;--r-2xl:20px;--r-pill:9999px;
+  --sh-subtle:0 1px 2px rgba(18,22,26,.05);--sh-card:0 4px 12px rgba(18,22,26,.04),0 1px 3px rgba(18,22,26,.06);
+  --sh-elevated:0 12px 28px rgba(18,22,26,.08),0 2px 6px rgba(18,22,26,.04);--sh-floating:0 12px 28px rgba(18,22,26,.12),0 2px 8px rgba(18,22,26,.06);
+  --tr-fast:150ms cubic-bezier(0.16,1,0.3,1);--tr-base:250ms cubic-bezier(0.16,1,0.3,1);
+  --cw:1160px;--cp:clamp(1rem,4vw,2.5rem);
+}
+*{margin:0;box-sizing:border-box}
+body{font-family:var(--ff-sans);font-size:var(--fz-base);line-height:var(--lh-normal);background:var(--bg-base);color:var(--tx-primary);padding-block:2rem 3rem}
+.x{max-width:var(--cw);margin-inline:auto;padding-inline:var(--cp)}
+.mono,.lab,.foot{font-family:var(--ff-mono)}
+.head{padding-bottom:var(--fz-lg)}
+.head h1{font-family:var(--ff-display);font-size:var(--fz-xl);line-height:var(--lh-tight);letter-spacing:-.02em}
+.head .mono{font-size:var(--fz-xs);color:var(--tx-muted);margin-top:var(--r-sm)}
+.note{font-size:var(--fz-sm);color:var(--tx-secondary);max-width:70ch;margin-top:var(--r-sm)}
+.sect{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--bd-medium)}
+.sect h2{font-family:var(--ff-display);font-size:var(--fz-lg);line-height:var(--lh-snug)}
+.sect h3{font-size:var(--fz-sm);font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--tx-muted);margin-top:1.25rem}
+.grid{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.75rem;margin-top:.75rem}
+.s{display:grid;gap:.25rem}
+.s i{display:block;height:46px;border:1px solid var(--bd-medium);border-radius:var(--r-sm);background:var(--c)}
+.s b{font-family:var(--ff-mono);font-weight:600;font-size:.6875rem;word-break:break-all}
+.s span{font-family:var(--ff-mono);font-size:var(--fz-xs);color:var(--tx-secondary)}
+.c1{--c:#f4f4f4}.c2{--c:#ffffff}.c3{--c:#231212}.c4{--c:#301a1a}.c5{--c:#ececec}.c6{--c:#e3e2f7}
+.c7{--c:#4d3d3d}.c8{--c:#756767}.c9{--c:#c9bfbf}.c10{--c:#e2e2e2}.c11{--c:#d0d0d0}.c12{--c:#9c9292}
+.c13{--c:#3a2222}.c14{--c:#3d2323}.c15{--c:rgba(35,18,18,.2)}.c16{--c:#1b7a4b}.c17{--c:#edf7f2}.c18{--c:#b91c1c}
+.c19{--c:#fdf2f2}.c20{--c:#2b6cb0}.c21{--c:#ebf8ff}
+.pe i{border-style:dashed;border-color:var(--bd-strong)}
+.badge{display:inline-block;font-family:var(--ff-mono);font-size:var(--fz-xs);font-weight:600;color:var(--tx-primary);background:var(--bg-accent);border:1px dashed var(--bd-strong);border-radius:var(--r-pill);padding:.125rem .75rem;vertical-align:middle;margin-left:.5rem}
+.ramp{margin-top:1rem}
+.ramp h3{margin-top:1rem}
+.ramp em{font-style:normal;font-weight:600;color:var(--tx-secondary)}
+.frow,.trow,.brow{display:flex;align-items:baseline;gap:1rem;border-top:1px solid var(--bd-subtle);padding:.5rem 0}
+.frow:first-of-type,.trow:first-of-type,.brow:first-of-type{border-top:0}
+.lab{flex:0 0 13rem;font-size:var(--fz-xs);color:var(--tx-muted)}
+.hint{margin-left:auto;font-family:var(--ff-mono);font-size:var(--fz-xs);color:var(--tx-muted);white-space:nowrap}
+.f-sans{font-family:var(--ff-sans);font-size:var(--fz-md)}
+.f-disp{font-family:var(--ff-display);font-size:var(--fz-md);font-weight:600}
+.f-mono{font-family:var(--ff-mono);font-size:var(--fz-sm)}
+.t{line-height:var(--lh-tight)}
+.t-xs{font-size:var(--fz-xs)}.t-sm{font-size:var(--fz-sm)}.t-base{font-size:var(--fz-base)}.t-md{font-size:var(--fz-md)}
+.t-lg{font-size:var(--fz-lg)}.t-xl{font-size:var(--fz-xl)}.t-2xl{font-size:var(--fz-2xl)}.t-3xl{font-size:var(--fz-3xl)}
+.t-display{font-size:var(--fz-display)}.t-giant{font-size:var(--fz-giant)}
+.frozen{margin-top:1.5rem;background:var(--bg-surface);border:1px solid var(--bd-medium);border-radius:var(--r-xl);box-shadow:var(--sh-card);padding:1.25rem 1.5rem}
+.frozen figcaption{font-size:var(--fz-xs);color:var(--tx-muted);margin-top:1rem;border-top:1px solid var(--bd-subtle);padding-top:.75rem}
+.hero-demo{font-family:var(--ff-display);font-size:clamp(2.125rem,5.6vw,4.35rem);line-height:1.04;letter-spacing:-.025em;text-transform:uppercase}
+.hd--primary{display:block;font-weight:700;white-space:nowrap}
+.hd--accent{display:block;font-weight:400;font-style:italic}
+.frozen figcaption{font-family:var(--ff-mono)}
+.bp1{width:4px}.bp2{width:8px}.bp3{width:12px}.bp4{width:16px}.bp5{width:20px}.bp6{width:24px}.bp8{width:32px}
+.bp10{width:40px}.bp12{width:48px}.bp16{width:64px}.bp20{width:80px}
+.brow i{display:block;height:var(--fz-base);border-radius:var(--r-xs);background:var(--bg-accent);border:1px solid var(--bd-strong)}
+.mota{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;margin-top:.75rem}
+.m{display:grid;justify-items:start;gap:.25rem}
+.m b{font-family:var(--ff-mono);font-weight:600;font-size:.6875rem}
+.m span{font-family:var(--ff-mono);font-size:var(--fz-xs);color:var(--tx-muted)}
+.rd{width:6.5rem;height:2.5rem;background:var(--bg-surface);border:1px solid var(--bd-medium)}
+.rdx{border-radius:var(--r-xs)}.rds{border-radius:var(--r-sm)}.rdm{border-radius:var(--r-md)}.rdl{border-radius:var(--r-lg)}
+.rdxl{border-radius:var(--r-xl)}.rd2{border-radius:var(--r-2xl)}.rdp{border-radius:var(--r-pill)}
+.sh{width:7rem;height:3rem;background:var(--bg-surface);border-radius:var(--r-lg)}
+.sh1{box-shadow:var(--sh-subtle)}.sh2{box-shadow:var(--sh-card)}.sh3{box-shadow:var(--sh-elevated)}.sh4{box-shadow:var(--sh-floating)}
+.sh1,.sh2,.sh3,.sh4{margin-bottom:var(--r-sm)}
+.gaptop{margin-top:1rem}
+.mv{display:inline-block;margin-top:.75rem;margin-right:1rem;background:var(--bg-surface);border:1px solid var(--bd-medium);border-radius:var(--r-pill);padding:.5rem 1.25rem;font-size:var(--fz-sm);cursor:default;transition:var(--tr-fast)}
+.mv-base{transition:var(--tr-base)}
+.mv:hover{transform:translateY(-3px);background:var(--bg-accent);border-color:var(--bd-strong)}
+.mv::-moz-selection,.mv::selection{background:var(--bg-accent)}
+.foot{margin-top:2.5rem;border-top:1px solid var(--bd-medium);padding-top:1rem;font-size:var(--fz-xs);color:var(--tx-muted)}
+.use{padding-left:1.25rem;margin-top:.75rem;font-size:var(--fz-sm);color:var(--tx-secondary);display:grid;gap:.25rem;max-width:75ch}
+.use code{font-family:var(--ff-mono);background:var(--bg-subtle);border-radius:var(--r-xs);padding:.0625rem .25rem}
+</style>
+</head>
+<body>
+
+<header class="x head">
+  <h1>Quadrate pe — sistema visual</h1>
+  <p class="mono">Referencia visual self-contained · fuente de verdad: <b>src/css/variables.css</b> · espejo máquina: <b>docs/design-tokens.json</b> · contrato: <b>docs/DESIGN.md</b> · generado 2026-10-23</p>
+  <p class="note">Cero requests externas. Satoshi Variable self-hosted se intenta cargar desde <span class="mono">../src/assets/fonts/Satoshi-Variable.woff2</span> con <span class="mono">font-display: swap</span>; si el asset no está disponible, las pilas nativas de respaldo cubren la vista sin romper nada.</p>
+</header>
+
+<section class="x sect">
+  <h2>Cómo usar los tokens</h2>
+  <ol class="use">
+    <li>En CSS siempre <code>var(--token)</code> contra <code>src/css/variables.css</code>. Nunca hardcodear un hex en componentes.</li>
+    <li>Espaciado y repetición con el ritmo 4/8: <code>--space-1</code>=4px … <code>--space-20</code>=80px. No inventar valores intermedios.</li>
+    <li>Los valores impresos aquí son descriptivos: la verdad es el token, no el hex en pantalla.</li>
+  </ol>
+</section>
+
+<section class="x sect">
+  <h2>Paleta vigente <span class="badge">current</span></h2>
+
+  <h3>Superficies</h3>
+  <ol class="grid">
+    <li class="s c1"><i></i><b>--color-bg-base</b><span>#f4f4f4</span></li>
+    <li class="s c2"><i></i><b>--color-bg-surface</b><span>#ffffff</span></li>
+    <li class="s c3"><i></i><b>--color-bg-contrast</b><span>#231212</span></li>
+    <li class="s c4"><i></i><b>--color-bg-contrast-soft</b><span>#301a1a</span></li>
+    <li class="s c5"><i></i><b>--color-bg-subtle</b><span>#ececec</span></li>
+    <li class="s c6"><i></i><b>--color-bg-accent-subtle</b><span>#e3e2f7</span></li>
+  </ol>
+
+  <h3>Texto</h3>
+  <ol class="grid">
+    <li class="s c3"><i></i><b>--color-text-primary</b><span>#231212</span></li>
+    <li class="s c7"><i></i><b>--color-text-secondary</b><span>#4d3d3d</span></li>
+    <li class="s c8"><i></i><b>--color-text-muted</b><span>#756767</span></li>
+    <li class="s c2"><i></i><b>--color-text-contrast</b><span>#ffffff</span></li>
+    <li class="s c9"><i></i><b>--color-text-contrast-muted</b><span>#c9bfbf</span></li>
+  </ol>
+
+  <h3>Bordes</h3>
+  <ol class="grid">
+    <li class="s c10"><i></i><b>--color-border-subtle</b><span>#e2e2e2</span></li>
+    <li class="s c11"><i></i><b>--color-border-medium</b><span>#d0d0d0</span></li>
+    <li class="s c12"><i></i><b>--color-border-strong</b><span>#9c9292</span></li>
+    <li class="s c13"><i></i><b>--color-border-contrast</b><span>#3a2222</span></li>
+  </ol>
+
+  <h3>Acentos</h3>
+  <ol class="grid">
+    <li class="s c3"><i></i><b>--color-accent-primary</b><span>#231212</span></li>
+    <li class="s c14"><i></i><b>--color-accent-hover</b><span>#3d2323</span></li>
+    <li class="s c15"><i></i><b>--color-accent-focus</b><span>rgba(35,18,18,0.2)</span></li>
+    <li class="s c6"><i></i><b>--color-accent-secondary</b><span>#e3e2f7</span></li>
+  </ol>
+
+  <h3>Estados funcionales (pares fg + bg)</h3>
+  <ol class="grid">
+    <li class="s c16"><i></i><b>--color-status-success</b><span>#1b7a4b</span></li>
+    <li class="s c17"><i></i><b>--color-status-success-bg</b><span>#edf7f2</span></li>
+    <li class="s c18"><i></i><b>--color-status-error</b><span>#b91c1c</span></li>
+    <li class="s c19"><i></i><b>--color-status-error-bg</b><span>#fdf2f2</span></li>
+    <li class="s c20"><i></i><b>--color-status-info</b><span>#2b6cb0</span></li>
+    <li class="s c21"><i></i><b>--color-status-info-bg</b><span>#ebf8ff</span></li>
+  </ol>
+</section>
+
+<section class="x sect">
+  <h2>Evolución aprobada — rampa cálida <span class="badge">PROPUESTA</span></h2>
+  <p class="note">Dirección aprobada por el equipo: la familia near-black/marrón oscuro sale del sistema hacia ocre/tierra; la base clara <span class="mono">#f4f4f4</span> se conserva y <span class="mono">--color-text-primary</span> permanece como tinta tipográfica. Los chips de abajo son <b>sólo propuesta</b>, pendientes de aprobación visual final: ningún valor pisa <code>src/css/variables.css</code> hoy. Valores espejados en el bloque <span class="mono">evolution</span> de <code>docs/design-tokens.json</code> con <span class="mono">status: "proposal"</span>.</p>
+
+  <article class="ramp">
+    <h3>A · ocre-tostado <em>· propuesta</em></h3>
+    <ol class="grid">
+      <li class="s pe pa1"><i></i><b>--color-bg-contrast</b><span>#3d280e</span></li>
+      <li class="s pe pa2"><i></i><b>--color-bg-contrast-soft</b><span>#5a3c14</span></li>
+      <li class="s pe pa3"><i></i><b>--color-border-contrast</b><span>#745625</span></li>
+      <li class="s pe pa4"><i></i><b>--color-accent-primary</b><span>#b8791f</span></li>
+      <li class="s pe pa5"><i></i><b>--color-accent-hover</b><span>#95601a</span></li>
+    </ol>
+  </article>
+
+  <article class="ramp">
+    <h3>B · tierra-cafe <em>· propuesta</em></h3>
+    <ol class="grid">
+      <li class="s pe pa6"><i></i><b>--color-bg-contrast</b><span>#40270d</span></li>
+      <li class="s pe pa7"><i></i><b>--color-bg-contrast-soft</b><span>#5c3d18</span></li>
+      <li class="s pe pa8"><i></i><b>--color-border-contrast</b><span>#75512b</span></li>
+      <li class="s pe pa9"><i></i><b>--color-accent-primary</b><span>#b3621a</span></li>
+      <li class="s pe pa10"><i></i><b>--color-accent-hover</b><span>#8b4b15</span></li>
+    </ol>
+  </article>
+
+  <article class="ramp">
+    <h3>C · oxido-arcilla <em>· propuesta</em></h3>
+    <ol class="grid">
+      <li class="s pe pa11"><i></i><b>--color-bg-contrast</b><span>#3a2218</span></li>
+      <li class="s pe pa12"><i></i><b>--color-bg-contrast-soft</b><span>#5c3826</span></li>
+      <li class="s pe pa13"><i></i><b>--color-border-contrast</b><span>#7a4f35</span></li>
+      <li class="s pe pa14"><i></i><b>--color-accent-primary</b><span>#bb5322</span></li>
+      <li class="s pe pa15"><i></i><b>--color-accent-hover</b><span>#8c3f1b</span></li>
+    </ol>
+  </article>
+</section>
+
+<section class="x sect">
+  <h2>Tipografía</h2>
+
+  <div class="frow"><span class="lab">--font-family-sans</span><p class="f-sans">Satoshi Variable self-hosted + pila nativa de respaldo (cuerpo y UI).</p></div>
+  <div class="frow"><span class="lab">--font-family-display</span><p class="f-disp">Satoshi display — titulares y hero (identidad congelada, ver abajo).</p></div>
+  <div class="frow"><span class="lab">--font-family-mono</span><p class="f-mono">ui-monospace — metadatos, tokens, etiquetas técnicas.</p></div>
+
+  <h3>Escala modular</h3>
+  <div class="trow"><span class="lab">--font-size-xs</span><p class="t t-xs">Tarifa clara, sin sorpresas.</p><em class="hint">0.75rem · 12px</em></div>
+  <div class="trow"><span class="lab">--font-size-sm</span><p class="t t-sm">Tarifa clara, sin sorpresas.</p><em class="hint">0.875rem · 14px</em></div>
+  <div class="trow"><span class="lab">--font-size-base</span><p class="t t-base">Tarifa clara, sin sorpresas.</p><em class="hint">1rem · 16px</em></div>
+  <div class="trow"><span class="lab">--font-size-md</span><p class="t t-md">Tarifa clara, sin sorpresas.</p><em class="hint">1.125rem · 18px</em></div>
+  <div class="trow"><span class="lab">--font-size-lg</span><p class="t t-lg">Tarifa clara, sin sorpresas.</p><em class="hint">1.375rem · 22px</em></div>
+  <div class="trow"><span class="lab">--font-size-xl</span><p class="t t-xl">Tarifa clara, sin sorpresas.</p><em class="hint">1.75rem · 28px</em></div>
+  <div class="trow"><span class="lab">--font-size-2xl</span><p class="t t-2xl">Tarifa clara.</p><em class="hint">2.25rem · 36px</em></div>
+  <div class="trow"><span class="lab">--font-size-3xl</span><p class="t t-3xl">Tarifa clara.</p><em class="hint">3rem · 48px</em></div>
+  <div class="trow"><span class="lab">--font-size-display</span><p class="t t-display">Tarifa clara.</p><em class="hint">clamp(2.25rem, 5.5vw, 3.75rem)</em></div>
+  <div class="trow"><span class="lab">--font-size-giant</span><p class="t t-giant">Tarifa clara.</p><em class="hint">clamp(2.75rem, 7vw, 4.5rem)</em></div>
+
+  <figure class="frozen">
+    <div class="hero-demo"><span class="hd--primary">Parking</span><span class="hd--accent">resuelto.</span></div>
+    <figcaption>IDENTIDAD CONGELADA · .hero__title verbatim: --font-family-display · font-size clamp(2.125rem, 5.6vw, 4.35rem) · line-height 1.04 · letter-spacing -0.025em · text-transform uppercase · línea primaria 700 / nowrap · línea de acento 400 / italic · decidido por el equipo 2026-10-23, no se modifica</figcaption>
+  </figure>
+</section>
+
+<section class="x sect">
+  <h2>Espaciado — ritmo 4/8</h2>
+  <div class="brow"><span class="lab">--space-1 · 4px</span><i class="bp1"></i></div>
+  <div class="brow"><span class="lab">--space-2 · 8px</span><i class="bp2"></i></div>
+  <div class="brow"><span class="lab">--space-3 · 12px</span><i class="bp3"></i></div>
+  <div class="brow"><span class="lab">--space-4 · 16px</span><i class="bp4"></i></div>
+  <div class="brow"><span class="lab">--space-5 · 20px</span><i class="bp5"></i></div>
+  <div class="brow"><span class="lab">--space-6 · 24px</span><i class="bp6"></i></div>
+  <div class="brow"><span class="lab">--space-8 · 32px</span><i class="bp8"></i></div>
+  <div class="brow"><span class="lab">--space-10 · 40px</span><i class="bp10"></i></div>
+  <div class="brow"><span class="lab">--space-12 · 48px</span><i class="bp12"></i></div>
+  <div class="brow"><span class="lab">--space-16 · 64px</span><i class="bp16"></i></div>
+  <div class="brow"><span class="lab">--space-20 · 80px</span><i class="bp20"></i></div>
+  <p class="lab gaptop">Layout: --container-max-width 1160px · --container-padding-inline clamp(1rem, 4vw, 2.5rem) — esta página usa ese contenedor.</p>
+</section>
+
+<section class="x sect">
+  <h2>Radios y sombras</h2>
+  <h3>Radios (tokens restringidos)</h3>
+  <ol class="mota">
+    <li class="m"><i class="rd rdx"></i><b>--radius-xs</b><span>2px</span></li>
+    <li class="m"><i class="rd rds"></i><b>--radius-sm</b><span>4px</span></li>
+    <li class="m"><i class="rd rdm"></i><b>--radius-md</b><span>6px</span></li>
+    <li class="m"><i class="rd rdl"></i><b>--radius-lg</b><span>8px</span></li>
+    <li class="m"><i class="rd rdxl"></i><b>--radius-xl</b><span>12px</span></li>
+    <li class="m"><i class="rd rd2"></i><b>--radius-2xl</b><span>20px</span></li>
+    <li class="m"><i class="rd rdp"></i><b>--radius-pill</b><span>9999px</span></li>
+  </ol>
+  <h3>Sombras direccionales (kernel rgba(18, 22, 26, alfa))</h3>
+  <ol class="mota">
+    <li class="m"><i class="sh sh1"></i><b>--shadow-subtle</b><span>0 1px 2px · 5%</span></li>
+    <li class="m"><i class="sh sh2"></i><b>--shadow-card</b><span>0 4px 12px + 0 1px 3px</span></li>
+    <li class="m"><i class="sh sh3"></i><b>--shadow-elevated</b><span>0 12px 28px + 0 2px 6px</span></li>
+    <li class="m"><i class="sh sh4"></i><b>--shadow-floating</b><span>0 12px 28px + 0 2px 8px</span></li>
+  </ol>
+</section>
+
+<section class="x sect">
+  <h2>Motion</h2>
+  <p class="mv">hover ▸ transition-fast · 150ms cubic-bezier(0.16, 1, 0.3, 1)</p>
+  <p class="mv mv-base">hover ▸ transition-base · 250ms cubic-bezier(0.16, 1, 0.3, 1)</p>
+</section>
+
+<footer class="x foot mono">
+  <p>Quadrate pe · tokens vigentes: src/css/variables.css · espejo máquina: docs/design-tokens.json · contrato humano: docs/DESIGN.md · referencia visual generada 2026-10-23</p>
+</footer>
+
+</body>
+</html>

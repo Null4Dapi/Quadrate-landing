@@ -1,22 +1,19 @@
 /**
  * Quadrate pe — Main Stylesheet
- * Orquestador CSS modular mediante @import.
+ * Orquestador CSS modular mediante @import (página única product-first).
  */
 
-@import "./fonts.css?v=0.0.6";
-@import "./variables.css?v=0.0.6";
-@import "./reset.css?v=0.0.6";
+@import "./fonts.css";
+@import "./variables.css";
+@import "./reset.css";
 
 /* Módulos de Componentes (BEM) */
-@import "./components/header.css?v=0.0.6";
-@import "./components/hero.css?v=0.0.6";
-@import "./components/stats.css?v=0.0.6";
-@import "./components/app-showcase.css?v=0.0.6";
-@import "./components/why-us.css?v=0.0.6";
-@import "./components/community.css?v=0.0.6";
-@import "./components/caseta.css?v=0.0.6";
-@import "./components/rates.css?v=0.0.6";
-@import "./components/quadrate-live.css?v=0.1.0";
-@import "./components/manifesto.css?v=0.0.6";
-@import "./components/tab-view.css?v=0.0.6";
-@import "./components/footer.css?v=0.0.6";
+@import "./components/header.css";
+@import "./components/hero.css";
+@import "./components/app-showcase.css";
+@import "./components/modules.css";
+@import "./components/caseta.css";
+@import "./components/rates.css";
+@import "./components/manifesto.css";
+@import "./components/waitlist.css";
+@import "./components/footer.css";

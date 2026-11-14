@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 580" width="100%" height="100%" fill="none" role="img" aria-label="Mockup de Smartphone - Control de Aforo y Plazas Libres">
+  <defs>
+    <filter id="shadow-phone-aforo" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#000000" flood-opacity="0.55" />
+    </filter>
+  </defs>
+
+  <style>
+    .font-ui { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+
+  <!-- Cuerpo Exterior del Teléfono -->
+  <g filter="url(#shadow-phone-aforo)">
+    <rect x="20" y="20" width="300" height="540" rx="44" fill="#121720" stroke="#2D3748" stroke-width="5" />
+    <rect x="25" y="25" width="290" height="530" rx="40" fill="none" stroke="#4A5568" stroke-width="1.5" stroke-opacity="0.4" />
+  </g>
+
+  <!-- Superficie de Pantalla -->
+  <rect x="30" y="30" width="280" height="520" rx="36" fill="#0C1017" />
+
+  <!-- Dynamic Island -->
+  <rect x="125" y="38" width="90" height="20" rx="10" fill="#000000" />
+  <circle cx="198" cy="48" r="4.5" fill="#1A202C" />
+
+  <!-- Barra de Estado Móvil -->
+  <text x="56" y="52" class="font-ui" font-size="11" font-weight="600" fill="#E2E8F0">17:30</text>
+  <path d="M260 44h18v9h-18z" fill="none" stroke="#E2E8F0" stroke-width="1.2" rx="2" />
+  <rect x="262" y="46" width="12" height="5" fill="#48BB78" rx="1" />
+  <circle cx="248" cy="48" r="3" fill="#E2E8F0" />
+
+  <!-- Cabecera de la Aplicación -->
+  <rect x="42" y="68" width="256" height="36" rx="8" fill="#171E28" />
+  <circle cx="58" cy="86" r="6" fill="#C25E34" />
+  <text x="70" y="90" class="font-ui" font-size="12" font-weight="700" fill="#FFFFFF">Quadrate Garita</text>
+  <rect x="202" y="77" width="84" height="18" rx="9" fill="#2D2115" stroke="#744210" stroke-width="1" />
+  <circle cx="212" cy="86" r="3" fill="#DD6B20" />
+  <text x="220" y="89" class="font-ui" font-size="8.5" font-weight="700" fill="#F6AD55">AFORO 84%</text>
+
+  <!-- Medidor Circular de Ocupación en Vivo -->
+  <rect x="42" y="114" width="256" height="190" rx="14" fill="#121822" stroke="#1E2A3A" stroke-width="1.2" />
+  
+  <!-- Anillo circular de aforo -->
+  <circle cx="170" cy="195" r="58" stroke="#1E2633" stroke-width="12" fill="none" />
+  <circle cx="170" cy="195" r="58" stroke="#C25E34" stroke-width="12" fill="none"
+          stroke-dasharray="364" stroke-dashoffset="58" stroke-linecap="round"
+          transform="rotate(-90 170 195)" />
+  
+  <text x="170" y="196" class="font-ui" font-size="34" font-weight="800" fill="#FFFFFF" text-anchor="middle">42</text>
+  <text x="170" y="214" class="font-ui" font-size="11" font-weight="600" fill="#94A3B8" text-anchor="middle">/ 50 plazas</text>
+
+  <rect x="120" y="270" width="100" height="20" rx="10" fill="#2A1B16" />
+  <text x="170" y="284" class="font-ui" font-size="9.5" font-weight="700" fill="#F6AD55" text-anchor="middle">84% OCUPACIÓN</text>
+
+  <!-- Grilla de Estadísticas Rápidas -->
+  <g transform="translate(42, 314)">
+    <rect x="0" y="0" width="122" height="64" rx="10" fill="#171F2C" stroke="#223044" stroke-width="1" />
+    <text x="12" y="20" class="font-ui" font-size="9" fill="#94A3B8">Ocupadas</text>
+    <text x="12" y="44" class="font-ui" font-size="18" font-weight="800" fill="#E53E3E">42 <tspan font-size="10" font-weight="400" fill="#CBD5E0">autos</tspan></text>
+
+    <rect x="134" y="0" width="122" height="64" rx="10" fill="#171F2C" stroke="#223044" stroke-width="1" />
+    <text x="146" y="20" class="font-ui" font-size="9" fill="#94A3B8">Disponibles</text>
+    <text x="146" y="44" class="font-ui" font-size="18" font-weight="800" fill="#48BB78">8 <tspan font-size="10" font-weight="400" fill="#CBD5E0">libres</tspan></text>
+  </g>
+
+  <!-- Tarjeta de Reservas en Camino por ETA -->
+  <rect x="42" y="388" width="256" height="52" rx="10" fill="#1A212D" stroke="#C25E34" stroke-width="1.2" stroke-opacity="0.5" />
+  <circle cx="62" cy="414" r="10" fill="#2C1B16" />
+  <text x="62" y="418" class="font-ui" font-size="11" text-anchor="middle">🚗</text>
+  <text x="82" y="408" class="font-ui" font-size="10" font-weight="700" fill="#FFFFFF">3 Vehículos en camino por ETA</text>
+  <text x="82" y="424" class="font-ui" font-size="8.5" fill="#CBD5E0">Cupos asegurados · Próxima llegada: 4 min</text>
+
+  <!-- Estado del Sensor Virtual -->
+  <rect x="42" y="448" width="256" height="32" rx="8" fill="#101720" />
+  <circle cx="58" cy="464" r="3.5" fill="#48BB78" />
+  <text x="68" y="468" class="font-ui" font-size="9" font-weight="600" fill="#CBD5E0">Sensor virtual sincronizado con la nube</text>
+
+  <!-- Barra de Navegación Inferior -->
+  <rect x="120" y="534" width="100" height="4" rx="2" fill="#4A5568" />
+</svg>
+

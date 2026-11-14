@@ -1,7 +1,13 @@
 /**
- * Quadrate pe — Componente Caseta (Panel de Playas Aliadas)
+ * Quadrate pe — Componente Caseta (Tour Interactivo de Caseta)
  * Panel de digitalización operativa para cocheras en alto contraste (BEM).
  */
+
+.caseta-section {
+  padding-block: clamp(var(--space-12), 7vw, var(--space-20));
+  background-color: var(--color-bg-base);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
 
 .caseta {
   max-width: var(--container-max-width);
@@ -61,6 +67,8 @@
   flex-direction: column;
   gap: var(--space-3);
   margin-top: var(--space-2);
+  list-style: none;
+  padding: 0;
 }
 
 .caseta__item {
@@ -69,9 +77,9 @@
   gap: 2px;
   padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
   border-left: 2px solid var(--color-border-contrast);
-  border-radius: 0 var(--radius-md, 6px) var(--radius-md, 6px) 0;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
   cursor: pointer;
-  transition: background-color var(--transition-base, 250ms), border-left-color var(--transition-base, 250ms), transform var(--transition-base, 250ms);
+  transition: background-color var(--transition-base), border-left-color var(--transition-base), transform var(--transition-base);
 }
 
 .caseta__item:hover:not(.caseta__item--active) {
@@ -79,14 +87,14 @@
 }
 
 .caseta__item:focus-visible {
-  outline: 2px solid var(--color-accent-secondary, #e3e2f7);
+  outline: 2px solid var(--color-accent-secondary);
   outline-offset: 2px;
 }
 
 .caseta__item--active {
-  border-left-color: var(--color-accent-secondary, #e3e2f7);
+  border-left-color: var(--color-accent-secondary);
   background-color: rgba(227, 226, 247, 0.08);
-  border-radius: 0 var(--radius-md, 6px) var(--radius-md, 6px) 0;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
   transform: translateX(4px);
 }
 
@@ -94,12 +102,14 @@
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-contrast);
+  margin: 0;
 }
 
 .caseta__item-detail {
   font-size: var(--font-size-sm);
   color: var(--color-text-contrast-muted);
   line-height: var(--line-height-normal);
+  margin: 0;
 }
 
 .caseta__controls {
@@ -119,7 +129,7 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.04em;
-  color: var(--color-accent-secondary, #e3e2f7);
+  color: var(--color-accent-secondary);
   background-color: rgba(227, 226, 247, 0.1);
   border: 1px solid rgba(227, 226, 247, 0.25);
   border-radius: var(--radius-pill);
@@ -139,7 +149,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-pill);
   cursor: pointer;
-  transition: background-color var(--transition-fast, 150ms), border-color var(--transition-fast, 150ms), transform var(--transition-fast, 150ms);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
 }
 
 .caseta__btn-control:hover {
@@ -152,7 +162,7 @@
 }
 
 .caseta__btn-control:focus-visible {
-  outline: 2px solid var(--color-accent-secondary, #e3e2f7);
+  outline: 2px solid var(--color-accent-secondary);
   outline-offset: 2px;
 }
 
@@ -174,12 +184,12 @@
 .caseta__image {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.45));
-  transition: opacity var(--transition-base, 250ms), transform var(--transition-base, 250ms);
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
+  transition: opacity var(--transition-base), transform var(--transition-base);
 }
 
 .caseta__image--transitioning {
-  opacity: 0.2;
+  opacity: 0.15;
   transform: scale(0.97);
 }
 

@@ -13,11 +13,11 @@ const { useState, useEffect, useRef } = React;
  * @returns {JSX.Element}
  */
 export function MonitorActividad({
-  onTick
+  onTick,
+  estadoWs = "en línea"
 }) {
   const [segundosTranscurridos, setSegundosTranscurridos] = useState(0);
   const [latenciaGarita, setLatenciaGarita] = useState(1.4);
-  const [estadoConexion, setEstadoConexion] = useState("sincronizado");
   useEffect(() => {
     const idIntervalo = setInterval(() => {
       setSegundosTranscurridos(segundosPrevios => {
@@ -61,7 +61,7 @@ export function MonitorActividad({
     className: "quadrate-live__monitor-telemetria-item"
   }, "Garitas: ", /*#__PURE__*/React.createElement("strong", null, latenciaGarita, "s")), /*#__PURE__*/React.createElement("span", {
     className: "quadrate-live__monitor-telemetria-item"
-  }, "Estado: ", /*#__PURE__*/React.createElement("strong", {
+  }, "Red WS: ", /*#__PURE__*/React.createElement("strong", {
     className: "quadrate-live__monitor-status--ok"
-  }, estadoConexion))));
+  }, estadoWs))));
 }

@@ -1,6 +1,7 @@
 /**
- * Quadrate pe — Componente Manifiesto
- * Declaración de impacto urbano en alto contraste oscuro (BEM).
+ * Quadrate pe — Componente Manifiesto / Slider de Testimonios (BEM)
+ * Carrusel editorial de experiencias reales para conductores y administradores,
+ * inspirado en el diseño de tarjetas con calificación y citas de Orbix Studio.
  */
 
 .manifesto {
@@ -8,22 +9,23 @@
   background-color: var(--color-bg-contrast);
   color: var(--color-text-contrast);
   border-bottom: 1px solid var(--color-border-contrast);
+  overflow: hidden;
 }
 
 .manifesto__container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-10);
   max-width: var(--container-max-width);
   margin-inline: auto;
   padding-inline: var(--container-padding-inline);
-  align-items: center;
-}
-
-.manifesto__statement {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-8);
+}
+
+.manifesto__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 680px;
 }
 
 .manifesto__eyebrow {
@@ -42,72 +44,194 @@
   border-radius: var(--radius-pill);
 }
 
-.manifesto__text {
+.manifesto__title {
   font-family: var(--font-family-display);
-  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
-  font-weight: var(--font-weight-regular);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-snug);
+  letter-spacing: -0.025em;
   color: var(--color-text-contrast);
+  margin: 0;
   text-wrap: balance;
 }
 
-.manifesto__action-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-8);
-  background-color: var(--color-bg-contrast-soft);
-  border: 1px solid var(--color-border-contrast);
-  border-radius: var(--radius-xl);
-}
-
-.manifesto__number {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-giant);
-  font-weight: var(--font-weight-bold);
-  color: #ffffff;
-  line-height: var(--line-height-tight);
-  letter-spacing: -0.03em;
-}
-
-.manifesto__label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-contrast);
-}
-
-.manifesto__detail {
-  font-size: var(--font-size-xs);
+.manifesto__lead {
+  font-size: var(--font-size-base);
   color: var(--color-text-contrast-muted);
   line-height: var(--line-height-relaxed);
+  margin: 0;
 }
 
-.manifesto__button {
-  display: inline-flex;
+/* Slider Track y Viewport */
+.manifesto__slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-border-contrast);
+  background-color: var(--color-bg-contrast-soft);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+}
+
+.manifesto__track {
+  display: flex;
+  width: 100%;
+  transition: transform var(--transition-base);
+  will-change: transform;
+}
+
+.manifesto__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: clamp(var(--space-6), 4.5vw, var(--space-10));
+}
+
+/* Encabezado de la Tarjeta de Testimonio */
+.manifesto__slide-top {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  width: fit-content;
-  padding: var(--space-3) var(--space-6);
-  margin-top: var(--space-2);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.manifesto__author-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.manifesto__avatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(227, 226, 247, 0.15);
+  border: 1px solid rgba(227, 226, 247, 0.3);
+  color: var(--color-text-contrast);
+  font-family: var(--font-family-mono);
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.manifesto__author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.manifesto__author-name {
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-bg-contrast);
-  background-color: #ffffff;
+  color: var(--color-text-contrast);
+  margin: 0;
+}
+
+.manifesto__author-role {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-contrast-muted);
+  margin: 0;
+}
+
+.manifesto__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: #fbbf24;
+  background-color: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  padding: 4px 10px;
   border-radius: var(--radius-pill);
+}
+
+.manifesto__stars {
+  letter-spacing: 2px;
+}
+
+/* Cita Editorial */
+.manifesto__quote {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-style: italic;
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-contrast);
+  margin: 0;
+  max-width: 68ch;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Controles de Navegación del Slider */
+.manifesto__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: var(--space-2);
+}
+
+.manifesto__dots {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.manifesto__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
   transition: all var(--transition-fast);
 }
 
-.manifesto__button:hover,
-.manifesto__button:focus-visible {
-  background-color: var(--color-bg-subtle);
-  transform: translateY(-1px);
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
+.manifesto__dot--active {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  transform: scale(1.25);
 }
 
-@media (min-width: 900px) {
-  .manifesto__container {
-    grid-template-columns: 1.3fr 0.9fr;
-    gap: var(--space-12);
-  }
+.manifesto__arrows {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.manifesto__btn-arrow {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-contrast);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-contrast);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.manifesto__btn-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.manifesto__btn-arrow:focus-visible {
+  outline: 2px solid var(--color-accent-secondary);
+  outline-offset: 2px;
 }

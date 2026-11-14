@@ -1,6 +1,8 @@
 /**
- * Quadrate pe — Componente App Showcase
- * Tarjeta destacada editorial con copy asimétrico y trío de smartphones (BEM).
+ * Quadrate pe — Componente App View (ex App Showcase)
+ * Tarjeta destacada editorial con la pantalla referencial del conductor:
+ * frame de dispositivo + mapa de disponibilidad dibujados solo con CSS (BEM).
+ * El bloque se marca data-screen="referencial" para iteraciones futuras.
  */
 
 .app-showcase {
@@ -123,18 +125,142 @@
 }
 
 .app-showcase__figure {
-  width: 100%;
-  max-width: 440px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.app-showcase__image {
+/* Frame de dispositivo referencial (sin imágenes: solo tokens) */
+.app-showcase__device {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
   width: 100%;
-  height: auto;
-  filter: drop-shadow(0 14px 32px rgba(18, 22, 26, 0.08));
+  max-width: 270px;
+  padding: var(--space-4);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-elevated);
+}
+
+.app-showcase__screen-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+}
+
+.app-showcase__screen-marca {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--font-weight-bold);
+}
+
+.app-showcase__screen-marca::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent-primary);
+}
+
+.app-showcase__screen-estado {
+  padding: 2px var(--space-2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-status-success);
+  background-color: var(--color-status-success-bg);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+/* Mapa abstracto: retícula urbana con líneas de manzana (sin imágenes) */
+.app-showcase__screen-map {
+  position: relative;
+  height: 210px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-subtle);
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 26px, var(--color-bg-surface) 26px 30px),
+    repeating-linear-gradient(90deg, transparent 0 26px, var(--color-bg-surface) 26px 30px);
+}
+
+.app-showcase__pin {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 3px var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+  white-space: nowrap;
+}
+
+.app-showcase__pin-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-status-success);
+}
+
+.app-showcase__pin--ocupado .app-showcase__pin-dot {
+  background-color: var(--color-text-muted);
+}
+
+.app-showcase__pin--a {
+  top: 14%;
+  left: 6%;
+}
+
+.app-showcase__pin--b {
+  top: 44%;
+  right: 4%;
+}
+
+.app-showcase__pin--c {
+  bottom: 16%;
+  left: 14%;
+}
+
+.app-showcase__sheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background-color: var(--color-bg-base);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.app-showcase__sheet-ruta {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.app-showcase__sheet-aforo {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.app-showcase__sheet-accion {
+  align-self: flex-start;
+  margin-top: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-contrast);
+  background-color: var(--color-accent-primary);
+  border-radius: var(--radius-pill);
 }
 
 @media (min-width: 900px) {
@@ -145,7 +271,11 @@
     padding-inline: var(--space-12);
   }
 
-  .app-showcase__figure {
-    max-width: 480px;
+  .app-showcase__device {
+    max-width: 300px;
+  }
+
+  .app-showcase__screen-map {
+    height: 260px;
   }
 }

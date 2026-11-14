@@ -8,16 +8,39 @@ Thumbs.db
 *.swp
 *.swo
 
+# Environment variables
+.env
+.env.*
+
 # Logs
 *.log
 npm-debug.log*
 
-# Tooling and local cache
-.atl/
-.codegraph/
+# Tooling, dependencies and local cache
+node_modules/
 dist/
 .cache/
+.atl/
+.codegraph/
 install.cmd
+
+# AI agents and assistant configs
+.agent/
+.agents/
+.impeccable/
+.opencode/
+.pi/
+.codex/
+.github/
+skills-lock.json
+
+# Testing and automation artifacts
+.playwright/
+.playwright-cli/
+
+# ODD workflow and task tracking
+odd/
+.odd/
 
 # Academic source documents (local only)
 *.pdf

@@ -1,18 +1,19 @@
 import React from "react";
 
 /**
- * Componente funcional reutilizable para renderizar tarjetas de cocheras.
- * Recibe datos y callbacks por medio de props.
+ * Componente funcional para renderizar tarjetas de cocheras con datos en vivo.
  *
  * @param {Object} props
  * @param {Object} props.cochera - Datos de la cochera
  * @param {boolean} props.estaSeleccionada - Estado de selección actual
- * @param {Function} props.onSeleccionarCochera - Callback disparado al hacer clic
+ * @param {boolean} props.estaActualizada - Destello de actualización en vivo por telemetría
+ * @param {Function} props.onSeleccionarCochera - Callback al seleccionar
  * @returns {JSX.Element}
  */
 export function TarjetaCochera({
   cochera,
   estaSeleccionada = false,
+  estaActualizada = false,
   onSeleccionarCochera,
 }) {
   const porcentajeOcupacion = Math.round(
@@ -25,7 +26,7 @@ export function TarjetaCochera({
     <article
       className={`quadrate-live__card ${
         estaSeleccionada ? "quadrate-live__card--selected" : ""
-      }`}
+      } ${estaActualizada ? "quadrate-live__card--actualizada" : ""}`}
       onClick={() => onSeleccionarCochera(cochera)}
       role="button"
       tabIndex={0}
@@ -46,7 +47,7 @@ export function TarjetaCochera({
               : "quadrate-live__badge--disponible"
           }`}
         >
-          {esAforoCritico ? "¡Últimos cupos!" : "Aforo normal"}
+          {esAforoCritico ? "Aforo crítico" : "Aforo fluido"}
         </span>
       </header>
 
@@ -55,7 +56,7 @@ export function TarjetaCochera({
 
       <div className="quadrate-live__card-metricas">
         <div className="quadrate-live__card-metrica">
-          <span className="quadrate-live__card-metrica-etiqueta">Disponibles</span>
+          <span className="quadrate-live__card-metrica-etiqueta">Plazas libres</span>
           <span className="quadrate-live__card-metrica-valor">
             <strong>{cochera.plazasDisponibles}</strong> / {cochera.plazasTotales}
           </span>
@@ -76,7 +77,7 @@ export function TarjetaCochera({
 
       <div className="quadrate-live__aforo-box">
         <div className="quadrate-live__aforo-info">
-          <span className="quadrate-live__aforo-label">Ocupación estimada</span>
+          <span className="quadrate-live__aforo-label">Ocupación</span>
           <span className="quadrate-live__aforo-pct">{porcentajeOcupacion}%</span>
         </div>
         <progress
@@ -91,7 +92,7 @@ export function TarjetaCochera({
 
       <footer className="quadrate-live__card-footer">
         <span className="quadrate-live__card-eta">
-          ETA aprox: <strong>{cochera.tiempoEstimadoLlegadaMinutos} min</strong>
+          ETA: <strong>{cochera.tiempoEstimadoLlegadaMinutos} min</strong>
         </span>
         <button
           type="button"
@@ -103,7 +104,7 @@ export function TarjetaCochera({
             onSeleccionarCochera(cochera);
           }}
         >
-          {estaSeleccionada ? "Seleccionada ✓" : "Ver y Reservar"}
+          {estaSeleccionada ? "Seleccionada ✓" : "Simular reserva"}
         </button>
       </footer>
     </article>

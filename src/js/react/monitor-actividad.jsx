@@ -8,10 +8,9 @@ import React, { useState, useEffect } from "react";
  * @param {Function} [props.onTick] - Notificación periódica de segundo transcurrido
  * @returns {JSX.Element}
  */
-export function MonitorActividad({ onTick }) {
+export function MonitorActividad({ onTick, estadoWs = "en línea" }) {
   const [segundosTranscurridos, setSegundosTranscurridos] = useState(0);
   const [latenciaGarita, setLatenciaGarita] = useState(1.4);
-  const [estadoConexion, setEstadoConexion] = useState("sincronizado");
 
   useEffect(() => {
     const idIntervalo = setInterval(() => {
@@ -55,7 +54,7 @@ export function MonitorActividad({ onTick }) {
           Garitas: <strong>{latenciaGarita}s</strong>
         </span>
         <span className="quadrate-live__monitor-telemetria-item">
-          Estado: <strong className="quadrate-live__monitor-status--ok">{estadoConexion}</strong>
+          Red WS: <strong className="quadrate-live__monitor-status--ok">{estadoWs}</strong>
         </span>
       </div>
     </div>

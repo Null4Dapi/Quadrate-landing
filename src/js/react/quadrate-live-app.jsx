@@ -7,48 +7,137 @@ import { SimuladorReserva } from "./simulador-reserva.jsx";
 import { ContenedorLive } from "./contenedor-live.jsx";
 
 /**
- * Componente principal de Quadrate Live en React.
- * Integra hooks (useState, useEffect, useRef), eventos onClick,
- * composición padre-hijo y simulación asíncrona con temporizadores controlados.
+ * Componente principal de la demo Quadrate Live.
+ * Arquitectura React con telemetría WebSocket nativa, estado reactivo,
+ * catálogo de disponibilidad y simulador de reserva por ETA.
  */
 export function QuadrateLiveApp() {
   const [distritoSeleccionado, setDistritoSeleccionado] = useState("Todos");
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [cocheraSeleccionada, setCocheraSeleccionada] = useState(DATOS_COCHERAS_INICIALES[0]);
-  const [cocheras, setCocheras] = useState([]);
-  const [estaCargando, setEstaCargando] = useState(true);
+  const [cocheras, setCocheras] = useState(DATOS_COCHERAS_INICIALES);
+  const [estaCargando, setEstaCargando] = useState(false);
   const [tiempoSesionTexto, setTiempoSesionTexto] = useState("00:00");
-  const [contadorRecargas, setContadorRecargas] = useState(0);
+  const [estadoWs, setEstadoWs] = useState("conectando");
+  const [eventosTelemetria, setEventosTelemetria] = useState([]);
+  const [cocheraActualizadaId, setCocheraActualizadaId] = useState(null);
+  const [estaPausado, setEstaPausado] = useState(false);
 
   const campoBusquedaRef = useRef(null);
+  const socketRef = useRef(null);
 
-  const enfocarCampoBusqueda = () => {
-    if (campoBusquedaRef.current) {
-      campoBusquedaRef.current.focus();
-    }
-  };
-
+  // Filtrado reactivo por distrito con feedback asíncrono
   useEffect(() => {
     setEstaCargando(true);
-
-    const temporizadorCarga = setTimeout(() => {
+    const timer = setTimeout(() => {
       const filtradas = distritoSeleccionado === "Todos"
         ? DATOS_COCHERAS_INICIALES
         : DATOS_COCHERAS_INICIALES.filter(
             (c) => c.distrito.toLowerCase() === distritoSeleccionado.toLowerCase()
           );
-
       setCocheras(filtradas);
       setEstaCargando(false);
-    }, 750);
+    }, 350);
+
+    return () => clearTimeout(timer);
+  }, [distritoSeleccionado]);
+
+  // Atajo de teclado: presionar '/' para enfocar buscador, 'Esc' para limpiar
+  useEffect(() => {
+    const manejarTecladoGlobal = (evento) => {
+      if (evento.key === "/" && document.activeElement !== campoBusquedaRef.current) {
+        evento.preventDefault();
+        campoBusquedaRef.current?.focus();
+      } else if (evento.key === "Escape" && document.activeElement === campoBusquedaRef.current) {
+        setTerminoBusqueda("");
+        campoBusquedaRef.current?.blur();
+      }
+    };
+    window.addEventListener("keydown", manejarTecladoGlobal);
+    return () => window.removeEventListener("keydown", manejarTecladoGlobal);
+  }, []);
+
+  // Conexión WebSocket RFC 6455 nativa para telemetría operativa
+  useEffect(() => {
+    let ws = null;
+    let reconexionTimer = null;
+
+    function conectarWebSocket() {
+      const protocolo = window.location.protocol === "https:" ? "wss:" : "ws:";
+      const urlWs = `${protocolo}//${window.location.host}/ws-telemetria`;
+
+      try {
+        ws = new WebSocket(urlWs);
+        socketRef.current = ws;
+
+        ws.onopen = () => {
+          setEstadoWs("en vivo");
+        };
+
+        ws.onmessage = (evento) => {
+          if (estaPausado) return;
+
+          try {
+            const dato = JSON.parse(evento.data);
+            const idItem = Date.now() + Math.random().toString(36).slice(2, 6);
+            const nuevoEvento = { ...dato, id: idItem };
+
+            setEventosTelemetria((previos) => [nuevoEvento, ...previos.slice(0, 3)]);
+
+            if (dato.cocheraId && dato.datos) {
+              setCocheraActualizadaId(dato.cocheraId);
+              setTimeout(() => setCocheraActualizadaId(null), 2500);
+
+              setCocheras((cocherasPrevias) =>
+                cocherasPrevias.map((c) => {
+                  if (c.id === dato.cocheraId) {
+                    const actualizado = {
+                      ...c,
+                      plazasDisponibles: dato.datos.plazasDisponibles ?? dato.datos.plazasLibres ?? c.plazasDisponibles,
+                      plazasLibres: dato.datos.plazasLibres ?? dato.datos.plazasDisponibles ?? c.plazasLibres,
+                      porcentajeOcupacion: dato.datos.porcentajeOcupacion ?? c.porcentajeOcupacion,
+                      estadoAforo: dato.datos.estadoAforo ?? c.estadoAforo,
+                      tarifaHora: dato.datos.tarifaHora ?? c.tarifaHora,
+                    };
+                    setCocheraSeleccionada((sel) => (sel?.id === c.id ? actualizado : sel));
+                    return actualizado;
+                  }
+                  return c;
+                })
+              );
+            }
+          } catch (err) {
+            console.error("Error al procesar trama de telemetría:", err);
+          }
+        };
+
+        ws.onclose = () => {
+          setEstadoWs("reconectando");
+          reconexionTimer = setTimeout(conectarWebSocket, 4000);
+        };
+
+        ws.onerror = () => {
+          setEstadoWs("desconectado");
+          if (ws) ws.close();
+        };
+      } catch (e) {
+        setEstadoWs("desconectado");
+        reconexionTimer = setTimeout(conectarWebSocket, 4000);
+      }
+    }
+
+    conectarWebSocket();
 
     return () => {
-      clearTimeout(temporizadorCarga);
+      if (ws) ws.close();
+      if (reconexionTimer) clearTimeout(reconexionTimer);
     };
-  }, [distritoSeleccionado, contadorRecargas]);
+  }, [estaPausado]);
 
-  const manejarRefrescarCatalogo = () => {
-    setContadorRecargas((previo) => previo + 1);
+  const simularEventoGarita = () => {
+    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+      socketRef.current.send(JSON.stringify({ accion: "simular_evento" }));
+    }
   };
 
   const manejarTickMonitor = (segundosTotales) => {
@@ -69,17 +158,56 @@ export function QuadrateLiveApp() {
 
   return (
     <ContenedorLive
-      titulo="Localizador y Monitor de Cocheras en Tiempo Real"
-      subtitulo="Monitoreo de aforo sincronizado por telemetría y apartado inmediato por ETA en Lima."
+      titulo="Centro de Operaciones y Aforo en Vivo"
+      subtitulo="Monitoreo de red de cocheras en Lima. Telemetría de garitas, aforo y reservas dinámicas por ETA."
       cabeceraSaludo={
         <SaludoUsuario
-          nombreUsuario="Carlos Valdivia"
-          rolUsuario="Conductor Premium"
-          totalCocheras={DATOS_COCHERAS_INICIALES.length}
-          tiempoActivo={tiempoSesionTexto}
+          totalCocheras={cocheras.length}
+          estadoWs={estadoWs}
+          onSimularEvento={simularEventoGarita}
+          estaPausado={estaPausado}
+          onAlternarPausa={() => setEstaPausado((p) => !p)}
         />
       }
-      monitor={<MonitorActividad onTick={manejarTickMonitor} />}
+      monitor={<MonitorActividad onTick={manejarTickMonitor} estadoWs={estadoWs} />}
+      feedTelemetria={
+        <div className="quadrate-live__feed" role="region" aria-label="Registro de telemetría operativa en vivo">
+          <div className="quadrate-live__feed-header">
+            <span className="quadrate-live__feed-title">
+              Registro de Telemetría Operativa
+            </span>
+            <span className="quadrate-live__feed-status">
+              {estaPausado ? "⏸ En pausa" : "● Recibiendo eventos"}
+            </span>
+          </div>
+
+          <div className="quadrate-live__feed-lista">
+            {eventosTelemetria.length === 0 ? (
+              <p className="quadrate-live__feed-empty">
+                Enlace activo. Esperando el próximo reporte de garitas en Lima...
+              </p>
+            ) : (
+              eventosTelemetria.map((evento) => (
+                <div key={evento.id} className={`quadrate-live__feed-item quadrate-live__feed-item--${evento.tipo}`}>
+                  <span className="quadrate-live__feed-time">{evento.timestamp}</span>
+                  <span className="quadrate-live__feed-badge">
+                    {evento.tipo === "ingreso" && "Check-in LPR"}
+                    {evento.tipo === "salida" && "Check-out"}
+                    {evento.tipo === "reserva_eta" && "Reserva ETA"}
+                    {evento.tipo === "tarifa_dinamica" && "Franja Valle"}
+                    {evento.tipo === "aforo_critico" && "Alerta Aforo"}
+                    {evento.tipo === "conexion" && "Enlace"}
+                  </span>
+                  <span className="quadrate-live__feed-cochera">
+                    {evento.nombreCochera ? `${evento.nombreCochera} · ` : ""}
+                  </span>
+                  <span className="quadrate-live__feed-msg">{evento.mensaje}</span>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      }
       barraBusqueda={
         <div className="quadrate-live__toolbar">
           <div className="quadrate-live__search-box">
@@ -92,9 +220,9 @@ export function QuadrateLiveApp() {
                 id="quadrate-live-input"
                 type="search"
                 className="quadrate-live__search-input"
-                placeholder="Ej. Begonias, Larco, Canaval..."
+                placeholder="Begonias, Larco, Canaval... (Presioná / para buscar)"
                 value={terminoBusqueda}
-                onChange={(eventoInput) => setTerminoBusqueda(eventoInput.target.value)}
+                onChange={(e) => setTerminoBusqueda(e.target.value)}
               />
               {terminoBusqueda && (
                 <button
@@ -102,7 +230,7 @@ export function QuadrateLiveApp() {
                   className="quadrate-live__search-clear"
                   onClick={() => {
                     setTerminoBusqueda("");
-                    enfocarCampoBusqueda();
+                    campoBusquedaRef.current?.focus();
                   }}
                   aria-label="Limpiar búsqueda"
                 >
@@ -110,14 +238,6 @@ export function QuadrateLiveApp() {
                 </button>
               )}
             </div>
-            <button
-              type="button"
-              className="quadrate-live__btn-focus"
-              onClick={enfocarCampoBusqueda}
-              aria-label="Enfocar campo de búsqueda"
-            >
-              Enfocar buscador
-            </button>
           </div>
 
           <div className="quadrate-live__filtros">
@@ -138,14 +258,6 @@ export function QuadrateLiveApp() {
                 </button>
               ))}
             </div>
-            <button
-              type="button"
-              className="quadrate-live__btn-refresh"
-              onClick={manejarRefrescarCatalogo}
-              title="Simular recarga asíncrona de disponibilidad"
-            >
-              ↻ Sincronizar
-            </button>
           </div>
         </div>
       }
@@ -162,7 +274,7 @@ export function QuadrateLiveApp() {
         <div className="quadrate-live__loading" role="status" aria-live="polite">
           <div className="quadrate-live__spinner" aria-hidden="true" />
           <p className="quadrate-live__loading-text">
-            Sincronizando aforo en tiempo real con garitas en {distritoSeleccionado}...
+            Consultando aforo con garitas en {distritoSeleccionado}...
           </p>
         </div>
       ) : cocherasVisibles.length === 0 ? (
@@ -170,14 +282,14 @@ export function QuadrateLiveApp() {
           <p>No se encontraron playas de estacionamiento para el criterio especificado.</p>
           <button
             type="button"
-            className="quadrate-live__btn-reset"
+            className="quadrate-live__btn quadrate-live__btn--secundario"
             onClick={() => {
               setTerminoBusqueda("");
               setDistritoSeleccionado("Todos");
-              enfocarCampoBusqueda();
+              campoBusquedaRef.current?.focus();
             }}
           >
-            Restablecer búsqueda y filtros
+            Restablecer filtros
           </button>
         </div>
       ) : (
@@ -187,7 +299,8 @@ export function QuadrateLiveApp() {
               key={cochera.id}
               cochera={cochera}
               estaSeleccionada={cocheraSeleccionada?.id === cochera.id}
-              onSeleccionarCochera={(cocheraElegida) => setCocheraSeleccionada(cocheraElegida)}
+              estaActualizada={cocheraActualizadaId === cochera.id}
+              onSeleccionarCochera={(c) => setCocheraSeleccionada(c)}
             />
           ))}
         </div>

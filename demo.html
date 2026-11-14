@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quadrate Live: Demostración interactiva de localización y monitor de cocheras en tiempo real en Lima Metropolitana.">
+  <title>Quadrate Live — Demostración Interactiva</title>
+  <link rel="icon" type="image/svg+xml" href="src/assets/favicon.svg">
+  <link rel="preload" href="src/assets/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="src/css/main.css?v=0.1.0">
+  <link rel="stylesheet" href="src/css/components/quadrate-live.css">
+</head>
+<body class="demo-page">
+  <header class="demo-nav">
+    <div class="demo-nav__container">
+      <a href="index.html" class="demo-nav__brand" aria-label="Ir al inicio de Quadrate pe">
+        <span class="demo-nav__logo-text">Quadrate</span>
+        <span class="demo-nav__logo-badge">pe</span>
+        <span class="demo-nav__pill">Demo en vivo</span>
+      </a>
+      <div class="demo-nav__actions">
+        <a href="index.html" class="demo-nav__back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Volver a la landing
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido-demo">
+    <section id="vista-live" class="quadrate-live" aria-label="Demostración interactiva de Quadrate Live">
+      <div id="quadrate-live-root"></div>
+    </section>
+  </main>
+
+  <footer class="demo-footer">
+    <div class="demo-footer__container">
+      <p>© 2026 Quadrate pe · Demostrador interactivo y simulador de cocheras en Lima</p>
+    </div>
+  </footer>
+
+  <!-- Dependencias de React autoalojadas para el demostrador aislado -->
+  <script src="src/assets/vendor/react.production.min.js"></script>
+  <script src="src/assets/vendor/react-dom.production.min.js"></script>
+  <script type="module">
+    import { inicializarQuadrateLive } from "./src/js/react/quadrate-live.js";
+    inicializarQuadrateLive();
+  </script>
+</body>
+</html>

@@ -4,24 +4,25 @@
 const React = window.React;
 
 /**
- * Componente funcional reutilizable para renderizar tarjetas de cocheras.
- * Recibe datos y callbacks por medio de props.
+ * Componente funcional para renderizar tarjetas de cocheras con datos en vivo.
  *
  * @param {Object} props
  * @param {Object} props.cochera - Datos de la cochera
  * @param {boolean} props.estaSeleccionada - Estado de selección actual
- * @param {Function} props.onSeleccionarCochera - Callback disparado al hacer clic
+ * @param {boolean} props.estaActualizada - Destello de actualización en vivo por telemetría
+ * @param {Function} props.onSeleccionarCochera - Callback al seleccionar
  * @returns {JSX.Element}
  */
 export function TarjetaCochera({
   cochera,
   estaSeleccionada = false,
+  estaActualizada = false,
   onSeleccionarCochera
 }) {
   const porcentajeOcupacion = Math.round((cochera.plazasTotales - cochera.plazasDisponibles) / cochera.plazasTotales * 100);
   const esAforoCritico = cochera.plazasDisponibles <= 5;
   return /*#__PURE__*/React.createElement("article", {
-    className: `quadrate-live__card ${estaSeleccionada ? "quadrate-live__card--selected" : ""}`,
+    className: `quadrate-live__card ${estaSeleccionada ? "quadrate-live__card--selected" : ""} ${estaActualizada ? "quadrate-live__card--actualizada" : ""}`,
     onClick: () => onSeleccionarCochera(cochera),
     role: "button",
     tabIndex: 0,
@@ -38,7 +39,7 @@ export function TarjetaCochera({
     className: "quadrate-live__card-distrito"
   }, cochera.distrito), /*#__PURE__*/React.createElement("span", {
     className: `quadrate-live__badge ${esAforoCritico ? "quadrate-live__badge--alerta" : "quadrate-live__badge--disponible"}`
-  }, esAforoCritico ? "¡Últimos cupos!" : "Aforo normal")), /*#__PURE__*/React.createElement("h4", {
+  }, esAforoCritico ? "Aforo crítico" : "Aforo fluido")), /*#__PURE__*/React.createElement("h4", {
     className: "quadrate-live__card-nombre"
   }, cochera.nombre), /*#__PURE__*/React.createElement("p", {
     className: "quadrate-live__card-direccion"
@@ -48,7 +49,7 @@ export function TarjetaCochera({
     className: "quadrate-live__card-metrica"
   }, /*#__PURE__*/React.createElement("span", {
     className: "quadrate-live__card-metrica-etiqueta"
-  }, "Disponibles"), /*#__PURE__*/React.createElement("span", {
+  }, "Plazas libres"), /*#__PURE__*/React.createElement("span", {
     className: "quadrate-live__card-metrica-valor"
   }, /*#__PURE__*/React.createElement("strong", null, cochera.plazasDisponibles), " / ", cochera.plazasTotales)), /*#__PURE__*/React.createElement("div", {
     className: "quadrate-live__card-metrica"
@@ -68,7 +69,7 @@ export function TarjetaCochera({
     className: "quadrate-live__aforo-info"
   }, /*#__PURE__*/React.createElement("span", {
     className: "quadrate-live__aforo-label"
-  }, "Ocupación estimada"), /*#__PURE__*/React.createElement("span", {
+  }, "Ocupación"), /*#__PURE__*/React.createElement("span", {
     className: "quadrate-live__aforo-pct"
   }, porcentajeOcupacion, "%")), /*#__PURE__*/React.createElement("progress", {
     className: `quadrate-live__aforo-barra ${esAforoCritico ? "quadrate-live__aforo-barra--critico" : ""}`,
@@ -79,12 +80,12 @@ export function TarjetaCochera({
     className: "quadrate-live__card-footer"
   }, /*#__PURE__*/React.createElement("span", {
     className: "quadrate-live__card-eta"
-  }, "ETA aprox: ", /*#__PURE__*/React.createElement("strong", null, cochera.tiempoEstimadoLlegadaMinutos, " min")), /*#__PURE__*/React.createElement("button", {
+  }, "ETA: ", /*#__PURE__*/React.createElement("strong", null, cochera.tiempoEstimadoLlegadaMinutos, " min")), /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: `quadrate-live__card-btn ${estaSeleccionada ? "quadrate-live__card-btn--active" : ""}`,
     onClick: eventoBoton => {
       eventoBoton.stopPropagation();
       onSeleccionarCochera(cochera);
     }
-  }, estaSeleccionada ? "Seleccionada ✓" : "Ver y Reservar")));
+  }, estaSeleccionada ? "Seleccionada ✓" : "Simular reserva")));
 }

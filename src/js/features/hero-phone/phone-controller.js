@@ -11,7 +11,7 @@ import {
 } from "./phone-materials.js";
 import { construirModeloTelefono } from "./phone-geometry.js";
 
-const ROTACION_BASE = { x: 0.0, y: 0.0 };
+const ROTACION_BASE = { x: 0.32, y: -0.52, z: -0.36 };
 const ZOOM_BASE = 13.0;
 
 /**
@@ -95,6 +95,7 @@ export function inicializarHeroTelefono3D() {
   const grupoTelefono = construirModeloTelefono(THREE, materiales);
   grupoTelefono.rotation.x = ROTACION_BASE.x;
   grupoTelefono.rotation.y = ROTACION_BASE.y;
+  grupoTelefono.rotation.z = ROTACION_BASE.z;
   escena.add(grupoTelefono);
 
   // 6. Estado de rotación e interactividad
@@ -149,6 +150,7 @@ export function inicializarHeroTelefono3D() {
       rotacionActual.y += (rotacionObjetivo.y - rotacionActual.y) * 0.08;
       grupoTelefono.rotation.x = rotacionActual.x;
       grupoTelefono.rotation.y = rotacionActual.y;
+      grupoTelefono.rotation.z = ROTACION_BASE.z;
     }
 
     renderizador.render(escena, camara);

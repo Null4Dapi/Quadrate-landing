@@ -34,7 +34,7 @@ Para detener la automatización: *Actions → Publicar Quadrate → ⋯ → Disa
   calculan en función del reloj, así que todas las instancias coinciden.
 - Orígenes permitidos (`ALLOWED_ORIGINS`): el WebSocket y CORS solo aceptan las páginas de Quadrate; un navegador siempre envía `Origin`.
 - Límites: 4 conexiones por IP, 150 por instancia, 8 mensajes de chat por minuto y por IP, 400 caracteres por mensaje, 2 KB por
-  trama, vida máxima de 14 min por conexión (el cliente reconecta), cierre a los 90 s sin actividad en `/ws`, y un
+  trama, vida máxima de 14 min en el chat y de 5 min en la telemetría (el cliente reconecta; así una desconexión brusca no deja sockets fantasma), cierre a los 90 s sin actividad en `/ws`, y un
   **presupuesto de 30 min de telemetría por IP y hora** (la demo de la página reconecta sola cada 4 s).
 - Privacidad: no se guardan ni se registran los mensajes del chat; el `--no-access-log` de uvicorn evita registrar las rutas.
 - Firebase Hosting no reenvía WebSocket: el navegador se conecta directo a la URL `*.run.app` del servicio.

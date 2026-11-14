@@ -109,12 +109,12 @@ class Hub:
         if not self.conexiones.admitir(ip):
             await ws.close(code=1013)
             return
-        await ws.accept()
         cliente = Cliente(ws)
-        self.clientes[ws] = cliente
-        self._asegurar_bucle()
         inicio = time.monotonic()
-        try:
+        try:  # accept() va dentro del try: si el cliente se cae en el saludo, igual se libera el cupo
+            await ws.accept()
+            self.clientes[ws] = cliente
+            self._asegurar_bucle()
             await cliente.enviar({
                 "type": "hola", "version": 1, "demostracion": True,
                 "distritos": list(aforo.DISTRITOS), "sugerencias": list(faq.SUGERENCIAS),
@@ -149,16 +149,18 @@ class Hub:
         if not self.presupuesto.disponible(ip) or not self.conexiones.admitir(ip):
             await ws.close(code=1013)
             return
-        await ws.accept()
         cliente = Cliente(ws)
-        self.telemetria[ws] = cliente
-        self._asegurar_bucle()
         inicio = time.monotonic()
-        try:
+        try:  # accept() va dentro del try: si el cliente se cae en el saludo, igual se libera el cupo
+            await ws.accept()
+            self.telemetria[ws] = cliente
+            self._asegurar_bucle()
             await cliente.enviar(telemetria.bienvenida(time.time()))
             await self._enviar_tramas(cliente, time.time())  # sincroniza el aforo al conectar
             while True:
-                restante = cfg.vida_max_seg - (time.monotonic() - inicio)
+                # Vida corta: la demo no envía nada, así que una desconexión brusca no se detecta; al reconectar sola
+                # (cada 4 s) la demo se recupera y los sockets fantasma no duran.
+                restante = cfg.vida_tele_seg - (time.monotonic() - inicio)
                 if restante <= 0:
                     await ws.close(code=4000)
                     return

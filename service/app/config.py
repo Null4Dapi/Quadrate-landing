@@ -17,6 +17,7 @@ class Config:
     max_bytes_mensaje: int = 2000
     max_chars_chat: int = 400
     pausa_fragmento_seg: float = 0.03  # ritmo del streaming del chat
+    vida_tele_seg: int = 300           # vida máxima de un socket de telemetría (la demo reconecta sola a los 4 s)
     presupuesto_tele_seg_hora: int = 1800  # segundos de telemetría por IP y hora (acota el costo de pestañas olvidadas)
     pausa_simulacion_seg: float = 2.0  # separación mínima entre «simular evento»
 
@@ -41,5 +42,6 @@ def cargar(env: dict | None = None) -> Config:
         vida_max_seg=_entero(env, "VIDA_MAX_SEG", base.vida_max_seg),
         inactividad_seg=_entero(env, "INACTIVIDAD_SEG", base.inactividad_seg),
         periodo_aforo_seg=_entero(env, "PERIODO_AFORO_SEG", base.periodo_aforo_seg),
+        vida_tele_seg=_entero(env, "VIDA_TELE_SEG", base.vida_tele_seg),
         presupuesto_tele_seg_hora=_entero(env, "PRESUPUESTO_TELE_SEG_HORA", base.presupuesto_tele_seg_hora),
     )

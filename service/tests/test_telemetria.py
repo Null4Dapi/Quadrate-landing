@@ -124,7 +124,7 @@ def test_presupuesto_de_tiempo_corta_a_quien_reconecta_sin_parar():
 
 
 def test_cierra_por_vida_maxima_y_el_cliente_reconecta_solo():
-    with abrir(cliente(vida_max_seg=1)) as ws:
+    with abrir(cliente(vida_tele_seg=1)) as ws:
         with pytest.raises(WebSocketDisconnect) as error:
             while True:
                 ws.receive_text()
@@ -139,3 +139,19 @@ def test_el_chat_y_la_telemetria_comparten_limite_de_conexiones_por_ip():
             with c.websocket_connect("/ws", headers={"origin": ORIGEN}):
                 pass
         assert error.value.code == 1013
+
+
+def test_las_conexiones_se_liberan_al_cerrar_en_ambos_protocolos():
+    c = cliente()
+    hub = c.app.state.hub
+    with abrir(c) as tele:
+        recibir(tele)
+        with c.websocket_connect("/ws", headers={"origin": ORIGEN}) as chat:
+            chat.receive_text()
+            assert hub.conexiones.total == 2
+    assert hub.conexiones.total == 0 and not hub.clientes and not hub.telemetria
+
+
+def test_la_telemetria_vive_menos_que_el_chat():
+    from app.config import Config as C
+    assert C().vida_tele_seg < C().vida_max_seg

@@ -11,8 +11,8 @@ import {
 } from "./phone-materials.js";
 import { construirModeloTelefono } from "./phone-geometry.js";
 
-const ROTACION_BASE = { x: 0.10, y: -0.96, z: -0.40 };
-const ZOOM_BASE = 12.8;
+const ROTACION_BASE = { x: 0.15, y: -0.38, z: -0.18 };
+const ZOOM_BASE = 12.0;
 
 /**
  * Comprueba compatibilidad con WebGL en el navegador del usuario.

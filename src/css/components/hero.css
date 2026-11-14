@@ -138,8 +138,6 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity var(--transition-normal);
   z-index: 1;
 }
 
@@ -153,18 +151,6 @@
   width: 100%;
   height: auto;
   filter: drop-shadow(0 16px 36px rgba(18, 22, 26, 0.12));
-  transition: opacity var(--transition-normal);
-  z-index: 0;
-}
-
-.hero__mockup-figure--3d-active .hero__phone-canvas {
-  opacity: 1;
-}
-
-.hero__mockup-figure--3d-active .hero__mockup-image {
-  opacity: 0;
-  position: absolute;
-  pointer-events: none;
 }
 
 @media (min-width: 640px) {

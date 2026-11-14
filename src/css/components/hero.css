@@ -126,15 +126,45 @@
   position: relative;
   width: 100%;
   max-width: 320px;
+  min-height: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.hero__phone-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 1;
+}
+
+.hero__phone-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
 }
 
 .hero__mockup-image {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 16px 36px rgba(18, 22, 26, 0.12));
+  transition: opacity var(--transition-normal);
+  z-index: 0;
+}
+
+.hero__mockup-figure--3d-active .hero__phone-canvas {
+  opacity: 1;
+}
+
+.hero__mockup-figure--3d-active .hero__mockup-image {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
 }
 
 @media (min-width: 640px) {
@@ -151,6 +181,7 @@
     align-items: center;
   }
   .hero__mockup-figure {
-    max-width: 340px;
+    max-width: 360px;
+    min-height: 560px;
   }
 }

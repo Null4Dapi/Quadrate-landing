@@ -11,8 +11,8 @@ import {
 } from "./phone-materials.js";
 import { construirModeloTelefono } from "./phone-geometry.js";
 
-const ROTACION_BASE = { x: 0.04, y: 2.52 };
-const ZOOM_BASE = 9.2;
+const ROTACION_BASE = { x: 0.0, y: 0.0 };
+const ZOOM_BASE = 13.0;
 
 /**
  * Comprueba compatibilidad con WebGL en el navegador del usuario.
@@ -149,8 +149,6 @@ export function inicializarHeroTelefono3D() {
       rotacionActual.y += (rotacionObjetivo.y - rotacionActual.y) * 0.08;
       grupoTelefono.rotation.x = rotacionActual.x;
       grupoTelefono.rotation.y = rotacionActual.y;
-      // Levitación suave y elegante
-      grupoTelefono.position.y = Math.sin(tiempo * 0.0018) * 0.06;
     }
 
     renderizador.render(escena, camara);

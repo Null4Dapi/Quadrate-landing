@@ -1,0 +1,267 @@
+/**
+ * Quadrate pe — Componente Rates / Transparencia Tarifaria (BEM)
+ * Arquitectura editorial con tarjetas apilables reactivas al scroll (Sticky Stack).
+ */
+
+.rates {
+  --rates-top: 96px;
+  --rates-step: 56px;
+  padding-block: clamp(var(--space-12), 7vw, var(--space-20));
+  background-color: var(--color-bg-base);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.rates__container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.rates__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 900px) {
+  .rates__layout {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(40px, 5vw, 80px);
+  }
+}
+
+/* Columna Lateral (Sticky Aside) */
+.rates__aside {
+  position: static;
+}
+
+@media (min-width: 900px) {
+  .rates__aside {
+    position: sticky;
+    top: var(--rates-top);
+    align-self: start;
+  }
+}
+
+.rates__eyebrow {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.rates__title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+  text-wrap: balance;
+}
+
+.rates__description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 44ch;
+}
+
+/* Indicador de Progreso en Aside */
+.rates__progress {
+  display: none;
+  list-style: none;
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  border-left: 1px solid var(--color-border-medium);
+}
+
+@media (min-width: 900px) {
+  .rates__progress {
+    display: grid;
+    gap: var(--space-2);
+  }
+}
+
+.rates__progress-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-2) 0 var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  position: relative;
+  transition: color var(--transition-fast);
+  cursor: default;
+}
+
+.rates__progress-item::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background-color: var(--color-accent-primary);
+  border-radius: var(--radius-pill);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform var(--transition-base);
+}
+
+.rates__progress-item[data-active] {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.rates__progress-item[data-active]::before {
+  transform: scaleY(1);
+}
+
+.rates__progress-number {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  opacity: 0.75;
+}
+
+.rates__progress-label {
+  letter-spacing: -0.01em;
+}
+
+/* Pila de Tarjetas Apilables (Sticky Stack) */
+.rates__stack {
+  display: grid;
+  gap: var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rates__card {
+  position: sticky;
+  top: calc(var(--rates-top) + var(--rates-card-index, 0) * var(--rates-step));
+  min-height: 320px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--space-4);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-2xl);
+  padding: clamp(var(--space-6), 4vw, var(--space-8));
+  box-shadow: 0 -12px 30px -15px rgba(35, 18, 18, 0.08), 0 4px 16px rgba(18, 22, 26, 0.04);
+  transform-origin: center top;
+  transform: scale(calc(1 - var(--rates-covered, 0) * 0.04));
+  filter: brightness(calc(1 - var(--rates-covered, 0) * 0.16));
+  transition: border-color var(--transition-fast);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.rates__card[data-rate="0"] {
+  border-color: var(--color-border-subtle);
+}
+
+.rates__card[data-rate="1"] {
+  border-color: var(--color-border-medium);
+}
+
+.rates__card[data-rate="2"] {
+  border-color: var(--color-border-medium);
+}
+
+.rates__card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.rates__card-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+}
+
+.rates__card-number {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+}
+
+.rates__card-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.rates__card-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.rates__card-description {
+  font-size: clamp(var(--font-size-sm), 1.2vw, var(--font-size-base));
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 45ch;
+  margin: 0;
+}
+
+.rates__card-footer {
+  padding-top: var(--space-3);
+}
+
+.rates__card-impact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-base);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+}
+
+/* Adaptación Responsive */
+@media (max-width: 899px) {
+  .rates {
+    --rates-top: 16px;
+    --rates-step: 44px;
+  }
+
+  .rates__card {
+    min-height: 280px;
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+  }
+}
+
+/* Accesibilidad: Respeto a Movimiento Reducido */
+@media (prefers-reduced-motion: reduce) {
+  .rates__card {
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .rates__progress-item::before {
+    transition: none;
+  }
+}

@@ -1,0 +1,156 @@
+/**
+ * Quadrate pe — Componente Hero
+ * Portada editorial asimétrica con tipografía display y mockup enriquecido (BEM).
+ */
+
+.hero {
+  padding-block: clamp(var(--space-8), 6vw, var(--space-16));
+  background-color: var(--color-bg-base);
+  overflow-x: clip;
+}
+
+.hero__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-5);
+}
+
+.hero__title {
+  font-family: var(--font-family-display);
+  font-size: clamp(2.125rem, 5.6vw, 4.35rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+}
+
+.hero__title-line {
+  display: block;
+  min-height: 1.05em;
+}
+
+.hero__title-line--primary {
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+}
+
+.hero__title-line--accent {
+  font-weight: var(--font-weight-regular);
+  font-style: italic;
+}
+
+.hero__cursor {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.82em;
+  background-color: var(--color-accent-primary);
+  margin-left: 0.06em;
+  vertical-align: -0.04em;
+  animation: hero-cursor-parpadeo 0.9s steps(2, start) infinite;
+}
+
+@keyframes hero-cursor-parpadeo {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__cursor {
+    display: none;
+  }
+}
+
+.hero__description {
+  font-size: clamp(var(--font-size-base), 2vw, var(--font-size-md));
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+  max-width: 34ch;
+  text-wrap: pretty;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-2);
+}
+
+.hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+  text-align: center;
+  width: fit-content;
+}
+
+.hero__button--primary {
+  color: var(--color-text-contrast);
+  background-color: var(--color-accent-primary);
+}
+
+.hero__button--primary:hover,
+.hero__button--primary:focus-visible {
+  background-color: var(--color-accent-hover);
+  outline: 2px solid var(--color-accent-focus);
+  outline-offset: 2px;
+}
+
+.hero__visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__mockup-figure {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__mockup-image {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 16px 36px rgba(18, 22, 26, 0.12));
+}
+
+@media (min-width: 640px) {
+  .hero__actions {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero__container {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-10);
+    align-items: center;
+  }
+  .hero__mockup-figure {
+    max-width: 340px;
+  }
+}

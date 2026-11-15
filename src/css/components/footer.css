@@ -1,0 +1,223 @@
+/**
+ * Quadrate pe — Componente Footer / Pie de Página Editorial
+ * Layout de alta densidad inspirado en la plataforma OpenBot, adaptado
+ * rigurosamente a la paleta de contraste sobrio y tokens BEM de Quadrate pe.
+ */
+
+.footer {
+  background-color: var(--color-bg-contrast);
+  color: var(--color-text-contrast);
+  padding-block: clamp(var(--space-12), 7vw, var(--space-20)) var(--space-8);
+  border-top: 1px solid var(--color-border-contrast);
+}
+
+.footer__container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grid Principal (Marca a la izquierda, 4 columnas de enlaces a la derecha) */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(var(--space-8), 6vw, var(--space-16));
+}
+
+@media (min-width: 960px) {
+  .footer__grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(480px, 1.15fr);
+    align-items: start;
+  }
+}
+
+/* Bloque de Marca y Declaración */
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.footer__lockup {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: var(--radius-xs);
+  transition: opacity var(--transition-fast);
+}
+
+.footer__lockup:hover {
+  opacity: 0.9;
+}
+
+.footer__logo-text {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-contrast);
+  letter-spacing: -0.03em;
+}
+
+.footer__logo-badge {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 1px 7px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  background-color: var(--color-accent-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-xs);
+}
+
+.footer__statement {
+  font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.03em;
+  color: var(--color-text-contrast);
+  margin: var(--space-6) 0 0;
+  max-width: 38ch;
+  text-wrap: balance;
+}
+
+/* Llamado a la Acción y Enlaces Rápidos */
+.footer__actions {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.footer__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-pill);
+  background-color: #ffffff;
+  color: var(--color-bg-contrast);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.footer__cta:hover {
+  background-color: var(--color-bg-subtle);
+  transform: translateY(-1px);
+}
+
+.footer__cta-icon {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition-fast);
+}
+
+.footer__cta:hover .footer__cta-icon {
+  transform: translateX(2px);
+}
+
+/* Iconos de Redes / Canales de Contacto */
+.footer__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.footer__social {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-contrast);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-contrast-muted);
+  text-decoration: none;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.footer__social svg {
+  width: 16px;
+  height: 16px;
+}
+
+.footer__social:hover,
+.footer__social:focus-visible {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+  outline: none;
+}
+
+/* Columnas de Navegación */
+.footer__columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-4);
+  padding-top: var(--space-2);
+}
+
+@media (min-width: 640px) {
+  .footer__columns {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(20px, 2.5vw, 36px);
+  }
+}
+
+.footer__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__column-title {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-contrast-muted);
+  margin: 0 0 var(--space-4);
+}
+
+.footer__column-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__column-link {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.68);
+  text-decoration: none;
+  line-height: var(--line-height-normal);
+  transition: color var(--transition-fast);
+}
+
+.footer__column-link:hover,
+.footer__column-link:focus-visible {
+  color: #ffffff;
+  outline: none;
+}
+
+/* Sub-Footer / Barra Inferior de Metadatos */
+.footer__bottom {
+  margin-top: clamp(var(--space-10), 6vw, var(--space-16));
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border-contrast);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-contrast-muted);
+}
+
+.footer__copyright {
+  margin: 0;
+}

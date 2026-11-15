@@ -1,0 +1,379 @@
+/**
+ * Quadrate pe — Componente Módulos / Bento Grid Reactivo (BEM)
+ * Cuadrícula asimétrica con tarjetas 1 y 4 estructuradas internamente en dos columnas:
+ * texto a la izquierda y visual a la derecha (QR con placa / Panel de mapa).
+ */
+
+.modules {
+  padding-block: clamp(var(--space-12), 7vw, var(--space-20));
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.modules__container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.modules__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 640px;
+  margin-bottom: var(--space-10);
+}
+
+.modules__eyebrow {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.modules__title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+}
+
+.modules__description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  text-wrap: pretty;
+}
+
+/* Bento Grid Principal */
+.modules__bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .modules__bento {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}
+
+/* Tarjeta Bento */
+.modules__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+  background-color: var(--color-bg-base);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-2xl);
+  padding: clamp(var(--space-5), 3vw, var(--space-8));
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  outline: none;
+}
+
+.modules__card:hover,
+.modules__card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--color-border-medium);
+  box-shadow: 0 12px 30px -10px rgba(35, 18, 18, 0.08);
+}
+
+@media (min-width: 900px) {
+  .modules__card--featured {
+    grid-column: span 2;
+  }
+
+  .modules__card--wide {
+    grid-column: span 2;
+  }
+}
+
+/* Layout interno de 2 columnas para Tarjeta 1 y 4 en Tablet y Desktop */
+@media (min-width: 768px) {
+  .modules__card--featured,
+  .modules__card--wide {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-rows: auto 1fr;
+    gap: var(--space-4) var(--space-6);
+    align-items: center;
+  }
+
+  .modules__card--featured .modules__card-header,
+  .modules__card--wide .modules__card-header {
+    grid-column: 1 / -1;
+  }
+
+  .modules__card--featured .modules__card-body,
+  .modules__card--wide .modules__card-body {
+    grid-column: 1;
+    align-self: center;
+  }
+
+  .modules__card--featured .modules__card-visual,
+  .modules__card--wide .modules__card-visual {
+    grid-column: 2;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    border-left: 1px solid var(--color-border-subtle);
+    padding-left: var(--space-6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.modules__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modules__card-tag {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.modules__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.modules__card-title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.modules__card-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.modules__card-badge {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-primary);
+  background-color: var(--color-bg-accent-subtle);
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  margin-right: var(--space-2);
+  vertical-align: middle;
+}
+
+/* Micro-interfaces Visuales */
+.modules__card-visual {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+/* Visual 1: Garita QR Box (QR con placa debajo) */
+.modules__qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  box-shadow: 0 4px 14px rgba(35, 18, 18, 0.04);
+  width: 100%;
+  max-width: 220px;
+}
+
+.modules__qr-icon {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border: 2px solid var(--color-accent-primary);
+  border-radius: var(--radius-xs);
+  background-image: conic-gradient(
+    var(--color-accent-primary) 25%,
+    transparent 0 50%,
+    var(--color-accent-primary) 0 75%,
+    transparent 0
+  );
+  background-size: 10px 10px;
+}
+
+.modules__qr-plate-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.modules__qr-plate {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: 0.04em;
+}
+
+.modules__qr-status {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-status-success);
+}
+
+/* Visual 2: Aforo Gauge */
+.modules__gauge {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+}
+
+.modules__gauge-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+}
+
+.modules__gauge-label {
+  color: var(--color-text-muted);
+}
+
+.modules__gauge-value {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.modules__gauge-bar {
+  height: 8px;
+  background-color: var(--color-bg-subtle);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.modules__gauge-fill {
+  height: 100%;
+  width: 78%;
+  background-color: var(--color-accent-primary);
+  border-radius: var(--radius-pill);
+}
+
+/* Visual 3: Caja Ledger */
+.modules__ledger {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-xs);
+}
+
+.modules__ledger-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-primary);
+}
+
+.modules__ledger-row strong {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.modules__ledger-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.modules__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-status-success);
+  display: inline-block;
+}
+
+/* Visual 4: Panel de Mapa de Demanda */
+.modules__map-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-5);
+  box-shadow: 0 4px 14px rgba(35, 18, 18, 0.04);
+  width: 100%;
+  max-width: 300px;
+}
+
+.modules__map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-xs);
+}
+
+.modules__map-indicator {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-status-success);
+}
+
+.modules__map-eta {
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-status-info);
+  background-color: var(--color-status-info-bg);
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.modules__route-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+}
+
+.modules__route-origin {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.modules__route-arrow {
+  color: var(--color-text-muted);
+}
+
+.modules__route-dest {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.modules__map-caption {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+}

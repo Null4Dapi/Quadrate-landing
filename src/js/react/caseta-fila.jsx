@@ -1,0 +1,43 @@
+import React from "react";
+
+/**
+ * Fila interactiva para una característica del tour de caseta.
+ *
+ * @param {Object} props
+ * @param {number} props.indice - Índice posicional de la característica
+ * @param {string} props.titulo - Título principal de la funcionalidad
+ * @param {string} props.detalle - Descripción detallada del beneficio
+ * @param {boolean} props.estaActiva - Indica si la fila se encuentra activa
+ * @param {Function} props.alSeleccionar - Callback invocado al seleccionar
+ * @returns {JSX.Element}
+ */
+export function CasetaFila({
+  indice,
+  titulo,
+  detalle,
+  estaActiva = false,
+  alSeleccionar,
+}) {
+  const handleKeyDown = (eventoTeclado) => {
+    if (eventoTeclado.key === "Enter" || eventoTeclado.key === " ") {
+      eventoTeclado.preventDefault();
+      alSeleccionar();
+    }
+  };
+
+  return (
+    <li
+      className={"caseta__item" + (estaActiva ? " caseta__item--active" : "")}
+      tabIndex={0}
+      role="button"
+      aria-pressed={estaActiva}
+      onClick={alSeleccionar}
+      onKeyDown={handleKeyDown}
+    >
+      <h3 className="caseta__item-title">{titulo}</h3>
+      <p className="caseta__item-detail">{detalle}</p>
+    </li>
+  );
+}
+
+export default CasetaFila;

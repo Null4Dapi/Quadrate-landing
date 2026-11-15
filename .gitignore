@@ -1,46 +1,12 @@
-# Operating System files
-.DS_Store
-Thumbs.db
-
-# Editor & IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Environment variables
+dist/
+.work/
+node_modules/
+service/.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
 .env
 .env.*
-
-# Logs
-*.log
-npm-debug.log*
-
-# Tooling, dependencies and local cache
-node_modules/
-dist/
-.cache/
-.atl/
-.codegraph/
-install.cmd
-
-# AI agents and assistant configs
-.agent/
-.agents/
-.impeccable/
-.opencode/
-.pi/
-.codex/
-.github/
-skills-lock.json
-
-# Testing and automation artifacts
-.playwright/
-.playwright-cli/
-
-# ODD workflow and task tracking
-odd/
-.odd/
-
-# Academic source documents (local only)
-*.pdf
+*.key
+*.pem
+.firebase/

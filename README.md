@@ -1,111 +1,38 @@
-# Quadrate pe — Landing Page
+# quadrate-publisher
 
-Landing page oficial de **Quadrate pe**, la plataforma móvil para la gestión operativa de playas de estacionamiento y localización inteligente para conductores en Lima Metropolitana.
+Publica la página de **Quadrate pe** (repo público [Null4Dapi/Quadrate-landing](https://github.com/Null4Dapi/Quadrate-landing))
+en Firebase Hosting (`quadratepe`) y le agrega una **capa en vivo** servida por Cloud Run: WebSocket con disponibilidad de
+cocheras y un asistente con respuesta en streaming. El repo público no se modifica ni se copia a mano: cada hora se vuelve
+a clonar y, si cambió, se publica solo.
 
-Sitio estático de alto rendimiento desarrollado con HTML5 semántico, CSS3 modular (BEM) y Vanilla JavaScript (ES Modules), organizado como un monolito desacoplado listo para migrar a componentes React/JSX.
-
----
-
-## Estructura del Proyecto
-
-```text
-├── index.html           # Documento principal semántico
-├── AGENTS.md            # Reglas técnicas y convenciones para agentes de IA
-├── docs/
-│   ├── ARCHITECTURE.md  # Arquitectura del sitio y políticas de rendimiento
-│   ├── DESIGN.md        # Tokens visuales y restricciones estéticas editoriales
-│   └── university/      # Guías, enunciados y entregables del curso
-├── CHANGELOG.md         # Registro de cambios (Keep a Changelog)
-├── README.md            # Este documento
-├── src/
-│   ├── assets/          # Logotipo SVG, fuentes Satoshi y mockups vectoriales/webp
-│   ├── css/
-│   │   ├── variables.css # Tokens CSS (:root)
-│   │   ├── reset.css     # Reseteo CSS moderno
-│   │   ├── fonts.css     # Tipografía Satoshi
-│   │   ├── main.css      # Orquestador CSS de importaciones
-│   │   └── components/   # Módulos CSS por bloque BEM
-│   │       ├── header.css
-│   │       ├── hero.css
-│   │       ├── why-us.css
-│   │       ├── caseta.css
-│   │       ├── community.css
-│   │       ├── app-showcase.css
-│   │       ├── rates.css
-│   │       ├── tab-view.css
-│   │       ├── manifesto.css
-│   │       ├── waitlist.css
-│   │       └── footer.css
-│   └── js/
-│       ├── config.js     # Configuración y constantes inmutables
-│       ├── content.js    # Textos, copys y datos crudos desacoplados
-│       ├── react/        # Componentes interactivos JSX y módulos compilados
-│       ├── services/     # Llamadas a red y wrappers API
-│       │   └── api.js
-│       ├── features/     # Lógica de componentes interactivos
-│       │   ├── adaptive-header.js
-│       │   ├── mobile-menu.js
-│       │   ├── tab-navigation.js
-│       │   └── waitlist.js
-│       └── main.js       # Punto de entrada e inicialización de listeners
+```
+Null4Dapi/Quadrate-landing ──(cada hora, GitHub Actions)──► guardas ► capa en vivo ► Firebase Hosting (quadratepe)
+                                                                                         │
+navegador ◄── página estática ─────────────────────────────────────────────────────────┘
+    │
+    └── wss://quadrate-live-….run.app/ws            chat en streaming
+        wss://quadrate-live-….run.app/ws-telemetria disponibilidad en vivo para la demo (/demo.html) de la propia página
 ```
 
-La documentación técnica del producto está en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) y [`docs/DESIGN.md`](docs/DESIGN.md). El flujo académico está aislado en [`docs/university/`](docs/university/), bajo sus propias instrucciones. Este README es el índice general; no hay otro README dentro de `docs/`.
+| Carpeta | Qué es |
+|---|---|
+| `scripts/` | `cambios` (¿hay algo nuevo?), `build` (arma `dist/`), `guardas` (seguridad), `verificar` (post-publicación) |
+| `overlay/` | `live.js/css` (asistente), `shim-ws.js` (redirige la demo al servicio) — se inyectan, no tocan el código de la página |
+| `service/` | Cloud Run `quadrate-live` (FastAPI): `/ws`, `/ws-telemetria`, `/v1/chat`, `/v1/aforo`, `/salud` |
+| `config/destino.json` | repo de origen, sitio de Firebase, URLs del servicio, hosts externos permitidos |
+| `.github/workflows/publicar.yml` | automatización (cron cada hora, manual y al cambiar este repo) |
 
----
+Detalles de seguridad, costos y operación: [`docs/OPERACION.md`](docs/OPERACION.md).
 
-## Ejecución Local y Compilación React
+## Desarrollo
 
-El proyecto cuenta con scripts nativos en `package.json` sin bundlers pesados:
-
-### 1. Iniciar Servidor Local
-```bash
-npm start
+```powershell
+node --test tests/*.test.mjs                                  # generador y guardas
+cd service; python -m venv .venv; .venv\Scripts\pip install -r requirements-dev.txt; .venv\Scripts\python -m pytest
+node scripts/build.mjs                                        # clona el repo público y arma dist/ (aplica las guardas)
 ```
-Inicia el servidor HTTP nativo en [http://localhost:3000](http://localhost:3000) con soporte para tipos MIME (HTML, CSS, JS módulos, WebP, WOFF2).
 
-### 2. Compilar Componentes React (JSX → ES Modules)
-```bash
-npm run build:react
-```
-Ejecuta `scripts/compilar-react.cjs` transpilando los archivos `.jsx` en `src/js/react/` a módulos `.js` estándar consumibles por el navegador con inyección de hooks.
+## Datos de demostración
 
----
-
-## Módulos React Integrados (Semana 6)
-
-1. **Tour Interactivo de Caseta (`CasetaTour` y `CasetaFila`):**
-   - **Props:** `<CasetaFila />` recibe `indice`, `titulo`, `detalle`, `estaActiva` y `alSeleccionar`.
-   - **Auto-play y Temporizador:** Rota automáticamente de característica cada 4 segundos mediante `setInterval`.
-   - **Limpieza de Recursos:** `useEffect` con `clearInterval` que libera el timer al desmontar o pausar.
-   - **Controles de Usuario:** Botones para **Pausar / Reanudar** (`active`) y **Reiniciar** al paso inicial.
-   - **Carga Simulada:** `useEffect` con `setTimeout` (800ms) y `clearTimeout` simulando conexión con garitas.
-
-2. **Demostrador en Vivo (`QuadrateLiveApp`):**
-   - **Estado y Eventos:** Filtros de cocheras por distrito, buscador reactivo y simulador de reserva por ETA.
-   - **Foco Programático (`useRef`):** Foco accesible en el buscador al limpiar texto (`✕`) y foco automático en el primer campo al conmutar a la pestaña de afiliación.
-
----
-
-## Matriz de Pruebas de Aceptación (Laboratorio N.° 4)
-
-| ID | Prueba | Comportamiento en Quadrate pe | Estado |
-| :--- | :--- | :--- | :---: |
-| **LAB1** | Arranque e Integración | La landing page conserva intactas todas sus secciones previas y arranca en `http://localhost:3000`. | ✅ Aprobado |
-| **LAB2** | Carga Simulada | `CasetaTour` y `QuadrateLiveApp` aplican `setTimeout` y cancelan con `clearTimeout`. | ✅ Aprobado |
-| **LAB3** | Monitor / Timer Activo | El temporizador rota las características de caseta en intervalos continuos de 1 segundo. | ✅ Aprobado |
-| **LAB4** | Detener / Reactivar | Al presionar **Pausar**, se ejecuta `clearInterval` y el contador se detiene sin duplicarse al reanudar. | ✅ Aprobado |
-| **LAB5** | Reiniciar | Al presionar **Reiniciar**, el carrusel vuelve al paso 1 (índice 0) y el tiempo se restablece a 4s. | ✅ Aprobado |
-| **LAB6** | Limpieza al Desmontar | Al conmutar de pestaña en el header, los efectos limpian sus temporizadores pendientes. | ✅ Aprobado |
-| **LAB7** | Dependencias | El array `[estaReproduciendo]` garantiza que el efecto recree el intervalo solo al cambiar el estado de pausa. | ✅ Aprobado |
-| **LAB8** | Uso de `useRef` | Enfoca programáticamente inputs reales (buscador y formulario de afiliación) sin re-renders. | ✅ Aprobado |
-| **LAB9** | Consola Limpia | Ejecución fluida en navegador sin errores de sintaxis ni fugas de memoria. | ✅ Aprobado |
-
----
-
-## Filosofía de Desarrollo
-
-- **Mobile-First:** Diseñado prioritariamente para viewports móviles de 320px–430px y expandido progresivamente a escritorio.
-- **Component-Driven UI:** Cada bloque BEM en HTML y CSS corresponde 1 a 1 a un futuro componente React (`<Hero />`, `<WhyUs />`, `<AppShowcase />`, `<Rates />`, `<WaitlistForm />`).
-- **Datos Desacoplados:** Todos los textos y enlaces residen en `src/js/content.js`.
-- **Cero Clichés Visuales:** Sin estética neón artificial ni iconitis; jerarquía sostenida en tipografía editorial (Satoshi), espacios en blanco y contrastes arquitectónicos.
+La disponibilidad de cocheras es **simulada** (determinista en el tiempo, sin base de datos). El asistente lo dice cada vez.
+El chat responde con preguntas frecuentes locales (sin IA ni claves) y solo afirma lo que la página publica.

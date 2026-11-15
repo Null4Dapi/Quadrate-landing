@@ -9,7 +9,7 @@ export const CONTENIDO_LANDING = Object.freeze({
   encabezado: Object.freeze({
     logoAlt: "Logotipo de Quadrate pe",
     enlacesNavegacion: Object.freeze([
-      { etiqueta: "Producto", enlace: "#app" },
+      { etiqueta: "Producto", enlace: "#inicio" },
       { etiqueta: "Módulos", enlace: "#modulos" },
       { etiqueta: "Cómo funciona", enlace: "#como-funciona" },
       { etiqueta: "Tarifas", enlace: "#tarifas" },
@@ -24,24 +24,6 @@ export const CONTENIDO_LANDING = Object.freeze({
     descripcionCorta:
       "Quadrate pe conecta conductores con playas de estacionamiento independientes. Tarifas transparentes, disponibilidad en vivo y reserva dinámica asegurada por tiempo estimado de llegada.",
     textoBotonPrincipal: "Probar demo",
-  }),
-
-  appEnAccion: Object.freeze({
-    tituloLinea1: "Dónde hay lugar",
-    tituloLinea2: "y a qué precio",
-    subtituloLinea1: "antes de arrancar",
-    subtituloLinea2: "sin dar vueltas",
-    botonTexto: "Abrir la plataforma",
-    pantallaConductor: Object.freeze({
-      marca: "Quadrate pe",
-      encabezadoEstado: "Miraflores · en vivo",
-      pinUno: "S/ 4.00 · libre",
-      pinDos: "Cupo lleno",
-      pinTres: "S/ 3.50 · libre",
-      rutaActiva: "Voy hacia allá · ETA 12 min",
-      aforoVisible: "Quedan 7 espacios libres en la zona",
-      accionDestino: "Reservar en camino",
-    }),
   }),
 
   modulos: Object.freeze({
@@ -196,7 +178,7 @@ export const CONTENIDO_LANDING = Object.freeze({
       producto: Object.freeze({
         titulo: "Producto",
         enlaces: Object.freeze([
-          { etiqueta: "App Web Progresiva", enlace: "#app" },
+          { etiqueta: "App Web Progresiva", enlace: "#inicio" },
           { etiqueta: "Garita digital", enlace: "#modulos" },
           { etiqueta: "Aforo en vivo", enlace: "#modulos" },
           { etiqueta: "Caja y liquidación", enlace: "#modulos" },

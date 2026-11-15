@@ -12,6 +12,7 @@ import { inicializarPilaTarifas } from "./features/rates-stack.js";
 import { inicializarTypewriter } from "./features/typewriter.js";
 import { inicializarTourCaseta } from "./features/caseta-tour.js";
 import { inicializarSliderTestimonios } from "./features/testimonials-slider.js";
+import { inicializarHeroTelefono3D } from "./features/hero-phone/index.js";
 import { CONTENIDO_LANDING } from "./content.js";
 import { CONFIGURACION_APP } from "./config.js";
 
@@ -64,6 +65,7 @@ function arrancarAplicacion() {
   inicializarTypewriter();
   inicializarTourCaseta();
   inicializarSliderTestimonios();
+  inicializarHeroTelefono3D();
   console.info(
     `[${CONFIGURACION_APP.NOMBRE_PROYECTO}] Página product-first inicializada · v${CONFIGURACION_APP.VERSION}`
   );

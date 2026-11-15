@@ -10,7 +10,6 @@
 /* Módulos de Componentes (BEM) */
 @import "./components/header.css";
 @import "./components/hero.css";
-@import "./components/app-showcase.css";
 @import "./components/modules.css";
 @import "./components/caseta.css";
 @import "./components/rates.css";

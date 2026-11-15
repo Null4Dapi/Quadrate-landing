@@ -9,6 +9,7 @@
   <link rel="preload" href="src/assets/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="src/css/main.css?v=0.1.0">
   <link rel="stylesheet" href="src/css/components/quadrate-live.css">
+  <link rel="stylesheet" href="src/css/components/catalogo-remoto.css">
 </head>
 <body class="demo-page">
   <header class="demo-nav">
@@ -42,6 +43,20 @@
   <!-- Dependencias de React autoalojadas para el demostrador aislado -->
   <script src="src/assets/vendor/react.production.min.js"></script>
   <script src="src/assets/vendor/react-dom.production.min.js"></script>
+
+  <!-- Mapeo ESM nativo del navegador para TanStack Query y Zustand sin empaquetadores pesados -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "./src/assets/vendor/react-shim.js",
+      "react/jsx-runtime": "./src/assets/vendor/react-jsx-runtime.js",
+      "@tanstack/react-query": "./src/assets/vendor/tanstack-query.module.js",
+      "zustand": "./src/assets/vendor/zustand.module.js",
+      "zustand/middleware": "./src/assets/vendor/zustand.module.js"
+    }
+  }
+  </script>
+
   <script type="module">
     import { inicializarQuadrateLive } from "./src/js/react/quadrate-live.js";
     inicializarQuadrateLive();

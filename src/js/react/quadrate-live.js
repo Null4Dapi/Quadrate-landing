@@ -3,11 +3,27 @@
  */
 const React = window.React;
 const ReactDOM = window.ReactDOM;
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { QuadrateLiveApp } from "./quadrate-live-app.js";
 import { CasetaTour } from "./caseta-tour.js";
 
 /**
- * Punto de montaje de la aplicación React de Quadrate Live.
+ * Instancia única singleton de QueryClient para TanStack Query.
+ * Configura staleTime en 2 minutos para demostración de reutilización de caché.
+ */
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 2,
+      // 2 minutos
+      refetchOnWindowFocus: false,
+      retry: 1
+    }
+  }
+});
+
+/**
+ * Punto de montaje de la aplicación React de Quadrate Live con QueryClientProvider.
  */
 export function inicializarQuadrateLive() {
   const contenedorRaiz = document.getElementById("quadrate-live-root");
@@ -15,7 +31,9 @@ export function inicializarQuadrateLive() {
     return;
   }
   const raizReact = ReactDOM.createRoot(contenedorRaiz);
-  raizReact.render(/*#__PURE__*/React.createElement(QuadrateLiveApp, null));
+  raizReact.render(/*#__PURE__*/React.createElement(QueryClientProvider, {
+    client: queryClient
+  }, /*#__PURE__*/React.createElement(QuadrateLiveApp, null)));
 }
 
 /**

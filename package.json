@@ -8,5 +8,9 @@
     "test": "node --test tests/*.test.mjs",
     "build": "node scripts/build.mjs",
     "cambios": "node scripts/cambios.mjs"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.107.1",
+    "zustand": "^5.1.0"
   }
 }

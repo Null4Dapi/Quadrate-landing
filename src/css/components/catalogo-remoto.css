@@ -1,0 +1,398 @@
+/**
+ * catalogo-remoto.css — Estilos BEM para TanStack Query, Zustand y Sincronización
+ * Quadrate pe — Semana 11
+ */
+
+/* ==========================================================================
+   Barra de Pestañas y Conmutador de Módulo
+   ========================================================================== */
+.quadrate-live__toolbar-completo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 1rem);
+  width: 100%;
+}
+
+.quadrate-live__pestañas-modulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+  padding: var(--space-2, 0.5rem);
+  background-color: var(--color-bg-surface, #ffffff);
+  border: 1px solid var(--color-border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 0.5rem);
+}
+
+.quadrate-live__tab-btn {
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-muted, #6b7280);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 0.375rem);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quadrate-live__tab-btn:hover {
+  color: var(--color-text-primary, #111827);
+  background-color: var(--color-bg-hover, #f3f4f6);
+}
+
+.quadrate-live__tab-btn--activo {
+  color: #ffffff;
+  background-color: var(--color-brand-primary, #0f172a);
+  font-weight: 600;
+}
+
+.quadrate-live__conmutador-tema-slot {
+  margin-left: auto;
+}
+
+.btn-conmutador-tema {
+  padding: 0.4rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-primary, #111827);
+  background-color: var(--color-bg-hover, #f3f4f6);
+  border: 1px solid var(--color-border-subtle, #d1d5db);
+  border-radius: var(--radius-full, 9999px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-conmutador-tema:hover {
+  background-color: var(--color-border-subtle, #e5e7eb);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Catálogo Remoto (TanStack Query)
+   ========================================================================== */
+.catalogo-remoto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5, 1.25rem);
+  width: 100%;
+}
+
+.catalogo-remoto__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+  padding-bottom: var(--space-4, 1rem);
+  border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
+}
+
+.catalogo-remoto__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #111827);
+}
+
+.catalogo-remoto__subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted, #6b7280);
+}
+
+.catalogo-remoto__badge-cache .catalogo-remoto__pill {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #065f46;
+  background-color: #d1fae5;
+  border: 1px solid #a7f3d0;
+  border-radius: var(--radius-full, 9999px);
+}
+
+/* Estados accesibles: loading y error */
+.catalogo-remoto__estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8, 2.5rem);
+  text-align: center;
+  border-radius: var(--radius-md, 0.5rem);
+  border: 1px dashed var(--color-border-subtle, #d1d5db);
+}
+
+.catalogo-remoto__spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid rgba(15, 23, 42, 0.1);
+  border-top-color: var(--color-brand-primary, #0f172a);
+  border-radius: 50%;
+  animation: girar-spinner 0.8s linear infinite;
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+@keyframes girar-spinner {
+  to { transform: rotate(360deg); }
+}
+
+.catalogo-remoto__estado--error {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+.catalogo-remoto__error-titulo {
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.catalogo-remoto__error-detalle {
+  font-size: 0.875rem;
+  margin: 0 0 1rem;
+}
+
+.catalogo-remoto__btn--reintentar {
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #dc2626;
+  border: none;
+  border-radius: var(--radius-sm, 0.375rem);
+  cursor: pointer;
+}
+
+/* Grid de tarjetas de catálogo */
+.catalogo-remoto__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4, 1rem);
+}
+
+.catalogo-remoto__card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4, 1rem);
+  background-color: var(--color-bg-surface, #ffffff);
+  border: 1px solid var(--color-border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 0.5rem);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.catalogo-remoto__card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.catalogo-remoto__card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.catalogo-remoto__card-id {
+  font-weight: 700;
+  color: var(--color-brand-primary, #0f172a);
+}
+
+.catalogo-remoto__card-tag {
+  color: var(--color-text-muted, #6b7280);
+}
+
+.catalogo-remoto__card-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-text-primary, #111827);
+  text-transform: capitalize;
+}
+
+.catalogo-remoto__card-body {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-muted, #4b5563);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Paginación */
+.catalogo-remoto__paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4, 1rem);
+  padding-top: var(--space-4, 1rem);
+  border-top: 1px solid var(--color-border-subtle, #e5e7eb);
+}
+
+.catalogo-remoto__btn-nav {
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary, #111827);
+  background-color: var(--color-bg-surface, #ffffff);
+  border: 1px solid var(--color-border-subtle, #d1d5db);
+  border-radius: var(--radius-sm, 0.375rem);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.catalogo-remoto__btn-nav:hover:not(:disabled) {
+  background-color: var(--color-bg-hover, #f3f4f6);
+}
+
+.catalogo-remoto__btn-nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.catalogo-remoto__pagina-indicador {
+  font-size: 0.875rem;
+  color: var(--color-text-muted, #4b5563);
+}
+
+/* ==========================================================================
+   Panel de Notificaciones e Historial (Zustand)
+   ========================================================================== */
+.quadrate-live__telemetria-columna {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 1rem);
+}
+
+.badge-notificaciones {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1e40af;
+  background-color: #dbeafe;
+  border-radius: var(--radius-full, 9999px);
+}
+
+.panel-historial {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-surface, #ffffff);
+  border: 1px solid var(--color-border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 0.5rem);
+  padding: var(--space-4, 1rem);
+}
+
+.panel-historial__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
+  margin-bottom: 0.75rem;
+}
+
+.panel-historial__title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.panel-historial__title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.panel-historial__btn-clear {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #6b7280);
+  background: transparent;
+  border: 1px solid var(--color-border-subtle, #d1d5db);
+  border-radius: var(--radius-sm, 0.25rem);
+  cursor: pointer;
+}
+
+.panel-historial__btn-clear:hover {
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.panel-historial__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.panel-historial__empty {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted, #6b7280);
+  margin: 0;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.tarjeta-alerta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--color-bg-hover, #f9fafb);
+  border-left: 3px solid #3b82f6;
+  border-radius: var(--radius-sm, 0.25rem);
+}
+
+.tarjeta-alerta__mensaje {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-primary, #111827);
+}
+
+.tarjeta-alerta__tiempo {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted, #9ca3af);
+  white-space: nowrap;
+}
+
+/* Modo Nocturno de Garita */
+body.tema-oscuro,
+[data-theme="dark"] body {
+  background-color: #0b0f19 !important;
+  color: #f3f4f6 !important;
+}
+
+body.tema-oscuro .catalogo-remoto__card,
+body.tema-oscuro .panel-historial,
+body.tema-oscuro .quadrate-live__pestañas-modulo,
+body.tema-oscuro .catalogo-remoto__btn-nav {
+  background-color: #111827 !important;
+  border-color: #1f2937 !important;
+  color: #f9fafb !important;
+}
+
+body.tema-oscuro .catalogo-remoto__title,
+body.tema-oscuro .catalogo-remoto__card-title,
+body.tema-oscuro .panel-historial__title,
+body.tema-oscuro .tarjeta-alerta__mensaje {
+  color: #f9fafb !important;
+}
+
+body.tema-oscuro .catalogo-remoto__card-body,
+body.tema-oscuro .catalogo-remoto__subtitle {
+  color: #9ca3af !important;
+}
+
+body.tema-oscuro .tarjeta-alerta {
+  background-color: #1f2937 !important;
+}

@@ -26,6 +26,8 @@ const mapaComponentes = [
   { fuente: "caseta-fila.jsx", destino: "caseta-fila.js" },
   { fuente: "caseta-tour.jsx", destino: "caseta-tour.js" },
   { fuente: "contenedor-live.jsx", destino: "contenedor-live.js" },
+  { fuente: "catalogo-remoto.jsx", destino: "catalogo-remoto.js" },
+  { fuente: "notificaciones-panel.jsx", destino: "notificaciones-panel.js" },
   { fuente: "quadrate-live-app.jsx", destino: "quadrate-live-app.js" },
   { fuente: "index.jsx", destino: "quadrate-live.js" },
 ];
@@ -47,8 +49,12 @@ for (const { fuente, destino } of mapaComponentes) {
   if (codigo.includes("ReactDOM")) {
     codigoSalida += `const ReactDOM = window.ReactDOM;\n`;
   }
-  if (codigo.includes("useState") || codigo.includes("useEffect") || codigo.includes("useRef")) {
-    codigoSalida += `const { useState, useEffect, useRef } = React;\n`;
+
+  const hooks = ["useState", "useEffect", "useRef", "useCallback", "useMemo", "useContext"].filter((h) =>
+    codigo.includes(h)
+  );
+  if (hooks.length > 0) {
+    codigoSalida += `const { ${hooks.join(", ")} } = React;\n`;
   }
 
   let cuerpo = resultado.code

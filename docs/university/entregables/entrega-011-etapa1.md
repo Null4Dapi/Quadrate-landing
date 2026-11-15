@@ -227,13 +227,13 @@ const { data, isPending, isError, error } = useExperiences(page);
 
 ## 11. Verificación final
 
-* [ ] La aplicación inicia correctamente desde la rama de trabajo `feature/week11-tanstack-query` y conserva los módulos de semanas anteriores.
-* [ ] TanStack Query cuenta con una única instancia de `QueryClientProvider` en el punto de montaje raíz.
-* [ ] El catálogo consume dinámicamente los datos de la API REST externa y no depende de arreglos estáticos hardcodeados.
-* [ ] Se validan visual y funcionalmente los tres estados: carga (`isPending`), error (`isError`) y datos cargados (`data`).
-* [ ] La paginación funciona bidireccionalmente y el botón "Anterior" queda inhabilitado en la página inicial.
-* [ ] Se demuestra la reutilización de caché al volver a páginas visitadas dentro del período de `staleTime`.
-* [ ] Se consolidaron los entregables obligatorios: repositorio actualizado, commit final, capturas, informe técnico y video.
+* [x] La aplicación inicia correctamente desde la rama de trabajo `feature/week11-tanstack-query` y conserva los módulos de semanas anteriores.
+* [x] TanStack Query cuenta con una única instancia de `QueryClientProvider` en el punto de montaje raíz.
+* [x] El catálogo consume dinámicamente los datos de la API REST externa y no depende de arreglos estáticos hardcodeados.
+* [x] Se validan visual y funcionalmente los tres estados: carga (`isPending`), error (`isError`) y datos cargados (`data`).
+* [x] La paginación funciona bidireccionalmente y el botón "Anterior" queda inhabilitado en la página inicial.
+* [x] Se demuestra la reutilización de caché al volver a páginas visitadas dentro del período de `staleTime`.
+* [x] Se consolidaron los entregables obligatorios: repositorio actualizado, commit final, capturas, informe técnico y video.
 
 ---
 

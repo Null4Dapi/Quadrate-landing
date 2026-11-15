@@ -5,13 +5,18 @@ import { TarjetaCochera } from "./tarjeta-cochera.jsx";
 import { MonitorActividad } from "./monitor-actividad.jsx";
 import { SimuladorReserva } from "./simulador-reserva.jsx";
 import { ContenedorLive } from "./contenedor-live.jsx";
+import { CatalogoRemoto } from "./catalogo-remoto.jsx";
+import { NotificationPanel, ControlTemaZustand } from "./notificaciones-panel.jsx";
+import { useAppStore } from "../../store/appStore.js";
+import { aplicarTemaVisualDOM } from "../../store/syncChannel.js";
 
 /**
- * Componente principal de la demo Quadrate Live.
- * Arquitectura React con telemetría WebSocket nativa, estado reactivo,
- * catálogo de disponibilidad y simulador de reserva por ETA.
+ * Componente principal de Quadrate Live — Arquitectura integrada Semana 11.
+ * Articula TanStack Query (catálogo REST paginado y caché) con Zustand (estado global,
+ * persistencia de tema, sincronización multi-pestaña y telemetría WebSocket).
  */
 export function QuadrateLiveApp() {
+  const [vistaActiva, setVistaActiva] = useState("garitas");
   const [distritoSeleccionado, setDistritoSeleccionado] = useState("Todos");
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [cocheraSeleccionada, setCocheraSeleccionada] = useState(DATOS_COCHERAS_INICIALES[0]);
@@ -25,6 +30,12 @@ export function QuadrateLiveApp() {
 
   const campoBusquedaRef = useRef(null);
   const socketRef = useRef(null);
+
+  // Inicialización de tema desde Zustand y persistencia
+  const temaStore = useAppStore((state) => state.theme);
+  useEffect(() => {
+    aplicarTemaVisualDOM(temaStore);
+  }, [temaStore]);
 
   // Filtrado reactivo por distrito con feedback asíncrono
   useEffect(() => {
@@ -42,7 +53,7 @@ export function QuadrateLiveApp() {
     return () => clearTimeout(timer);
   }, [distritoSeleccionado]);
 
-  // Atajo de teclado: presionar '/' para enfocar buscador, 'Esc' para limpiar
+  // Atajo de teclado: '/' enfocar buscador, 'Esc' limpiar
   useEffect(() => {
     const manejarTecladoGlobal = (evento) => {
       if (evento.key === "/" && document.activeElement !== campoBusquedaRef.current) {
@@ -57,7 +68,7 @@ export function QuadrateLiveApp() {
     return () => window.removeEventListener("keydown", manejarTecladoGlobal);
   }, []);
 
-  // Conexión WebSocket RFC 6455 nativa para telemetría operativa
+  // Conexión WebSocket RFC 6455 nativa integrada con el Store Zustand
   useEffect(() => {
     let ws = null;
     let reconexionTimer = null;
@@ -81,6 +92,13 @@ export function QuadrateLiveApp() {
             const dato = JSON.parse(evento.data);
             const idItem = Date.now() + Math.random().toString(36).slice(2, 6);
             const nuevoEvento = { ...dato, id: idItem };
+
+            // Integración reactiva con el Store Zustand (Semana 11)
+            useAppStore.getState().addNotification({
+              id: String(idItem),
+              message: String(dato.mensaje || `Evento operativo: Cochera ${dato.cocheraId || "Lima"}`),
+              createdAt: new Date().toISOString(),
+            });
 
             setEventosTelemetria((previos) => [nuevoEvento, ...previos.slice(0, 3)]);
 
@@ -158,8 +176,8 @@ export function QuadrateLiveApp() {
 
   return (
     <ContenedorLive
-      titulo="Centro de Operaciones y Aforo en Vivo"
-      subtitulo="Monitoreo de red de cocheras en Lima. Telemetría de garitas, aforo y reservas dinámicas por ETA."
+      titulo="Centro de Operaciones y Catálogo Inteligente"
+      subtitulo="Plataforma de cocheras en Lima. Integración TanStack Query + Zustand Store y Telemetría WebSocket."
       cabeceraSaludo={
         <SaludoUsuario
           totalCocheras={cocheras.length}
@@ -171,98 +189,136 @@ export function QuadrateLiveApp() {
       }
       monitor={<MonitorActividad onTick={manejarTickMonitor} estadoWs={estadoWs} />}
       feedTelemetria={
-        <div className="quadrate-live__feed" role="region" aria-label="Registro de telemetría operativa en vivo">
-          <div className="quadrate-live__feed-header">
-            <span className="quadrate-live__feed-title">
-              Registro de Telemetría Operativa
-            </span>
-            <span className="quadrate-live__feed-status">
-              {estaPausado ? "⏸ En pausa" : "● Recibiendo eventos"}
-            </span>
-          </div>
+        <div className="quadrate-live__telemetria-columna">
+          <div className="quadrate-live__feed" role="region" aria-label="Registro de telemetría operativa en vivo">
+            <div className="quadrate-live__feed-header">
+              <span className="quadrate-live__feed-title">
+                Registro de Telemetría (WebSocket)
+              </span>
+              <span className="quadrate-live__feed-status">
+                {estaPausado ? "⏸ En pausa" : "● Recibiendo eventos"}
+              </span>
+            </div>
 
-          <div className="quadrate-live__feed-lista">
-            {eventosTelemetria.length === 0 ? (
-              <p className="quadrate-live__feed-empty">
-                Enlace activo. Esperando el próximo reporte de garitas en Lima...
-              </p>
-            ) : (
-              eventosTelemetria.map((evento) => (
-                <div key={evento.id} className={`quadrate-live__feed-item quadrate-live__feed-item--${evento.tipo}`}>
-                  <span className="quadrate-live__feed-time">{evento.timestamp}</span>
-                  <span className="quadrate-live__feed-badge">
-                    {evento.tipo === "ingreso" && "Check-in LPR"}
-                    {evento.tipo === "salida" && "Check-out"}
-                    {evento.tipo === "reserva_eta" && "Reserva ETA"}
-                    {evento.tipo === "tarifa_dinamica" && "Franja Valle"}
-                    {evento.tipo === "aforo_critico" && "Alerta Aforo"}
-                    {evento.tipo === "conexion" && "Enlace"}
-                  </span>
-                  <span className="quadrate-live__feed-cochera">
-                    {evento.nombreCochera ? `${evento.nombreCochera} · ` : ""}
-                  </span>
-                  <span className="quadrate-live__feed-msg">{evento.mensaje}</span>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      }
-      barraBusqueda={
-        <div className="quadrate-live__toolbar">
-          <div className="quadrate-live__search-box">
-            <label htmlFor="quadrate-live-input" className="quadrate-live__search-label">
-              Buscar cochera o calle:
-            </label>
-            <div className="quadrate-live__search-input-group">
-              <input
-                ref={campoBusquedaRef}
-                id="quadrate-live-input"
-                type="search"
-                className="quadrate-live__search-input"
-                placeholder="Begonias, Larco, Canaval... (Presioná / para buscar)"
-                value={terminoBusqueda}
-                onChange={(e) => setTerminoBusqueda(e.target.value)}
-              />
-              {terminoBusqueda && (
-                <button
-                  type="button"
-                  className="quadrate-live__search-clear"
-                  onClick={() => {
-                    setTerminoBusqueda("");
-                    campoBusquedaRef.current?.focus();
-                  }}
-                  aria-label="Limpiar búsqueda"
-                >
-                  ✕
-                </button>
+            <div className="quadrate-live__feed-lista">
+              {eventosTelemetria.length === 0 ? (
+                <p className="quadrate-live__feed-empty">
+                  Enlace activo. Esperando el próximo reporte de garitas en Lima...
+                </p>
+              ) : (
+                eventosTelemetria.map((evento) => (
+                  <div key={evento.id} className={`quadrate-live__feed-item quadrate-live__feed-item--${evento.tipo}`}>
+                    <span className="quadrate-live__feed-time">{evento.timestamp}</span>
+                    <span className="quadrate-live__feed-badge">
+                      {evento.tipo === "ingreso" && "Check-in LPR"}
+                      {evento.tipo === "salida" && "Check-out"}
+                      {evento.tipo === "reserva_eta" && "Reserva ETA"}
+                      {evento.tipo === "tarifa_dinamica" && "Franja Valle"}
+                      {evento.tipo === "aforo_critico" && "Alerta Aforo"}
+                      {evento.tipo === "conexion" && "Enlace"}
+                    </span>
+                    <span className="quadrate-live__feed-cochera">
+                      {evento.nombreCochera ? `${evento.nombreCochera} · ` : ""}
+                    </span>
+                    <span className="quadrate-live__feed-msg">{evento.mensaje}</span>
+                  </div>
+                ))
               )}
             </div>
           </div>
 
-          <div className="quadrate-live__filtros">
-            <span className="quadrate-live__filtros-label">Distritos:</span>
-            <div className="quadrate-live__filtros-pills">
-              {DISTRITOS_DISPONIBLES.map((distrito) => (
-                <button
-                  key={distrito}
-                  type="button"
-                  className={`quadrate-live__filtro-pill ${
-                    distritoSeleccionado === distrito
-                      ? "quadrate-live__filtro-pill--activo"
-                      : ""
-                  }`}
-                  onClick={() => setDistritoSeleccionado(distrito)}
-                >
-                  {distrito}
-                </button>
-              ))}
+          {/* Panel de alertas reactivo con Zustand */}
+          <NotificationPanel />
+        </div>
+      }
+      barraBusqueda={
+        <div className="quadrate-live__toolbar-completo">
+          {/* Barra de pestañas para conmutar entre Red en Vivo y Catálogo TanStack Query */}
+          <div className="quadrate-live__pestañas-modulo" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={vistaActiva === "garitas"}
+              className={`quadrate-live__tab-btn ${
+                vistaActiva === "garitas" ? "quadrate-live__tab-btn--activo" : ""
+              }`}
+              onClick={() => setVistaActiva("garitas")}
+            >
+              🚗 Red de Garitas (En Vivo)
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={vistaActiva === "catalogo_api"}
+              className={`quadrate-live__tab-btn ${
+                vistaActiva === "catalogo_api" ? "quadrate-live__tab-btn--activo" : ""
+              }`}
+              onClick={() => setVistaActiva("catalogo_api")}
+            >
+              🌐 Catálogo API (TanStack Query)
+            </button>
+            <div className="quadrate-live__conmutador-tema-slot">
+              <ControlTemaZustand />
             </div>
           </div>
+
+          {vistaActiva === "garitas" && (
+            <div className="quadrate-live__toolbar">
+              <div className="quadrate-live__search-box">
+                <label htmlFor="quadrate-live-input" className="quadrate-live__search-label">
+                  Buscar cochera o calle:
+                </label>
+                <div className="quadrate-live__search-input-group">
+                  <input
+                    ref={campoBusquedaRef}
+                    id="quadrate-live-input"
+                    type="search"
+                    className="quadrate-live__search-input"
+                    placeholder="Begonias, Larco, Canaval... (Presioná / para buscar)"
+                    value={terminoBusqueda}
+                    onChange={(e) => setTerminoBusqueda(e.target.value)}
+                  />
+                  {terminoBusqueda && (
+                    <button
+                      type="button"
+                      className="quadrate-live__search-clear"
+                      onClick={() => {
+                        setTerminoBusqueda("");
+                        campoBusquedaRef.current?.focus();
+                      }}
+                      aria-label="Limpiar búsqueda"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="quadrate-live__filtros">
+                <span className="quadrate-live__filtros-label">Distritos:</span>
+                <div className="quadrate-live__filtros-pills">
+                  {DISTRITOS_DISPONIBLES.map((distrito) => (
+                    <button
+                      key={distrito}
+                      type="button"
+                      className={`quadrate-live__filtro-pill ${
+                        distritoSeleccionado === distrito
+                          ? "quadrate-live__filtro-pill--activo"
+                          : ""
+                      }`}
+                      onClick={() => setDistritoSeleccionado(distrito)}
+                    >
+                      {distrito}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       }
       panelDetalle={
-        cocheraSeleccionada && (
+        cocheraSeleccionada && vistaActiva === "garitas" && (
           <SimuladorReserva
             cochera={cocheraSeleccionada}
             onCerrar={() => setCocheraSeleccionada(null)}
@@ -270,7 +326,9 @@ export function QuadrateLiveApp() {
         )
       }
     >
-      {estaCargando ? (
+      {vistaActiva === "catalogo_api" ? (
+        <CatalogoRemoto />
+      ) : estaCargando ? (
         <div className="quadrate-live__loading" role="status" aria-live="polite">
           <div className="quadrate-live__spinner" aria-hidden="true" />
           <p className="quadrate-live__loading-text">

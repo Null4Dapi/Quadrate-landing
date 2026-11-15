@@ -9,13 +9,18 @@ import { TarjetaCochera } from "./tarjeta-cochera.js";
 import { MonitorActividad } from "./monitor-actividad.js";
 import { SimuladorReserva } from "./simulador-reserva.js";
 import { ContenedorLive } from "./contenedor-live.js";
+import { CatalogoRemoto } from "./catalogo-remoto.js";
+import { NotificationPanel, ControlTemaZustand } from "./notificaciones-panel.js";
+import { useAppStore } from "../../store/appStore.js";
+import { aplicarTemaVisualDOM } from "../../store/syncChannel.js";
 
 /**
- * Componente principal de la demo Quadrate Live.
- * Arquitectura React con telemetría WebSocket nativa, estado reactivo,
- * catálogo de disponibilidad y simulador de reserva por ETA.
+ * Componente principal de Quadrate Live — Arquitectura integrada Semana 11.
+ * Articula TanStack Query (catálogo REST paginado y caché) con Zustand (estado global,
+ * persistencia de tema, sincronización multi-pestaña y telemetría WebSocket).
  */
 export function QuadrateLiveApp() {
+  const [vistaActiva, setVistaActiva] = useState("garitas");
   const [distritoSeleccionado, setDistritoSeleccionado] = useState("Todos");
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [cocheraSeleccionada, setCocheraSeleccionada] = useState(DATOS_COCHERAS_INICIALES[0]);
@@ -29,6 +34,12 @@ export function QuadrateLiveApp() {
   const campoBusquedaRef = useRef(null);
   const socketRef = useRef(null);
 
+  // Inicialización de tema desde Zustand y persistencia
+  const temaStore = useAppStore(state => state.theme);
+  useEffect(() => {
+    aplicarTemaVisualDOM(temaStore);
+  }, [temaStore]);
+
   // Filtrado reactivo por distrito con feedback asíncrono
   useEffect(() => {
     setEstaCargando(true);
@@ -40,7 +51,7 @@ export function QuadrateLiveApp() {
     return () => clearTimeout(timer);
   }, [distritoSeleccionado]);
 
-  // Atajo de teclado: presionar '/' para enfocar buscador, 'Esc' para limpiar
+  // Atajo de teclado: '/' enfocar buscador, 'Esc' limpiar
   useEffect(() => {
     const manejarTecladoGlobal = evento => {
       if (evento.key === "/" && document.activeElement !== campoBusquedaRef.current) {
@@ -55,7 +66,7 @@ export function QuadrateLiveApp() {
     return () => window.removeEventListener("keydown", manejarTecladoGlobal);
   }, []);
 
-  // Conexión WebSocket RFC 6455 nativa para telemetría operativa
+  // Conexión WebSocket RFC 6455 nativa integrada con el Store Zustand
   useEffect(() => {
     let ws = null;
     let reconexionTimer = null;
@@ -77,6 +88,13 @@ export function QuadrateLiveApp() {
               ...dato,
               id: idItem
             };
+
+            // Integración reactiva con el Store Zustand (Semana 11)
+            useAppStore.getState().addNotification({
+              id: String(idItem),
+              message: String(dato.mensaje || `Evento operativo: Cochera ${dato.cocheraId || "Lima"}`),
+              createdAt: new Date().toISOString()
+            });
             setEventosTelemetria(previos => [nuevoEvento, ...previos.slice(0, 3)]);
             if (dato.cocheraId && dato.datos) {
               setCocheraActualizadaId(dato.cocheraId);
@@ -138,8 +156,8 @@ export function QuadrateLiveApp() {
     return item.nombre.toLowerCase().includes(busquedaLimpia) || item.direccion.toLowerCase().includes(busquedaLimpia) || item.distrito.toLowerCase().includes(busquedaLimpia);
   });
   return /*#__PURE__*/React.createElement(ContenedorLive, {
-    titulo: "Centro de Operaciones y Aforo en Vivo",
-    subtitulo: "Monitoreo de red de cocheras en Lima. Telemetría de garitas, aforo y reservas dinámicas por ETA.",
+    titulo: "Centro de Operaciones y Catálogo Inteligente",
+    subtitulo: "Plataforma de cocheras en Lima. Integración TanStack Query + Zustand Store y Telemetría WebSocket.",
     cabeceraSaludo: /*#__PURE__*/React.createElement(SaludoUsuario, {
       totalCocheras: cocheras.length,
       estadoWs: estadoWs,
@@ -152,6 +170,8 @@ export function QuadrateLiveApp() {
       estadoWs: estadoWs
     }),
     feedTelemetria: /*#__PURE__*/React.createElement("div", {
+      className: "quadrate-live__telemetria-columna"
+    }, /*#__PURE__*/React.createElement("div", {
       className: "quadrate-live__feed",
       role: "region",
       "aria-label": "Registro de telemetría operativa en vivo"
@@ -159,7 +179,7 @@ export function QuadrateLiveApp() {
       className: "quadrate-live__feed-header"
     }, /*#__PURE__*/React.createElement("span", {
       className: "quadrate-live__feed-title"
-    }, "Registro de Telemetría Operativa"), /*#__PURE__*/React.createElement("span", {
+    }, "Registro de Telemetría (WebSocket)"), /*#__PURE__*/React.createElement("span", {
       className: "quadrate-live__feed-status"
     }, estaPausado ? "⏸ En pausa" : "● Recibiendo eventos")), /*#__PURE__*/React.createElement("div", {
       className: "quadrate-live__feed-lista"
@@ -176,8 +196,27 @@ export function QuadrateLiveApp() {
       className: "quadrate-live__feed-cochera"
     }, evento.nombreCochera ? `${evento.nombreCochera} · ` : ""), /*#__PURE__*/React.createElement("span", {
       className: "quadrate-live__feed-msg"
-    }, evento.mensaje))))),
+    }, evento.mensaje))))), /*#__PURE__*/React.createElement(NotificationPanel, null)),
     barraBusqueda: /*#__PURE__*/React.createElement("div", {
+      className: "quadrate-live__toolbar-completo"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "quadrate-live__pestañas-modulo",
+      role: "tablist"
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      role: "tab",
+      "aria-selected": vistaActiva === "garitas",
+      className: `quadrate-live__tab-btn ${vistaActiva === "garitas" ? "quadrate-live__tab-btn--activo" : ""}`,
+      onClick: () => setVistaActiva("garitas")
+    }, "🚗 Red de Garitas (En Vivo)"), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      role: "tab",
+      "aria-selected": vistaActiva === "catalogo_api",
+      className: `quadrate-live__tab-btn ${vistaActiva === "catalogo_api" ? "quadrate-live__tab-btn--activo" : ""}`,
+      onClick: () => setVistaActiva("catalogo_api")
+    }, "🌐 Catálogo API (TanStack Query)"), /*#__PURE__*/React.createElement("div", {
+      className: "quadrate-live__conmutador-tema-slot"
+    }, /*#__PURE__*/React.createElement(ControlTemaZustand, null))), vistaActiva === "garitas" && /*#__PURE__*/React.createElement("div", {
       className: "quadrate-live__toolbar"
     }, /*#__PURE__*/React.createElement("div", {
       className: "quadrate-live__search-box"
@@ -213,12 +252,12 @@ export function QuadrateLiveApp() {
       type: "button",
       className: `quadrate-live__filtro-pill ${distritoSeleccionado === distrito ? "quadrate-live__filtro-pill--activo" : ""}`,
       onClick: () => setDistritoSeleccionado(distrito)
-    }, distrito))))),
-    panelDetalle: cocheraSeleccionada && /*#__PURE__*/React.createElement(SimuladorReserva, {
+    }, distrito)))))),
+    panelDetalle: cocheraSeleccionada && vistaActiva === "garitas" && /*#__PURE__*/React.createElement(SimuladorReserva, {
       cochera: cocheraSeleccionada,
       onCerrar: () => setCocheraSeleccionada(null)
     })
-  }, estaCargando ? /*#__PURE__*/React.createElement("div", {
+  }, vistaActiva === "catalogo_api" ? /*#__PURE__*/React.createElement(CatalogoRemoto, null) : estaCargando ? /*#__PURE__*/React.createElement("div", {
     className: "quadrate-live__loading",
     role: "status",
     "aria-live": "polite"

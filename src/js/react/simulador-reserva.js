@@ -2,7 +2,7 @@
  * simulador-reserva.js — Compilado para Navegador
  */
 const React = window.React;
-const { useState, useEffect, useRef } = React;
+const { useState } = React;
 
 /**
  * Mejora Creativa: Simulador de Reserva Dinámica por ETA & Calculadora de Fraccionamiento.

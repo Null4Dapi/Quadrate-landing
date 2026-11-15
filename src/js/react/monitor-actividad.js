@@ -2,7 +2,7 @@
  * monitor-actividad.js — Compilado para Navegador
  */
 const React = window.React;
-const { useState, useEffect, useRef } = React;
+const { useState, useEffect } = React;
 
 /**
  * Monitor automático de actividad con setInterval y clearInterval.

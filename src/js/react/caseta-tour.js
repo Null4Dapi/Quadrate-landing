@@ -2,7 +2,7 @@
  * caseta-tour.js — Compilado para Navegador
  */
 const React = window.React;
-const { useState, useEffect, useRef } = React;
+const { useState, useEffect } = React;
 import { CARACTERISTICAS_CASETA } from "./datos-caseta.js";
 import { CasetaFila } from "./caseta-fila.js";
 

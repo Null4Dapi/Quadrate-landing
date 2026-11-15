@@ -19,12 +19,12 @@ export function inicializarConmutadorTema() {
   function aplicarTema(tema) {
     if (tema === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
-      botonToggle.setAttribute("aria-label", "Cambiar a modo claro");
-      botonToggle.setAttribute("title", "Cambiar a modo claro");
+      botonToggle.setAttribute("aria-label", "Tema actual: oscuro. Cambiar a modo claro");
+      botonToggle.setAttribute("title", "Tema actual: oscuro. Clic para cambiar a modo claro");
     } else {
       document.documentElement.removeAttribute("data-theme");
-      botonToggle.setAttribute("aria-label", "Cambiar a modo oscuro");
-      botonToggle.setAttribute("title", "Cambiar a modo oscuro");
+      botonToggle.setAttribute("aria-label", "Tema actual: claro. Cambiar a modo oscuro");
+      botonToggle.setAttribute("title", "Tema actual: claro. Clic para cambiar a modo oscuro");
     }
     try {
       localStorage.setItem("quadrate_theme", tema);

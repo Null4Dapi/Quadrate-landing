@@ -13,7 +13,7 @@
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Quadrate pe — La app web de estacionamiento de Lima">
   <meta name="twitter:description" content="Quadrate pe es la app web progresiva de las playas de estacionamiento de Lima: garita digital, aforo en vivo, caja con liquidación automática y demanda visible antes de llegar."><meta name="twitter:image" content="https://quadratepe.dealforge.lat/src/assets/logo.webp">
   <link rel="preload" href="src/assets/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="src/css/main.css">
+  <link rel="stylesheet" href="src/css/main.css?v=1.2.0">
   <link rel="icon" type="image/svg+xml" href="src/assets/favicon.svg">
   <script>(function(){try{var t=localStorage.getItem("quadrate_theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();</script>
   <script type="application/ld+json">
@@ -33,9 +33,13 @@
         </ul>
       </nav>
       <div class="header__actions">
-        <button type="button" id="tema-toggle" class="header__theme-toggle" aria-label="Cambiar a modo oscuro" title="Cambiar a modo oscuro">
-          <svg class="header__theme-icon header__theme-icon--sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="18" height="18"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-          <svg class="header__theme-icon header__theme-icon--luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="18" height="18"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <button type="button" id="tema-toggle" class="header__theme-pill" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema (claro / oscuro)">
+          <span class="header__theme-option header__theme-option--claro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </span>
+          <span class="header__theme-option header__theme-option--oscuro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
         </button>
         <a href="#contacto" class="header__cta" data-texto="encabezado.botonCtaNav">Abrir la plataforma</a>
       </div>
@@ -364,6 +368,6 @@
     </div>
   </footer>
 
-  <script type="module" src="src/js/main.js"></script>
+  <script type="module" src="src/js/main.js?v=1.2.0"></script>
 </body>
 </html>

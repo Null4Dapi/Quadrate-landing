@@ -1,7 +1,7 @@
 {
   "upstream": "https://github.com/Null4Dapi/Quadrate-landing",
   "sitioFirebase": "quadratepe",
-  "urlPublica": "https://quadratepe.web.app",
+  "urlPublica": "https://quadratepe.dealforge.lat",
   "wsUrl": "wss://quadrate-live-365843518799.southamerica-west1.run.app/ws",
   "httpUrl": "https://quadrate-live-365843518799.southamerica-west1.run.app",
   "hostsPermitidos": []

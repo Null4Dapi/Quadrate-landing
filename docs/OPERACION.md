@@ -2,7 +2,7 @@
 
 ## Cómo se publica
 1. `scripts/cambios.mjs` lee el último commit del repo público (`git ls-remote`) y la huella de nuestra capa; los compara con
-   `https://quadratepe.web.app/upstream.json`. Si coinciden, termina sin publicar.
+   `https://quadratepe.dealforge.lat/upstream.json`. Si coinciden, termina sin publicar.
 2. `scripts/build.mjs` clona el repo (solo lectura), **ejecuta las guardas**, copia el sitio, inyecta la capa en `index.html` y
    `demo.html`, y escribe `upstream.json` (commit, huella, tamaño, fecha).
 3. Autenticación a Google Cloud por **federación de identidad** (sin claves guardadas): el pool `github-pool` solo acepta tokens

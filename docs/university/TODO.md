@@ -40,3 +40,9 @@ Semáforo de control interno del equipo para seguimiento de guías, enunciados y
 ## Semana 10 (Context API / Estado Global + WebSockets Servidor Propio)
 - [x] `entregables/entrega-010-etapa1.md`: Planificación de Context API, erradicación de prop drilling y ThemeContext (Google Doc importado en Drive)
 - [x] `entregables/entrega-010-etapa2.md`: Implementación de servidor WebSocket propio en Node.js, salas por distrito y useExperienceSocket (Google Doc importado en Drive)
+
+---
+
+## Semana 11 (TanStack Query + Zustand + WebSockets Desacoplados + React UI)
+- [x] `entregables/entrega-011-etapa1.md`: Planificación de Server State (TanStack Query) y Client State (Zustand), contratos de tipos y aislamiento de WebSocket local
+- [x] `entregables/entrega-011-etapa2.md`: Implementación de catálogo paginado, store atómico de tema/preferencias/toasts y sincronización en tiempo real

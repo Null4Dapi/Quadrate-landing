@@ -8,7 +8,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join, relative, resolve } from "node:path";
+import { dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { analizar } from "./guardas.mjs";
@@ -18,8 +18,14 @@ const RAIZ = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const MARCA = "<!-- quadrate-live -->";
 
 // Lo que no es parte del sitio publicado (mismo criterio que el firebase.json original de Quadrate).
-const EXCLUIDOS = [/^\.(git|github|devcontainer|agents|gitignore|upstream-commit)(\/|$)/, /^(docs|odd|scripts|node_modules)(\/|$)/,
-  /^(package\.json|package-lock\.json|skills-lock\.json|AGENTS\.md|CHANGELOG\.md|README\.md)$/, /\.(md|jsx)$/, /(^|\/)\.[^/]+$/];
+const EXCLUIDOS = [
+  /^\.(git|github|devcontainer|agents|firebase|gitignore|upstream-commit)(\/|$)/,
+  /^(docs|odd|scripts|service|tests|config|overlay|dist|node_modules)(\/|$)/,
+  /^(package\.json|package-lock\.json|skills-lock\.json|AGENTS\.md|CHANGELOG\.md|README\.md|firebase\.json|\.firebaserc)$/,
+  /\.(md|jsx)$/,
+  /(^|\/)babel\.min\.js$/,
+  /(^|\/)\.[^/]+$/
+];
 export const esExcluido = (rel) => EXCLUIDOS.some((patron) => patron.test(rel));
 
 export function leerDestino(ruta = join(RAIZ, "config", "destino.json")) {
@@ -71,7 +77,22 @@ export function ensamblar({ upstream, salida, destino, sha, raiz = RAIZ, bytesPr
   }
   rmSync(salida, { recursive: true, force: true });
   mkdirSync(salida, { recursive: true });
-  cpSync(upstream, salida, { recursive: true, filter: (origen) => !esExcluido(relative(upstream, origen).replace(/\\/g, "/")) });
+  const salidaRes = resolve(salida);
+  const upstreamRes = resolve(upstream);
+  if (salidaRes === upstreamRes || salidaRes.startsWith(upstreamRes + sep)) {
+    for (const entrada of readdirSync(upstream)) {
+      const rutaOrigen = join(upstream, entrada);
+      if (resolve(rutaOrigen) === salidaRes) continue;
+      const rel = relative(upstream, rutaOrigen).replace(/\\/g, "/");
+      if (esExcluido(rel)) continue;
+      cpSync(rutaOrigen, join(salida, entrada), {
+        recursive: true,
+        filter: (origen) => !esExcluido(relative(upstream, origen).replace(/\\/g, "/")),
+      });
+    }
+  } else {
+    cpSync(upstream, salida, { recursive: true, filter: (origen) => !esExcluido(relative(upstream, origen).replace(/\\/g, "/")) });
+  }
 
   const version = huellaOverlay({ raiz, destino });
   // La capa va en todas las páginas de la raíz (index.html y demo.html); index.html es obligatorio.

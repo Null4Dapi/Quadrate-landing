@@ -1,0 +1,216 @@
+/**
+ * notificaciones-feed.css — Feed de Telemetría Operativa y Conmutador de Turno
+ * Quadrate pe — Semana 11 (Zustand + WebSocket + BroadcastChannel)
+ */
+
+/* ==========================================================================
+   1. Conmutador de Turno de Garita (Zustand + BroadcastChannel)
+   ========================================================================== */
+.quadrate-live__monitor-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 0.75rem);
+  align-items: flex-end;
+}
+
+@media (max-width: 768px) {
+  .quadrate-live__monitor-group {
+    align-items: stretch;
+    width: 100%;
+  }
+}
+
+.btn-turno-garita {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-primary, #231212);
+  background-color: var(--color-bg-surface, #ffffff);
+  border: 1px solid var(--color-border-subtle, #e5e7eb);
+  border-radius: var(--radius-full, 9999px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-turno-garita:hover {
+  background-color: var(--color-bg-subtle, #ececec);
+  border-color: #cbd5e1;
+}
+
+.btn-turno-garita__icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   2. Feed de Telemetría Operativa (Zustand Store)
+   ========================================================================== */
+.telemetria-feed {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-surface, #ffffff);
+  border: 1px solid var(--color-border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 0.5rem);
+  padding: var(--space-4, 1rem);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.telemetria-feed__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
+  margin-bottom: 0.75rem;
+}
+
+.telemetria-feed__header-izq {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.telemetria-feed__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.telemetria-feed__dot--activo {
+  background-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.telemetria-feed__dot--pausa {
+  background-color: #f59e0b;
+}
+
+.telemetria-feed__titulo {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-primary, #231212);
+}
+
+.telemetria-feed__badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  background-color: #dbeafe;
+  border-radius: var(--radius-full, 9999px);
+}
+
+.telemetria-feed__acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.telemetria-feed__btn-accion {
+  padding: 0.25rem 0.6rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary, #4d3d3d);
+  background: transparent;
+  border: 1px solid var(--color-border-subtle, #e5e7eb);
+  border-radius: var(--radius-sm, 0.25rem);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.telemetria-feed__btn-accion:hover {
+  background-color: var(--color-bg-subtle, #ececec);
+  color: var(--color-text-primary, #231212);
+}
+
+.telemetria-feed__btn-accion--limpiar:hover {
+  color: #b91c1c;
+  border-color: #fca5a5;
+  background-color: #fef2f2;
+}
+
+.telemetria-feed__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.telemetria-feed__vacio {
+  margin: 0;
+  padding: 1.25rem 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary, #6b7280);
+  text-align: center;
+}
+
+.telemetria-feed__item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: var(--radius-sm, 0.25rem);
+  background-color: var(--color-bg-subtle, #f8f9fa);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.telemetria-feed__tiempo {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.6875rem;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.telemetria-feed__etiqueta {
+  padding: 0.1rem 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  border-radius: 3px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.telemetria-feed__etiqueta--ingreso { color: #1e3a8a; background-color: #dbeafe; }
+.telemetria-feed__etiqueta--salida { color: #065f46; background-color: #d1fae5; }
+.telemetria-feed__etiqueta--reserva_eta { color: #581c87; background-color: #f3e8ff; }
+.telemetria-feed__etiqueta--tarifa_dinamica { color: #92400e; background-color: #fef3c7; }
+.telemetria-feed__etiqueta--aforo_critico { color: #991b1b; background-color: #fee2e2; }
+
+.telemetria-feed__cuerpo {
+  color: var(--color-text-primary, #231212);
+  flex: 1;
+}
+
+.telemetria-feed__cochera {
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   3. Modo Nocturno (Zustand theme: "dark")
+   ========================================================================== */
+body.tema-oscuro .telemetria-feed,
+body.tema-oscuro .btn-turno-garita {
+  background-color: #111827 !important;
+  border-color: #1f2937 !important;
+  color: #f9fafb !important;
+}
+
+body.tema-oscuro .telemetria-feed__item {
+  background-color: #182234 !important;
+}
+
+body.tema-oscuro .telemetria-feed__cuerpo,
+body.tema-oscuro .telemetria-feed__titulo {
+  color: #f9fafb !important;
+}

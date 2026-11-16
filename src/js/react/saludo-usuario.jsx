@@ -45,7 +45,7 @@ export function SaludoUsuario({
           title={estaPausado ? "Reanudar recepción de telemetría" : "Pausar eventos automáticos"}
           aria-pressed={estaPausado}
         >
-          {estaPausado ? "▶ Reanudar flujo" : "⏸ Pausar flujo"}
+          {estaPausado ? "Reanudar flujo" : "Pausar flujo"}
         </button>
 
         {onSimularEvento && (
@@ -55,7 +55,7 @@ export function SaludoUsuario({
             onClick={onSimularEvento}
             title="Disparar un evento de garita en tiempo real para evaluar reactividad"
           >
-            ⚡ Simular evento de garita
+            Simular evento de garita
           </button>
         )}
       </div>

@@ -46,10 +46,10 @@ export function SaludoUsuario({
     onClick: onAlternarPausa,
     title: estaPausado ? "Reanudar recepción de telemetría" : "Pausar eventos automáticos",
     "aria-pressed": estaPausado
-  }, estaPausado ? "▶ Reanudar flujo" : "⏸ Pausar flujo"), onSimularEvento && /*#__PURE__*/React.createElement("button", {
+  }, estaPausado ? "Reanudar flujo" : "Pausar flujo"), onSimularEvento && /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: "quadrate-live__btn quadrate-live__btn--primario",
     onClick: onSimularEvento,
     title: "Disparar un evento de garita en tiempo real para evaluar reactividad"
-  }, "⚡ Simular evento de garita")));
+  }, "Simular evento de garita")));
 }

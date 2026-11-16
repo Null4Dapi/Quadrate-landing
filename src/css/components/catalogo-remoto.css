@@ -1,82 +1,15 @@
 /**
- * catalogo-remoto.css — Estilos BEM para TanStack Query, Zustand y Sincronización
+ * catalogo-remoto.css — Catálogo Inteligente Remoto (TanStack Query)
  * Quadrate pe — Semana 11
  */
 
 /* ==========================================================================
-   Barra de Pestañas y Conmutador de Módulo
-   ========================================================================== */
-.quadrate-live__toolbar-completo {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4, 1rem);
-  width: 100%;
-}
-
-.quadrate-live__pestañas-modulo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-3, 0.75rem);
-  padding: var(--space-2, 0.5rem);
-  background-color: var(--color-bg-surface, #ffffff);
-  border: 1px solid var(--color-border-subtle, #e5e7eb);
-  border-radius: var(--radius-md, 0.5rem);
-}
-
-.quadrate-live__tab-btn {
-  padding: 0.5rem 1rem;
-  font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-text-muted, #6b7280);
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: var(--radius-sm, 0.375rem);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.quadrate-live__tab-btn:hover {
-  color: var(--color-text-primary, #111827);
-  background-color: var(--color-bg-hover, #f3f4f6);
-}
-
-.quadrate-live__tab-btn--activo {
-  color: #ffffff;
-  background-color: var(--color-brand-primary, #0f172a);
-  font-weight: 600;
-}
-
-.quadrate-live__conmutador-tema-slot {
-  margin-left: auto;
-}
-
-.btn-conmutador-tema {
-  padding: 0.4rem 0.85rem;
-  font-family: inherit;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-text-primary, #111827);
-  background-color: var(--color-bg-hover, #f3f4f6);
-  border: 1px solid var(--color-border-subtle, #d1d5db);
-  border-radius: var(--radius-full, 9999px);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-conmutador-tema:hover {
-  background-color: var(--color-border-subtle, #e5e7eb);
-  transform: translateY(-1px);
-}
-
-/* ==========================================================================
-   Catálogo Remoto (TanStack Query)
+   1. Estructura y Cabecera del Catálogo
    ========================================================================== */
 .catalogo-remoto {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5, 1.25rem);
+  gap: var(--space-4, 1rem);
   width: 100%;
 }
 
@@ -84,315 +17,324 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--space-3, 0.75rem);
-  padding-bottom: var(--space-4, 1rem);
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
 }
 
-.catalogo-remoto__title {
+.catalogo-remoto__titulo {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-text-primary, #111827);
+  color: var(--color-text-primary, #231212);
 }
 
-.catalogo-remoto__subtitle {
-  margin: 0.25rem 0 0;
+.catalogo-remoto__subtitulo {
+  margin: 0.2rem 0 0;
   font-size: 0.875rem;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-secondary, #4d3d3d);
 }
 
 .catalogo-remoto__badge-cache .catalogo-remoto__pill {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
+  padding: 0.25rem 0.65rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #065f46;
-  background-color: #d1fae5;
-  border: 1px solid #a7f3d0;
   border-radius: var(--radius-full, 9999px);
 }
 
-/* Estados accesibles: loading y error */
-.catalogo-remoto__estado {
+.catalogo-remoto__pill--cache {
+  color: #065f46;
+  background-color: #d1fae5;
+  border: 1px solid #a7f3d0;
+}
+
+.catalogo-remoto__pill--sync {
+  color: #1e3a8a;
+  background-color: #dbeafe;
+  border: 1px solid #bfdbfe;
+}
+
+/* ==========================================================================
+   2. Toolbar: Búsqueda y Filtros de Distrito
+   ========================================================================== */
+.catalogo-remoto__toolbar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-8, 2.5rem);
-  text-align: center;
-  border-radius: var(--radius-md, 0.5rem);
-  border: 1px dashed var(--color-border-subtle, #d1d5db);
-}
-
-.catalogo-remoto__spinner {
-  width: 2rem;
-  height: 2rem;
-  border: 3px solid rgba(15, 23, 42, 0.1);
-  border-top-color: var(--color-brand-primary, #0f172a);
-  border-radius: 50%;
-  animation: girar-spinner 0.8s linear infinite;
-  margin-bottom: var(--space-3, 0.75rem);
-}
-
-@keyframes girar-spinner {
-  to { transform: rotate(360deg); }
-}
-
-.catalogo-remoto__estado--error {
-  background-color: #fef2f2;
-  border-color: #fca5a5;
-  color: #991b1b;
-}
-
-.catalogo-remoto__error-titulo {
-  font-weight: 700;
-  margin: 0 0 0.25rem;
-}
-
-.catalogo-remoto__error-detalle {
-  font-size: 0.875rem;
-  margin: 0 0 1rem;
-}
-
-.catalogo-remoto__btn--reintentar {
-  padding: 0.5rem 1rem;
-  font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: #dc2626;
-  border: none;
-  border-radius: var(--radius-sm, 0.375rem);
-  cursor: pointer;
-}
-
-/* Grid de tarjetas de catálogo */
-.catalogo-remoto__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-4, 1rem);
-}
-
-.catalogo-remoto__card {
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-4, 1rem);
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-3, 0.75rem);
+  padding: var(--space-3, 0.75rem);
   background-color: var(--color-bg-surface, #ffffff);
   border: 1px solid var(--color-border-subtle, #e5e7eb);
   border-radius: var(--radius-md, 0.5rem);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.catalogo-remoto__card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+.catalogo-remoto__search-box {
+  flex: 1;
+  min-width: 260px;
 }
 
-.catalogo-remoto__card-header {
+.catalogo-remoto__search-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--color-text-secondary, #4d3d3d);
+}
+
+.catalogo-remoto__search-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.catalogo-remoto__search-input {
+  width: 100%;
+  padding: 0.45rem 2rem 0.45rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  border: 1px solid var(--color-border-subtle, #d1d5db);
+  border-radius: var(--radius-sm, 0.375rem);
+  background-color: var(--color-bg-base, #f4f4f4);
+  color: var(--color-text-primary, #231212);
+}
+
+.catalogo-remoto__search-input:focus {
+  outline: none;
+  border-color: #000000;
+  background-color: #ffffff;
+}
+
+.catalogo-remoto__search-clear {
+  position: absolute;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.catalogo-remoto__filtros {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.catalogo-remoto__filtros-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary, #4d3d3d);
+}
+
+.catalogo-remoto__pills-group {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.catalogo-remoto__filtro-btn {
+  padding: 0.35rem 0.65rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary, #4d3d3d);
+  background-color: var(--color-bg-base, #f4f4f4);
+  border: 1px solid var(--color-border-subtle, #e5e7eb);
+  border-radius: var(--radius-full, 9999px);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.catalogo-remoto__filtro-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.catalogo-remoto__filtro-btn--activo {
+  background-color: #111827;
+  color: #ffffff;
+  border-color: #111827;
+}
+
+/* ==========================================================================
+   3. Skeletons de Carga (isPending)
+   ========================================================================== */
+.cochera-skeleton {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  background-color: var(--color-bg-surface, #ffffff);
+  border: 1px solid var(--color-border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 0.5rem);
+  gap: 0.75rem;
+  animation: pulso-skeleton 1.5s ease-in-out infinite;
+}
+
+@keyframes pulso-skeleton {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+.cochera-skeleton__header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
-  font-size: 0.75rem;
 }
 
-.catalogo-remoto__card-id {
-  font-weight: 700;
-  color: var(--color-brand-primary, #0f172a);
+.cochera-skeleton__bar {
+  height: 12px;
+  background-color: #e5e7eb;
+  border-radius: 3px;
 }
 
-.catalogo-remoto__card-tag {
-  color: var(--color-text-muted, #6b7280);
+.cochera-skeleton__bar--sm { width: 30%; }
+.cochera-skeleton__bar--md { width: 60%; height: 10px; }
+.cochera-skeleton__bar--lg { width: 80%; height: 16px; }
+
+.cochera-skeleton__pill {
+  width: 70px;
+  height: 18px;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
 }
 
-.catalogo-remoto__card-title {
+.cochera-skeleton__metricas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.cochera-skeleton__caja {
+  height: 48px;
+  background-color: #f1f5f9;
+  border-radius: 4px;
+}
+
+.cochera-skeleton__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.cochera-skeleton__btn {
+  width: 100px;
+  height: 30px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   4. Error, Vacío y Paginación en Red
+   ========================================================================== */
+.catalogo-remoto__error-box {
+  padding: 2rem;
+  text-align: center;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md, 0.5rem);
+}
+
+.catalogo-remoto__error-titulo {
   margin: 0 0 0.5rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  line-height: 1.35;
-  color: var(--color-text-primary, #111827);
-  text-transform: capitalize;
+  color: #991b1b;
+  font-weight: 700;
 }
 
-.catalogo-remoto__card-body {
-  margin: 0;
+.catalogo-remoto__error-detalle {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  color: #7f1d1d;
+}
+
+.catalogo-remoto__btn-reintentar,
+.catalogo-remoto__btn-reset {
+  padding: 0.45rem 1rem;
+  font-family: inherit;
   font-size: 0.8125rem;
-  line-height: 1.5;
-  color: var(--color-text-muted, #4b5563);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #111827;
+  border: none;
+  border-radius: var(--radius-sm, 0.25rem);
+  cursor: pointer;
 }
 
-/* Paginación */
+.catalogo-remoto__empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--color-text-secondary, #4d3d3d);
+}
+
 .catalogo-remoto__paginacion {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: var(--space-4, 1rem);
-  padding-top: var(--space-4, 1rem);
+  padding: var(--space-4, 1rem) 0;
   border-top: 1px solid var(--color-border-subtle, #e5e7eb);
 }
 
 .catalogo-remoto__btn-nav {
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.9rem;
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-text-primary, #111827);
+  color: var(--color-text-primary, #231212);
   background-color: var(--color-bg-surface, #ffffff);
   border: 1px solid var(--color-border-subtle, #d1d5db);
-  border-radius: var(--radius-sm, 0.375rem);
+  border-radius: var(--radius-sm, 0.25rem);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .catalogo-remoto__btn-nav:hover:not(:disabled) {
-  background-color: var(--color-bg-hover, #f3f4f6);
+  background-color: var(--color-bg-subtle, #ececec);
 }
 
 .catalogo-remoto__btn-nav:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
-.catalogo-remoto__pagina-indicador {
-  font-size: 0.875rem;
-  color: var(--color-text-muted, #4b5563);
+.catalogo-remoto__pagina-info {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary, #4d3d3d);
 }
 
 /* ==========================================================================
-   Panel de Notificaciones e Historial (Zustand)
+   5. Modo Nocturno (Zustand theme: "dark")
    ========================================================================== */
-.quadrate-live__telemetria-columna {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4, 1rem);
-}
-
-.badge-notificaciones {
-  display: inline-block;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #1e40af;
-  background-color: #dbeafe;
-  border-radius: var(--radius-full, 9999px);
-}
-
-.panel-historial {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-bg-surface, #ffffff);
-  border: 1px solid var(--color-border-subtle, #e5e7eb);
-  border-radius: var(--radius-md, 0.5rem);
-  padding: var(--space-4, 1rem);
-}
-
-.panel-historial__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
-  margin-bottom: 0.75rem;
-}
-
-.panel-historial__title-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.panel-historial__title {
-  margin: 0;
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-
-.panel-historial__btn-clear {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  color: var(--color-text-muted, #6b7280);
-  background: transparent;
-  border: 1px solid var(--color-border-subtle, #d1d5db);
-  border-radius: var(--radius-sm, 0.25rem);
-  cursor: pointer;
-}
-
-.panel-historial__btn-clear:hover {
-  color: #dc2626;
-  border-color: #fca5a5;
-}
-
-.panel-historial__lista {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-height: 220px;
-  overflow-y: auto;
-}
-
-.panel-historial__empty {
-  font-size: 0.8125rem;
-  color: var(--color-text-muted, #6b7280);
-  margin: 0;
-  text-align: center;
-  padding: 1rem 0;
-}
-
-.tarjeta-alerta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-  background-color: var(--color-bg-hover, #f9fafb);
-  border-left: 3px solid #3b82f6;
-  border-radius: var(--radius-sm, 0.25rem);
-}
-
-.tarjeta-alerta__mensaje {
-  margin: 0;
-  font-size: 0.8125rem;
-  color: var(--color-text-primary, #111827);
-}
-
-.tarjeta-alerta__tiempo {
-  font-size: 0.6875rem;
-  color: var(--color-text-muted, #9ca3af);
-  white-space: nowrap;
-}
-
-/* Modo Nocturno de Garita */
-body.tema-oscuro,
-[data-theme="dark"] body {
-  background-color: #0b0f19 !important;
-  color: #f3f4f6 !important;
-}
-
-body.tema-oscuro .catalogo-remoto__card,
-body.tema-oscuro .panel-historial,
-body.tema-oscuro .quadrate-live__pestañas-modulo,
+body.tema-oscuro .catalogo-remoto__toolbar,
 body.tema-oscuro .catalogo-remoto__btn-nav {
   background-color: #111827 !important;
   border-color: #1f2937 !important;
   color: #f9fafb !important;
 }
 
-body.tema-oscuro .catalogo-remoto__title,
-body.tema-oscuro .catalogo-remoto__card-title,
-body.tema-oscuro .panel-historial__title,
-body.tema-oscuro .tarjeta-alerta__mensaje {
+body.tema-oscuro .catalogo-remoto__titulo {
   color: #f9fafb !important;
 }
 
-body.tema-oscuro .catalogo-remoto__card-body,
-body.tema-oscuro .catalogo-remoto__subtitle {
+body.tema-oscuro .catalogo-remoto__subtitulo,
+body.tema-oscuro .catalogo-remoto__pagina-info {
   color: #9ca3af !important;
 }
 
-body.tema-oscuro .tarjeta-alerta {
+body.tema-oscuro .catalogo-remoto__search-input {
   background-color: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #f9fafb !important;
+}
+
+body.tema-oscuro .catalogo-remoto__filtro-btn {
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #9ca3af !important;
+}
+
+body.tema-oscuro .catalogo-remoto__filtro-btn--activo {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: #ffffff !important;
 }

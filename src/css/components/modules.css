@@ -84,78 +84,115 @@
   box-shadow: var(--modules-card-shadow-hover, 0 12px 30px -10px rgba(35, 18, 18, 0.08));
 }
 
-/* Variaciones cromáticas pastel suave para tarjetas Bento */
+/* Variaciones cromáticas de tono fuerte (estilo Tarifas) para tarjetas Bento */
 .modules__card:nth-child(1),
 .modules__card--celeste {
-  --modules-card-bg: #e2effa;
-  --modules-card-border: rgba(2, 132, 199, 0.18);
-  --modules-card-border-hover: rgba(2, 132, 199, 0.38);
-  --modules-card-shadow-hover: 0 14px 32px -8px rgba(2, 132, 199, 0.16);
-  --modules-card-divider: rgba(2, 132, 199, 0.18);
+  --modules-card-bg: #4EAEE8;
+  --modules-card-border: rgba(14, 75, 120, 0.22);
+  --modules-card-border-hover: rgba(14, 75, 120, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(14, 75, 120, 0.25);
+  --modules-card-divider: rgba(14, 75, 120, 0.18);
+  --modules-card-text: #061c2e;
+  --modules-card-text-desc: rgba(6, 28, 46, 0.88);
+  --modules-card-tag-bg: rgba(6, 28, 46, 0.08);
+  --modules-card-tag-border: rgba(6, 28, 46, 0.18);
 }
 
 .modules__card:nth-child(2),
 .modules__card--verde {
-  --modules-card-bg: #e4f5ea;
-  --modules-card-border: rgba(22, 163, 74, 0.18);
-  --modules-card-border-hover: rgba(22, 163, 74, 0.38);
-  --modules-card-shadow-hover: 0 14px 32px -8px rgba(22, 163, 74, 0.16);
-  --modules-card-divider: rgba(22, 163, 74, 0.18);
+  --modules-card-bg: #4EBE81;
+  --modules-card-border: rgba(10, 60, 30, 0.22);
+  --modules-card-border-hover: rgba(10, 60, 30, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(10, 60, 30, 0.25);
+  --modules-card-divider: rgba(10, 60, 30, 0.18);
+  --modules-card-text: #082111;
+  --modules-card-text-desc: rgba(8, 33, 17, 0.88);
+  --modules-card-tag-bg: rgba(8, 33, 17, 0.08);
+  --modules-card-tag-border: rgba(8, 33, 17, 0.18);
 }
 
 .modules__card:nth-child(3),
 .modules__card--amarillo {
-  --modules-card-bg: #fdf5d8;
-  --modules-card-border: rgba(217, 119, 6, 0.18);
-  --modules-card-border-hover: rgba(217, 119, 6, 0.38);
-  --modules-card-shadow-hover: 0 14px 32px -8px rgba(217, 119, 6, 0.16);
-  --modules-card-divider: rgba(217, 119, 6, 0.18);
+  --modules-card-bg: #F7C752;
+  --modules-card-border: rgba(110, 75, 15, 0.22);
+  --modules-card-border-hover: rgba(110, 75, 15, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(110, 75, 15, 0.25);
+  --modules-card-divider: rgba(110, 75, 15, 0.18);
+  --modules-card-text: #221703;
+  --modules-card-text-desc: rgba(34, 23, 3, 0.88);
+  --modules-card-tag-bg: rgba(34, 23, 3, 0.08);
+  --modules-card-tag-border: rgba(34, 23, 3, 0.18);
 }
 
 .modules__card:nth-child(4),
 .modules__card--naranja {
-  --modules-card-bg: #fdeee2;
-  --modules-card-border: rgba(234, 88, 12, 0.18);
-  --modules-card-border-hover: rgba(234, 88, 12, 0.38);
-  --modules-card-shadow-hover: 0 14px 32px -8px rgba(234, 88, 12, 0.16);
-  --modules-card-divider: rgba(234, 88, 12, 0.18);
+  --modules-card-bg: #F48B47;
+  --modules-card-border: rgba(124, 45, 18, 0.22);
+  --modules-card-border-hover: rgba(124, 45, 18, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(124, 45, 18, 0.25);
+  --modules-card-divider: rgba(124, 45, 18, 0.18);
+  --modules-card-text: #2a1205;
+  --modules-card-text-desc: rgba(42, 18, 5, 0.88);
+  --modules-card-tag-bg: rgba(42, 18, 5, 0.08);
+  --modules-card-tag-border: rgba(42, 18, 5, 0.18);
+}
+
+.modules__card--lavanda,
+.modules__card--morado {
+  --modules-card-bg: #BBA2E3;
+  --modules-card-border: rgba(60, 30, 95, 0.2);
+  --modules-card-border-hover: rgba(60, 30, 95, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(60, 30, 95, 0.25);
+  --modules-card-divider: rgba(60, 30, 95, 0.18);
+  --modules-card-text: #1C0F2C;
+  --modules-card-text-desc: rgba(28, 15, 44, 0.88);
+  --modules-card-tag-bg: rgba(28, 15, 44, 0.08);
+  --modules-card-tag-border: rgba(28, 15, 44, 0.18);
 }
 
 /* Soporte de modo oscuro para tarjetas Bento */
 [data-theme="dark"] .modules__card:nth-child(1),
 [data-theme="dark"] .modules__card--celeste {
-  --modules-card-bg: #141f2a;
-  --modules-card-border: rgba(56, 189, 248, 0.22);
-  --modules-card-border-hover: rgba(56, 189, 248, 0.45);
-  --modules-card-shadow-hover: 0 14px 32px -8px rgba(56, 189, 248, 0.18);
-  --modules-card-divider: rgba(56, 189, 248, 0.18);
+  --modules-card-bg: #3E92C4;
+  --modules-card-border: rgba(10, 45, 75, 0.3);
+  --modules-card-border-hover: rgba(10, 45, 75, 0.55);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(0, 0, 0, 0.4);
+  --modules-card-divider: rgba(10, 45, 75, 0.22);
+  --modules-card-text: #051624;
+  --modules-card-text-desc: rgba(5, 22, 36, 0.9);
 }
 
 [data-theme="dark"] .modules__card:nth-child(2),
 [data-theme="dark"] .modules__card--verde {
-  --modules-card-bg: #13241c;
-  --modules-card-border: rgba(74, 222, 128, 0.22);
-  --modules-card-border-hover: rgba(74, 222, 128, 0.45);
-  --modules-card-shadow-hover: 0 14px 32px -8px rgba(74, 222, 128, 0.18);
-  --modules-card-divider: rgba(74, 222, 128, 0.18);
+  --modules-card-bg: #4B9C67;
+  --modules-card-border: rgba(15, 45, 25, 0.28);
+  --modules-card-border-hover: rgba(15, 45, 25, 0.55);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(0, 0, 0, 0.4);
+  --modules-card-divider: rgba(15, 45, 25, 0.22);
+  --modules-card-text: #081B0F;
+  --modules-card-text-desc: rgba(8, 27, 15, 0.9);
 }
 
 [data-theme="dark"] .modules__card:nth-child(3),
 [data-theme="dark"] .modules__card--amarillo {
-  --modules-card-bg: #242014;
-  --modules-card-border: rgba(251, 191, 36, 0.22);
-  --modules-card-border-hover: rgba(251, 191, 36, 0.45);
-  --modules-card-shadow-hover: 0 14px 32px -8px rgba(251, 191, 36, 0.18);
-  --modules-card-divider: rgba(251, 191, 36, 0.18);
+  --modules-card-bg: #E3B866;
+  --modules-card-border: rgba(85, 60, 15, 0.28);
+  --modules-card-border-hover: rgba(85, 60, 15, 0.55);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(0, 0, 0, 0.4);
+  --modules-card-divider: rgba(85, 60, 15, 0.22);
+  --modules-card-text: #1E1404;
+  --modules-card-text-desc: rgba(30, 20, 4, 0.9);
 }
 
 [data-theme="dark"] .modules__card:nth-child(4),
 [data-theme="dark"] .modules__card--naranja {
-  --modules-card-bg: #271c17;
-  --modules-card-border: rgba(251, 146, 60, 0.22);
-  --modules-card-border-hover: rgba(251, 146, 60, 0.45);
-  --modules-card-shadow-hover: 0 14px 32px -8px rgba(251, 146, 60, 0.18);
-  --modules-card-divider: rgba(251, 146, 60, 0.18);
+  --modules-card-bg: #D97536;
+  --modules-card-border: rgba(75, 30, 10, 0.3);
+  --modules-card-border-hover: rgba(75, 30, 10, 0.55);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(0, 0, 0, 0.4);
+  --modules-card-divider: rgba(75, 30, 10, 0.22);
+  --modules-card-text: #1d0c03;
+  --modules-card-text-desc: rgba(29, 12, 3, 0.9);
 }
 
 @media (min-width: 900px) {
@@ -218,7 +255,11 @@
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--modules-card-text, var(--color-text-primary));
+  background-color: var(--modules-card-tag-bg, rgba(0, 0, 0, 0.08));
+  border: 1px solid var(--modules-card-tag-border, rgba(0, 0, 0, 0.14));
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
 }
 
 .modules__card-body {
@@ -232,13 +273,13 @@
   font-size: clamp(1.25rem, 2.2vw, 1.65rem);
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.02em;
-  color: var(--color-text-primary);
+  color: var(--modules-card-text, var(--color-text-primary));
   margin: 0;
 }
 
 .modules__card-desc {
   font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  color: var(--modules-card-text-desc, var(--color-text-secondary));
   line-height: var(--line-height-relaxed);
   max-width: 38ch;
   margin: 0;
@@ -248,9 +289,9 @@
   display: inline-block;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-accent-subtle);
-  border: 1px solid var(--color-border-subtle);
+  color: var(--modules-card-text, var(--color-text-primary));
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   padding: 2px 8px;
   border-radius: var(--radius-pill);
   margin-right: var(--space-2);
@@ -258,9 +299,9 @@
 }
 
 [data-theme="dark"] .modules__card-badge {
-  color: #f0f2f5;
-  background-color: rgba(227, 226, 247, 0.15);
-  border-color: rgba(227, 226, 247, 0.3);
+  color: var(--modules-card-text, #101216);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Micro-interfaces Visuales */

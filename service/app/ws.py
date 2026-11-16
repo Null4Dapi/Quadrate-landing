@@ -11,6 +11,7 @@ import json
 import logging
 import re
 import time
+from urllib.parse import urlsplit
 
 from fastapi import WebSocket
 from starlette.websockets import WebSocketDisconnect
@@ -25,6 +26,15 @@ ID_VALIDO = re.compile(r"^[A-Za-z0-9_-]{1,40}$")
 ENVIO_TIMEOUT_SEG = 5
 
 
+def _habla_la_demo(texto: str | None) -> bool:
+    """La demo de Quadrate envía {"accion": ...}; el asistente envía {"type": ...}."""
+    try:
+        mensaje = json.loads(texto or "")
+    except ValueError:
+        return False
+    return isinstance(mensaje, dict) and "accion" in mensaje and "type" not in mensaje
+
+
 def ip_de(ws: WebSocket) -> str:
     reenviado = ws.headers.get("x-forwarded-for", "")
     if reenviado:
@@ -34,7 +44,14 @@ def ip_de(ws: WebSocket) -> str:
 
 def origen_permitido(origen: str | None, config: Config) -> bool:
     """Un navegador siempre envía Origin al abrir un WebSocket; sin lista configurada no se acepta ninguno."""
-    return bool(origen) and origen.rstrip("/") in config.origenes
+    if not origen:
+        return False
+    if origen.rstrip("/") in config.origenes:
+        return True
+    if config.permitir_localhost:
+        partes = urlsplit(origen)
+        return partes.scheme in ("http", "https") and partes.hostname in ("localhost", "127.0.0.1")
+    return False
 
 
 class Cliente:
@@ -100,84 +117,84 @@ class Hub:
             self.clientes.pop(cliente.ws, None)  # cliente lento o caído: se descarta
 
     # --- ciclo de vida de una conexión ------------------------------------------------------------
+    # modo "chat": asistente (/ws-chat) · "telemetria": demo de Quadrate (/ws-telemetria) ·
+    # "mixto" (/ws): atiende a las dos cosas, porque la demo de la página abre /ws en producción y el asistente
+    # de versiones anteriores también.
     async def atender(self, ws: WebSocket) -> None:
+        await self._sesion(ws, "mixto")
+
+    async def atender_chat(self, ws: WebSocket) -> None:
+        await self._sesion(ws, "chat")
+
+    async def atender_telemetria(self, ws: WebSocket) -> None:
+        await self._sesion(ws, "telemetria")
+
+    async def _sesion(self, ws: WebSocket, modo: str) -> None:
         cfg = self.config
-        if not origen_permitido(ws.headers.get("origin"), cfg):
+        origen = ws.headers.get("origin")
+        if not origen_permitido(origen, cfg):
+            log.warning("WebSocket rechazado en %s: origen no permitido (%s)", modo, (origen or "sin origen")[:80])
             await ws.close(code=1008)
             return
         ip = ip_de(ws)
-        if not self.conexiones.admitir(ip):
+        con_telemetria = modo in ("telemetria", "mixto")
+        if (con_telemetria and not self.presupuesto.disponible(ip)) or not self.conexiones.admitir(ip):
             await ws.close(code=1013)
             return
         cliente = Cliente(ws)
         inicio = time.monotonic()
+        vida = cfg.vida_max_seg if modo == "chat" else cfg.vida_tele_seg
+        inactividad = cfg.inactividad_seg if modo == "chat" else None  # la demo no envía nada: no hay inactividad que medir
         try:  # accept() va dentro del try: si el cliente se cae en el saludo, igual se libera el cupo
             await ws.accept()
             self.clientes[ws] = cliente
+            if con_telemetria:
+                self.telemetria[ws] = cliente
             self._asegurar_bucle()
-            await cliente.enviar({
-                "type": "hola", "version": 1, "demostracion": True,
-                "distritos": list(aforo.DISTRITOS), "sugerencias": list(faq.SUGERENCIAS),
-                "vida_max_seg": cfg.vida_max_seg, "inactividad_seg": cfg.inactividad_seg,
-            })
+            await self._saludar(cliente, modo, vida)
             while True:
-                restante = cfg.vida_max_seg - (time.monotonic() - inicio)
+                restante = vida - (time.monotonic() - inicio)
                 if restante <= 0:
                     await ws.close(code=4000)
                     return
+                espera = restante if inactividad is None else min(inactividad, restante)
                 try:
-                    evento = await asyncio.wait_for(ws.receive(), timeout=min(cfg.inactividad_seg, restante))
+                    evento = await asyncio.wait_for(ws.receive(), timeout=espera)
                 except asyncio.TimeoutError:
-                    await ws.close(code=4000 if restante <= cfg.inactividad_seg else 4001)
+                    await ws.close(code=4000 if inactividad is None or restante <= inactividad else 4001)
                     return
                 if evento["type"] == "websocket.disconnect":
                     return
-                await self._procesar(cliente, evento.get("text"), ip)
+                await self._despachar(cliente, modo, evento.get("text"), ip)
         except (WebSocketDisconnect, RuntimeError, asyncio.TimeoutError, OSError):
             pass
         finally:
             self.clientes.pop(ws, None)
-            self.conexiones.liberar(ip)
-
-    async def atender_telemetria(self, ws: WebSocket) -> None:
-        """Protocolo de la demo de Quadrate (demo.html): tramas de aforo y eventos. Esa demo reconecta sola."""
-        cfg = self.config
-        if not origen_permitido(ws.headers.get("origin"), cfg):
-            await ws.close(code=1008)
-            return
-        ip = ip_de(ws)
-        if not self.presupuesto.disponible(ip) or not self.conexiones.admitir(ip):
-            await ws.close(code=1013)
-            return
-        cliente = Cliente(ws)
-        inicio = time.monotonic()
-        try:  # accept() va dentro del try: si el cliente se cae en el saludo, igual se libera el cupo
-            await ws.accept()
-            self.telemetria[ws] = cliente
-            self._asegurar_bucle()
-            await cliente.enviar(telemetria.bienvenida(time.time()))
-            await self._enviar_tramas(cliente, time.time())  # sincroniza el aforo al conectar
-            while True:
-                # Vida corta: la demo no envía nada, así que una desconexión brusca no se detecta; al reconectar sola
-                # (cada 4 s) la demo se recupera y los sockets fantasma no duran.
-                restante = cfg.vida_tele_seg - (time.monotonic() - inicio)
-                if restante <= 0:
-                    await ws.close(code=4000)
-                    return
-                try:
-                    evento = await asyncio.wait_for(ws.receive(), timeout=restante)
-                except asyncio.TimeoutError:
-                    await ws.close(code=4000)
-                    return
-                if evento["type"] == "websocket.disconnect":
-                    return
-                await self._procesar_telemetria(cliente, evento.get("text"))
-        except (WebSocketDisconnect, RuntimeError, asyncio.TimeoutError, OSError):
-            pass
-        finally:
             self.telemetria.pop(ws, None)
             self.conexiones.liberar(ip)
-            self.presupuesto.registrar(ip, time.monotonic() - inicio)
+            if con_telemetria:
+                self.presupuesto.registrar(ip, time.monotonic() - inicio)
+
+    async def _saludar(self, cliente: Cliente, modo: str, vida: int) -> None:
+        ahora = time.time()
+        datos_chat = {"type": "hola", "version": 1, "demostracion": True, "distritos": list(aforo.DISTRITOS),
+                      "sugerencias": list(faq.SUGERENCIAS), "vida_max_seg": vida}
+        if modo == "chat":
+            await cliente.enviar({**datos_chat, "inactividad_seg": self.config.inactividad_seg})
+            return
+        # En telemetría y mixto el primer mensaje es una trama que la demo sabe dibujar (tipo/timestamp/mensaje);
+        # en mixto además lleva los campos del asistente, que la demo ignora.
+        saludo = telemetria.bienvenida(ahora)
+        if modo == "mixto":
+            saludo = {**saludo, **datos_chat}
+        await cliente.enviar(saludo)
+        await self._enviar_tramas(cliente, ahora)  # sincroniza el aforo al conectar
+
+    async def _despachar(self, cliente: Cliente, modo: str, texto: str | None, ip: str) -> None:
+        if modo == "chat" or (modo == "mixto" and not _habla_la_demo(texto)):
+            await self._procesar(cliente, texto, ip)
+        else:
+            await self._procesar_telemetria(cliente, texto)
 
     async def _procesar_telemetria(self, cliente: Cliente, texto: str | None) -> None:
         if texto is None or len(texto.encode("utf-8")) > self.config.max_bytes_mensaje:

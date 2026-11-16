@@ -30,6 +30,10 @@ firebase hosting:rollback --site quadratepe --project dealforge-512304
 Para detener la automatización: *Actions → Publicar Quadrate → ⋯ → Disable workflow*.
 
 ## Servicio en vivo (Cloud Run `quadrate-live`, región `southamerica-west1`)
+- Endpoints WebSocket: `/ws` (**mixto**: atiende la demo de la página —tramas de telemetría y el botón «Simular evento»— y el asistente
+  de versiones anteriores), `/ws-chat` (solo asistente) y `/ws-telemetria` (solo demo). La demo publicada en producción abre `/ws`.
+- `PERMITIR_LOCALHOST=1` acepta páginas servidas desde `localhost`/`127.0.0.1` (probar la demo en local contra Cloud Run). Los orígenes
+  rechazados quedan en el log (`WebSocket rechazado en …: origen no permitido (…)`) para diagnosticar 403.
 - Sin base de datos, sin claves, sin permisos de GCP (cuenta de servicio `quadrate-live@…` sin roles). Los datos de aforo se
   calculan en función del reloj, así que todas las instancias coinciden.
 - Orígenes permitidos (`ALLOWED_ORIGINS`): el WebSocket y CORS solo aceptan las páginas de Quadrate; un navegador siempre envía `Origin`.

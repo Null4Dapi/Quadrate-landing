@@ -225,8 +225,73 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .quadrate-live__simulador-btn-reservar:hover { background-color: var(--color-accent-hover); transform: translateY(-1px); }
-.quadrate-live__simulador-confirmacion { margin-top: var(--space-4); background-color: var(--color-status-success-bg); border: 1px solid var(--color-status-success); border-radius: var(--radius-sm); padding: var(--space-3); }
-.quadrate-live__simulador-pase-codigo { font-family: var(--font-family-mono); font-size: var(--font-size-md); font-weight: var(--font-weight-bold); color: var(--color-status-success); margin: var(--space-1) 0; }
+/* Pase Digital de Estacionamiento */
+.quadrate-live__pase {
+  margin-top: var(--space-4);
+  background-color: var(--color-bg-base);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl, 14px);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-card);
+  animation: slide-toast 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.quadrate-live__pase-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3); }
+.quadrate-live__pase-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-family-mono); font-size: 0.72rem; font-weight: var(--font-weight-bold);
+  color: var(--color-status-success); background-color: var(--color-status-success-bg);
+  border: 1px solid var(--color-status-success); padding: 3px 8px; border-radius: var(--radius-pill);
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.quadrate-live__pase-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background-color: var(--color-status-success); box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  animation: pulso-dot 1.5s ease-in-out infinite;
+}
+@keyframes pulso-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+.quadrate-live__pase-countdown { display: inline-flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--color-text-secondary); }
+.quadrate-live__pase-countdown-label { font-size: 0.7rem; color: var(--color-text-muted); }
+.quadrate-live__pase-timer {
+  font-family: var(--font-family-mono); font-size: 0.8125rem; font-weight: var(--font-weight-bold);
+  color: #d97706; background-color: rgba(245, 158, 11, 0.12); padding: 2px 6px;
+  border-radius: var(--radius-xs, 4px); border: 1px solid rgba(245, 158, 11, 0.25);
+}
+.quadrate-live__pase-grid {
+  display: flex; align-items: center; gap: var(--space-4); padding: var(--space-3);
+  background-color: var(--color-bg-surface); border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg, 10px);
+}
+.quadrate-live__pase-qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+.quadrate-live__pase-qr {
+  color: #101216;
+  background-color: #ffffff;
+  padding: 4px;
+  border-radius: var(--radius-sm, 6px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+.quadrate-live__pase-qr-caption { font-size: 0.62rem; font-family: var(--font-family-mono); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.quadrate-live__pase-info { display: flex; flex-direction: column; gap: var(--space-2); flex: 1; min-width: 0; }
+.quadrate-live__pase-field { display: flex; flex-direction: column; }
+.quadrate-live__pase-label { font-size: 0.65rem; font-family: var(--font-family-sans); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); font-weight: var(--font-weight-semibold); }
+.quadrate-live__pase-codigo { font-family: var(--font-family-mono); font-size: 0.95rem; font-weight: var(--font-weight-bold); color: var(--color-text-primary); letter-spacing: 0.04em; }
+.quadrate-live__pase-row { display: flex; justify-content: space-between; gap: var(--space-2); }
+.quadrate-live__pase-valor { font-size: 0.8125rem; font-weight: var(--font-weight-bold); color: var(--color-text-primary); }
+.quadrate-live__pase-pin {
+  font-family: var(--font-family-mono); font-size: 0.8125rem; font-weight: var(--font-weight-bold);
+  color: var(--color-status-info); background-color: var(--color-status-info-bg); padding: 1px 6px;
+  border-radius: var(--radius-xs, 4px); width: fit-content;
+}
+[data-theme="dark"] .quadrate-live__pase-pin { color: #93c5fd; background-color: rgba(30, 58, 138, 0.4); }
+[data-theme="dark"] .quadrate-live__pase-badge { color: #6ee7b7; background-color: rgba(6, 95, 70, 0.35); border-color: rgba(16, 185, 129, 0.4); }
+.quadrate-live__pase-emision { font-size: 0.72rem; color: var(--color-text-secondary); font-family: var(--font-family-mono); }
+.quadrate-live__pase-footer { margin-top: var(--space-3); display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); }
+.quadrate-live__pase-aviso { font-size: 0.7rem; color: var(--color-text-muted); line-height: 1.35; margin: 0; flex: 1; }
+.quadrate-live__pase-btn-nueva {
+  font-family: var(--font-family-mono); font-size: 0.72rem; padding: 4px 10px; border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-medium); background-color: var(--color-bg-surface); color: var(--color-text-secondary);
+  cursor: pointer; white-space: nowrap; transition: all var(--transition-fast);
+}
+.quadrate-live__pase-btn-nueva:hover { background-color: var(--color-bg-subtle); color: var(--color-text-primary); border-color: var(--color-text-primary); }
 
 /* Estados Empty, Loading y Footer */
 .quadrate-live__loading, .quadrate-live__empty { text-align: center; padding: var(--space-12) var(--space-4); background-color: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); }

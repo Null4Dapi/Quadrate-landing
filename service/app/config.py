@@ -7,6 +7,7 @@ from dataclasses import dataclass
 class Config:
     # Orígenes del navegador autorizados a abrir el WebSocket y a llamar por HTTP (CORS).
     origenes: tuple[str, ...] = ()
+    permitir_localhost: bool = False   # acepta páginas servidas desde localhost/127.0.0.1 (pruebas locales de la demo)
     max_conexiones: int = 150          # por instancia
     max_por_ip: int = 4                # conexiones simultáneas por IP
     chat_por_minuto: int = 8           # mensajes de chat por IP
@@ -35,6 +36,7 @@ def cargar(env: dict | None = None) -> Config:
     base = Config()
     return Config(
         origenes=origenes,
+        permitir_localhost=str(env.get("PERMITIR_LOCALHOST", "0")).strip().lower() in ("1", "true", "si", "sí"),
         max_conexiones=_entero(env, "MAX_CONEXIONES", base.max_conexiones),
         max_por_ip=_entero(env, "MAX_POR_IP", base.max_por_ip),
         chat_por_minuto=_entero(env, "CHAT_POR_MINUTO", base.chat_por_minuto),

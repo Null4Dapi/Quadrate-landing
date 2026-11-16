@@ -60,6 +60,11 @@ export function inyectar(html, version) {
   return html.replace(/<\/head>/i, `${estilo}</head>`).replace(/<\/body>/i, `${scripts}</body>`);
 }
 
+/** wss://host/ws -> wss://host/ws-chat (el asistente tiene su propio endpoint; /ws queda para la demo de la página). */
+export function urlChat(wsUrl) {
+  return wsUrl ? wsUrl.replace(/\/ws\/?$/, "/ws-chat") : "";
+}
+
 /** wss://host/ws -> wss://host/ws-telemetria (el protocolo que ya habla la demo de Quadrate). */
 export function urlTelemetria(wsUrl) {
   return wsUrl ? wsUrl.replace(/\/ws\/?$/, "/ws-telemetria") : "";
@@ -110,7 +115,7 @@ export function ensamblar({ upstream, salida, destino, sha, raiz = RAIZ, bytesPr
   mkdirSync(carpetaLive, { recursive: true });
   for (const nombre of ["live.js", "live.css", "shim-ws.js"]) cpSync(join(raiz, "overlay", nombre), join(carpetaLive, nombre));
   writeFileSync(join(carpetaLive, "config.js"),
-    `window.QUADRATE_LIVE=${JSON.stringify({ wsUrl: destino.wsUrl, wsTelemetriaUrl: urlTelemetria(destino.wsUrl), httpUrl: destino.httpUrl })};\n`);
+    `window.QUADRATE_LIVE=${JSON.stringify({ wsUrl: destino.wsUrl, wsChatUrl: urlChat(destino.wsUrl), wsTelemetriaUrl: urlTelemetria(destino.wsUrl), httpUrl: destino.httpUrl })};\n`);
 
   const bytes = archivosDe(salida).reduce((total, f) => total + statSync(f).size, 0);
   const marcador = { sha, overlay: version, repo: destino.upstream, bytes, publicado: new Date().toISOString() };

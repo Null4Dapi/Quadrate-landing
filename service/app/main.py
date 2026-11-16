@@ -29,6 +29,7 @@ def crear_app(config: Config | None = None) -> FastAPI:
 
     if config.origenes:
         app.add_middleware(CORSMiddleware, allow_origins=list(config.origenes),
+                           allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$" if config.permitir_localhost else None,
                            allow_methods=["GET", "POST"], allow_headers=["Content-Type"], max_age=600)
 
     @app.middleware("http")
@@ -56,7 +57,12 @@ def crear_app(config: Config | None = None) -> FastAPI:
 
     @app.websocket("/ws")
     async def websocket(ws: WebSocket) -> None:
+        """Atiende a la demo de la página (telemetría) y al asistente: ver Hub.atender."""
         await hub.atender(ws)
+
+    @app.websocket("/ws-chat")
+    async def websocket_chat(ws: WebSocket) -> None:
+        await hub.atender_chat(ws)
 
     @app.websocket("/ws-telemetria")
     async def websocket_telemetria(ws: WebSocket) -> None:

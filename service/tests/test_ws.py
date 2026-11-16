@@ -18,7 +18,7 @@ def cliente(**cambios) -> TestClient:
 
 
 def abrir(c: TestClient, origen: str | None = ORIGEN):
-    return c.websocket_connect("/ws", headers={"origin": origen} if origen else {})
+    return c.websocket_connect("/ws-chat", headers={"origin": origen} if origen else {})
 
 
 def recibir(ws) -> dict:

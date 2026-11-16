@@ -159,7 +159,7 @@ class Conexion extends EventTarget {
   }
 }
 
-const conexion = new Conexion(CFG.wsUrl);
+const conexion = new Conexion(CFG.wsChatUrl || CFG.wsUrl);
 
 function etiquetaDeEstado(estado) {
   return {
@@ -196,6 +196,12 @@ function crearAsistente() {
     h("p", { class: "qlive-panel__nota" },
       "Responde con la información de esta página. La disponibilidad es de demostración. Tus mensajes no se guardan."));
   document.body.append(lanzador, panel);
+  // En la demo las alertas de la página se apilan abajo a la derecha: el asistente se coloca a la izquierda para no taparlas.
+  if (document.getElementById("quadrate-live-root")) {
+    lanzador.classList.add("qlive--izq");
+    panel.classList.add("qlive--izq");
+    document.documentElement.classList.add("qlive-en-demo"); // el CSS reubica las alertas de la página en pantallas pequeñas
+  }
 
   let contador = 0;
   let enCurso = null; // {id, burbuja}
@@ -334,7 +340,7 @@ function crearAsistente() {
 }
 
 function iniciar() {
-  if (!CFG.wsUrl) return; // sin destino configurado la capa no se activa
+  if (!(CFG.wsChatUrl || CFG.wsUrl)) return; // sin destino configurado la capa no se activa
   crearAsistente();
 }
 

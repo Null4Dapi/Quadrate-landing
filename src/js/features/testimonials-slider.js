@@ -35,6 +35,12 @@ export function inicializarSliderTestimonios() {
       const activo = idx === indiceActivo;
       dot.classList.toggle("manifesto__dot--active", activo);
       dot.setAttribute("aria-selected", activo ? "true" : "false");
+      dot.setAttribute("tabindex", activo ? "0" : "-1");
+    });
+
+    slides.forEach((slide, idx) => {
+      const activo = idx === indiceActivo;
+      slide.setAttribute("aria-hidden", activo ? "false" : "true");
     });
   }
 
@@ -87,16 +93,23 @@ export function inicializarSliderTestimonios() {
   seccion.addEventListener("focusin", detenerAutoplay);
   seccion.addEventListener("focusout", iniciarAutoplay);
 
-  // Navegación por teclado dentro del slider
-  seccion.addEventListener("keydown", (evento) => {
-    if (evento.key === "ArrowLeft") {
-      anterior();
-      iniciarAutoplay();
-    } else if (evento.key === "ArrowRight") {
-      siguiente();
-      iniciarAutoplay();
-    }
-  });
+  // Navegación por teclado accesible restringida a los controles del slider
+  const zonaControles = seccion.querySelector(".manifesto__controls");
+  if (zonaControles) {
+    zonaControles.addEventListener("keydown", (evento) => {
+      if (evento.key === "ArrowLeft") {
+        evento.preventDefault();
+        anterior();
+        dots[indiceActivo]?.focus();
+        iniciarAutoplay();
+      } else if (evento.key === "ArrowRight") {
+        evento.preventDefault();
+        siguiente();
+        dots[indiceActivo]?.focus();
+        iniciarAutoplay();
+      }
+    });
+  }
 
   irADiapositiva(0);
   iniciarAutoplay();

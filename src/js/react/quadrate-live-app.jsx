@@ -5,7 +5,6 @@ import { CatalogoRemoto } from "./catalogo-remoto.jsx";
 import {
   ToastNotificacionZustand,
   TelemetriaDrawerZustand,
-  ControlTemaZustand,
 } from "./notificaciones-panel.jsx";
 import { useAppStore } from "../../store/appStore.js";
 import { aplicarTemaVisualDOM } from "../../store/syncChannel.js";
@@ -110,7 +109,6 @@ export function QuadrateLiveApp() {
       <ContenedorLive
         titulo="Playas de Estacionamiento en Lima"
         subtitulo="Consultá disponibilidad en vivo, tarifas dinámicas por hora y asegurá tu plaza al instante."
-        monitor={<ControlTemaZustand />}
         feedTelemetria={
           <TelemetriaDrawerZustand
             estaPausado={estaPausado}

@@ -4,6 +4,7 @@
  */
 
 import { useAppStore } from "./appStore.js";
+import { guardarTema, aplicarTemaDOM, sanitizarTema } from "../js/utils/theme.js";
 
 const NOMBRE_CANAL = "experiencias-sync";
 let channel = null;
@@ -14,9 +15,9 @@ if (typeof window !== "undefined" && "BroadcastChannel" in window) {
 
     channel.onmessage = (event) => {
       if (event.data?.type === "THEME_CHANGED") {
-        const nuevoTema = event.data.theme;
+        const nuevoTema = sanitizarTema(event.data.theme);
         useAppStore.getState().setTheme(nuevoTema);
-        aplicarTemaVisualDOM(nuevoTema);
+        aplicarTemaDOM(nuevoTema);
       }
     };
   } catch (error) {
@@ -29,14 +30,7 @@ if (typeof window !== "undefined" && "BroadcastChannel" in window) {
  * @param {'light' | 'dark'} tema
  */
 export function aplicarTemaVisualDOM(tema) {
-  if (typeof document !== "undefined") {
-    document.documentElement.setAttribute("data-theme", tema);
-    if (tema === "dark") {
-      document.body.classList.add("tema-oscuro");
-    } else {
-      document.body.classList.remove("tema-oscuro");
-    }
-  }
+  aplicarTemaDOM(tema);
 }
 
 /**
@@ -44,12 +38,14 @@ export function aplicarTemaVisualDOM(tema) {
  * @param {'light' | 'dark'} theme
  */
 export function changeTheme(theme) {
-  useAppStore.getState().setTheme(theme);
-  aplicarTemaVisualDOM(theme);
+  const seguro = sanitizarTema(theme);
+  guardarTema(seguro);
+  useAppStore.getState().setTheme(seguro);
+  aplicarTemaDOM(seguro);
 
   if (channel) {
     try {
-      channel.postMessage({ type: "THEME_CHANGED", theme });
+      channel.postMessage({ type: "THEME_CHANGED", theme: seguro });
     } catch (e) {
       console.warn("[syncChannel] Error al emitir mensaje en el canal:", e);
     }

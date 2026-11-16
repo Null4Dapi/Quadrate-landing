@@ -6,6 +6,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { obtenerTemaGuardado, guardarTema } from "../js/utils/theme.js";
 
 /**
  * @typedef {Object} Notice
@@ -26,9 +27,12 @@ import { persist } from "zustand/middleware";
 export const useAppStore = create(
   persist(
     (set) => ({
-      theme: "light",
+      theme: obtenerTemaGuardado(),
       notifications: [],
-      setTheme: (theme) => set({ theme }),
+      setTheme: (theme) => {
+        guardarTema(theme);
+        set({ theme });
+      },
       addNotification: (notice) =>
         set((state) => ({
           notifications: [notice, ...state.notifications].slice(0, 20),

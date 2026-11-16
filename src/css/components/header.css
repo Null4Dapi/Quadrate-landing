@@ -74,6 +74,19 @@ html {
   text-transform: lowercase;
 }
 
+.header__pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-status-success);
+  background-color: var(--color-status-success-bg);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: var(--radius-pill);
+  line-height: 1;
+}
+
 /* Botón Hamburguesa Móvil (Visible solo en mobile) */
 .header__menu-toggle {
   display: inline-flex;
@@ -341,27 +354,11 @@ button.header__nav-link {
 
 /* Tablet y Desktop (768px+) */
 @media (min-width: 768px) {
-  .header {
-    padding-block: var(--space-4);
-  }
-
-  .header__menu-toggle {
-    display: none;
-  }
-
-  .header__brand {
-    display: inline-flex;
-  }
-
-  .header__logo-img {
-    width: auto;
-    height: 36px;
-    max-height: 36px;
-  }
-
-  .header__logo-text {
-    font-size: 1.25rem;
-  }
+  .header { padding-block: var(--space-4); }
+  .header__menu-toggle { display: none; }
+  .header__brand { display: inline-flex; }
+  .header__logo-img { width: auto; height: 36px; max-height: 36px; }
+  .header__logo-text { font-size: 1.25rem; }
 
   .header__nav {
     display: block;

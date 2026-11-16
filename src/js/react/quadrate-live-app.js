@@ -6,7 +6,7 @@ const { useState, useEffect, useRef } = React;
 import { ContenedorLive } from "./contenedor-live.js";
 import { SimuladorReserva } from "./simulador-reserva.js";
 import { CatalogoRemoto } from "./catalogo-remoto.js";
-import { ToastNotificacionZustand, TelemetriaDrawerZustand, ControlTemaZustand } from "./notificaciones-panel.js";
+import { ToastNotificacionZustand, TelemetriaDrawerZustand } from "./notificaciones-panel.js";
 import { useAppStore } from "../../store/appStore.js";
 import { aplicarTemaVisualDOM } from "../../store/syncChannel.js";
 
@@ -95,7 +95,6 @@ export function QuadrateLiveApp() {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToastNotificacionZustand, null), /*#__PURE__*/React.createElement(ContenedorLive, {
     titulo: "Playas de Estacionamiento en Lima",
     subtitulo: "Consultá disponibilidad en vivo, tarifas dinámicas por hora y asegurá tu plaza al instante.",
-    monitor: /*#__PURE__*/React.createElement(ControlTemaZustand, null),
     feedTelemetria: /*#__PURE__*/React.createElement(TelemetriaDrawerZustand, {
       estaPausado: estaPausado,
       onAlternarPausa: () => setEstaPausado(p => !p),

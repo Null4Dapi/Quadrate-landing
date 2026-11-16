@@ -39,7 +39,7 @@
    ========================================================================== */
 .toast-operativo {
   position: fixed;
-  top: 1.25rem;
+  top: 4.75rem;
   right: 1.25rem;
   z-index: 9999;
   display: flex;

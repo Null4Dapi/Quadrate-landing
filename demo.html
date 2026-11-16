@@ -7,22 +7,32 @@
   <title>Quadrate Live — Demostración Interactiva</title>
   <link rel="icon" type="image/svg+xml" href="src/assets/favicon.svg">
   <link rel="preload" href="src/assets/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="src/css/main.css?v=0.1.0">
+  <link rel="stylesheet" href="src/css/main.css?v=1.2.0">
   <link rel="stylesheet" href="src/css/components/quadrate-live.css">
   <link rel="stylesheet" href="src/css/components/notificaciones-feed.css">
   <link rel="stylesheet" href="src/css/components/catalogo-remoto.css">
+  <script>(function(){try{var t=localStorage.getItem("quadrate_theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();</script>
 </head>
 <body class="demo-page">
-  <header class="demo-nav">
-    <div class="demo-nav__container">
-      <a href="index.html" class="demo-nav__brand" aria-label="Ir al inicio de Quadrate pe">
-        <span class="demo-nav__logo-text">Quadrate</span>
-        <span class="demo-nav__logo-badge">pe</span>
-        <span class="demo-nav__pill">Demo en vivo</span>
+  <header class="header">
+    <div class="header__container">
+      <a href="index.html" class="header__brand" aria-label="Volver al inicio de Quadrate pe">
+        <img src="src/assets/logo.webp" alt="Logotipo de Quadrate pe" width="34" height="37" class="header__logo-img">
+        <span class="header__logo-text">Quadrate</span>
+        <span class="header__logo-badge">pe</span>
+        <span class="header__pill">Demo en vivo</span>
       </a>
-      <div class="demo-nav__actions">
-        <a href="index.html" class="demo-nav__back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      <div class="header__actions">
+        <button type="button" id="tema-toggle" class="header__theme-pill" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema (claro / oscuro)">
+          <span class="header__theme-option header__theme-option--claro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </span>
+          <span class="header__theme-option header__theme-option--oscuro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+        <a href="index.html" class="header__cta" aria-label="Volver a la página principal de Quadrate">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14" style="margin-right: 6px;"><polyline points="15 18 9 12 15 6"></polyline></svg>
           Volver a la landing
         </a>
       </div>
@@ -59,7 +69,10 @@
   </script>
 
   <script type="module">
+    import { inicializarConmutadorTema } from "./src/js/features/theme-switcher.js";
     import { inicializarQuadrateLive } from "./src/js/react/quadrate-live.js";
+
+    inicializarConmutadorTema();
     inicializarQuadrateLive();
   </script>
 </body>

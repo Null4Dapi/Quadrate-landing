@@ -96,7 +96,14 @@
   color: var(--color-text-muted);
   position: relative;
   transition: color var(--transition-fast);
-  cursor: default;
+  cursor: pointer;
+  user-select: none;
+}
+
+.rates__progress-item:hover,
+.rates__progress-item:focus-visible {
+  color: var(--color-text-primary);
+  outline: none;
 }
 
 .rates__progress-item::before {
@@ -145,7 +152,7 @@
 .rates__card {
   position: sticky;
   top: calc(var(--rates-top) + var(--rates-card-index, 0) * var(--rates-step));
-  min-height: 320px;
+  min-height: 280px;
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: var(--space-4);
@@ -153,11 +160,12 @@
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-2xl);
   padding: clamp(var(--space-6), 4vw, var(--space-8));
-  box-shadow: 0 -12px 30px -15px rgba(35, 18, 18, 0.08), 0 4px 16px rgba(18, 22, 26, 0.04);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05), 0 0 0 1px var(--color-border-subtle);
   transform-origin: center top;
-  transform: scale(calc(1 - var(--rates-covered, 0) * 0.04));
-  filter: brightness(calc(1 - var(--rates-covered, 0) * 0.16));
-  transition: border-color var(--transition-fast);
+  transform: scale(calc(1 - var(--rates-covered, 0) * 0.05)) translateY(calc(var(--rates-covered, 0) * 4px));
+  opacity: calc(1 - var(--rates-covered, 0) * 0.22);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  will-change: transform, opacity;
   overflow: hidden;
   isolation: isolate;
 }

@@ -99,10 +99,10 @@
   .modules__card--featured,
   .modules__card--wide {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-columns: minmax(180px, 3fr) minmax(0, 7fr);
     grid-template-rows: auto 1fr;
     gap: var(--space-4) var(--space-6);
-    align-items: center;
+    align-items: start;
   }
 
   .modules__card--featured .modules__card-header,
@@ -113,7 +113,8 @@
   .modules__card--featured .modules__card-body,
   .modules__card--wide .modules__card-body {
     grid-column: 1;
-    align-self: center;
+    align-self: start;
+    padding-top: var(--space-1);
   }
 
   .modules__card--featured .modules__card-visual,
@@ -127,6 +128,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: center;
   }
 }
 
@@ -164,6 +166,7 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
+  max-width: 38ch;
   margin: 0;
 }
 
@@ -171,12 +174,19 @@
   display: inline-block;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
-  color: var(--color-accent-primary);
+  color: var(--color-text-primary);
   background-color: var(--color-bg-accent-subtle);
-  padding: 1px 8px;
+  border: 1px solid var(--color-border-subtle);
+  padding: 2px 8px;
   border-radius: var(--radius-pill);
   margin-right: var(--space-2);
   vertical-align: middle;
+}
+
+[data-theme="dark"] .modules__card-badge {
+  color: #f0f2f5;
+  background-color: rgba(227, 226, 247, 0.15);
+  border-color: rgba(227, 226, 247, 0.3);
 }
 
 /* Micro-interfaces Visuales */
@@ -186,59 +196,30 @@
   border-top: 1px solid var(--color-border-subtle);
 }
 
-/* Visual 1: Garita QR Box (QR con placa debajo) */
-.modules__qr-box {
+/* Visual 1: Garita QR directo (sin bloque contenedor pesado) */
+.modules__visual--garita {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: var(--space-3);
-  background-color: var(--color-bg-surface);
+  justify-content: center;
+}
+
+.modules__qr-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-2xl);
+  background-color: #ffffff;
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-xl);
-  padding: var(--space-5);
-  box-shadow: 0 4px 14px rgba(35, 18, 18, 0.04);
-  width: 100%;
-  max-width: 220px;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-fast);
 }
 
-.modules__qr-icon {
-  width: 60px;
-  height: 60px;
-  flex-shrink: 0;
-  border: 2px solid var(--color-accent-primary);
-  border-radius: var(--radius-xs);
-  background-image: conic-gradient(
-    var(--color-accent-primary) 25%,
-    transparent 0 50%,
-    var(--color-accent-primary) 0 75%,
-    transparent 0
-  );
-  background-size: 10px 10px;
+.modules__card:hover .modules__qr-img {
+  transform: scale(1.03);
 }
 
-.modules__qr-plate-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.modules__qr-plate {
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-  letter-spacing: 0.04em;
-}
-
-.modules__qr-status {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-status-success);
-}
-
-/* Visual 2: Aforo Gauge */
-.modules__gauge {
+/* Visual 2: Aforo Occupancy Widget (telemetría nativa para bento) */
+.modules__occupancy {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -246,35 +227,66 @@
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-lg);
   padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-xs);
+  width: 100%;
 }
 
-.modules__gauge-header {
+.modules__occupancy-row {
   display: flex;
   justify-content: space-between;
-  font-size: var(--font-size-xs);
-}
-
-.modules__gauge-label {
+  align-items: center;
   color: var(--color-text-muted);
 }
 
-.modules__gauge-value {
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
+.modules__occupancy-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
 }
 
-.modules__gauge-bar {
-  height: 8px;
-  background-color: var(--color-bg-subtle);
+.modules__occupancy-badge {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-status-success);
+  background-color: var(--color-status-success-bg);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.modules__occupancy-metric {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-block: 2px;
+}
+
+.modules__occupancy-count {
+  font-family: var(--font-family-mono);
+  font-size: 1.4rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.modules__occupancy-total {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.modules__occupancy-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-border-subtle);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
-.modules__gauge-fill {
+.modules__occupancy-fill {
   height: 100%;
-  width: 78%;
-  background-color: var(--color-accent-primary);
+  background-color: var(--color-status-success);
   border-radius: var(--radius-pill);
+  transition: width var(--transition-base);
 }
 
 /* Visual 3: Caja Ledger */
@@ -316,64 +328,22 @@
   display: inline-block;
 }
 
-/* Visual 4: Panel de Mapa de Demanda */
-.modules__map-panel {
+/* Visual 4: Vista Previa de la Aplicación (Demanda Activa) */
+.modules__app-preview {
+  margin: 0;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-xl);
-  padding: var(--space-4) var(--space-5);
-  box-shadow: 0 4px 14px rgba(35, 18, 18, 0.04);
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  max-width: 300px;
 }
 
-.modules__map-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: var(--font-size-xs);
-}
-
-.modules__map-indicator {
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-status-success);
-}
-
-.modules__map-eta {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-status-info);
-  background-color: var(--color-status-info-bg);
-  padding: 1px 8px;
-  border-radius: var(--radius-pill);
-}
-
-.modules__route-badge {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-xs);
-}
-
-.modules__route-origin {
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-}
-
-.modules__route-arrow {
-  color: var(--color-text-muted);
-}
-
-.modules__route-dest {
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-}
-
-.modules__map-caption {
-  font-size: 11px;
-  color: var(--color-text-muted);
-  line-height: var(--line-height-normal);
+.modules__app-img {
+  width: 100%;
+  max-width: 220px;
+  max-height: 220px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-card);
 }

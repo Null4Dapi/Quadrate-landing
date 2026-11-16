@@ -45,7 +45,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
           </span>
         </button>
-        <a href="#contacto" class="header__cta" data-texto="encabezado.botonCtaNav">Abrir la plataforma</a>
+        <a href="demo.html" class="header__cta" data-texto="encabezado.botonCtaNav">Abrir la plataforma</a>
       </div>
     </div>
   </header>
@@ -92,10 +92,7 @@
               <p class="modules__card-desc"><span class="modules__card-badge" data-texto="modulos.filas.0.badge">Check-in &lt; 3 seg</span><span data-texto="modulos.filas.0.beneficio">Credencial digital con QR o PIN en el portón. Abonados y conductores frecuentes pasan directo, sin papel ni filas.</span></p>
             </div>
             <div class="modules__card-visual modules__visual--garita" aria-hidden="true">
-              <div class="modules__qr-box">
-                <div class="modules__qr-icon"></div>
-                <div class="modules__qr-plate-info"><span class="modules__qr-plate">Placa: BZ-492</span><span class="modules__qr-status">● Paso autorizado</span></div>
-              </div>
+              <img src="src/assets/qr-credencial.jpg" alt="Credencial digital QR con autorización de paso" width="200" height="200" class="modules__qr-img" loading="lazy">
             </div>
           </article>
           <!-- Tarjeta 2: Aforo en vivo -->
@@ -106,9 +103,18 @@
               <p class="modules__card-desc" data-texto="modulos.filas.1.beneficio">Cada entrada y salida actualiza el cupo real del estacionamiento: se ve al instante cuántos lugares quedan.</p>
             </div>
             <div class="modules__card-visual modules__visual--aforo" aria-hidden="true">
-              <div class="modules__gauge">
-                <div class="modules__gauge-header"><span class="modules__gauge-label">Cupo libre</span><span class="modules__gauge-value">18 plazas</span></div>
-                <div class="modules__gauge-bar"><div class="modules__gauge-fill"></div></div>
+              <div class="modules__occupancy">
+                <div class="modules__occupancy-row">
+                  <span class="modules__occupancy-status"><span class="modules__status-dot"></span> Plazas libres</span>
+                  <span class="modules__occupancy-badge">84% libre</span>
+                </div>
+                <div class="modules__occupancy-metric">
+                  <strong class="modules__occupancy-count">42</strong>
+                  <span class="modules__occupancy-total">/ 50 plazas</span>
+                </div>
+                <div class="modules__occupancy-track">
+                  <div class="modules__occupancy-fill" style="width: 84%;"></div>
+                </div>
               </div>
             </div>
           </article>
@@ -134,11 +140,9 @@
               <p class="modules__card-desc" data-texto="modulos.filas.3.beneficio">La playa publica cupo y tarifas claras: el conductor elige con certidumbre antes de arrancar y la cochera recibe trámite formal.</p>
             </div>
             <div class="modules__card-visual modules__visual--demanda" aria-hidden="true">
-              <div class="modules__map-panel">
-                <div class="modules__map-header"><span class="modules__map-indicator">● Demanda activa</span><span class="modules__map-eta">ETA 8 min</span></div>
-                <div class="modules__route-badge"><span class="modules__route-origin">Lima Centro</span><span class="modules__route-arrow">→</span><span class="modules__route-dest">Cochera Destino</span></div>
-                <span class="modules__map-caption">Plaza reservada en trayecto con tarifa fija garantizada</span>
-              </div>
+              <figure class="modules__app-preview">
+                <img src="src/assets/app-screen-aforo.jpg" alt="Pantalla de la app Quadrate con reserva en trayecto y demanda activa en tiempo real" width="280" height="180" class="modules__app-img" loading="lazy">
+              </figure>
             </div>
           </article>
         </div>
@@ -150,7 +154,6 @@
       <div class="caseta">
         <div class="caseta__grid">
           <div class="caseta__content">
-            <span class="caseta__eyebrow" data-texto="comoFunciona.etiquetaSeccion">Panel de Control de Caseta · Garitas conectadas ✓</span>
             <h2 id="como-funciona-titulo" class="caseta__title" data-texto="comoFunciona.tituloSeccion">Digitalización operativa para playas sin hardware costoso</h2>
             <p class="caseta__lead" data-texto="comoFunciona.descripcionSeccion">Opera tu estacionamiento desde cualquier smartphone o tableta existente. Cero barreras electromecánicas y cero sensores en el suelo.</p>
             <ul class="caseta__list" role="list">
@@ -160,7 +163,8 @@
             </ul>
           </div>
           <div class="caseta__visual">
-            <figure class="caseta__figure">
+            <figure class="caseta__figure" id="caseta-figure">
+              <div id="caseta-phone-canvas" class="caseta__phone-canvas" role="img" aria-label="Modelo 3D estático de smartphone con panel operativo de caseta"></div>
               <img src="src/assets/caseta-mockup-checkin.svg" alt="Mockup interactivo del panel de caseta Quadrate pe" width="320" height="320" loading="lazy" class="caseta__image">
             </figure>
           </div>
@@ -175,10 +179,10 @@
           <span class="rates__eyebrow" data-texto="tarifas.etiquetaSeccion">Tarifas claras</span>
           <h2 id="tarifas-titulo" class="rates__title" data-texto="tarifas.tituloSeccion">El precio que ves es el precio que pagas</h2>
           <p class="rates__description" data-texto="tarifas.descripcionSeccion">Las tarifas claras benefician a las dos caras del sistema: el conductor conoce el precio antes de llegar y la cochera liquida cada estadía con ese mismo dato exacto.</p>
-          <ol class="rates__progress" aria-hidden="true">
-            <li class="rates__progress-item" data-rate="0" data-active=""><span class="rates__progress-number">01</span><span class="rates__progress-label" data-texto="tarifas.filas.0.categoria">Primera hora</span></li>
-            <li class="rates__progress-item" data-rate="1"><span class="rates__progress-number">02</span><span class="rates__progress-label" data-texto="tarifas.filas.1.categoria">Fraccionamiento</span></li>
-            <li class="rates__progress-item" data-rate="2"><span class="rates__progress-number">03</span><span class="rates__progress-label" data-texto="tarifas.filas.2.categoria">Abonados mensuales</span></li>
+          <ol class="rates__progress" aria-label="Progreso de tarifas">
+            <li class="rates__progress-item" data-rate="0" data-active="" tabindex="0" role="button" aria-label="Ir a Primera hora"><span class="rates__progress-number">01</span><span class="rates__progress-label" data-texto="tarifas.filas.0.categoria">Primera hora</span></li>
+            <li class="rates__progress-item" data-rate="1" tabindex="0" role="button" aria-label="Ir a Fraccionamiento"><span class="rates__progress-number">02</span><span class="rates__progress-label" data-texto="tarifas.filas.1.categoria">Fraccionamiento</span></li>
+            <li class="rates__progress-item" data-rate="2" tabindex="0" role="button" aria-label="Ir a Abonados mensuales"><span class="rates__progress-number">03</span><span class="rates__progress-label" data-texto="tarifas.filas.2.categoria">Abonados mensuales</span></li>
           </ol>
         </header>
         <ol class="rates__stack">
@@ -205,7 +209,6 @@
     <section id="manifiesto" class="manifesto" aria-labelledby="manifiesto-titulo">
       <div class="manifesto__container">
         <header class="manifesto__header">
-          <span class="manifesto__eyebrow" data-texto="manifiesto.etiqueta">Experiencias reales</span>
           <h2 id="manifiesto-titulo" class="manifesto__title" data-texto="manifiesto.titulo">Lo que dicen quienes operan y se estacionan con Quadrate pe</h2>
           <p class="manifesto__lead" data-texto="manifiesto.descripcion">Historias directas de administradores de playas y conductores en Lima que transformaron su rutina diaria.</p>
         </header>

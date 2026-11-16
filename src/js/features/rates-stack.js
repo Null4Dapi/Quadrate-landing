@@ -135,6 +135,32 @@ export function inicializarPilaTarifas() {
     }
   }
 
+  // Habilitar navegación interactiva y accesible (click / teclado) en la lista de progreso lateral
+  listaIndicadores.forEach((indicador, indice) => {
+    function desplazarseATarjeta() {
+      const tarjetaObjetivo = listaTarjetas[indice];
+      if (!tarjetaObjetivo) {
+        return;
+      }
+      const { distanciaSuperior, pasoEscalon } = obtenerMetricasCss();
+      const puntoSticky = distanciaSuperior + indice * pasoEscalon;
+      const rectTarjeta = tarjetaObjetivo.getBoundingClientRect();
+      const posicionAbsoluta = window.scrollY + rectTarjeta.top - puntoSticky;
+      window.scrollTo({
+        top: Math.max(0, posicionAbsoluta),
+        behavior: prefiereMovimientoReducido ? "auto" : "smooth",
+      });
+    }
+
+    indicador.addEventListener("click", desplazarseATarjeta);
+    indicador.addEventListener("keydown", (evento) => {
+      if (evento.key === "Enter" || evento.key === " ") {
+        evento.preventDefault();
+        desplazarseATarjeta();
+      }
+    });
+  });
+
   // Ejecución inicial para sincronizar el estado
   calcularApilamientoTarjetas();
 

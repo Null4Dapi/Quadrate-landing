@@ -187,39 +187,39 @@
 /* Simulador de Reserva y Tarifa Dinámica */
 .quadrate-live__simulador {
   background-color: var(--color-bg-surface); border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-2xl, 20px); padding: var(--space-6); box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12);
-  position: sticky; top: 80px;
+  border-radius: var(--radius-2xl, 20px); padding: var(--space-4) var(--space-5); box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12);
+  position: sticky; top: 80px; max-height: fit-content;
 }
 .quadrate-live__simulador-header {
   display: flex; justify-content: space-between; align-items: flex-start;
-  border-bottom: 1px solid var(--color-border-subtle); padding-bottom: var(--space-3); margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle); padding-bottom: var(--space-2); margin-bottom: var(--space-3);
 }
-.quadrate-live__simulador-eyebrow { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); text-transform: uppercase; color: var(--color-text-muted); }
-.quadrate-live__simulador-titulo { font-family: var(--font-family-display); font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); color: var(--color-text-primary); margin: var(--space-1) 0 0; }
+.quadrate-live__simulador-eyebrow { font-size: 0.7rem; font-weight: var(--font-weight-bold); text-transform: uppercase; color: var(--color-text-muted); }
+.quadrate-live__simulador-titulo { font-family: var(--font-family-display); font-size: var(--font-size-base); font-weight: var(--font-weight-bold); color: var(--color-text-primary); margin: 2px 0 0; }
 .quadrate-live__simulador-btn-cerrar { background: none; border: none; font-size: var(--font-size-base); color: var(--color-text-muted); cursor: pointer; padding: 4px; }
-.quadrate-live__simulador-grupo { margin-bottom: var(--space-4); }
-.quadrate-live__simulador-label { display: block; font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-text-secondary); margin-bottom: var(--space-2); }
+.quadrate-live__simulador-grupo { margin-bottom: var(--space-3); }
+.quadrate-live__simulador-label { display: block; font-size: 0.72rem; font-weight: var(--font-weight-semibold); color: var(--color-text-secondary); margin-bottom: var(--space-1); }
 .quadrate-live__simulador-pills { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 .quadrate-live__simulador-pill {
-  font-family: var(--font-family-sans); font-size: var(--font-size-xs); font-weight: var(--font-weight-medium);
-  padding: 0.4rem 0.9rem; border-radius: var(--radius-pill, 9999px); border: 1px solid var(--color-border-subtle);
+  font-family: var(--font-family-sans); font-size: 0.72rem; font-weight: var(--font-weight-medium);
+  padding: 0.35rem 0.75rem; border-radius: var(--radius-pill, 9999px); border: 1px solid var(--color-border-subtle);
   background-color: var(--color-bg-base); color: var(--color-text-secondary); cursor: pointer; transition: all var(--transition-fast);
 }
 .quadrate-live__simulador-pill:hover { border-color: var(--color-border-medium); color: var(--color-text-primary); }
 .quadrate-live__simulador-pill--activo { background-color: var(--color-accent-primary); color: var(--color-text-contrast); border-color: var(--color-accent-primary); }
 .quadrate-live__simulador-desglose {
-  background-color: var(--color-bg-base); padding: var(--space-4); border-radius: var(--radius-md);
-  margin-bottom: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-base); padding: var(--space-3); border-radius: var(--radius-md);
+  margin-bottom: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); border: 1px solid var(--color-border-subtle);
 }
-.quadrate-live__simulador-fila { display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: 1.5; }
+.quadrate-live__simulador-fila { display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-xs); color: var(--color-text-secondary); line-height: 1.4; }
 .quadrate-live__simulador-fila strong { color: var(--color-text-primary); font-family: var(--font-family-mono); }
 .quadrate-live__simulador-fila--total {
-  border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-3);
-  margin-top: var(--space-1); font-size: var(--font-size-base); font-weight: var(--font-weight-bold); color: var(--color-text-primary);
+  border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-2);
+  margin-top: 2px; font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); color: var(--color-text-primary);
 }
 .quadrate-live__simulador-total-monto { font-family: var(--font-family-mono); color: var(--color-accent-primary); font-weight: var(--font-weight-bold); }
 .quadrate-live__simulador-btn-reservar {
-  width: 100%; padding: 0.85rem 1.25rem; font-family: var(--font-family-sans); font-size: var(--font-size-sm);
+  width: 100%; padding: 0.65rem 1rem; font-family: var(--font-family-sans); font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold); background-color: var(--color-accent-primary); color: var(--color-text-contrast);
   border: none; border-radius: var(--radius-pill, 9999px); cursor: pointer; transition: all var(--transition-fast);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

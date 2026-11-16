@@ -157,11 +157,7 @@
   grid-template-rows: auto 1fr auto;
   gap: var(--space-4);
   background-color: var(--rates-card-bg);
-  background-image:
-    linear-gradient(to right, var(--rates-card-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--rates-card-grid) 1px, transparent 1px);
-  background-size: 24px 24px;
-  background-position: -1px -1px;
+  background-image: none;
   color: var(--rates-card-text);
   border: 1px solid var(--rates-card-border);
   border-radius: clamp(20px, 2.5vw, 28px);
@@ -176,30 +172,7 @@
   isolation: isolate;
 }
 
-.rates__card[data-rate="0"] {
-  --rates-card-bg: #A686BC;
-  --rates-card-border: rgba(45, 25, 65, 0.22);
-  --rates-card-text: #1C1128;
-  --rates-card-text-muted: #3D2B52;
-  --rates-card-grid: rgba(0, 0, 0, 0.08);
-  --rates-card-pill-bg: rgba(0, 0, 0, 0.07);
-  --rates-card-pill-border: rgba(0, 0, 0, 0.22);
-  --rates-card-shadow: 0 12px 30px rgba(70, 40, 95, 0.15);
-}
-
-.rates__card[data-rate="1"] {
-  --rates-card-bg: #4B9C67;
-  --rates-card-border: rgba(15, 45, 25, 0.22);
-  --rates-card-text: #0B2113;
-  --rates-card-text-muted: #1A3E26;
-  --rates-card-grid: rgba(0, 0, 0, 0.08);
-  --rates-card-pill-bg: rgba(0, 0, 0, 0.07);
-  --rates-card-pill-border: rgba(0, 0, 0, 0.22);
-  --rates-card-shadow: 0 12px 30px rgba(25, 70, 40, 0.15);
-  background-image: none;
-}
-
-.rates__card[data-rate="1"]::before {
+.rates__card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -208,30 +181,76 @@
     linear-gradient(to bottom, var(--rates-card-grid) 1px, transparent 1px);
   background-size: 24px 24px;
   background-position: -1px -1px;
-  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 82%);
-  mask-image: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 82%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 84%);
+  mask-image: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 84%);
   pointer-events: none;
   z-index: 0;
 }
 
-.rates__card[data-rate="1"] > * {
+.rates__card > * {
   position: relative;
   z-index: 1;
 }
 
-.rates__card[data-rate="2"] {
-  --rates-card-bg: #E3B866;
-  --rates-card-border: rgba(85, 60, 15, 0.22);
-  --rates-card-text: #231908;
-  --rates-card-text-muted: #4F3B1A;
+.rates__card[data-rate="0"] {
+  --rates-card-bg: #BBA2E3;
+  --rates-card-border: rgba(60, 30, 95, 0.2);
+  --rates-card-text: #1C0F2C;
+  --rates-card-text-muted: #382452;
   --rates-card-grid: rgba(0, 0, 0, 0.08);
   --rates-card-pill-bg: rgba(0, 0, 0, 0.07);
   --rates-card-pill-border: rgba(0, 0, 0, 0.22);
-  --rates-card-shadow: 0 12px 30px rgba(100, 75, 20, 0.15);
+  --rates-card-shadow: 0 12px 32px rgba(90, 50, 130, 0.16);
+}
+
+.rates__card[data-rate="1"] {
+  --rates-card-bg: #4EBE81;
+  --rates-card-border: rgba(10, 60, 30, 0.2);
+  --rates-card-text: #082111;
+  --rates-card-text-muted: #153E23;
+  --rates-card-grid: rgba(0, 0, 0, 0.08);
+  --rates-card-pill-bg: rgba(0, 0, 0, 0.07);
+  --rates-card-pill-border: rgba(0, 0, 0, 0.22);
+  --rates-card-shadow: 0 12px 32px rgba(25, 90, 45, 0.16);
+}
+
+.rates__card[data-rate="2"] {
+  --rates-card-bg: #F7C752;
+  --rates-card-border: rgba(110, 75, 15, 0.2);
+  --rates-card-text: #221703;
+  --rates-card-text-muted: #4B360F;
+  --rates-card-grid: rgba(0, 0, 0, 0.08);
+  --rates-card-pill-bg: rgba(0, 0, 0, 0.07);
+  --rates-card-pill-border: rgba(0, 0, 0, 0.22);
+  --rates-card-shadow: 0 12px 32px rgba(120, 85, 15, 0.16);
 }
 
 [data-theme="dark"] .rates__card {
   --rates-card-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .rates__card[data-rate="0"] {
+  --rates-card-bg: #A686BC;
+  --rates-card-border: rgba(45, 25, 65, 0.28);
+  --rates-card-text: #160D20;
+  --rates-card-text-muted: #2E1B42;
+  --rates-card-grid: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .rates__card[data-rate="1"] {
+  --rates-card-bg: #4B9C67;
+  --rates-card-border: rgba(15, 45, 25, 0.28);
+  --rates-card-text: #081B0F;
+  --rates-card-text-muted: #13331E;
+  --rates-card-grid: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .rates__card[data-rate="2"] {
+  --rates-card-bg: #E3B866;
+  --rates-card-border: rgba(85, 60, 15, 0.28);
+  --rates-card-text: #1E1404;
+  --rates-card-text-muted: #3D290A;
+  --rates-card-grid: rgba(0, 0, 0, 0.12);
 }
 
 .rates__card-top {

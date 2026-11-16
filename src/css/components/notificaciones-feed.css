@@ -103,206 +103,215 @@
    3. Dock y Drawer Flotante de Diagnóstico & Telemetría (DX)
    ========================================================================== */
 .telemetria-dock {
-  position: static;
-  margin-top: var(--space-6);
   width: 100%;
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-6);
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: var(--space-3);
 }
 
 .telemetria-dock__trigger {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--space-3);
   width: 100%;
-  padding: 0.65rem 1.15rem;
-  font-family: inherit;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-text-primary, #231212);
-  background-color: var(--color-bg-surface, #ffffff);
-  border: 1px dashed var(--color-border-medium, #d1d5db);
-  border-radius: var(--radius-lg, 12px);
-  box-shadow: var(--shadow-subtle);
+  padding: var(--space-2) 0;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.telemetria-dock__trigger-left {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  transition: color var(--transition-fast);
 }
 
 .telemetria-dock__trigger:hover {
-  background-color: var(--color-bg-subtle, #f8f9fa);
-  border-color: var(--color-accent-primary);
-  border-style: solid;
+  color: var(--color-text-primary);
 }
 
-.telemetria-dock__trigger-dot {
+.dev-mode-trigger__label {
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.dev-mode-trigger__line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border-subtle);
+  transition: background-color var(--transition-fast);
+}
+
+.telemetria-dock__trigger:hover .dev-mode-trigger__line {
+  background-color: var(--color-border-strong);
+}
+
+.dev-mode-trigger__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+}
+
+.dev-mode-trigger__dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  display: inline-block;
 }
 
-.telemetria-dock__trigger-dot--activo {
+.dev-mode-trigger__dot--activo {
   background-color: #10b981;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
 }
 
-.telemetria-dock__trigger-dot--pausa {
+.dev-mode-trigger__dot--pausa {
   background-color: #f59e0b;
 }
 
-.telemetria-feed__badge {
-  display: inline-block;
-  padding: 0.15rem 0.45rem;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  color: #1e3a8a;
-  background-color: #dbeafe;
-  border-radius: var(--radius-full, 9999px);
-}
-
-.telemetria-dock__trigger-chevron {
-  font-size: 0.75rem;
-  font-weight: 600;
+.dev-mode-trigger__count {
+  font-size: 0.72rem;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg-subtle);
   color: var(--color-text-muted);
 }
 
-/* Panel Drawer colapsable */
+.dev-mode-trigger__chevron {
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+}
+
+/* Panel Consola DevTools */
 .telemetria-drawer {
   width: 100%;
-  max-height: 480px;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-bg-surface, #ffffff);
-  border: 1px solid var(--color-border-subtle, #e5e7eb);
-  border-radius: var(--radius-lg, 14px);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md, 8px);
   box-shadow: var(--shadow-card);
   overflow: hidden;
-  animation: slide-drawer 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-family-mono);
+  animation: slide-drawer 0.2s ease-out;
 }
 
 @keyframes slide-drawer {
-  from {
-    transform: translateY(-8px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.telemetria-drawer__header {
+.dev-console__header {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: var(--space-4, 1rem);
-  border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
-  background-color: var(--color-bg-subtle, #f8f9fa);
-}
-
-.telemetria-drawer__titulo {
-  margin: 0;
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-text-primary, #231212);
-}
-
-.telemetria-drawer__subtitulo {
-  margin: 0.2rem 0 0;
-  font-size: 0.75rem;
-  color: var(--color-text-secondary, #6b7280);
-}
-
-.telemetria-drawer__acciones {
-  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.25rem;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-bg-base);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: 0.72rem;
 }
 
-.telemetria-drawer__btn {
-  padding: 0.25rem 0.6rem;
-  font-family: inherit;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-text-secondary, #4d3d3d);
-  background-color: var(--color-bg-surface, #ffffff);
-  border: 1px solid var(--color-border-subtle, #d1d5db);
-  border-radius: var(--radius-sm, 0.25rem);
+.dev-console__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.dev-console__tag {
+  font-weight: var(--font-weight-bold);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-base);
+}
+
+.dev-console__endpoint { color: var(--color-text-muted); }
+.dev-console__estado { font-weight: var(--font-weight-semibold); color: #10b981; }
+
+.dev-console__acciones {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.dev-console__btn {
+  font-family: var(--font-family-mono);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-border-medium);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all var(--transition-fast);
 }
 
-.telemetria-drawer__btn:hover {
-  background-color: var(--color-bg-subtle, #ececec);
+.dev-console__btn:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-text-primary);
 }
 
-.telemetria-drawer__btn--simular {
-  color: #1e3a8a;
-  border-color: #bfdbfe;
-  background-color: #eff6ff;
+.dev-console__table-header {
+  display: grid;
+  grid-template-columns: 80px 105px 200px 1fr;
+  padding: 6px 12px;
+  font-size: 0.68rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
-.telemetria-drawer__btn--simular:hover {
-  background-color: #dbeafe;
-}
-
-.telemetria-drawer__btn--limpiar:hover {
-  color: #b91c1c;
-  background-color: #fef2f2;
-}
-
-.telemetria-drawer__feed {
-  padding: var(--space-3, 0.75rem);
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  max-height: 320px;
-}
-
-.telemetria-drawer__vacio {
-  margin: 0;
-  padding: 1.5rem 0;
-  font-size: 0.8125rem;
-  color: var(--color-text-secondary, #6b7280);
-  text-align: center;
-}
-
-.telemetria-drawer__item {
-  display: flex;
+.dev-console__row {
+  display: grid;
+  grid-template-columns: 80px 105px 200px 1fr;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--color-border-subtle);
   align-items: baseline;
-  gap: 0.5rem;
-  padding: 0.45rem 0.55rem;
-  border-radius: var(--radius-sm, 0.25rem);
-  background-color: var(--color-bg-subtle, #f8f9fa);
-  font-size: 0.8125rem;
-  line-height: 1.4;
+  gap: var(--space-2);
 }
 
-.telemetria-drawer__tiempo {
-  font-family: var(--font-family-mono, monospace);
-  font-size: 0.6875rem;
-  color: #64748b;
-  white-space: nowrap;
+.dev-console__row:hover {
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
-.telemetria-drawer__etiqueta {
-  padding: 0.1rem 0.4rem;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  border-radius: 3px;
+.dev-col--time {
+  color: var(--color-text-muted);
+  font-family: var(--font-family-mono);
+  font-size: 0.72rem;
+}
+
+.dev-col--type {
+  font-weight: var(--font-weight-bold);
+  font-size: 0.68rem;
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  text-align: center;
+  display: inline-block;
+  width: fit-content;
+}
+
+.dev-col--node {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
   white-space: nowrap;
-  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dev-col--data {
+  color: var(--color-text-secondary);
+}
+
+.dev-console__empty {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
 }
 
 .telemetria-drawer__etiqueta--ingreso { color: #1e3a8a; background-color: #dbeafe; }
@@ -311,38 +320,30 @@
 .telemetria-drawer__etiqueta--tarifa_dinamica { color: #92400e; background-color: #fef3c7; }
 .telemetria-drawer__etiqueta--aforo_critico { color: #991b1b; background-color: #fee2e2; }
 
-.telemetria-drawer__cuerpo {
-  color: var(--color-text-primary, #231212);
-  flex: 1;
+/* Modo Oscuro DevTools */
+[data-theme="dark"] .dev-console {
+  background-color: var(--color-bg-contrast);
+  border-color: var(--color-border-subtle);
 }
-
-.telemetria-drawer__cochera {
-  font-weight: 600;
+[data-theme="dark"] .dev-console__header {
+  background-color: var(--color-bg-base);
+  border-color: var(--color-border-subtle);
 }
-
-/* ==========================================================================
-   4. Modo Nocturno (Zustand theme: "dark")
-   ========================================================================== */
-body.tema-oscuro .toast-operativo,
-body.tema-oscuro .telemetria-dock__trigger,
-body.tema-oscuro .telemetria-drawer,
-body.tema-oscuro .btn-turno-garita {
-  background-color: #111827 !important;
-  border-color: #1f2937 !important;
-  color: #f9fafb !important;
+[data-theme="dark"] .dev-console__table-header {
+  background-color: var(--color-bg-surface);
+  border-color: var(--color-border-subtle);
 }
-
-body.tema-oscuro .telemetria-drawer__header {
-  background-color: #182234 !important;
-  border-color: #1f2937 !important;
+[data-theme="dark"] .dev-console__btn {
+  background-color: var(--color-bg-surface);
+  border-color: var(--color-border-medium);
+  color: var(--color-text-primary);
 }
-
-body.tema-oscuro .telemetria-drawer__item {
-  background-color: #182234 !important;
+[data-theme="dark"] .dev-console__btn:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-border-strong);
 }
-
-body.tema-oscuro .toast-operativo__cuerpo,
-body.tema-oscuro .telemetria-drawer__titulo,
-body.tema-oscuro .telemetria-drawer__cuerpo {
-  color: #f9fafb !important;
-}
+[data-theme="dark"] .telemetria-drawer__etiqueta--ingreso { color: #93c5fd; background-color: rgba(30, 58, 138, 0.4); }
+[data-theme="dark"] .telemetria-drawer__etiqueta--salida { color: #6ee7b7; background-color: rgba(6, 95, 70, 0.4); }
+[data-theme="dark"] .telemetria-drawer__etiqueta--reserva_eta { color: #d8b4fe; background-color: rgba(88, 28, 135, 0.4); }
+[data-theme="dark"] .telemetria-drawer__etiqueta--tarifa_dinamica { color: #fde68a; background-color: rgba(146, 64, 14, 0.4); }
+[data-theme="dark"] .telemetria-drawer__etiqueta--aforo_critico { color: #fca5a5; background-color: rgba(153, 27, 27, 0.4); }

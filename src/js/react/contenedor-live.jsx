@@ -34,7 +34,6 @@ export function ContenedorLive({
       <div className="quadrate-live__layout">
         <div className="quadrate-live__principal">
           {children}
-          {feedTelemetria}
         </div>
         {panelDetalle && (
           <div className="quadrate-live__secundario">
@@ -42,6 +41,8 @@ export function ContenedorLive({
           </div>
         )}
       </div>
+
+      {feedTelemetria}
     </div>
   );
 }

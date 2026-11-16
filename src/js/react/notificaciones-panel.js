@@ -158,74 +158,89 @@ export function TelemetriaDrawerZustand({
     className: `telemetria-dock ${estaAbierto ? "telemetria-dock--abierto" : ""}`
   }, /*#__PURE__*/React.createElement("button", {
     type: "button",
-    className: "telemetria-dock__trigger",
+    className: "telemetria-dock__trigger dev-mode-trigger",
     onClick: () => setEstaAbierto(v => !v),
     "aria-expanded": estaAbierto,
     "aria-controls": "telemetria-panel-drawer",
-    title: "Abrir consola de telemetría y diagnóstico"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "telemetria-dock__trigger-left"
+    title: "Modo desarrollador: alternar panel de diagnóstico y tramas en vivo"
   }, /*#__PURE__*/React.createElement("span", {
-    className: `telemetria-dock__trigger-dot ${estaPausado ? "telemetria-dock__trigger-dot--pausa" : "telemetria-dock__trigger-dot--activo"}`,
+    className: "dev-mode-trigger__label"
+  }, "Modo desarrollador"), /*#__PURE__*/React.createElement("span", {
+    className: "dev-mode-trigger__line",
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
-    className: "telemetria-dock__trigger-label"
-  }, "Consola de Telemetría & Diagnóstico"), /*#__PURE__*/React.createElement(NotificationBadge, null)), /*#__PURE__*/React.createElement("span", {
-    className: "telemetria-dock__trigger-chevron",
+    className: "dev-mode-trigger__status"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `dev-mode-trigger__dot ${estaPausado ? "dev-mode-trigger__dot--pausa" : "dev-mode-trigger__dot--activo"}`,
     "aria-hidden": "true"
-  }, estaAbierto ? "Ocultar ▲" : "Desplegar ▼")), estaAbierto && /*#__PURE__*/React.createElement("section", {
+  }), notifications.length > 0 && /*#__PURE__*/React.createElement("span", {
+    className: "dev-mode-trigger__count"
+  }, notifications.length, " tramas"), /*#__PURE__*/React.createElement("span", {
+    className: "dev-mode-trigger__chevron"
+  }, estaAbierto ? "Contraer ▲" : "Desplegar ▼"))), estaAbierto && /*#__PURE__*/React.createElement("section", {
     id: "telemetria-panel-drawer",
-    className: "telemetria-drawer",
+    className: "telemetria-drawer dev-console",
     "aria-label": "Consola de telemetría operativa y diagnóstico"
   }, /*#__PURE__*/React.createElement("header", {
-    className: "telemetria-drawer__header"
+    className: "dev-console__header"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "telemetria-drawer__header-info"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "telemetria-drawer__titulo"
-  }, "Consola de Telemetría (WebSocket + Zustand)"), /*#__PURE__*/React.createElement("p", {
-    className: "telemetria-drawer__subtitulo"
-  }, "Enlace WebSocket ", estadoWs, " · Auditoría en vivo para evaluadores y desarrolladores")), /*#__PURE__*/React.createElement("div", {
-    className: "telemetria-drawer__acciones"
+    className: "dev-console__meta"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dev-console__tag"
+  }, "DEV CONSOLE"), /*#__PURE__*/React.createElement("span", {
+    className: "dev-console__endpoint"
+  }, "ws://cloudrun/v1/eventos"), /*#__PURE__*/React.createElement("span", {
+    className: "dev-console__estado"
+  }, estaPausado ? "⏸ PAUSADO" : `● ENLACE ${estadoWs.toUpperCase()}`)), /*#__PURE__*/React.createElement("div", {
+    className: "dev-console__acciones"
   }, onSimularEvento && /*#__PURE__*/React.createElement("button", {
     type: "button",
     onClick: onSimularEvento,
-    className: "telemetria-drawer__btn telemetria-drawer__btn--simular",
-    title: "Simular trama de telemetría de garita"
-  }, "Simular evento"), onAlternarPausa && /*#__PURE__*/React.createElement("button", {
+    className: "dev-console__btn dev-console__btn--simular",
+    title: "Inyectar evento simulado de garita"
+  }, "⚡ Simular evento"), onAlternarPausa && /*#__PURE__*/React.createElement("button", {
     type: "button",
     onClick: onAlternarPausa,
-    className: "telemetria-drawer__btn",
+    className: "dev-console__btn",
     title: estaPausado ? "Reanudar recepción" : "Pausar eventos"
-  }, estaPausado ? "Reanudar flujo" : "Pausar flujo"), notifications.length > 0 && /*#__PURE__*/React.createElement("button", {
+  }, estaPausado ? "▶ Reanudar" : "⏸ Pausar"), notifications.length > 0 && /*#__PURE__*/React.createElement("button", {
     type: "button",
     onClick: clearNotifications,
-    className: "telemetria-drawer__btn telemetria-drawer__btn--limpiar",
-    title: "Limpiar avisos en el store de Zustand"
-  }, "Limpiar historial"))), /*#__PURE__*/React.createElement("div", {
-    className: "telemetria-drawer__feed",
+    className: "dev-console__btn dev-console__btn--limpiar",
+    title: "Vaciar buffer de eventos"
+  }, "Limpiar"))), /*#__PURE__*/React.createElement("div", {
+    className: "telemetria-drawer__feed dev-console__terminal",
     role: "log",
     "aria-live": "polite"
-  }, notifications.length === 0 ? /*#__PURE__*/React.createElement("p", {
-    className: "telemetria-drawer__vacio"
-  }, "Enlace de garitas activo. Esperando reportes automáticos de control vehicular en Lima...") : notifications.map(n => /*#__PURE__*/React.createElement("article", {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dev-console__table-header",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dev-col dev-col--time"
+  }, "TIMESTAMP"), /*#__PURE__*/React.createElement("span", {
+    className: "dev-col dev-col--type"
+  }, "EVENTO"), /*#__PURE__*/React.createElement("span", {
+    className: "dev-col dev-col--node"
+  }, "NODO / COCHERA"), /*#__PURE__*/React.createElement("span", {
+    className: "dev-col dev-col--data"
+  }, "PAYLOAD / MENSAJE")), notifications.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    className: "dev-console__empty"
+  }, /*#__PURE__*/React.createElement("code", null, "> Conexión WebSocket activa. Esperando tramas de garitas en Lima Metropolitana...")) : notifications.map(n => /*#__PURE__*/React.createElement("article", {
     key: n.id,
-    className: "telemetria-drawer__item"
+    className: "dev-console__row telemetria-drawer__item"
   }, /*#__PURE__*/React.createElement("time", {
-    className: "telemetria-drawer__tiempo"
+    className: "dev-col dev-col--time telemetria-drawer__tiempo"
   }, n.timestamp || new Date(n.createdAt).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit"
-  })), n.tipo && /*#__PURE__*/React.createElement("span", {
-    className: `telemetria-drawer__etiqueta telemetria-drawer__etiqueta--${n.tipo}`
-  }, n.tipo === "ingreso" && "Check-in LPR", n.tipo === "salida" && "Check-out", n.tipo === "reserva_eta" && "Reserva ETA", n.tipo === "tarifa_dinamica" && "Tarifa Valle", n.tipo === "aforo_critico" && "Alerta Aforo", n.tipo !== "ingreso" && n.tipo !== "salida" && n.tipo !== "reserva_eta" && n.tipo !== "tarifa_dinamica" && n.tipo !== "aforo_critico" && (n.tipo || "Operación")), /*#__PURE__*/React.createElement("div", {
-    className: "telemetria-drawer__cuerpo"
-  }, n.nombreCochera && /*#__PURE__*/React.createElement("strong", {
-    className: "telemetria-drawer__cochera"
-  }, n.nombreCochera, " · "), /*#__PURE__*/React.createElement("span", {
-    className: "telemetria-drawer__texto"
-  }, n.message)))))));
+  })), /*#__PURE__*/React.createElement("span", {
+    className: `dev-col dev-col--type telemetria-drawer__etiqueta telemetria-drawer__etiqueta--${n.tipo}`
+  }, n.tipo === "ingreso" && "LPR_IN", n.tipo === "salida" && "CHECKOUT", n.tipo === "reserva_eta" && "ETA_HOLD", n.tipo === "tarifa_dinamica" && "VALLE_RATE", n.tipo === "aforo_critico" && "ALERT_CAP", n.tipo !== "ingreso" && n.tipo !== "salida" && n.tipo !== "reserva_eta" && n.tipo !== "tarifa_dinamica" && n.tipo !== "aforo_critico" && (n.tipo ? n.tipo.toUpperCase() : "EVENT")), /*#__PURE__*/React.createElement("span", {
+    className: "dev-col dev-col--node"
+  }, n.nombreCochera || "Sistema central"), /*#__PURE__*/React.createElement("span", {
+    className: "dev-col dev-col--data"
+  }, n.message))))));
 }
 
 /** Compatibilidad de importaciones existentes */

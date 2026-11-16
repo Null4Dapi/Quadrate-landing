@@ -24,13 +24,13 @@
 .catalogo-remoto__pill--cache {
   color: var(--color-status-success);
   background-color: var(--color-status-success-bg);
-  border: 1px solid #a7f3d0;
+  border: 1px solid var(--color-status-success);
 }
 
 .catalogo-remoto__pill--sync {
   color: var(--color-status-info);
   background-color: var(--color-status-info-bg);
-  border: 1px solid #bfdbfe;
+  border: 1px solid var(--color-status-info);
 }
 
 .catalogo-remoto__toolbar {
@@ -38,9 +38,9 @@
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-4) var(--space-5);
-  background-color: var(--color-bg-surface, #ffffff);
-  border: 1px solid var(--color-border-subtle, #e5e7eb);
-  border-radius: 18px;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-2xl, 18px);
   box-shadow: var(--shadow-subtle);
 }
 
@@ -52,11 +52,10 @@
   display: block;
   font-family: var(--font-family-sans);
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
   margin-bottom: var(--space-2);
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 }
 
 .catalogo-remoto__search-group {
@@ -76,14 +75,14 @@
   color: var(--color-text-primary);
   min-height: 38px;
   box-sizing: border-box;
-  transition: all var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .catalogo-remoto__search-input:focus {
   outline: none;
-  border-color: var(--color-accent-primary);
+  border-color: var(--color-text-primary);
   background-color: var(--color-bg-surface);
-  box-shadow: 0 0 0 3px rgba(35, 18, 18, 0.08);
+  box-shadow: 0 0 0 3px var(--color-accent-focus);
 }
 
 .catalogo-remoto__search-clear {
@@ -152,6 +151,12 @@
   color: var(--color-text-contrast);
   border-color: var(--color-accent-primary);
   font-weight: var(--font-weight-semibold);
+}
+
+[data-theme="dark"] .catalogo-remoto__filtro-btn--activo {
+  background-color: #f0f2f5;
+  color: #101216;
+  border-color: #f0f2f5;
 }
 
 /* ==========================================================================

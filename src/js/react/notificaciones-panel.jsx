@@ -114,87 +114,95 @@ export function TelemetriaDrawerZustand({
 
   return (
     <div className={`telemetria-dock ${estaAbierto ? "telemetria-dock--abierto" : ""}`}>
-      {/* Botón flotante para abrir/cerrar consola */}
+      {/* Línea divisoria minimalista 'Modo desarrollador' desplegable */}
       <button
         type="button"
-        className="telemetria-dock__trigger"
+        className="telemetria-dock__trigger dev-mode-trigger"
         onClick={() => setEstaAbierto((v) => !v)}
         aria-expanded={estaAbierto}
         aria-controls="telemetria-panel-drawer"
-        title="Abrir consola de telemetría y diagnóstico"
+        title="Modo desarrollador: alternar panel de diagnóstico y tramas en vivo"
       >
-        <div className="telemetria-dock__trigger-left">
+        <span className="dev-mode-trigger__label">Modo desarrollador</span>
+        <span className="dev-mode-trigger__line" aria-hidden="true" />
+        <span className="dev-mode-trigger__status">
           <span
-            className={`telemetria-dock__trigger-dot ${
-              estaPausado ? "telemetria-dock__trigger-dot--pausa" : "telemetria-dock__trigger-dot--activo"
+            className={`dev-mode-trigger__dot ${
+              estaPausado ? "dev-mode-trigger__dot--pausa" : "dev-mode-trigger__dot--activo"
             }`}
             aria-hidden="true"
           />
-          <span className="telemetria-dock__trigger-label">Consola de Telemetría & Diagnóstico</span>
-          <NotificationBadge />
-        </div>
-        <span className="telemetria-dock__trigger-chevron" aria-hidden="true">
-          {estaAbierto ? "Ocultar ▲" : "Desplegar ▼"}
+          {notifications.length > 0 && (
+            <span className="dev-mode-trigger__count">{notifications.length} tramas</span>
+          )}
+          <span className="dev-mode-trigger__chevron">{estaAbierto ? "Contraer ▲" : "Desplegar ▼"}</span>
         </span>
       </button>
 
-      {/* Contenido colapsable de la consola */}
+      {/* Consola DevTools desplegable */}
       {estaAbierto && (
         <section
           id="telemetria-panel-drawer"
-          className="telemetria-drawer"
+          className="telemetria-drawer dev-console"
           aria-label="Consola de telemetría operativa y diagnóstico"
         >
-          <header className="telemetria-drawer__header">
-            <div className="telemetria-drawer__header-info">
-              <h3 className="telemetria-drawer__titulo">Consola de Telemetría (WebSocket + Zustand)</h3>
-              <p className="telemetria-drawer__subtitulo">
-                Enlace WebSocket {estadoWs} · Auditoría en vivo para evaluadores y desarrolladores
-              </p>
+          <header className="dev-console__header">
+            <div className="dev-console__meta">
+              <span className="dev-console__tag">DEV CONSOLE</span>
+              <span className="dev-console__endpoint">ws://cloudrun/v1/eventos</span>
+              <span className="dev-console__estado">
+                {estaPausado ? "⏸ PAUSADO" : `● ENLACE ${estadoWs.toUpperCase()}`}
+              </span>
             </div>
-            <div className="telemetria-drawer__acciones">
+            <div className="dev-console__acciones">
               {onSimularEvento && (
                 <button
                   type="button"
                   onClick={onSimularEvento}
-                  className="telemetria-drawer__btn telemetria-drawer__btn--simular"
-                  title="Simular trama de telemetría de garita"
+                  className="dev-console__btn dev-console__btn--simular"
+                  title="Inyectar evento simulado de garita"
                 >
-                  Simular evento
+                  ⚡ Simular evento
                 </button>
               )}
               {onAlternarPausa && (
                 <button
                   type="button"
                   onClick={onAlternarPausa}
-                  className="telemetria-drawer__btn"
+                  className="dev-console__btn"
                   title={estaPausado ? "Reanudar recepción" : "Pausar eventos"}
                 >
-                  {estaPausado ? "Reanudar flujo" : "Pausar flujo"}
+                  {estaPausado ? "▶ Reanudar" : "⏸ Pausar"}
                 </button>
               )}
               {notifications.length > 0 && (
                 <button
                   type="button"
                   onClick={clearNotifications}
-                  className="telemetria-drawer__btn telemetria-drawer__btn--limpiar"
-                  title="Limpiar avisos en el store de Zustand"
+                  className="dev-console__btn dev-console__btn--limpiar"
+                  title="Vaciar buffer de eventos"
                 >
-                  Limpiar historial
+                  Limpiar
                 </button>
               )}
             </div>
           </header>
 
-          <div className="telemetria-drawer__feed" role="log" aria-live="polite">
+          <div className="telemetria-drawer__feed dev-console__terminal" role="log" aria-live="polite">
+            <div className="dev-console__table-header" aria-hidden="true">
+              <span className="dev-col dev-col--time">TIMESTAMP</span>
+              <span className="dev-col dev-col--type">EVENTO</span>
+              <span className="dev-col dev-col--node">NODO / COCHERA</span>
+              <span className="dev-col dev-col--data">PAYLOAD / MENSAJE</span>
+            </div>
             {notifications.length === 0 ? (
-              <p className="telemetria-drawer__vacio">
-                Enlace de garitas activo. Esperando reportes automáticos de control vehicular en Lima...
-              </p>
+              <div className="dev-console__empty">
+                <code>&gt; Conexión WebSocket activa. Esperando tramas de garitas en Lima Metropolitana...</code>
+              </div>
             ) : (
               notifications.map((n) => (
-                <article key={n.id} className="telemetria-drawer__item">
-                  <time className="telemetria-drawer__tiempo">
+                <article key={n.id} className="dev-console__row telemetria-drawer__item">
+                  <time className="dev-col dev-col--time telemetria-drawer__tiempo">
                     {n.timestamp ||
                       new Date(n.createdAt).toLocaleTimeString([], {
                         hour: "2-digit",
@@ -202,25 +210,25 @@ export function TelemetriaDrawerZustand({
                         second: "2-digit",
                       })}
                   </time>
-                  {n.tipo && (
-                    <span className={`telemetria-drawer__etiqueta telemetria-drawer__etiqueta--${n.tipo}`}>
-                      {n.tipo === "ingreso" && "Check-in LPR"}
-                      {n.tipo === "salida" && "Check-out"}
-                      {n.tipo === "reserva_eta" && "Reserva ETA"}
-                      {n.tipo === "tarifa_dinamica" && "Tarifa Valle"}
-                      {n.tipo === "aforo_critico" && "Alerta Aforo"}
-                      {n.tipo !== "ingreso" &&
-                        n.tipo !== "salida" &&
-                        n.tipo !== "reserva_eta" &&
-                        n.tipo !== "tarifa_dinamica" &&
-                        n.tipo !== "aforo_critico" &&
-                        (n.tipo || "Operación")}
-                    </span>
-                  )}
-                  <div className="telemetria-drawer__cuerpo">
-                    {n.nombreCochera && <strong className="telemetria-drawer__cochera">{n.nombreCochera} · </strong>}
-                    <span className="telemetria-drawer__texto">{n.message}</span>
-                  </div>
+                  <span className={`dev-col dev-col--type telemetria-drawer__etiqueta telemetria-drawer__etiqueta--${n.tipo}`}>
+                    {n.tipo === "ingreso" && "LPR_IN"}
+                    {n.tipo === "salida" && "CHECKOUT"}
+                    {n.tipo === "reserva_eta" && "ETA_HOLD"}
+                    {n.tipo === "tarifa_dinamica" && "VALLE_RATE"}
+                    {n.tipo === "aforo_critico" && "ALERT_CAP"}
+                    {n.tipo !== "ingreso" &&
+                      n.tipo !== "salida" &&
+                      n.tipo !== "reserva_eta" &&
+                      n.tipo !== "tarifa_dinamica" &&
+                      n.tipo !== "aforo_critico" &&
+                      (n.tipo ? n.tipo.toUpperCase() : "EVENT")}
+                  </span>
+                  <span className="dev-col dev-col--node">
+                    {n.nombreCochera || "Sistema central"}
+                  </span>
+                  <span className="dev-col dev-col--data">
+                    {n.message}
+                  </span>
                 </article>
               ))
             )}

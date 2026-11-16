@@ -341,6 +341,10 @@ function crearAsistente() {
 
 function iniciar() {
   if (!(CFG.wsChatUrl || CFG.wsUrl)) return; // sin destino configurado la capa no se activa
+  const esPaginaDemo = window.location.pathname.includes("demo")
+    || !!document.getElementById("quadrate-live-root")
+    || document.body.classList.contains("demo-page");
+  if (!esPaginaDemo) return;
   crearAsistente();
 }
 

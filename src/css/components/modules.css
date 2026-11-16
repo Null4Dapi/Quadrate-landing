@@ -6,7 +6,7 @@
 
 .modules {
   padding-block: clamp(var(--space-12), 7vw, var(--space-20));
-  background-color: var(--color-bg-surface);
+  background-color: var(--color-bg-base);
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
@@ -69,8 +69,8 @@
   flex-direction: column;
   justify-content: space-between;
   gap: var(--space-5);
-  background-color: var(--color-bg-base);
-  border: 1px solid var(--color-border-subtle);
+  background-color: var(--modules-card-bg, var(--color-bg-base));
+  border: 1px solid var(--modules-card-border, var(--color-border-subtle));
   border-radius: var(--radius-2xl);
   padding: clamp(var(--space-5), 3vw, var(--space-8));
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
@@ -80,8 +80,82 @@
 .modules__card:hover,
 .modules__card:focus-visible {
   transform: translateY(-2px);
-  border-color: var(--color-border-medium);
-  box-shadow: 0 12px 30px -10px rgba(35, 18, 18, 0.08);
+  border-color: var(--modules-card-border-hover, var(--color-border-medium));
+  box-shadow: var(--modules-card-shadow-hover, 0 12px 30px -10px rgba(35, 18, 18, 0.08));
+}
+
+/* Variaciones cromáticas pastel suave para tarjetas Bento */
+.modules__card:nth-child(1),
+.modules__card--celeste {
+  --modules-card-bg: #e2effa;
+  --modules-card-border: rgba(2, 132, 199, 0.18);
+  --modules-card-border-hover: rgba(2, 132, 199, 0.38);
+  --modules-card-shadow-hover: 0 14px 32px -8px rgba(2, 132, 199, 0.16);
+  --modules-card-divider: rgba(2, 132, 199, 0.18);
+}
+
+.modules__card:nth-child(2),
+.modules__card--verde {
+  --modules-card-bg: #e4f5ea;
+  --modules-card-border: rgba(22, 163, 74, 0.18);
+  --modules-card-border-hover: rgba(22, 163, 74, 0.38);
+  --modules-card-shadow-hover: 0 14px 32px -8px rgba(22, 163, 74, 0.16);
+  --modules-card-divider: rgba(22, 163, 74, 0.18);
+}
+
+.modules__card:nth-child(3),
+.modules__card--amarillo {
+  --modules-card-bg: #fdf5d8;
+  --modules-card-border: rgba(217, 119, 6, 0.18);
+  --modules-card-border-hover: rgba(217, 119, 6, 0.38);
+  --modules-card-shadow-hover: 0 14px 32px -8px rgba(217, 119, 6, 0.16);
+  --modules-card-divider: rgba(217, 119, 6, 0.18);
+}
+
+.modules__card:nth-child(4),
+.modules__card--naranja {
+  --modules-card-bg: #fdeee2;
+  --modules-card-border: rgba(234, 88, 12, 0.18);
+  --modules-card-border-hover: rgba(234, 88, 12, 0.38);
+  --modules-card-shadow-hover: 0 14px 32px -8px rgba(234, 88, 12, 0.16);
+  --modules-card-divider: rgba(234, 88, 12, 0.18);
+}
+
+/* Soporte de modo oscuro para tarjetas Bento */
+[data-theme="dark"] .modules__card:nth-child(1),
+[data-theme="dark"] .modules__card--celeste {
+  --modules-card-bg: #141f2a;
+  --modules-card-border: rgba(56, 189, 248, 0.22);
+  --modules-card-border-hover: rgba(56, 189, 248, 0.45);
+  --modules-card-shadow-hover: 0 14px 32px -8px rgba(56, 189, 248, 0.18);
+  --modules-card-divider: rgba(56, 189, 248, 0.18);
+}
+
+[data-theme="dark"] .modules__card:nth-child(2),
+[data-theme="dark"] .modules__card--verde {
+  --modules-card-bg: #13241c;
+  --modules-card-border: rgba(74, 222, 128, 0.22);
+  --modules-card-border-hover: rgba(74, 222, 128, 0.45);
+  --modules-card-shadow-hover: 0 14px 32px -8px rgba(74, 222, 128, 0.18);
+  --modules-card-divider: rgba(74, 222, 128, 0.18);
+}
+
+[data-theme="dark"] .modules__card:nth-child(3),
+[data-theme="dark"] .modules__card--amarillo {
+  --modules-card-bg: #242014;
+  --modules-card-border: rgba(251, 191, 36, 0.22);
+  --modules-card-border-hover: rgba(251, 191, 36, 0.45);
+  --modules-card-shadow-hover: 0 14px 32px -8px rgba(251, 191, 36, 0.18);
+  --modules-card-divider: rgba(251, 191, 36, 0.18);
+}
+
+[data-theme="dark"] .modules__card:nth-child(4),
+[data-theme="dark"] .modules__card--naranja {
+  --modules-card-bg: #271c17;
+  --modules-card-border: rgba(251, 146, 60, 0.22);
+  --modules-card-border-hover: rgba(251, 146, 60, 0.45);
+  --modules-card-shadow-hover: 0 14px 32px -8px rgba(251, 146, 60, 0.18);
+  --modules-card-divider: rgba(251, 146, 60, 0.18);
 }
 
 @media (min-width: 900px) {
@@ -123,7 +197,7 @@
     margin-top: 0;
     padding-top: 0;
     border-top: none;
-    border-left: 1px solid var(--color-border-subtle);
+    border-left: 1px solid var(--modules-card-divider, var(--color-border-subtle));
     padding-left: var(--space-6);
     display: flex;
     justify-content: center;
@@ -193,7 +267,7 @@
 .modules__card-visual {
   margin-top: auto;
   padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid var(--modules-card-divider, var(--color-border-subtle));
 }
 
 /* Visual 1: Garita QR directo (sin bloque contenedor pesado) */
@@ -229,6 +303,7 @@
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-xs);
   width: 100%;
+  box-shadow: var(--shadow-subtle);
 }
 
 .modules__occupancy-row {
@@ -299,6 +374,7 @@
   border-radius: var(--radius-lg);
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-xs);
+  box-shadow: var(--shadow-subtle);
 }
 
 .modules__ledger-row {

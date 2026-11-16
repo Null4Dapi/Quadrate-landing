@@ -64,7 +64,7 @@ const server = http.createServer((req, res) => {
       res.end(err.code === 'ENOENT' ? '404 Not Found' : '500 Server Error: ' + err.code);
       return;
     }
-    if (!distExiste && (urlLimpia === '/' || urlLimpia === '/index.html')) {
+    if (!distExiste && (urlLimpia === '/demo.html' || urlLimpia === '/demo')) {
       let html = content.toString('utf8');
       if (!html.includes('<!-- quadrate-live -->')) {
         const estilo = '<link rel="stylesheet" href="/live/live.css">';

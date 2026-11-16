@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quadrate pe — Design System & Canvas UI Completo</title>
+  <link rel="icon" type="image/svg+xml" href="../src/assets/favicon.svg">
+  <link rel="stylesheet" href="../src/css/variables.css">
+  <link rel="stylesheet" href="../src/css/components/header.css">
+  <link rel="stylesheet" href="../src/css/components/hero.css">
+  <link rel="stylesheet" href="../src/css/components/modules.css">
+  <link rel="stylesheet" href="../src/css/components/how-it-works.css">
+  <link rel="stylesheet" href="../src/css/components/rates.css">
+  <link rel="stylesheet" href="../src/css/components/caseta.css">
+  <link rel="stylesheet" href="../src/css/components/waitlist.css">
+  <link rel="stylesheet" href="../src/css/components/catalogo-remoto.css">
+  <link rel="stylesheet" href="../src/css/components/notificaciones-feed.css">
+  <link rel="stylesheet" href="../src/css/components/quadrate-live.css">
+  <link rel="stylesheet" href="../overlay/live.css">
+  <link rel="stylesheet" href="./design-system.css">
+  <script type="module" src="./design-system.js"></script>
+</head>
+<body class="ds-body">
+  <header class="ds-header">
+    <div class="ds-brand">
+      <img src="../src/assets/logo.webp" alt="Logo Quadrate" width="28" height="30">
+      <h1>Quadrate <span style="font-size: 0.65em; opacity: 0.8;">pe</span></h1>
+      <span class="ds-badge">Design System Canvas • v2.0</span>
+    </div>
+    <div class="ds-actions">
+      <nav class="ds-nav" aria-label="Navegación del Canvas">
+        <a href="#foundations">01. Fundaciones</a>
+        <a href="#botones">02. Botones & Píldoras</a>
+        <a href="#inputs">03. Inputs & Formularios</a>
+        <a href="#tarjetas">04. Tarjetas (7 tipos)</a>
+        <a href="#chat">05. Asistente & Chat</a>
+        <a href="#paneles">06. Paneles & Toasts</a>
+      </nav>
+      <button type="button" id="ds-theme-toggle" class="header__theme-pill" aria-label="Alternar modo claro y oscuro" title="Cambiar tema">
+        <span class="header__theme-option header__theme-option--claro" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg> Claro</span>
+        <span class="header__theme-option header__theme-option--oscuro" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg> Oscuro</span>
+      </button>
+      <a href="../demo.html" class="ds-nav-btn" style="font-size: var(--font-size-xs); font-weight: 700; text-decoration: none; color: var(--color-text-contrast); background: var(--color-accent-primary); padding: 6px 12px; border-radius: var(--radius-sm);">Abrir Demo ↗</a>
+    </div>
+  </header>
+
+  <main class="ds-container">
+    <!-- 01. FUNDACIONES -->
+    <section id="foundations" class="ds-section">
+      <h2 class="ds-section__title">01. Fundaciones: Tokens de Color, Tipografía y Radios</h2>
+      <p class="ds-section__desc">Tokens semánticos vinculados con variables CSS nativas. Respeta contraste WCAG AA en temas claro y oscuro.</p>
+      <div class="ds-grid ds-grid--swatches">
+        <div class="ds-specimen"><div class="ds-swatch" style="background: var(--color-bg-base);"></div><div class="ds-swatch-info"><strong>--color-bg-base</strong><span>Fondo principal</span></div></div>
+        <div class="ds-specimen"><div class="ds-swatch" style="background: var(--color-bg-surface);"></div><div class="ds-swatch-info"><strong>--color-bg-surface</strong><span>Superficie tarjetas</span></div></div>
+        <div class="ds-specimen"><div class="ds-swatch" style="background: var(--color-accent-primary);"></div><div class="ds-swatch-info"><strong>--color-accent-primary</strong><span>Acento / CTA</span></div></div>
+        <div class="ds-specimen"><div class="ds-swatch" style="background: var(--color-text-primary);"></div><div class="ds-swatch-info"><strong>--color-text-primary</strong><span>Texto cuerpo y títulos</span></div></div>
+        <div class="ds-specimen"><div class="ds-swatch" style="background: var(--color-status-success);"></div><div class="ds-swatch-info"><strong>--color-status-success</strong><span>Aforo fluido (&gt;10)</span></div></div>
+        <div class="ds-specimen"><div class="ds-swatch" style="background: var(--color-status-error);"></div><div class="ds-swatch-info"><strong>--color-status-error</strong><span>Aforo crítico (&lt;5)</span></div></div>
+        <div class="ds-specimen"><div class="ds-swatch" style="background: var(--color-status-info);"></div><div class="ds-swatch-info"><strong>--color-status-info</strong><span>Enlace WS / Telemetría</span></div></div>
+      </div>
+      <div class="ds-specimen" style="margin-top: var(--space-4);">
+        <span class="ds-specimen__label">Escala Tipográfica &amp; Radios</span>
+        <div class="ds-type-row"><span class="ds-type-meta">Display (48px+ / Satoshi)</span><span style="font-family: var(--font-family-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1;">Sin vueltas y pago exacto.</span></div>
+        <div class="ds-type-row"><span class="ds-type-meta">H1 Sección (28px)</span><span style="font-size: var(--font-size-2xl); font-weight: 700;">Playas en tiempo real</span></div>
+        <div class="ds-type-row"><span class="ds-type-meta">H2 Tarjeta (20px)</span><span style="font-size: var(--font-size-lg); font-weight: 700;">Estacionamiento Los Portales</span></div>
+        <div class="ds-type-row"><span class="ds-type-meta">Cuerpo / Input (14-16px)</span><span>Tarifa fija garantizada por tiempo estimado de llegada (ETA 8 min).</span></div>
+        <div class="ds-row" style="margin-top: var(--space-3);"><span class="ds-type-meta">Radios:</span><span class="ds-badge" style="border-radius: var(--radius-sm);">radius-sm: 4px</span><span class="ds-badge" style="border-radius: var(--radius-md);">radius-md: 6px</span><span class="ds-badge" style="border-radius: var(--radius-lg);">radius-lg: 8px</span><span class="ds-badge" style="border-radius: var(--radius-xl);">radius-xl: 12px</span><span class="ds-badge" style="border-radius: var(--radius-pill);">radius-pill: 9999px</span></div>
+      </div>
+    </section>
+
+    <!-- 02. BOTONES & PÍLDORAS -->
+    <section id="botones" class="ds-section">
+      <h2 class="ds-section__title">02. Botones, Píldoras y Controles de Acción</h2>
+      <p class="ds-section__desc">Controles con foco accesible, estados hover, disabled y aria-pressed para filtros y reservas.</p>
+      <div class="ds-grid ds-grid--cards">
+        <div class="ds-specimen">
+          <span class="ds-specimen__label">Botones Principales &amp; Secundarios</span>
+          <div class="ds-row">
+            <button type="button" class="hero__button hero__button--primary">CTA Primario</button>
+            <button type="button" class="hero__button hero__button--secondary">Secundario Outline</button>
+            <button type="button" class="cochera-boton" style="max-width: 160px;">Reservar espacio</button>
+            <button type="button" class="cochera-boton cochera-boton--activo" aria-pressed="true" style="max-width: 160px;">Seleccionada ✓</button>
+          </div>
+        </div>
+        <div class="ds-specimen">
+          <span class="ds-specimen__label">Píldoras de Filtro (Distritos) &amp; Iconos</span>
+          <div class="ds-row">
+            <button type="button" class="catalogo-pildora catalogo-pildora--activa" aria-pressed="true">Todos (6)</button>
+            <button type="button" class="catalogo-pildora" aria-pressed="false">Miraflores</button>
+            <button type="button" class="catalogo-pildora" aria-pressed="false">San Isidro</button>
+            <button type="button" class="catalogo-pildora" aria-pressed="false">Centro de Lima</button>
+          </div>
+          <div class="ds-row" style="margin-top: var(--space-2);">
+            <button type="button" class="caseta__btn-control" aria-label="Pausar tour">⏸</button>
+            <button type="button" class="caseta__btn-control" aria-label="Reanudar tour">▶</button>
+            <button type="button" class="caseta__btn-control" aria-label="Reiniciar tour">↺</button>
+            <button type="button" class="qlive-boton--sec" style="padding: 4px 10px; border-radius: var(--radius-sm); border: 1px solid var(--color-border-medium);">✕ Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. INPUTS & FORMULARIOS -->
+    <section id="inputs" class="ds-section">
+      <h2 class="ds-section__title">03. Cajones de Texto, Selectores y Feedback</h2>
+      <p class="ds-section__desc">Campos de búsqueda en vivo con botón de borrado inmediato y formularios de afiliación comercial.</p>
+      <div class="ds-grid ds-grid--cards">
+        <div class="ds-specimen">
+          <span class="ds-specimen__label">Buscador en Tiempo Real (Demo / Catálogo)</span>
+          <div class="catalogo-filtro__caja" style="margin: 0; max-width: 100%;">
+            <label for="ds-search-input" class="catalogo-filtro__label">Filtrar cocheras por nombre o dirección</label>
+            <div class="catalogo-filtro__input-wrapper">
+              <svg class="catalogo-filtro__icono" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="search" id="ds-search-input" class="catalogo-filtro__input" placeholder="Ej: Miraflores, Larco, Centro..." value="Larco">
+              <button type="button" id="ds-search-clear" class="catalogo-filtro__limpiar" aria-label="Limpiar búsqueda" style="display: inline-flex;">✕</button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-specimen">
+          <span class="ds-specimen__label">Formulario de Contacto &amp; Afiliación (Waitlist)</span>
+          <div class="waitlist__field" style="margin-bottom: var(--space-3);">
+            <label class="waitlist__label" for="ds-input-email">Correo de contacto <span class="waitlist__label-required">*</span></label>
+            <input type="email" id="ds-input-email" class="waitlist__input" placeholder="tu@empresa.pe" value="administrador@playaslima.pe">
+          </div>
+          <div class="waitlist__field">
+            <label class="waitlist__label" for="ds-select-distrito">Distrito de la cochera</label>
+            <select id="ds-select-distrito" class="waitlist__select">
+              <option value="miraflores">Miraflores</option>
+              <option value="san-isidro">San Isidro</option>
+              <option value="surco">Santiago de Surco</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. TARJETAS (TODAS LAS VARIANTES) -->
+    <section id="tarjetas" class="ds-section">
+      <h2 class="ds-section__title">04. Colección de Tarjetas UI (7 Formatos)</h2>
+      <p class="ds-section__desc">Todas las tarjetas empleadas en el sitio: catálogo de disponibilidad, módulos bento, tarifas y pasos.</p>
+      
+      <!-- Subgrupo 1: Tarjetas de Catálogo -->
+      <h3 style="font-size: var(--font-size-md); margin: var(--space-4) 0 var(--space-3); color: var(--color-text-secondary);">Tarjetas de Cochera (Estados de Aforo y Carga)</h3>
+      <div class="ds-grid ds-grid--cards">
+        <!-- 1. Tarjeta Fluida -->
+        <article class="cochera-tarjeta" tabindex="0">
+          <div class="cochera-tarjeta__cabecera">
+            <div><span class="cochera-distrito">Miraflores</span><h4 class="cochera-nombre">Los Portales Larco</h4></div>
+            <span class="cochera-badge cochera-badge--fluido">● 18 Libres</span>
+          </div>
+          <p class="cochera-direccion">Av. José Larco 850 · Altura Parque Kennedy</p>
+          <div class="cochera-metricas">
+            <div class="cochera-metrica"><span class="cochera-metrica__etiqueta">Tarifa</span><strong class="cochera-metrica__valor">S/ 6.50 <small>/h</small></strong></div>
+            <div class="cochera-metrica"><span class="cochera-metrica__etiqueta">Aforo</span><strong class="cochera-metrica__valor">45 plazas</strong></div>
+            <div class="cochera-metrica"><span class="cochera-metrica__etiqueta">ETA</span><strong class="cochera-metrica__valor">6 min</strong></div>
+          </div>
+          <button type="button" class="cochera-boton" aria-pressed="false">Reservar espacio</button>
+        </article>
+
+        <!-- 2. Tarjeta Crítica -->
+        <article class="cochera-tarjeta" tabindex="0">
+          <div class="cochera-tarjeta__cabecera">
+            <div><span class="cochera-distrito">San Isidro</span><h4 class="cochera-nombre">Playa Rivera Navarrete</h4></div>
+            <span class="cochera-badge cochera-badge--critico">▲ 2 Libres</span>
+          </div>
+          <p class="cochera-direccion">Calle Las Begonias 441 · Centro Financiero</p>
+          <div class="cochera-metricas">
+            <div class="cochera-metrica"><span class="cochera-metrica__etiqueta">Tarifa</span><strong class="cochera-metrica__valor">S/ 8.00 <small>/h</small></strong></div>
+            <div class="cochera-metrica"><span class="cochera-metrica__etiqueta">Aforo</span><strong class="cochera-metrica__valor">30 plazas</strong></div>
+            <div class="cochera-metrica"><span class="cochera-metrica__etiqueta">ETA</span><strong class="cochera-metrica__valor">12 min</strong></div>
+          </div>
+          <button type="button" class="cochera-boton" aria-pressed="false">Reservar espacio</button>
+        </article>
+
+        <!-- 3. Tarjeta Skeleton -->
+        <article class="cochera-skeleton" aria-hidden="true">
+          <div class="cochera-skeleton__header">
+            <div style="flex:1;"><div class="cochera-skeleton__bar cochera-skeleton__bar--sm"></div><div class="cochera-skeleton__bar cochera-skeleton__bar--lg"></div></div>
+            <div class="cochera-skeleton__pill"></div>
+          </div>
+          <div class="cochera-skeleton__bar cochera-skeleton__bar--md" style="margin-bottom: var(--space-4);"></div>
+          <div class="cochera-skeleton__metricas">
+            <div class="cochera-skeleton__caja"></div><div class="cochera-skeleton__caja"></div><div class="cochera-skeleton__caja"></div>
+          </div>
+          <div class="cochera-skeleton__btn"></div>
+        </article>
+      </div>
+
+      <!-- Subgrupo 2: Bento, Tarifas y Pasos -->
+      <h3 style="font-size: var(--font-size-md); margin: var(--space-8) 0 var(--space-3); color: var(--color-text-secondary);">Tarjetas de Contenido Comercial (Bento Módulos, Tarifas y Pasos)</h3>
+      <div class="ds-grid ds-grid--cards">
+        <!-- 4. Bento Módulo Garita con QR -->
+        <article class="modules__card modules__card--featured" tabindex="0">
+          <div class="modules__card-header"><span class="modules__card-tag">Acceso Rápido</span></div>
+          <div class="modules__card-body">
+            <h4 class="modules__card-title">Garita digital</h4>
+            <p class="modules__card-desc"><span class="modules__card-badge">Check-in &lt; 3 seg</span>Credencial digital con QR o PIN en el portón.</p>
+          </div>
+          <div class="modules__card-visual modules__visual--garita" aria-hidden="true">
+            <div class="modules__qr-box">
+              <div class="modules__qr-icon"></div>
+              <div class="modules__qr-plate-info"><span class="modules__qr-plate">Placa: BZ-492</span><span class="modules__qr-status">● Paso autorizado</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Tarjeta de Tarifas Editorial -->
+        <article class="rates__card" data-rate="0" tabindex="0">
+          <div class="rates__card-top">
+            <span class="rates__card-tag">Autos y Camionetas</span>
+            <span class="rates__card-number">S/ 0.12 <small>/min</small></span>
+          </div>
+          <div class="rates__card-copy">
+            <h4 class="rates__card-title">Fraccionamiento al Minuto Exacto</h4>
+            <p class="rates__card-description">Sin redondeo abusivo a la siguiente hora. Pagás estrictamente por el tiempo que ocupaste la cochera.</p>
+          </div>
+          <div class="rates__card-footer"><span class="rates__card-impact">Ahorro promedio del 28%</span></div>
+        </article>
+
+        <!-- 6. Tarjeta de Pasos (How it works) -->
+        <article class="how-it-works__step" style="background: var(--color-bg-surface); padding: var(--space-5); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md);">
+          <span style="font-family: var(--font-family-mono); font-size: var(--font-size-xs); color: var(--color-accent-primary); font-weight: 700;">PASO 02</span>
+          <h4 class="how-it-works__step-title" style="margin: var(--space-2) 0;">Reserva con ETA Protegido</h4>
+          <p class="how-it-works__step-detail" style="margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-sm);">Tu espacio queda bloqueado mientras manejás hacia la playa. Si hay tráfico, el ETA se recalcula dinámicamente.</p>
+        </article>
+
+        <!-- 7. Item Caseta Digital Tour -->
+        <article class="caseta__item caseta__item--active" tabindex="0">
+          <h4 class="caseta__item-title">Control de Aforo y Barrera</h4>
+          <p class="caseta__item-detail">Monitoreo en vivo de cámaras LPR y liberación automática al validar el pago digital en la salida.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 05. ASISTENTE VIRTUAL & CHAT -->
+    <section id="chat" class="ds-section">
+      <h2 class="ds-section__title">05. Asistente Virtual y Componente de Chat</h2>
+      <p class="ds-section__desc">Componente de conversación conectado al servicio WebSocket/HTTP. Permite consultas contextuales de tarifas y aforo.</p>
+      
+      <div class="ds-chat-frame">
+        <!-- Lanzador Flotante -->
+        <div class="ds-specimen ds-chat-inline" style="flex: 1; min-width: 260px;">
+          <span class="ds-specimen__label">Botón Lanzador Flotante (.qlive-lanzador)</span>
+          <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Píldora fija en el borde inferior con badge e indicador de actividad en vivo.</p>
+          <div style="padding: var(--space-4) 0;">
+            <button type="button" class="qlive-lanzador">
+              <span class="qlive-indicador qlive-indicador--vivo" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#1b7a4b; margin-right:8px;" aria-hidden="true"></span>
+              Asistente Quadrate
+            </button>
+          </div>
+        </div>
+
+        <!-- Ventana de Chat en Vivo -->
+        <div class="ds-specimen ds-chat-inline" style="flex: 2; min-width: 340px;">
+          <span class="ds-specimen__label">Ventana de Diálogo Completa (.qlive-panel)</span>
+          <div class="qlive-panel" role="region" aria-label="Simulador de Chat en Vivo">
+            <div class="qlive-panel__cab">
+              <div>
+                <h4 class="qlive-panel__titulo">Asistente de Quadrate pe</h4>
+                <div class="qlive-panel__estado">● En vivo (Cloud Run /ws)</div>
+              </div>
+              <button type="button" class="qlive-boton qlive-boton--sec qlive-boton--cerrar" aria-label="Minimizar chat">✕</button>
+            </div>
+            
+            <div id="ds-chat-log" class="qlive-registro" role="log" aria-live="polite">
+              <p class="qlive-msg qlive-msg--bot">¡Hola! Soy el asistente de Quadrate pe. Puedo contarte cómo funciona la app, las tarifas y la disponibilidad de cocheras.</p>
+              <p class="qlive-msg qlive-msg--usr">¿Tienen lugares libres en Miraflores?</p>
+              <p class="qlive-msg qlive-msg--bot">Sí, en Los Portales Larco quedan 18 espacios libres a S/ 6.50/h. ¿Querés reservar?</p>
+            </div>
+
+            <div class="qlive-sugerencias" style="padding: 0.25rem 0.85rem 0.5rem; display: flex; gap: 0.35rem; overflow-x: auto; background: var(--q-fondo);">
+              <button type="button" class="qlive-chip">¿Tarifas por hora?</button>
+              <button type="button" class="qlive-chip">¿Cómo afilio mi cochera?</button>
+              <button type="button" class="qlive-chip">¿Qué es el ETA?</button>
+            </div>
+
+            <form id="ds-chat-form" class="qlive-formulario" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.85rem; border-top: 1px solid var(--q-borde); background: var(--q-superficie);">
+              <input type="text" id="ds-chat-input" class="qlive-entrada" placeholder="Escribe tu consulta..." aria-label="Escribir mensaje" style="flex: 1;">
+              <button type="submit" class="qlive-boton qlive-boton--enviar" aria-label="Enviar mensaje">➤</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. PANELES & FEEDBACK DE TELEMETRÍA -->
+    <section id="paneles" class="ds-section">
+      <h2 class="ds-section__title">06. Paneles, Toasts de Telemetría y Badges de Sincronización</h2>
+      <p class="ds-section__desc">Feedback reactivo en tiempo real para eventos de aforo, check-in por cámaras y estado de la red.</p>
+      <div class="ds-grid ds-grid--cards">
+        <div class="ds-specimen">
+          <span class="ds-specimen__label">Toasts Flotantes de Eventos (notificaciones-feed.css)</span>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div class="notificacion-item" style="position: static; margin: 0; transform: none; opacity: 1;">
+              <span class="notificacion-item__icono" aria-hidden="true">🚗</span>
+              <div class="notificacion-item__contenido">
+                <strong class="notificacion-item__titulo">Check-in LPR Detectado</strong>
+                <p class="notificacion-item__texto">Placa BZ-492 ingresó a Cochera Larco. Tiempo de barrera: 1.8s.</p>
+              </div>
+            </div>
+            <div class="notificacion-item notificacion-item--alerta" style="position: static; margin: 0; transform: none; opacity: 1; border-color: var(--color-status-error);">
+              <span class="notificacion-item__icono" aria-hidden="true">⚠️</span>
+              <div class="notificacion-item__contenido">
+                <strong class="notificacion-item__titulo">Aforo Crítico en San Isidro</strong>
+                <p class="notificacion-item__texto">Playa Rivera Navarrete alcanzó el 95% de ocupación.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-specimen">
+          <span class="ds-specimen__label">Badges de Estado de Red &amp; TanStack Query</span>
+          <div class="ds-row">
+            <span class="ds-badge" style="background: var(--color-bg-contrast); color: var(--color-text-contrast); font-weight: 700;">TanStack Query • Caché 2m</span>
+            <span class="ds-badge" style="background: #edf7f2; color: #1b7a4b; border-color: #1b7a4b;">● WebSocket Conectado</span>
+            <span class="ds-badge" style="background: #fff8e6; color: #b45309; border-color: #b45309;">Sincronizando red...</span>
+          </div>
+          <div style="margin-top: var(--space-4);">
+            <span class="ds-specimen__label">Barra de Aforo (.modules__gauge)</span>
+            <div class="modules__gauge" style="max-width: 320px; background: var(--color-bg-base); padding: var(--space-3); border-radius: var(--radius-sm); border: 1px solid var(--color-border-subtle);">
+              <div class="modules__gauge-header" style="display: flex; justify-content: space-between; font-size: var(--font-size-xs); font-weight: 700; margin-bottom: 4px;">
+                <span>Cupo disponible</span><span>18 / 45 plazas</span>
+              </div>
+              <div class="modules__gauge-bar" style="height: 8px; background: var(--color-border-medium); border-radius: var(--radius-pill); overflow: hidden;">
+                <div class="modules__gauge-fill" style="width: 40%; height: 100%; background: var(--color-status-success);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

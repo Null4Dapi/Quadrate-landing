@@ -196,6 +196,27 @@
   --rates-card-pill-bg: rgba(0, 0, 0, 0.07);
   --rates-card-pill-border: rgba(0, 0, 0, 0.22);
   --rates-card-shadow: 0 12px 30px rgba(25, 70, 40, 0.15);
+  background-image: none;
+}
+
+.rates__card[data-rate="1"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--rates-card-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rates-card-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 82%);
+  mask-image: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 82%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rates__card[data-rate="1"] > * {
+  position: relative;
+  z-index: 1;
 }
 
 .rates__card[data-rate="2"] {
@@ -243,6 +264,16 @@
   color: var(--rates-card-text-muted);
 }
 
+.rates__card-number--destacado {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.85rem, 3.5vw, 2.35rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.04em;
+  color: var(--rates-card-text);
+  line-height: 1;
+  margin-left: auto;
+}
+
 .rates__card-copy {
   display: flex;
   flex-direction: column;
@@ -265,6 +296,10 @@
   line-height: var(--line-height-relaxed);
   max-width: 45ch;
   margin: 0;
+}
+
+.rates__card-description--narrow {
+  max-width: 34ch;
 }
 
 .rates__card-footer {

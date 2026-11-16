@@ -181,7 +181,7 @@
           <p class="rates__description" data-texto="tarifas.descripcionSeccion">Las tarifas claras benefician a las dos caras del sistema: el conductor conoce el precio antes de llegar y la cochera liquida cada estadía con ese mismo dato exacto.</p>
           <ol class="rates__progress" aria-label="Progreso de tarifas">
             <li class="rates__progress-item" data-rate="0" data-active="" tabindex="0" role="button" aria-label="Ir a Primera hora"><span class="rates__progress-number">01</span><span class="rates__progress-label" data-texto="tarifas.filas.0.categoria">Primera hora</span></li>
-            <li class="rates__progress-item" data-rate="1" tabindex="0" role="button" aria-label="Ir a Fraccionamiento"><span class="rates__progress-number">02</span><span class="rates__progress-label" data-texto="tarifas.filas.1.categoria">Fraccionamiento</span></li>
+            <li class="rates__progress-item" data-rate="1" tabindex="0" role="button" aria-label="Ir a Pago exacto"><span class="rates__progress-number">02</span><span class="rates__progress-label" data-texto="tarifas.filas.1.categoria">Pago exacto</span></li>
             <li class="rates__progress-item" data-rate="2" tabindex="0" role="button" aria-label="Ir a Abonados mensuales"><span class="rates__progress-number">03</span><span class="rates__progress-label" data-texto="tarifas.filas.2.categoria">Abonados mensuales</span></li>
           </ol>
         </header>
@@ -192,9 +192,12 @@
             <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.0.impacto">Precio visible antes de llegar</span></div>
           </li>
           <li class="rates__card" data-rate="1" style="--rates-card-index: 1; --rates-covered: 0.000;">
-            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.1.tag">Ley de estacionamientos</span><span class="rates__card-number" aria-hidden="true">02 / 03</span></div>
-            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.1.categoria">Fraccionamiento</h3><p class="rates__card-description" data-texto="tarifas.filas.1.regla">Cobro reglamentario por cuartos de hora (15 min) posteriores a la primera hora; el sistema calcula solo.</p></div>
-            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.1.impacto">Pago exacto del tiempo real</span></div>
+            <div class="rates__card-top"><span class="rates__card-number rates__card-number--destacado" aria-hidden="true">02</span></div>
+            <div class="rates__card-copy">
+              <h3 class="rates__card-title" data-texto="tarifas.filas.1.categoria">Pago exacto</h3>
+              <p class="rates__card-description rates__card-description--narrow" data-texto="tarifas.filas.1.regla">Cobro reglamentario por cuartos de hora (15 min) posteriores a la primera hora.</p>
+              <p class="rates__card-description rates__card-description--narrow">El sistema calcula el importe exacto en garita sin redondeos arbitrarios.</p>
+            </div>
           </li>
           <li class="rates__card" data-rate="2" style="--rates-card-index: 2; --rates-covered: 0.000;">
             <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.2.tag">Ingresos previsibles</span><span class="rates__card-number" aria-hidden="true">03 / 03</span></div>

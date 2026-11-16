@@ -138,42 +138,48 @@
 /* Layout y Catálogo de Cocheras */
 .quadrate-live__layout { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
 @media (min-width: 992px) { .quadrate-live__layout { grid-template-columns: 1.8fr 1.2fr; } }
-.quadrate-live__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-4); }
+.quadrate-live__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-6); }
 
 .quadrate-live__card {
-  background-color: var(--color-bg-surface); border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md); padding: var(--space-4); cursor: pointer; display: flex;
-  flex-direction: column; box-shadow: var(--shadow-subtle); transition: all var(--transition-fast); position: relative;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-fast);
+  position: relative;
 }
-.quadrate-live__card:hover { border-color: var(--color-border-medium); box-shadow: var(--shadow-card); }
-.quadrate-live__card--selected { border-color: var(--color-accent-primary); box-shadow: 0 0 0 2px var(--color-accent-primary); }
+.quadrate-live__card:hover { border-color: var(--color-border-medium); box-shadow: 0 10px 25px -5px rgba(35, 18, 18, 0.08); transform: translateY(-2px); }
+.quadrate-live__card--selected { border-color: var(--color-accent-primary); box-shadow: 0 0 0 2px var(--color-accent-primary), 0 8px 20px rgba(35, 18, 18, 0.08); }
 .quadrate-live__card--actualizada { animation: pulso-actualizacion 2s ease-out; }
 @keyframes pulso-actualizacion {
   0% { box-shadow: 0 0 0 3px var(--color-status-success); border-color: var(--color-status-success); }
-  100% { box-shadow: var(--shadow-subtle); border-color: var(--color-border-subtle); }
+  100% { box-shadow: var(--shadow-card); border-color: var(--color-border-subtle); }
 }
 
-.quadrate-live__card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); }
-.quadrate-live__card-distrito { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); text-transform: uppercase; color: var(--color-text-muted); }
-.quadrate-live__badge { font-size: 0.72rem; font-weight: var(--font-weight-bold); padding: 2px 8px; border-radius: var(--radius-pill); }
+.quadrate-live__card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3); }
+.quadrate-live__card-distrito { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-secondary); }
+.quadrate-live__badge { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); padding: 4px 10px; border-radius: var(--radius-pill); }
 .quadrate-live__badge--disponible { background-color: var(--color-status-success-bg); color: var(--color-status-success); }
 .quadrate-live__badge--alerta { background-color: var(--color-status-error-bg); color: var(--color-status-error); }
 .quadrate-live__badge--nodo { background-color: var(--color-bg-subtle); color: var(--color-text-secondary); }
-.quadrate-live__card-nombre { font-family: var(--font-family-display); font-size: var(--font-size-md); font-weight: var(--font-weight-bold); color: var(--color-text-primary); margin: 0 0 var(--space-1); }
-.quadrate-live__card-direccion { font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0 0 var(--space-3); }
+.quadrate-live__card-nombre { font-family: var(--font-family-display); font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); color: var(--color-text-primary); margin: 0 0 var(--space-2); line-height: 1.25; }
+.quadrate-live__card-direccion { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin: 0 0 var(--space-4); line-height: 1.4; }
 .quadrate-live__card-metricas {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2);
-  background-color: var(--color-bg-base); padding: var(--space-2); border-radius: var(--radius-sm); margin-bottom: var(--space-3);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);
+  background-color: var(--color-bg-base); border: 1px solid var(--color-border-subtle); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-4);
 }
 .quadrate-live__card-metrica { display: flex; flex-direction: column; }
-.quadrate-live__card-metrica-etiqueta { font-size: 0.68rem; text-transform: uppercase; color: var(--color-text-muted); }
-.quadrate-live__card-metrica-valor { font-size: var(--font-size-xs); color: var(--color-text-primary); }
-.quadrate-live__aforo-box { margin-bottom: var(--space-4); }
-.quadrate-live__aforo-info { display: flex; justify-content: space-between; font-size: var(--font-size-xs); margin-bottom: 4px; }
-.quadrate-live__aforo-label { color: var(--color-text-muted); }
+.quadrate-live__card-metrica-etiqueta { font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-muted); margin-bottom: 2px; }
+.quadrate-live__card-metrica-valor { font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); color: var(--color-text-primary); }
+.quadrate-live__aforo-box { margin-bottom: var(--space-5); }
+.quadrate-live__aforo-info { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--font-size-sm); margin-bottom: var(--space-2); }
+.quadrate-live__aforo-label { color: var(--color-text-secondary); font-weight: var(--font-weight-medium); }
 .quadrate-live__aforo-pct { font-family: var(--font-family-mono); font-weight: var(--font-weight-bold); color: var(--color-text-primary); }
 .quadrate-live__aforo-barra {
-  width: 100%; height: 6px; border-radius: var(--radius-pill); appearance: none;
+  width: 100%; height: 8px; border-radius: var(--radius-pill); appearance: none;
   border: none; background-color: var(--color-border-subtle); overflow: hidden;
 }
 .quadrate-live__aforo-barra::-webkit-progress-bar { background-color: var(--color-border-subtle); }
@@ -181,14 +187,16 @@
 .quadrate-live__aforo-barra--critico::-webkit-progress-value { background-color: var(--color-status-error); }
 .quadrate-live__card-footer {
   margin-top: auto; display: flex; justify-content: space-between; align-items: center;
-  border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-4); gap: var(--space-3);
 }
-.quadrate-live__card-eta { font-size: var(--font-size-xs); color: var(--color-text-secondary); }
+.quadrate-live__card-eta { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
 .quadrate-live__card-btn {
-  font-family: var(--font-family-sans); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
-  padding: 4px 10px; border-radius: var(--radius-sm); border: 1px solid var(--color-border-medium);
+  font-family: var(--font-family-sans); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+  padding: 0.55rem 1.15rem; min-height: 38px; border-radius: var(--radius-sm); border: 1px solid var(--color-border-medium);
   background-color: var(--color-bg-surface); color: var(--color-text-primary); cursor: pointer; transition: all var(--transition-fast);
 }
+.quadrate-live__card-btn:hover { background-color: var(--color-accent-primary); color: var(--color-text-contrast); border-color: var(--color-accent-primary); }
+.quadrate-live__card-btn:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 2px; }
 .quadrate-live__card-btn--active { background-color: var(--color-accent-primary); color: var(--color-text-contrast); border-color: var(--color-accent-primary); }
 
 /* Simulador de Reserva y Tarifa Dinámica */

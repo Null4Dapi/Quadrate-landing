@@ -1,7 +1,9 @@
 import React from "react";
 
 /**
- * Componente funcional para renderizar tarjetas de cocheras con datos en vivo.
+ * Componente accesible de tarjeta de cochera con datos en vivo.
+ * Sigue los principios de WCAG 2.2: jerarquía semántica, ratios de contraste
+ * y eliminación del anti-patrón de botones anidados.
  *
  * @param {Object} props
  * @param {Object} props.cochera - Datos de la cochera
@@ -21,22 +23,14 @@ export function TarjetaCochera({
   );
 
   const esAforoCritico = cochera.plazasDisponibles <= 5;
+  const tituloId = `cochera-nombre-${cochera.id}`;
 
   return (
     <article
       className={`quadrate-live__card ${
         estaSeleccionada ? "quadrate-live__card--selected" : ""
       } ${estaActualizada ? "quadrate-live__card--actualizada" : ""}`}
-      onClick={() => onSeleccionarCochera(cochera)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(eventoTeclado) => {
-        if (eventoTeclado.key === "Enter" || eventoTeclado.key === " ") {
-          onSeleccionarCochera(cochera);
-        }
-      }}
-      aria-pressed={estaSeleccionada}
-      aria-label={`Seleccionar cochera ${cochera.nombre} en ${cochera.distrito}`}
+      aria-labelledby={tituloId}
     >
       <header className="quadrate-live__card-header">
         <span className="quadrate-live__card-distrito">{cochera.distrito}</span>
@@ -51,10 +45,10 @@ export function TarjetaCochera({
         </span>
       </header>
 
-      <h4 className="quadrate-live__card-nombre">{cochera.nombre}</h4>
+      <h4 id={tituloId} className="quadrate-live__card-nombre">{cochera.nombre}</h4>
       <p className="quadrate-live__card-direccion">{cochera.direccion}</p>
 
-      <div className="quadrate-live__card-metricas">
+      <div className="quadrate-live__card-metricas" aria-label="Métricas de tarifa y capacidad">
         <div className="quadrate-live__card-metrica">
           <span className="quadrate-live__card-metrica-etiqueta">Plazas libres</span>
           <span className="quadrate-live__card-metrica-valor">
@@ -77,7 +71,7 @@ export function TarjetaCochera({
 
       <div className="quadrate-live__aforo-box">
         <div className="quadrate-live__aforo-info">
-          <span className="quadrate-live__aforo-label">Ocupación</span>
+          <span className="quadrate-live__aforo-label">Ocupación estimada</span>
           <span className="quadrate-live__aforo-pct">{porcentajeOcupacion}%</span>
         </div>
         <progress
@@ -86,23 +80,23 @@ export function TarjetaCochera({
           }`}
           value={porcentajeOcupacion}
           max="100"
-          aria-label={`Aforo al ${porcentajeOcupacion}%`}
+          aria-label={`Ocupación actual al ${porcentajeOcupacion}%`}
         />
       </div>
 
       <footer className="quadrate-live__card-footer">
-        <span className="quadrate-live__card-eta">
-          ETA: <strong>{cochera.tiempoEstimadoLlegadaMinutos} min</strong>
-        </span>
+        <div className="quadrate-live__card-eta">
+          <span>ETA estimado: </span>
+          <strong>{cochera.tiempoEstimadoLlegadaMinutos} min</strong>
+        </div>
         <button
           type="button"
           className={`quadrate-live__card-btn ${
             estaSeleccionada ? "quadrate-live__card-btn--active" : ""
           }`}
-          onClick={(eventoBoton) => {
-            eventoBoton.stopPropagation();
-            onSeleccionarCochera(cochera);
-          }}
+          onClick={() => onSeleccionarCochera(cochera)}
+          aria-pressed={estaSeleccionada}
+          aria-label={`Simular reserva en ${cochera.nombre}, ${cochera.distrito}`}
         >
           {estaSeleccionada ? "Seleccionada ✓" : "Simular reserva"}
         </button>

@@ -35,7 +35,7 @@ export function SimuladorReserva({ cochera, onCerrar }) {
     <aside className="quadrate-live__simulador" aria-label="Simulador y Reserva Dinámica">
       <div className="quadrate-live__simulador-header">
         <div>
-          <span className="quadrate-live__simulador-eyebrow">Simulador de Tarifa & ETA</span>
+          <span className="quadrate-live__simulador-eyebrow">Tarifa</span>
           <h3 className="quadrate-live__simulador-titulo">{cochera.nombre}</h3>
         </div>
         <button

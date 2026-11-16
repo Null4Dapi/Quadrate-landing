@@ -150,8 +150,9 @@ export function TelemetriaDrawerZustand({
             <div className="dev-console__meta">
               <span className="dev-console__tag">DEV CONSOLE</span>
               <span className="dev-console__endpoint">ws://cloudrun/v1/eventos</span>
-              <span className="dev-console__estado">
-                {estaPausado ? "⏸ PAUSADO" : `● ENLACE ${estadoWs.toUpperCase()}`}
+              <span className={`dev-console__estado dev-console__estado--${estaPausado ? "pausado" : "activo"}`}>
+                <span className="dev-console__status-dot" aria-hidden="true" />
+                {estaPausado ? "Pausado" : `Enlace ${estadoWs}`}
               </span>
             </div>
             <div className="dev-console__acciones">
@@ -162,7 +163,7 @@ export function TelemetriaDrawerZustand({
                   className="dev-console__btn dev-console__btn--simular"
                   title="Inyectar evento simulado de garita"
                 >
-                  ⚡ Simular evento
+                  Simular evento
                 </button>
               )}
               {onAlternarPausa && (
@@ -172,7 +173,7 @@ export function TelemetriaDrawerZustand({
                   className="dev-console__btn"
                   title={estaPausado ? "Reanudar recepción" : "Pausar eventos"}
                 >
-                  {estaPausado ? "▶ Reanudar" : "⏸ Pausar"}
+                  {estaPausado ? "Reanudar" : "Pausar"}
                 </button>
               )}
               {notifications.length > 0 && (
@@ -210,23 +211,25 @@ export function TelemetriaDrawerZustand({
                         second: "2-digit",
                       })}
                   </time>
-                  <span className={`dev-col dev-col--type telemetria-drawer__etiqueta telemetria-drawer__etiqueta--${n.tipo}`}>
-                    {n.tipo === "ingreso" && "LPR_IN"}
-                    {n.tipo === "salida" && "CHECKOUT"}
-                    {n.tipo === "reserva_eta" && "ETA_HOLD"}
-                    {n.tipo === "tarifa_dinamica" && "VALLE_RATE"}
-                    {n.tipo === "aforo_critico" && "ALERT_CAP"}
-                    {n.tipo !== "ingreso" &&
-                      n.tipo !== "salida" &&
-                      n.tipo !== "reserva_eta" &&
-                      n.tipo !== "tarifa_dinamica" &&
-                      n.tipo !== "aforo_critico" &&
-                      (n.tipo ? n.tipo.toUpperCase() : "EVENT")}
-                  </span>
-                  <span className="dev-col dev-col--node">
+                  <div className="dev-col dev-col--type">
+                    <span className={`telemetria-drawer__etiqueta telemetria-drawer__etiqueta--${n.tipo}`}>
+                      {n.tipo === "ingreso" && "LPR_IN"}
+                      {n.tipo === "salida" && "CHECKOUT"}
+                      {n.tipo === "reserva_eta" && "ETA_HOLD"}
+                      {n.tipo === "tarifa_dinamica" && "VALLE_RATE"}
+                      {n.tipo === "aforo_critico" && "ALERT_CAP"}
+                      {n.tipo !== "ingreso" &&
+                        n.tipo !== "salida" &&
+                        n.tipo !== "reserva_eta" &&
+                        n.tipo !== "tarifa_dinamica" &&
+                        n.tipo !== "aforo_critico" &&
+                        (n.tipo ? n.tipo.toUpperCase() : "EVENT")}
+                    </span>
+                  </div>
+                  <span className="dev-col dev-col--node" title={n.nombreCochera || "Sistema central"}>
                     {n.nombreCochera || "Sistema central"}
                   </span>
-                  <span className="dev-col dev-col--data">
+                  <span className="dev-col dev-col--data" title={n.message}>
                     {n.message}
                   </span>
                 </article>

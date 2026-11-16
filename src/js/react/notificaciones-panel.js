@@ -190,20 +190,23 @@ export function TelemetriaDrawerZustand({
   }, "DEV CONSOLE"), /*#__PURE__*/React.createElement("span", {
     className: "dev-console__endpoint"
   }, "ws://cloudrun/v1/eventos"), /*#__PURE__*/React.createElement("span", {
-    className: "dev-console__estado"
-  }, estaPausado ? "⏸ PAUSADO" : `● ENLACE ${estadoWs.toUpperCase()}`)), /*#__PURE__*/React.createElement("div", {
+    className: `dev-console__estado dev-console__estado--${estaPausado ? "pausado" : "activo"}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dev-console__status-dot",
+    "aria-hidden": "true"
+  }), estaPausado ? "Pausado" : `Enlace ${estadoWs}`)), /*#__PURE__*/React.createElement("div", {
     className: "dev-console__acciones"
   }, onSimularEvento && /*#__PURE__*/React.createElement("button", {
     type: "button",
     onClick: onSimularEvento,
     className: "dev-console__btn dev-console__btn--simular",
     title: "Inyectar evento simulado de garita"
-  }, "⚡ Simular evento"), onAlternarPausa && /*#__PURE__*/React.createElement("button", {
+  }, "Simular evento"), onAlternarPausa && /*#__PURE__*/React.createElement("button", {
     type: "button",
     onClick: onAlternarPausa,
     className: "dev-console__btn",
     title: estaPausado ? "Reanudar recepción" : "Pausar eventos"
-  }, estaPausado ? "▶ Reanudar" : "⏸ Pausar"), notifications.length > 0 && /*#__PURE__*/React.createElement("button", {
+  }, estaPausado ? "Reanudar" : "Pausar"), notifications.length > 0 && /*#__PURE__*/React.createElement("button", {
     type: "button",
     onClick: clearNotifications,
     className: "dev-console__btn dev-console__btn--limpiar",
@@ -234,12 +237,16 @@ export function TelemetriaDrawerZustand({
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit"
-  })), /*#__PURE__*/React.createElement("span", {
-    className: `dev-col dev-col--type telemetria-drawer__etiqueta telemetria-drawer__etiqueta--${n.tipo}`
-  }, n.tipo === "ingreso" && "LPR_IN", n.tipo === "salida" && "CHECKOUT", n.tipo === "reserva_eta" && "ETA_HOLD", n.tipo === "tarifa_dinamica" && "VALLE_RATE", n.tipo === "aforo_critico" && "ALERT_CAP", n.tipo !== "ingreso" && n.tipo !== "salida" && n.tipo !== "reserva_eta" && n.tipo !== "tarifa_dinamica" && n.tipo !== "aforo_critico" && (n.tipo ? n.tipo.toUpperCase() : "EVENT")), /*#__PURE__*/React.createElement("span", {
-    className: "dev-col dev-col--node"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "dev-col dev-col--type"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `telemetria-drawer__etiqueta telemetria-drawer__etiqueta--${n.tipo}`
+  }, n.tipo === "ingreso" && "LPR_IN", n.tipo === "salida" && "CHECKOUT", n.tipo === "reserva_eta" && "ETA_HOLD", n.tipo === "tarifa_dinamica" && "VALLE_RATE", n.tipo === "aforo_critico" && "ALERT_CAP", n.tipo !== "ingreso" && n.tipo !== "salida" && n.tipo !== "reserva_eta" && n.tipo !== "tarifa_dinamica" && n.tipo !== "aforo_critico" && (n.tipo ? n.tipo.toUpperCase() : "EVENT"))), /*#__PURE__*/React.createElement("span", {
+    className: "dev-col dev-col--node",
+    title: n.nombreCochera || "Sistema central"
   }, n.nombreCochera || "Sistema central"), /*#__PURE__*/React.createElement("span", {
-    className: "dev-col dev-col--data"
+    className: "dev-col dev-col--data",
+    title: n.message
   }, n.message))))));
 }
 

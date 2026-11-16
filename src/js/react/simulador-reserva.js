@@ -45,7 +45,7 @@ export function SimuladorReserva({
     className: "quadrate-live__simulador-header"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     className: "quadrate-live__simulador-eyebrow"
-  }, "Simulador de Tarifa & ETA"), /*#__PURE__*/React.createElement("h3", {
+  }, "Tarifa"), /*#__PURE__*/React.createElement("h3", {
     className: "quadrate-live__simulador-titulo"
   }, cochera.nombre)), /*#__PURE__*/React.createElement("button", {
     type: "button",

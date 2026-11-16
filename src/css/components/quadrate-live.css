@@ -155,7 +155,10 @@
 .quadrate-live__card-metrica:not(:last-child) { border-bottom: 1px dashed var(--color-border-subtle); padding-bottom: 4px; }
 .quadrate-live__card-metrica-etiqueta { font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); color: var(--color-text-secondary); }
 .quadrate-live__card-metrica-valor { font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); color: var(--color-text-primary); font-family: var(--font-family-mono); }
-.quadrate-live__aforo-box { margin-bottom: var(--space-5); }
+.quadrate-live__aforo-box {
+  margin-top: auto;
+  margin-bottom: var(--space-4);
+}
 .quadrate-live__aforo-info { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--font-size-sm); margin-bottom: var(--space-2); }
 .quadrate-live__aforo-label { color: var(--color-text-secondary); font-weight: var(--font-weight-medium); }
 .quadrate-live__aforo-pct { font-family: var(--font-family-mono); font-weight: var(--font-weight-bold); color: var(--color-text-primary); }
@@ -167,7 +170,7 @@
 .quadrate-live__aforo-barra::-webkit-progress-value { background-color: var(--color-status-success); transition: width var(--transition-base); }
 .quadrate-live__aforo-barra--critico::-webkit-progress-value { background-color: var(--color-status-error); }
 .quadrate-live__card-footer {
-  margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+  margin-top: 0; display: flex; justify-content: space-between; align-items: center;
   border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-3); gap: var(--space-3); flex-wrap: nowrap;
 }
 .quadrate-live__card-eta { font-size: var(--font-size-xs); color: var(--color-text-secondary); white-space: nowrap; }

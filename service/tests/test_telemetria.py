@@ -155,3 +155,41 @@ def test_las_conexiones_se_liberan_al_cerrar_en_ambos_protocolos():
 def test_la_telemetria_vive_menos_que_el_chat():
     from app.config import Config as C
     assert C().vida_tele_seg < C().vida_max_seg
+
+
+def test_las_tramas_de_sincronizacion_no_generan_alerta_pero_si_parpadeo_de_tarjeta():
+    tramas, _ = telemetria.eventos_por_cambio(None, 1_700_000_000)
+    assert len(tramas) == len(aforo.COCHERAS)
+    assert all("titulo" not in t and t["cocheraId"] and t["distrito"] for t in tramas)
+
+
+def test_solo_un_evento_por_ciclo_lleva_titulo_para_no_inundar_de_alertas():
+    previas = {c["id"]: (c["plazasDisponibles"], c["estadoAforo"]) for c in aforo.listar(1_700_000_000)}
+    instante, con_titulo = 1_700_000_000, 0
+    for _ in range(300):
+        instante += 5
+        tramas, previas = telemetria.eventos_por_cambio(previas, instante)
+        titulados = [t for t in tramas if "titulo" in t]
+        assert len(titulados) <= 1
+        for t in titulados:
+            assert t["titulo"] == telemetria.TITULOS[t["tipo"]] and t["mensaje"]
+        con_titulo += len(titulados)
+    assert con_titulo > 20
+
+
+def test_la_alerta_prioriza_el_aforo_critico():
+    previas = {c["id"]: (c["plazasDisponibles"], c["estadoAforo"]) for c in aforo.listar(1_700_000_000)}
+    instante = 1_700_000_000
+    for _ in range(600):
+        instante += 5
+        tramas, previas = telemetria.eventos_por_cambio(previas, instante)
+        if any(t["tipo"] == "aforo_critico" for t in tramas):
+            assert next(t for t in tramas if "titulo" in t)["tipo"] == "aforo_critico"
+            return
+    raise AssertionError("no apareció ningún aforo crítico en el barrido")
+
+
+def test_simular_evento_trae_lo_que_la_demo_necesita_para_la_alerta_y_el_parpadeo():
+    t = telemetria.evento_simulado(1_700_000_000)
+    assert t["titulo"] == telemetria.TITULOS[t["tipo"]] and t["mensaje"] and t["cocheraId"] and t["distrito"]
+    assert "datos" not in t

@@ -156,55 +156,91 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: var(--space-4);
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-2xl);
+  background-color: var(--rates-card-bg);
+  background-image:
+    linear-gradient(to right, var(--rates-card-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rates-card-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+  color: var(--rates-card-text);
+  border: 1px solid var(--rates-card-border);
+  border-radius: clamp(20px, 2.5vw, 28px);
   padding: clamp(var(--space-6), 4vw, var(--space-8));
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05), 0 0 0 1px var(--color-border-subtle);
+  box-shadow: var(--rates-card-shadow);
   transform-origin: center top;
   transform: scale(calc(1 - var(--rates-covered, 0) * 0.05)) translateY(calc(var(--rates-covered, 0) * 4px));
   opacity: calc(1 - var(--rates-covered, 0) * 0.22);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
   will-change: transform, opacity;
   overflow: hidden;
   isolation: isolate;
 }
 
 .rates__card[data-rate="0"] {
-  border-color: var(--color-border-subtle);
+  --rates-card-bg: #A686BC;
+  --rates-card-border: rgba(45, 25, 65, 0.22);
+  --rates-card-text: #1C1128;
+  --rates-card-text-muted: #3D2B52;
+  --rates-card-grid: rgba(0, 0, 0, 0.08);
+  --rates-card-pill-bg: rgba(0, 0, 0, 0.07);
+  --rates-card-pill-border: rgba(0, 0, 0, 0.22);
+  --rates-card-shadow: 0 12px 30px rgba(70, 40, 95, 0.15);
 }
 
 .rates__card[data-rate="1"] {
-  border-color: var(--color-border-medium);
+  --rates-card-bg: #4B9C67;
+  --rates-card-border: rgba(15, 45, 25, 0.22);
+  --rates-card-text: #0B2113;
+  --rates-card-text-muted: #1A3E26;
+  --rates-card-grid: rgba(0, 0, 0, 0.08);
+  --rates-card-pill-bg: rgba(0, 0, 0, 0.07);
+  --rates-card-pill-border: rgba(0, 0, 0, 0.22);
+  --rates-card-shadow: 0 12px 30px rgba(25, 70, 40, 0.15);
 }
 
 .rates__card[data-rate="2"] {
-  border-color: var(--color-border-medium);
+  --rates-card-bg: #E3B866;
+  --rates-card-border: rgba(85, 60, 15, 0.22);
+  --rates-card-text: #231908;
+  --rates-card-text-muted: #4F3B1A;
+  --rates-card-grid: rgba(0, 0, 0, 0.08);
+  --rates-card-pill-bg: rgba(0, 0, 0, 0.07);
+  --rates-card-pill-border: rgba(0, 0, 0, 0.22);
+  --rates-card-shadow: 0 12px 30px rgba(100, 75, 20, 0.15);
+}
+
+[data-theme="dark"] .rates__card {
+  --rates-card-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
 .rates__card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: var(--space-2);
-  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .rates__card-tag {
   display: inline-flex;
   align-items: center;
+  font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+  color: var(--rates-card-text);
+  background-color: var(--rates-card-pill-bg);
+  border: 1px solid var(--rates-card-pill-border);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
 }
 
 .rates__card-number {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-muted);
+  color: var(--rates-card-text-muted);
 }
 
 .rates__card-copy {
@@ -219,13 +255,13 @@
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.03em;
   line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
+  color: var(--rates-card-text);
   margin: 0;
 }
 
 .rates__card-description {
   font-size: clamp(var(--font-size-sm), 1.2vw, var(--font-size-base));
-  color: var(--color-text-secondary);
+  color: var(--rates-card-text-muted);
   line-height: var(--line-height-relaxed);
   max-width: 45ch;
   margin: 0;
@@ -239,11 +275,12 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-base);
-  border: 1px solid var(--color-border-subtle);
+  color: var(--rates-card-text);
+  background-color: var(--rates-card-pill-bg);
+  border: 1px solid var(--rates-card-pill-border);
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-pill);
 }

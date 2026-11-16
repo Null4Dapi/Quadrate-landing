@@ -99,19 +99,42 @@
   border-radius: var(--radius-pill);
   transition: all var(--transition-fast);
   text-align: center;
+  text-decoration: none;
   width: fit-content;
 }
 
-.hero__button--primary {
+.hero__button--primary,
+button.demo,
+.hero__button.demo {
   color: var(--color-text-contrast);
   background-color: var(--color-accent-primary);
+  border: 1px solid var(--color-accent-primary);
+  box-shadow: var(--shadow-subtle);
 }
 
 .hero__button--primary:hover,
-.hero__button--primary:focus-visible {
-  background-color: var(--color-accent-hover);
-  outline: 2px solid var(--color-accent-focus);
-  outline-offset: 2px;
+button.demo:hover,
+.hero__button.demo:hover {
+  background-color: var(--color-bg-contrast);
+  border-color: var(--color-bg-contrast);
+  box-shadow: var(--shadow-card);
+}
+
+.hero__button--primary:focus-visible,
+button.demo:focus-visible,
+.hero__button.demo:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px var(--color-accent-primary);
+}
+
+@media (forced-colors: active) {
+  .hero__button--primary,
+  button.demo,
+  .hero__button.demo {
+    border: 2px solid ButtonText;
+    outline-color: Highlight;
+  }
 }
 
 .hero__visual {

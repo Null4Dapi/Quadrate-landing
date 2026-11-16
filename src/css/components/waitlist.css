@@ -49,10 +49,10 @@
   flex-direction: column;
   gap: var(--space-5);
   background-color: var(--color-bg-base);
-  padding: var(--space-6);
+  padding: clamp(var(--space-6), 4vw, var(--space-8));
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-subtle);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-card);
 }
 
 .waitlist__field {
@@ -100,21 +100,26 @@
   justify-content: center;
   gap: var(--space-2);
   width: 100%;
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-3) var(--space-6);
   margin-top: var(--space-2);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-contrast);
-  background-color: var(--color-accent-primary);
-  border-radius: var(--radius-sm);
-  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+  background-color: var(--color-bg-contrast);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-subtle);
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
 .waitlist__submit:hover:not(:disabled),
 .waitlist__submit:focus-visible:not(:disabled) {
-  background-color: var(--color-accent-hover);
+  background-color: var(--color-bg-contrast-soft);
+  border-color: var(--color-border-strong);
   outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
+  transform: translateY(-1px);
 }
 
 .waitlist__submit:disabled {

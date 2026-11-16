@@ -27,7 +27,7 @@ function evaluarSiColorEsOscuro(colorRgb) {
 function obtenerColorFondoEfectivo(elemento) {
   let elementoActual = elemento;
 
-  while (elementoActual && elementoActual !== document.documentElement) {
+  while (elementoActual) {
     const estilo = window.getComputedStyle(elementoActual);
     const colorFondo = estilo.backgroundColor;
 
@@ -39,10 +39,12 @@ function obtenerColorFondoEfectivo(elemento) {
       return colorFondo;
     }
 
-    elementoActual = elementoActual.parentElement;
+    if (elementoActual === document.documentElement) break;
+    elementoActual = elementoActual.parentElement || document.documentElement;
   }
 
-  return "rgb(244, 244, 244)";
+  const esOscuro = document.documentElement.getAttribute("data-theme") === "dark";
+  return esOscuro ? "rgb(16, 18, 22)" : "rgb(244, 244, 244)";
 }
 
 /**
@@ -84,21 +86,13 @@ export function inicializarCabeceraAdaptativa() {
     const rectCabecera = elementoCabecera.getBoundingClientRect();
     const puntoDisparoY = rectCabecera.bottom;
 
-    const estaAlFinalDePagina =
-      window.innerHeight + window.scrollY >=
-      document.documentElement.scrollHeight - 4;
-
     let seccionActual = mapaDatosSecciones[0];
 
-    if (estaAlFinalDePagina) {
-      seccionActual = mapaDatosSecciones[mapaDatosSecciones.length - 1];
-    } else {
-      for (const datos of mapaDatosSecciones) {
-        const rect = datos.elemento.getBoundingClientRect();
-        if (rect.top <= puntoDisparoY && rect.bottom > puntoDisparoY) {
-          seccionActual = datos;
-          break;
-        }
+    for (const datos of mapaDatosSecciones) {
+      const rect = datos.elemento.getBoundingClientRect();
+      if (rect.top <= puntoDisparoY && rect.bottom > puntoDisparoY) {
+        seccionActual = datos;
+        break;
       }
     }
 
@@ -178,4 +172,14 @@ export function inicializarCabeceraAdaptativa() {
 
   window.addEventListener("scroll", manejarDesplazamiento, { passive: true });
   window.addEventListener("resize", manejarRedimension, { passive: true });
+
+  const observadorTema = new MutationObserver(() => {
+    actualizarCacheSecciones();
+    seccionPrevia = null;
+    sincronizarColorCabecera();
+  });
+  observadorTema.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
 }

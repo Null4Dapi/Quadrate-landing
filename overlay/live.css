@@ -16,6 +16,19 @@
   color: var(--q-texto);
 }
 
+[data-theme="dark"] .qlive-lanzador,
+[data-theme="dark"] .qlive-panel {
+  --q-superficie: var(--color-bg-surface, #181b20);
+  --q-fondo: var(--color-bg-base, #101216);
+  --q-texto: var(--color-text-primary, #f0f2f5);
+  --q-texto-2: var(--color-text-secondary, #b0b7c3);
+  --q-apagado: var(--color-text-muted, #8a94a6);
+  --q-borde: var(--color-border-medium, #363c46);
+  --q-acento: #171a21;
+  --q-acento-texto: #f0f2f5;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+
 .qlive-solo-lectores {
   position: absolute;
   width: 1px;
@@ -70,14 +83,34 @@
   z-index: 1000;
   min-height: 48px;
   padding: 0.6rem 1.2rem;
-  border: 0;
   border-radius: 999px;
   background: var(--q-acento);
   color: var(--q-acento-texto);
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(35, 18, 18, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.qlive-lanzador:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .qlive-lanzador {
+  background: #1e232b;
+  color: #f0f2f5;
+  border: 1px solid rgba(240, 242, 245, 0.3);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .qlive-lanzador:hover {
+  background: #272d37;
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
 .qlive-lanzador[hidden],
@@ -112,8 +145,29 @@
 }
 
 .qlive-panel__cab .qlive-boton--sec {
-  border-color: var(--q-acento-texto);
+  width: 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   color: var(--q-acento-texto);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.qlive-panel__cab .qlive-boton--sec:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: #ffffff;
+  transform: scale(1.08);
 }
 
 .qlive-panel__titulo {
@@ -137,8 +191,8 @@
 .qlive-registro {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  padding: 1rem;
+  gap: 0.45rem;
+  padding: 0.75rem 0.85rem 0.35rem;
   overflow-y: auto;
   background: var(--q-fondo);
 }
@@ -168,8 +222,8 @@
 .qlive-sugerencias {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem 0;
+  gap: 0.35rem;
+  padding: 0.2rem 0.85rem 0.5rem;
   background: var(--q-fondo);
 }
 
@@ -178,27 +232,84 @@
 }
 
 .qlive-chip {
-  min-height: 36px;
-  padding: 0.3rem 0.75rem;
-  border: 1px solid var(--q-acento);
+  min-height: 34px;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--q-borde);
   border-radius: 999px;
   background: var(--q-superficie);
-  color: var(--q-acento);
+  color: var(--q-texto);
   font: inherit;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.qlive-chip:hover,
+.qlive-chip:focus-visible {
+  border-color: var(--color-border-strong, #9c9292);
+  background: var(--q-fondo);
 }
 
 .qlive-formulario {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 0.85rem;
   border-top: 1px solid var(--q-borde);
+  background: var(--q-superficie);
 }
 
 .qlive-entrada {
   flex: 1;
   min-width: 0;
+  min-height: 40px;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--q-borde);
+  border-radius: 999px;
+  background: var(--q-fondo);
+  color: var(--q-texto);
+  font: inherit;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+
+.qlive-entrada:hover {
+  border-color: var(--color-border-strong, #9c9292);
+  outline: none;
+}
+
+.qlive-entrada:focus,
+.qlive-entrada:focus-visible {
+  outline: none;
+  background: var(--q-superficie);
+  border-color: var(--color-border-strong, #9c9292);
+  box-shadow: 0 0 0 2px rgba(35, 18, 18, 0.12);
+}
+
+.qlive-boton--enviar {
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--q-acento);
+  color: var(--q-acento-texto);
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(35, 18, 18, 0.2);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.qlive-boton--enviar:hover:not(:disabled) {
+  transform: scale(1.06);
+  filter: brightness(1.2);
 }
 
 .qlive-panel__nota {
@@ -244,10 +355,11 @@
 
 /* ---------- Foco visible de dos tonos ---------- */
 .qlive-lanzador:focus-visible,
-.qlive-panel :focus-visible {
-  outline: 3px solid #fff;
+.qlive-panel button:focus-visible,
+.qlive-panel a:focus-visible {
+  outline: 2px solid #fff;
   outline-offset: 0;
-  box-shadow: 0 0 0 6px #231212;
+  box-shadow: 0 0 0 4px #231212;
 }
 
 @media (max-width: 599px) {

@@ -97,16 +97,19 @@
   gap: var(--space-2);
   padding: var(--space-2) var(--space-5);
   border-radius: var(--radius-pill);
-  background-color: var(--color-bg-surface);
-  color: var(--color-bg-contrast);
+  background-color: #ffffff;
+  color: #101216;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: background-color var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer__cta:hover {
-  background-color: var(--color-bg-subtle);
+  background-color: #f0f2f5;
+  color: #101216;
   transform: translateY(-1px);
 }
 

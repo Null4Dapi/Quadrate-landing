@@ -183,10 +183,10 @@ function crearAsistente() {
   }, "Asistente");
   const registro = h("div", { class: "qlive-registro", role: "log", "aria-live": "polite", "aria-relevant": "additions text", tabindex: "0", "aria-label": "Conversación" });
   const sugerencias = h("div", { class: "qlive-sugerencias" });
-  const entrada = h("input", { id: "qlive-entrada", class: "qlive-entrada", type: "text", maxlength: "400", autocomplete: "off", enterkeyhint: "send" });
-  const enviar = h("button", { type: "submit", class: "qlive-boton" }, "Enviar");
+  const entrada = h("input", { id: "qlive-entrada", class: "qlive-entrada", type: "text", maxlength: "400", autocomplete: "off", enterkeyhint: "send", placeholder: "Escribe tu consulta..." });
+  const enviar = h("button", { type: "submit", class: "qlive-boton qlive-boton--enviar", "aria-label": "Enviar mensaje" }, "➤");
   const estado = h("p", { class: "qlive-panel__estado", role: "status" });
-  const cerrar = h("button", { type: "button", class: "qlive-boton qlive-boton--sec", "aria-label": "Cerrar asistente" }, "Cerrar");
+  const cerrar = h("button", { type: "button", class: "qlive-boton qlive-boton--sec qlive-boton--cerrar", "aria-label": "Cerrar asistente" }, "✕");
   const formulario = h("form", { class: "qlive-formulario", novalidate: true },
     h("label", { for: "qlive-entrada", class: "qlive-solo-lectores" }, "Escribe tu pregunta"), entrada, enviar);
   const panel = h("section", { id: "qlive-panel", class: "qlive-panel", role: "dialog", "aria-label": "Asistente de Quadrate pe", hidden: true },

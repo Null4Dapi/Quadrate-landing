@@ -123,16 +123,18 @@ export function TelemetriaDrawerZustand({
         aria-controls="telemetria-panel-drawer"
         title="Abrir consola de telemetría y diagnóstico"
       >
-        <span
-          className={`telemetria-dock__trigger-dot ${
-            estaPausado ? "telemetria-dock__trigger-dot--pausa" : "telemetria-dock__trigger-dot--activo"
-          }`}
-          aria-hidden="true"
-        />
-        <span className="telemetria-dock__trigger-label">Consola de Telemetría (DevTools)</span>
-        <NotificationBadge />
+        <div className="telemetria-dock__trigger-left">
+          <span
+            className={`telemetria-dock__trigger-dot ${
+              estaPausado ? "telemetria-dock__trigger-dot--pausa" : "telemetria-dock__trigger-dot--activo"
+            }`}
+            aria-hidden="true"
+          />
+          <span className="telemetria-dock__trigger-label">Consola de Telemetría & Diagnóstico</span>
+          <NotificationBadge />
+        </div>
         <span className="telemetria-dock__trigger-chevron" aria-hidden="true">
-          {estaAbierto ? "▼" : "▲"}
+          {estaAbierto ? "Ocultar ▲" : "Desplegar ▼"}
         </span>
       </button>
 

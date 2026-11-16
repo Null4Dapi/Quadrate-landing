@@ -40,7 +40,7 @@ export function ContenedorLive({
     className: "quadrate-live__layout"
   }, /*#__PURE__*/React.createElement("div", {
     className: "quadrate-live__principal"
-  }, children), panelDetalle && /*#__PURE__*/React.createElement("div", {
+  }, children, feedTelemetria), panelDetalle && /*#__PURE__*/React.createElement("div", {
     className: "quadrate-live__secundario"
-  }, panelDetalle)), feedTelemetria);
+  }, panelDetalle)));
 }

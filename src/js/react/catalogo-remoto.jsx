@@ -120,32 +120,34 @@ export function CatalogoRemoto({
           </div>
         </div>
 
-        <div className="catalogo-remoto__filtros">
-          <span className="catalogo-remoto__filtros-label">Distritos:</span>
-          <div className="catalogo-remoto__pills-group">
-            {DISTRITOS_DISPONIBLES.map((d) => (
-              <button
-                key={d}
-                type="button"
-                className={`catalogo-remoto__filtro-btn ${
-                  distrito === d ? "catalogo-remoto__filtro-btn--activo" : ""
-                }`}
-                onClick={() => cambiarDistrito(d)}
-              >
-                {d}
-              </button>
-            ))}
+        <div className="catalogo-remoto__filtros-barra">
+          <div className="catalogo-remoto__filtros" role="toolbar" aria-label="Filtrar por distrito">
+            <span className="catalogo-remoto__filtros-label">Distritos:</span>
+            <div className="catalogo-remoto__pills-group">
+              {DISTRITOS_DISPONIBLES.map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  className={`catalogo-remoto__filtro-btn ${
+                    distrito === d ? "catalogo-remoto__filtro-btn--activo" : ""
+                  }`}
+                  onClick={() => cambiarDistrito(d)}
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="catalogo-remoto__badge-cache" title="Almacenamiento en memoria para navegación instantánea">
-          <span
-            className={`catalogo-remoto__pill ${
-              isFetching ? "catalogo-remoto__pill--sync" : "catalogo-remoto__pill--cache"
-            }`}
-          >
-            {isFetching ? "Sincronizando red..." : "TanStack Query · Caché 2m"}
-          </span>
+          <div className="catalogo-remoto__badge-cache" title="Almacenamiento en memoria para navegación instantánea">
+            <span
+              className={`catalogo-remoto__pill ${
+                isFetching ? "catalogo-remoto__pill--sync" : "catalogo-remoto__pill--cache"
+              }`}
+            >
+              {isFetching ? "Sincronizando..." : "TanStack Query · Caché 2m"}
+            </span>
+          </div>
         </div>
       </div>
 

@@ -131,7 +131,11 @@ export function CatalogoRemoto({
     onClick: limpiarFiltros,
     "aria-label": "Limpiar búsqueda"
   }, "✕"))), /*#__PURE__*/React.createElement("div", {
-    className: "catalogo-remoto__filtros"
+    className: "catalogo-remoto__filtros-barra"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "catalogo-remoto__filtros",
+    role: "toolbar",
+    "aria-label": "Filtrar por distrito"
   }, /*#__PURE__*/React.createElement("span", {
     className: "catalogo-remoto__filtros-label"
   }, "Distritos:"), /*#__PURE__*/React.createElement("div", {
@@ -146,7 +150,7 @@ export function CatalogoRemoto({
     title: "Almacenamiento en memoria para navegación instantánea"
   }, /*#__PURE__*/React.createElement("span", {
     className: `catalogo-remoto__pill ${isFetching ? "catalogo-remoto__pill--sync" : "catalogo-remoto__pill--cache"}`
-  }, isFetching ? "Sincronizando red..." : "TanStack Query · Caché 2m"))), isPending && /*#__PURE__*/React.createElement("div", {
+  }, isFetching ? "Sincronizando..." : "TanStack Query · Caché 2m")))), isPending && /*#__PURE__*/React.createElement("div", {
     className: "quadrate-live__grid",
     role: "status",
     "aria-live": "polite",

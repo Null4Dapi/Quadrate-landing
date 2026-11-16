@@ -82,5 +82,5 @@ export function TarjetaCochera({
     onClick: () => onSeleccionarCochera(cochera),
     "aria-pressed": estaSeleccionada,
     "aria-label": `Simular reserva en ${cochera.nombre}, ${cochera.distrito}`
-  }, estaSeleccionada ? "Seleccionada ✓" : "Simular reserva")));
+  }, estaSeleccionada ? "Elegida ✓" : "Simular")));
 }

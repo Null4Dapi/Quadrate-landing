@@ -147,12 +147,14 @@
 .quadrate-live__card-nombre { font-family: var(--font-family-display); font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); color: var(--color-text-primary); margin: 0 0 var(--space-2); line-height: 1.25; }
 .quadrate-live__card-direccion { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin: 0 0 var(--space-4); line-height: 1.4; }
 .quadrate-live__card-metricas {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);
-  background-color: var(--color-bg-base); border: 1px solid var(--color-border-subtle); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-4);
+  display: flex; flex-direction: column; gap: var(--space-2);
+  background-color: var(--color-bg-base); border: 1px solid var(--color-border-subtle);
+  padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-4);
 }
-.quadrate-live__card-metrica { display: flex; flex-direction: column; }
-.quadrate-live__card-metrica-etiqueta { font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-muted); margin-bottom: 2px; }
-.quadrate-live__card-metrica-valor { font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); color: var(--color-text-primary); }
+.quadrate-live__card-metrica { display: flex; justify-content: space-between; align-items: center; }
+.quadrate-live__card-metrica:not(:last-child) { border-bottom: 1px dashed var(--color-border-subtle); padding-bottom: 4px; }
+.quadrate-live__card-metrica-etiqueta { font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); color: var(--color-text-secondary); }
+.quadrate-live__card-metrica-valor { font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); color: var(--color-text-primary); font-family: var(--font-family-mono); }
 .quadrate-live__aforo-box { margin-bottom: var(--space-5); }
 .quadrate-live__aforo-info { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--font-size-sm); margin-bottom: var(--space-2); }
 .quadrate-live__aforo-label { color: var(--color-text-secondary); font-weight: var(--font-weight-medium); }
@@ -166,13 +168,14 @@
 .quadrate-live__aforo-barra--critico::-webkit-progress-value { background-color: var(--color-status-error); }
 .quadrate-live__card-footer {
   margin-top: auto; display: flex; justify-content: space-between; align-items: center;
-  border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-4); gap: var(--space-3);
+  border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-3); gap: var(--space-3); flex-wrap: nowrap;
 }
-.quadrate-live__card-eta { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.quadrate-live__card-eta { font-size: var(--font-size-xs); color: var(--color-text-secondary); white-space: nowrap; }
 .quadrate-live__card-btn {
-  font-family: var(--font-family-sans); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
-  padding: 0.55rem 1.15rem; min-height: 38px; border-radius: var(--radius-sm); border: 1px solid var(--color-border-medium);
+  font-family: var(--font-family-sans); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
+  padding: 0.45rem 1rem; min-height: 34px; border-radius: var(--radius-pill); border: 1px solid var(--color-border-medium);
   background-color: var(--color-bg-surface); color: var(--color-text-primary); cursor: pointer; transition: all var(--transition-fast);
+  white-space: nowrap; flex-shrink: 0;
 }
 .quadrate-live__card-btn:hover { background-color: var(--color-accent-primary); color: var(--color-text-contrast); border-color: var(--color-accent-primary); }
 .quadrate-live__card-btn:focus-visible { outline: 2px solid var(--color-accent-primary); outline-offset: 2px; }
@@ -181,7 +184,7 @@
 /* Simulador de Reserva y Tarifa Dinámica */
 .quadrate-live__simulador {
   background-color: var(--color-bg-surface); border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md); padding: var(--space-5); box-shadow: var(--shadow-card);
+  border-radius: var(--radius-2xl, 20px); padding: var(--space-6); box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12);
   position: sticky; top: 80px;
 }
 .quadrate-live__simulador-header {
@@ -193,25 +196,32 @@
 .quadrate-live__simulador-btn-cerrar { background: none; border: none; font-size: var(--font-size-base); color: var(--color-text-muted); cursor: pointer; padding: 4px; }
 .quadrate-live__simulador-grupo { margin-bottom: var(--space-4); }
 .quadrate-live__simulador-label { display: block; font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-text-secondary); margin-bottom: var(--space-2); }
-.quadrate-live__simulador-pills { display: flex; gap: var(--space-2); }
+.quadrate-live__simulador-pills { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 .quadrate-live__simulador-pill {
-  font-family: var(--font-family-sans); font-size: var(--font-size-xs); padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm); border: 1px solid var(--color-border-subtle); background-color: var(--color-bg-base);
-  color: var(--color-text-secondary); cursor: pointer;
+  font-family: var(--font-family-sans); font-size: var(--font-size-xs); font-weight: var(--font-weight-medium);
+  padding: 0.4rem 0.9rem; border-radius: var(--radius-pill, 9999px); border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-base); color: var(--color-text-secondary); cursor: pointer; transition: all var(--transition-fast);
 }
+.quadrate-live__simulador-pill:hover { border-color: var(--color-border-medium); color: var(--color-text-primary); }
 .quadrate-live__simulador-pill--activo { background-color: var(--color-accent-primary); color: var(--color-text-contrast); border-color: var(--color-accent-primary); }
-.quadrate-live__simulador-totales { background-color: var(--color-bg-base); padding: var(--space-4); border-radius: var(--radius-sm); margin-bottom: var(--space-4); }
-.quadrate-live__simulador-fila { display: flex; justify-content: space-between; font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-bottom: var(--space-1); }
+.quadrate-live__simulador-desglose {
+  background-color: var(--color-bg-base); padding: var(--space-4); border-radius: var(--radius-md);
+  margin-bottom: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); border: 1px solid var(--color-border-subtle);
+}
+.quadrate-live__simulador-fila { display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: 1.5; }
+.quadrate-live__simulador-fila strong { color: var(--color-text-primary); font-family: var(--font-family-mono); }
 .quadrate-live__simulador-fila--total {
-  border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-2);
-  margin-top: var(--space-2); font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); color: var(--color-text-primary);
+  border-top: 1px solid var(--color-border-subtle); padding-top: var(--space-3);
+  margin-top: var(--space-1); font-size: var(--font-size-base); font-weight: var(--font-weight-bold); color: var(--color-text-primary);
 }
+.quadrate-live__simulador-total-monto { font-family: var(--font-family-mono); color: var(--color-accent-primary); font-weight: var(--font-weight-bold); }
 .quadrate-live__simulador-btn-reservar {
-  width: 100%; padding: var(--space-3); font-family: var(--font-family-sans); font-size: var(--font-size-sm);
+  width: 100%; padding: 0.85rem 1.25rem; font-family: var(--font-family-sans); font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold); background-color: var(--color-accent-primary); color: var(--color-text-contrast);
-  border: none; border-radius: var(--radius-sm); cursor: pointer; transition: background-color var(--transition-fast);
+  border: none; border-radius: var(--radius-pill, 9999px); cursor: pointer; transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-.quadrate-live__simulador-btn-reservar:hover { background-color: var(--color-accent-hover); }
+.quadrate-live__simulador-btn-reservar:hover { background-color: var(--color-accent-hover); transform: translateY(-1px); }
 .quadrate-live__simulador-confirmacion { margin-top: var(--space-4); background-color: var(--color-status-success-bg); border: 1px solid var(--color-status-success); border-radius: var(--radius-sm); padding: var(--space-3); }
 .quadrate-live__simulador-pase-codigo { font-family: var(--font-family-mono); font-size: var(--font-size-md); font-weight: var(--font-weight-bold); color: var(--color-status-success); margin: var(--space-1) 0; }
 

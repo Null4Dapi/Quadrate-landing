@@ -163,15 +163,17 @@ export function TelemetriaDrawerZustand({
     "aria-expanded": estaAbierto,
     "aria-controls": "telemetria-panel-drawer",
     title: "Abrir consola de telemetría y diagnóstico"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "telemetria-dock__trigger-left"
   }, /*#__PURE__*/React.createElement("span", {
     className: `telemetria-dock__trigger-dot ${estaPausado ? "telemetria-dock__trigger-dot--pausa" : "telemetria-dock__trigger-dot--activo"}`,
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     className: "telemetria-dock__trigger-label"
-  }, "Consola de Telemetría (DevTools)"), /*#__PURE__*/React.createElement(NotificationBadge, null), /*#__PURE__*/React.createElement("span", {
+  }, "Consola de Telemetría & Diagnóstico"), /*#__PURE__*/React.createElement(NotificationBadge, null)), /*#__PURE__*/React.createElement("span", {
     className: "telemetria-dock__trigger-chevron",
     "aria-hidden": "true"
-  }, estaAbierto ? "▼" : "▲")), estaAbierto && /*#__PURE__*/React.createElement("section", {
+  }, estaAbierto ? "Ocultar ▲" : "Desplegar ▼")), estaAbierto && /*#__PURE__*/React.createElement("section", {
     id: "telemetria-panel-drawer",
     className: "telemetria-drawer",
     "aria-label": "Consola de telemetría operativa y diagnóstico"

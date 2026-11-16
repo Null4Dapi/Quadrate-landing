@@ -103,37 +103,43 @@
    3. Dock y Drawer Flotante de Diagnóstico & Telemetría (DX)
    ========================================================================== */
 .telemetria-dock {
-  position: fixed;
-  bottom: 1.25rem;
-  right: 1.25rem;
-  z-index: 9000;
+  position: static;
+  margin-top: var(--space-6);
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
+  align-items: stretch;
+  gap: var(--space-3);
 }
 
 .telemetria-dock__trigger {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.5rem 0.95rem;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.65rem 1.15rem;
   font-family: inherit;
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--color-text-primary, #231212);
   background-color: var(--color-bg-surface, #ffffff);
-  border: 1px solid var(--color-border-subtle, #d1d5db);
-  border-radius: var(--radius-full, 9999px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px dashed var(--color-border-medium, #d1d5db);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-subtle);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
+.telemetria-dock__trigger-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
 .telemetria-dock__trigger:hover {
   background-color: var(--color-bg-subtle, #f8f9fa);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border-color: var(--color-accent-primary);
+  border-style: solid;
 }
 
 .telemetria-dock__trigger-dot {
@@ -162,27 +168,28 @@
 }
 
 .telemetria-dock__trigger-chevron {
-  font-size: 0.6875rem;
-  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
 }
 
 /* Panel Drawer colapsable */
 .telemetria-drawer {
-  width: min(520px, 92vw);
+  width: 100%;
   max-height: 480px;
   display: flex;
   flex-direction: column;
   background-color: var(--color-bg-surface, #ffffff);
   border: 1px solid var(--color-border-subtle, #e5e7eb);
-  border-radius: var(--radius-md, 0.5rem);
-  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-lg, 14px);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   animation: slide-drawer 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slide-drawer {
   from {
-    transform: translateY(12px);
+    transform: translateY(-8px);
     opacity: 0;
   }
   to {

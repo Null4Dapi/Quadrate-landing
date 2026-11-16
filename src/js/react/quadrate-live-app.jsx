@@ -1,17 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ContenedorLive } from "./contenedor-live.jsx";
-import { SaludoUsuario } from "./saludo-usuario.jsx";
-import { MonitorActividad } from "./monitor-actividad.jsx";
 import { SimuladorReserva } from "./simulador-reserva.jsx";
 import { CatalogoRemoto } from "./catalogo-remoto.jsx";
-import { TelemetriaFeedZustand, ControlTemaZustand } from "./notificaciones-panel.jsx";
+import {
+  ToastNotificacionZustand,
+  TelemetriaDrawerZustand,
+  ControlTemaZustand,
+} from "./notificaciones-panel.jsx";
 import { useAppStore } from "../../store/appStore.js";
 import { aplicarTemaVisualDOM } from "../../store/syncChannel.js";
 
 /**
- * Componente principal de Quadrate Live — Arquitectura integrada Semana 11.
- * Articula TanStack Query (catálogo REST paginado y caché) con Zustand (estado global,
- * persistencia de tema, sincronización multi-pestaña y telemetría WebSocket).
+ * Experiencia de Usuario Principal de Quadrate Live (Semana 11).
+ * Diseñado con patrones de producto centrados en el conductor:
+ * 1. UX primaria: Descubrimiento de cocheras en Lima con TanStack Query (búsqueda, aforo, tarifas, reserva).
+ * 2. Feedback en vivo: Notificaciones ambientales discretas (Toast) ante eventos de garita.
+ * 3. DX / Auditoría: Consola de telemetría colapsable en dock inferior para evaluación técnica y DevTools.
  */
 export function QuadrateLiveApp() {
   const [cocheraSeleccionada, setCocheraSeleccionada] = useState(null);
@@ -50,7 +54,7 @@ export function QuadrateLiveApp() {
             const dato = JSON.parse(evento.data);
             const idItem = Date.now() + Math.random().toString(36).slice(2, 6);
 
-            // Integración reactiva con el Store Zustand (Semana 11)
+            // Ingesta reactiva en el Store Zustand (Semana 11)
             useAppStore.getState().addNotification({
               id: String(idItem),
               tipo: dato.tipo || "operativo",
@@ -99,44 +103,37 @@ export function QuadrateLiveApp() {
   };
 
   return (
-    <ContenedorLive
-      titulo="Centro de Operaciones y Catálogo Inteligente"
-      subtitulo="Plataforma de cocheras en Lima. Integración TanStack Query + Zustand Store y Telemetría WebSocket."
-      cabeceraSaludo={
-        <SaludoUsuario
-          totalCocheras={6}
-          estadoWs={estadoWs}
-          onSimularEvento={simularEventoGarita}
-          estaPausado={estaPausado}
-          onAlternarPausa={() => setEstaPausado((p) => !p)}
-        />
-      }
-      monitor={
-        <div className="quadrate-live__monitor-group">
-          <MonitorActividad estadoWs={estadoWs} />
-          <ControlTemaZustand />
-        </div>
-      }
-      feedTelemetria={
-        <TelemetriaFeedZustand
-          estaPausado={estaPausado}
-          onAlternarPausa={() => setEstaPausado((p) => !p)}
-        />
-      }
-      panelDetalle={
-        cocheraSeleccionada && (
-          <SimuladorReserva
-            cochera={cocheraSeleccionada}
-            onCerrar={() => setCocheraSeleccionada(null)}
+    <>
+      {/* Toast no intrusivo para alertas de disponibilidad en tiempo real */}
+      <ToastNotificacionZustand />
+
+      <ContenedorLive
+        titulo="Playas de Estacionamiento en Lima"
+        subtitulo="Consultá disponibilidad en vivo, tarifas dinámicas por hora y asegurá tu plaza al instante."
+        monitor={<ControlTemaZustand />}
+        feedTelemetria={
+          <TelemetriaDrawerZustand
+            estaPausado={estaPausado}
+            onAlternarPausa={() => setEstaPausado((p) => !p)}
+            onSimularEvento={simularEventoGarita}
+            estadoWs={estadoWs}
           />
-        )
-      }
-    >
-      <CatalogoRemoto
-        cocheraSeleccionada={cocheraSeleccionada}
-        onSeleccionarCochera={(c) => setCocheraSeleccionada(c)}
-        cocheraActualizadaId={cocheraActualizadaId}
-      />
-    </ContenedorLive>
+        }
+        panelDetalle={
+          cocheraSeleccionada && (
+            <SimuladorReserva
+              cochera={cocheraSeleccionada}
+              onCerrar={() => setCocheraSeleccionada(null)}
+            />
+          )
+        }
+      >
+        <CatalogoRemoto
+          cocheraSeleccionada={cocheraSeleccionada}
+          onSeleccionarCochera={(c) => setCocheraSeleccionada(c)}
+          cocheraActualizadaId={cocheraActualizadaId}
+        />
+      </ContenedorLive>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAppStore } from "../../store/appStore.js";
 import { changeTheme } from "../../store/syncChannel.js";
 
@@ -22,17 +22,13 @@ export function ControlTemaZustand() {
   const theme = useAppStore((state) => state.theme);
   const esOscuro = theme === "dark";
 
-  const alternarTema = () => {
-    changeTheme(esOscuro ? "light" : "dark");
-  };
-
   return (
     <button
       type="button"
       className={`btn-turno-garita ${esOscuro ? "btn-turno-garita--nocturno" : ""}`}
-      onClick={alternarTema}
+      onClick={() => changeTheme(esOscuro ? "light" : "dark")}
       aria-label={`Cambiar a turno ${esOscuro ? "diurno" : "nocturno"}`}
-      title="Sincronizado entre garitas vía BroadcastChannel"
+      title="Sincronizado entre pestañas vía BroadcastChannel"
     >
       <span className="btn-turno-garita__icono" aria-hidden="true">
         {esOscuro ? (
@@ -54,101 +50,185 @@ export function ControlTemaZustand() {
         )}
       </span>
       <span className="btn-turno-garita__texto">
-        {esOscuro ? "Turno Garita: Nocturno" : "Turno Garita: Diurno"}
+        {esOscuro ? "Turno Nocturno" : "Turno Diurno"}
       </span>
     </button>
   );
 }
 
 /**
- * Feed unificado de telemetría operativa en vivo consumiendo Zustand.
- * Elimina la redundancia visual y canaliza los eventos WebSocket con precisión editorial.
+ * Toast flotante no intrusivo para el usuario (UX).
+ * Muestra alertas contextuales de disponibilidad en tiempo real sin romper el flujo de navegación.
  */
-export function TelemetriaFeedZustand({ estaPausado = false, onAlternarPausa }) {
+export function ToastNotificacionZustand() {
+  const notifications = useAppStore((state) => state.notifications);
+  const [toastVisible, setToastVisible] = useState(null);
+
+  useEffect(() => {
+    if (notifications.length > 0) {
+      const ultima = notifications[0];
+      setToastVisible(ultima);
+      const timer = setTimeout(() => {
+        setToastVisible((prev) => (prev?.id === ultima.id ? null : prev));
+      }, 4500);
+      return () => clearTimeout(timer);
+    }
+  }, [notifications]);
+
+  if (!toastVisible) return null;
+
+  return (
+    <aside className="toast-operativo" role="status" aria-live="polite">
+      <div className="toast-operativo__dot" aria-hidden="true" />
+      <div className="toast-operativo__cuerpo">
+        {toastVisible.nombreCochera && (
+          <strong className="toast-operativo__cochera">{toastVisible.nombreCochera}: </strong>
+        )}
+        <span className="toast-operativo__mensaje">{toastVisible.message}</span>
+      </div>
+      <button
+        type="button"
+        className="toast-operativo__cerrar"
+        onClick={() => setToastVisible(null)}
+        aria-label="Cerrar notificación"
+      >
+        ✕
+      </button>
+    </aside>
+  );
+}
+
+/**
+ * Drawer / Consola colapsable de telemetría y diagnóstico para evaluadores (DX).
+ * Confinado en un dock inferior que no interfiere con la experiencia del usuario.
+ */
+export function TelemetriaDrawerZustand({
+  estaPausado = false,
+  onAlternarPausa,
+  onSimularEvento,
+  estadoWs = "en vivo",
+}) {
+  const [estaAbierto, setEstaAbierto] = useState(false);
   const notifications = useAppStore((state) => state.notifications);
   const clearNotifications = useAppStore((state) => state.clearNotifications);
 
   return (
-    <section className="telemetria-feed" aria-label="Registro de telemetría operativa en vivo">
-      <header className="telemetria-feed__header">
-        <div className="telemetria-feed__header-izq">
-          <span
-            className={`telemetria-feed__dot ${
-              estaPausado ? "telemetria-feed__dot--pausa" : "telemetria-feed__dot--activo"
-            }`}
-            aria-hidden="true"
-          />
-          <h3 className="telemetria-feed__titulo">Telemetría de Red</h3>
-          <NotificationBadge />
-        </div>
-        <div className="telemetria-feed__acciones">
-          {onAlternarPausa && (
-            <button
-              type="button"
-              onClick={onAlternarPausa}
-              className="telemetria-feed__btn-accion"
-              title={estaPausado ? "Reanudar recepción de telemetría" : "Pausar flujo en pantalla"}
-            >
-              {estaPausado ? "Reanudar" : "Pausar"}
-            </button>
-          )}
-          {notifications.length > 0 && (
-            <button
-              type="button"
-              onClick={clearNotifications}
-              className="telemetria-feed__btn-accion telemetria-feed__btn-accion--limpiar"
-              title="Limpiar historial de avisos"
-            >
-              Limpiar
-            </button>
-          )}
-        </div>
-      </header>
+    <div className={`telemetria-dock ${estaAbierto ? "telemetria-dock--abierto" : ""}`}>
+      {/* Botón flotante para abrir/cerrar consola */}
+      <button
+        type="button"
+        className="telemetria-dock__trigger"
+        onClick={() => setEstaAbierto((v) => !v)}
+        aria-expanded={estaAbierto}
+        aria-controls="telemetria-panel-drawer"
+        title="Abrir consola de telemetría y diagnóstico"
+      >
+        <span
+          className={`telemetria-dock__trigger-dot ${
+            estaPausado ? "telemetria-dock__trigger-dot--pausa" : "telemetria-dock__trigger-dot--activo"
+          }`}
+          aria-hidden="true"
+        />
+        <span className="telemetria-dock__trigger-label">Consola de Telemetría (DevTools)</span>
+        <NotificationBadge />
+        <span className="telemetria-dock__trigger-chevron" aria-hidden="true">
+          {estaAbierto ? "▼" : "▲"}
+        </span>
+      </button>
 
-      <div className="telemetria-feed__lista" role="log" aria-live="polite">
-        {notifications.length === 0 ? (
-          <p className="telemetria-feed__vacio">
-            Enlace de garitas activo. Esperando reportes automáticos de control vehicular en Lima...
-          </p>
-        ) : (
-          notifications.slice(0, 4).map((n) => (
-            <article key={n.id} className="telemetria-feed__item">
-              <time className="telemetria-feed__tiempo">
-                {n.timestamp ||
-                  new Date(n.createdAt).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                  })}
-              </time>
-              {n.tipo && (
-                <span className={`telemetria-feed__etiqueta telemetria-feed__etiqueta--${n.tipo}`}>
-                  {n.tipo === "ingreso" && "Check-in LPR"}
-                  {n.tipo === "salida" && "Check-out"}
-                  {n.tipo === "reserva_eta" && "Reserva ETA"}
-                  {n.tipo === "tarifa_dinamica" && "Tarifa Valle"}
-                  {n.tipo === "aforo_critico" && "Alerta Aforo"}
-                  {n.tipo !== "ingreso" &&
-                    n.tipo !== "salida" &&
-                    n.tipo !== "reserva_eta" &&
-                    n.tipo !== "tarifa_dinamica" &&
-                    n.tipo !== "aforo_critico" &&
-                    (n.tipo || "Operación")}
-                </span>
+      {/* Contenido colapsable de la consola */}
+      {estaAbierto && (
+        <section
+          id="telemetria-panel-drawer"
+          className="telemetria-drawer"
+          aria-label="Consola de telemetría operativa y diagnóstico"
+        >
+          <header className="telemetria-drawer__header">
+            <div className="telemetria-drawer__header-info">
+              <h3 className="telemetria-drawer__titulo">Consola de Telemetría (WebSocket + Zustand)</h3>
+              <p className="telemetria-drawer__subtitulo">
+                Enlace WebSocket {estadoWs} · Auditoría en vivo para evaluadores y desarrolladores
+              </p>
+            </div>
+            <div className="telemetria-drawer__acciones">
+              {onSimularEvento && (
+                <button
+                  type="button"
+                  onClick={onSimularEvento}
+                  className="telemetria-drawer__btn telemetria-drawer__btn--simular"
+                  title="Simular trama de telemetría de garita"
+                >
+                  Simular evento
+                </button>
               )}
-              <div className="telemetria-feed__cuerpo">
-                {n.nombreCochera && (
-                  <strong className="telemetria-feed__cochera">{n.nombreCochera} · </strong>
-                )}
-                <span className="telemetria-feed__texto">{n.message}</span>
-              </div>
-            </article>
-          ))
-        )}
-      </div>
-    </section>
+              {onAlternarPausa && (
+                <button
+                  type="button"
+                  onClick={onAlternarPausa}
+                  className="telemetria-drawer__btn"
+                  title={estaPausado ? "Reanudar recepción" : "Pausar eventos"}
+                >
+                  {estaPausado ? "Reanudar flujo" : "Pausar flujo"}
+                </button>
+              )}
+              {notifications.length > 0 && (
+                <button
+                  type="button"
+                  onClick={clearNotifications}
+                  className="telemetria-drawer__btn telemetria-drawer__btn--limpiar"
+                  title="Limpiar avisos en el store de Zustand"
+                >
+                  Limpiar historial
+                </button>
+              )}
+            </div>
+          </header>
+
+          <div className="telemetria-drawer__feed" role="log" aria-live="polite">
+            {notifications.length === 0 ? (
+              <p className="telemetria-drawer__vacio">
+                Enlace de garitas activo. Esperando reportes automáticos de control vehicular en Lima...
+              </p>
+            ) : (
+              notifications.map((n) => (
+                <article key={n.id} className="telemetria-drawer__item">
+                  <time className="telemetria-drawer__tiempo">
+                    {n.timestamp ||
+                      new Date(n.createdAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                      })}
+                  </time>
+                  {n.tipo && (
+                    <span className={`telemetria-drawer__etiqueta telemetria-drawer__etiqueta--${n.tipo}`}>
+                      {n.tipo === "ingreso" && "Check-in LPR"}
+                      {n.tipo === "salida" && "Check-out"}
+                      {n.tipo === "reserva_eta" && "Reserva ETA"}
+                      {n.tipo === "tarifa_dinamica" && "Tarifa Valle"}
+                      {n.tipo === "aforo_critico" && "Alerta Aforo"}
+                      {n.tipo !== "ingreso" &&
+                        n.tipo !== "salida" &&
+                        n.tipo !== "reserva_eta" &&
+                        n.tipo !== "tarifa_dinamica" &&
+                        n.tipo !== "aforo_critico" &&
+                        (n.tipo || "Operación")}
+                    </span>
+                  )}
+                  <div className="telemetria-drawer__cuerpo">
+                    {n.nombreCochera && <strong className="telemetria-drawer__cochera">{n.nombreCochera} · </strong>}
+                    <span className="telemetria-drawer__texto">{n.message}</span>
+                  </div>
+                </article>
+              ))
+            )}
+          </div>
+        </section>
+      )}
+    </div>
   );
 }
 
-/** Alias para compatibilidad de importaciones existentes */
-export const NotificationPanel = TelemetriaFeedZustand;
+/** Compatibilidad de importaciones existentes */
+export const TelemetriaFeedZustand = TelemetriaDrawerZustand;
+export const NotificationPanel = TelemetriaDrawerZustand;

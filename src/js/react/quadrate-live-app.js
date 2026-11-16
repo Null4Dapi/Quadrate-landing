@@ -4,18 +4,18 @@
 const React = window.React;
 const { useState, useEffect, useRef } = React;
 import { ContenedorLive } from "./contenedor-live.js";
-import { SaludoUsuario } from "./saludo-usuario.js";
-import { MonitorActividad } from "./monitor-actividad.js";
 import { SimuladorReserva } from "./simulador-reserva.js";
 import { CatalogoRemoto } from "./catalogo-remoto.js";
-import { TelemetriaFeedZustand, ControlTemaZustand } from "./notificaciones-panel.js";
+import { ToastNotificacionZustand, TelemetriaDrawerZustand, ControlTemaZustand } from "./notificaciones-panel.js";
 import { useAppStore } from "../../store/appStore.js";
 import { aplicarTemaVisualDOM } from "../../store/syncChannel.js";
 
 /**
- * Componente principal de Quadrate Live — Arquitectura integrada Semana 11.
- * Articula TanStack Query (catálogo REST paginado y caché) con Zustand (estado global,
- * persistencia de tema, sincronización multi-pestaña y telemetría WebSocket).
+ * Experiencia de Usuario Principal de Quadrate Live (Semana 11).
+ * Diseñado con patrones de producto centrados en el conductor:
+ * 1. UX primaria: Descubrimiento de cocheras en Lima con TanStack Query (búsqueda, aforo, tarifas, reserva).
+ * 2. Feedback en vivo: Notificaciones ambientales discretas (Toast) ante eventos de garita.
+ * 3. DX / Auditoría: Consola de telemetría colapsable en dock inferior para evaluación técnica y DevTools.
  */
 export function QuadrateLiveApp() {
   const [cocheraSeleccionada, setCocheraSeleccionada] = useState(null);
@@ -49,7 +49,7 @@ export function QuadrateLiveApp() {
             const dato = JSON.parse(evento.data);
             const idItem = Date.now() + Math.random().toString(36).slice(2, 6);
 
-            // Integración reactiva con el Store Zustand (Semana 11)
+            // Ingesta reactiva en el Store Zustand (Semana 11)
             useAppStore.getState().addNotification({
               id: String(idItem),
               tipo: dato.tipo || "operativo",
@@ -92,24 +92,15 @@ export function QuadrateLiveApp() {
       }));
     }
   };
-  return /*#__PURE__*/React.createElement(ContenedorLive, {
-    titulo: "Centro de Operaciones y Catálogo Inteligente",
-    subtitulo: "Plataforma de cocheras en Lima. Integración TanStack Query + Zustand Store y Telemetría WebSocket.",
-    cabeceraSaludo: /*#__PURE__*/React.createElement(SaludoUsuario, {
-      totalCocheras: 6,
-      estadoWs: estadoWs,
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToastNotificacionZustand, null), /*#__PURE__*/React.createElement(ContenedorLive, {
+    titulo: "Playas de Estacionamiento en Lima",
+    subtitulo: "Consultá disponibilidad en vivo, tarifas dinámicas por hora y asegurá tu plaza al instante.",
+    monitor: /*#__PURE__*/React.createElement(ControlTemaZustand, null),
+    feedTelemetria: /*#__PURE__*/React.createElement(TelemetriaDrawerZustand, {
+      estaPausado: estaPausado,
+      onAlternarPausa: () => setEstaPausado(p => !p),
       onSimularEvento: simularEventoGarita,
-      estaPausado: estaPausado,
-      onAlternarPausa: () => setEstaPausado(p => !p)
-    }),
-    monitor: /*#__PURE__*/React.createElement("div", {
-      className: "quadrate-live__monitor-group"
-    }, /*#__PURE__*/React.createElement(MonitorActividad, {
       estadoWs: estadoWs
-    }), /*#__PURE__*/React.createElement(ControlTemaZustand, null)),
-    feedTelemetria: /*#__PURE__*/React.createElement(TelemetriaFeedZustand, {
-      estaPausado: estaPausado,
-      onAlternarPausa: () => setEstaPausado(p => !p)
     }),
     panelDetalle: cocheraSeleccionada && /*#__PURE__*/React.createElement(SimuladorReserva, {
       cochera: cocheraSeleccionada,
@@ -119,5 +110,5 @@ export function QuadrateLiveApp() {
     cocheraSeleccionada: cocheraSeleccionada,
     onSeleccionarCochera: c => setCocheraSeleccionada(c),
     cocheraActualizadaId: cocheraActualizadaId
-  }));
+  })));
 }

@@ -108,20 +108,7 @@ export function CatalogoRemoto({
   return /*#__PURE__*/React.createElement("section", {
     className: "catalogo-remoto",
     "aria-label": "Catálogo de playas de estacionamiento en Lima"
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "catalogo-remoto__header"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "catalogo-remoto__titulos"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "catalogo-remoto__titulo"
-  }, "Red de Playas Conectadas"), /*#__PURE__*/React.createElement("p", {
-    className: "catalogo-remoto__subtitulo"
-  }, "Disponibilidad de aforo y tarifas dinámicas en Lima Metropolitana")), /*#__PURE__*/React.createElement("div", {
-    className: "catalogo-remoto__badge-cache",
-    title: "Almacenamiento en memoria para navegación instantánea"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: `catalogo-remoto__pill ${isFetching ? "catalogo-remoto__pill--sync" : "catalogo-remoto__pill--cache"}`
-  }, isFetching ? "Sincronizando red..." : "TanStack Query · Caché 2m"))), /*#__PURE__*/React.createElement("div", {
     className: "catalogo-remoto__toolbar"
   }, /*#__PURE__*/React.createElement("div", {
     className: "catalogo-remoto__search-box"
@@ -154,7 +141,12 @@ export function CatalogoRemoto({
     type: "button",
     className: `catalogo-remoto__filtro-btn ${distrito === d ? "catalogo-remoto__filtro-btn--activo" : ""}`,
     onClick: () => cambiarDistrito(d)
-  }, d))))), isPending && /*#__PURE__*/React.createElement("div", {
+  }, d)))), /*#__PURE__*/React.createElement("div", {
+    className: "catalogo-remoto__badge-cache",
+    title: "Almacenamiento en memoria para navegación instantánea"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: `catalogo-remoto__pill ${isFetching ? "catalogo-remoto__pill--sync" : "catalogo-remoto__pill--cache"}`
+  }, isFetching ? "Sincronizando red..." : "TanStack Query · Caché 2m"))), isPending && /*#__PURE__*/React.createElement("div", {
     className: "quadrate-live__grid",
     role: "status",
     "aria-live": "polite",

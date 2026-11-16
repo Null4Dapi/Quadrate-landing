@@ -4,36 +4,13 @@
  */
 
 /* ==========================================================================
-   1. Estructura y Cabecera del Catálogo
+   1. Estructura y Toolbar del Catálogo
    ========================================================================== */
 .catalogo-remoto {
   display: flex;
   flex-direction: column;
   gap: var(--space-4, 1rem);
   width: 100%;
-}
-
-.catalogo-remoto__header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: var(--space-3, 0.75rem);
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--color-border-subtle, #e5e7eb);
-}
-
-.catalogo-remoto__titulo {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-text-primary, #231212);
-}
-
-.catalogo-remoto__subtitulo {
-  margin: 0.2rem 0 0;
-  font-size: 0.875rem;
-  color: var(--color-text-secondary, #4d3d3d);
 }
 
 .catalogo-remoto__badge-cache .catalogo-remoto__pill {
@@ -56,14 +33,11 @@
   border: 1px solid #bfdbfe;
 }
 
-/* ==========================================================================
-   2. Toolbar: Búsqueda y Filtros de Distrito
-   ========================================================================== */
 .catalogo-remoto__toolbar {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   gap: var(--space-3, 0.75rem);
   padding: var(--space-3, 0.75rem);
   background-color: var(--color-bg-surface, #ffffff);
@@ -312,11 +286,6 @@ body.tema-oscuro .catalogo-remoto__btn-nav {
   color: #f9fafb !important;
 }
 
-body.tema-oscuro .catalogo-remoto__titulo {
-  color: #f9fafb !important;
-}
-
-body.tema-oscuro .catalogo-remoto__subtitulo,
 body.tema-oscuro .catalogo-remoto__pagina-info {
   color: #9ca3af !important;
 }

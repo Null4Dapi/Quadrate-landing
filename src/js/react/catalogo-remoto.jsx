@@ -91,25 +91,6 @@ export function CatalogoRemoto({
 
   return (
     <section className="catalogo-remoto" aria-label="Catálogo de playas de estacionamiento en Lima">
-      {/* Cabecera editorial del catálogo */}
-      <header className="catalogo-remoto__header">
-        <div className="catalogo-remoto__titulos">
-          <h3 className="catalogo-remoto__titulo">Red de Playas Conectadas</h3>
-          <p className="catalogo-remoto__subtitulo">
-            Disponibilidad de aforo y tarifas dinámicas en Lima Metropolitana
-          </p>
-        </div>
-        <div className="catalogo-remoto__badge-cache" title="Almacenamiento en memoria para navegación instantánea">
-          <span
-            className={`catalogo-remoto__pill ${
-              isFetching ? "catalogo-remoto__pill--sync" : "catalogo-remoto__pill--cache"
-            }`}
-          >
-            {isFetching ? "Sincronizando red..." : "TanStack Query · Caché 2m"}
-          </span>
-        </div>
-      </header>
-
       {/* Barra de herramientas: Búsqueda y distritos */}
       <div className="catalogo-remoto__toolbar">
         <div className="catalogo-remoto__search-box">
@@ -155,6 +136,16 @@ export function CatalogoRemoto({
               </button>
             ))}
           </div>
+        </div>
+
+        <div className="catalogo-remoto__badge-cache" title="Almacenamiento en memoria para navegación instantánea">
+          <span
+            className={`catalogo-remoto__pill ${
+              isFetching ? "catalogo-remoto__pill--sync" : "catalogo-remoto__pill--cache"
+            }`}
+          >
+            {isFetching ? "Sincronizando red..." : "TanStack Query · Caché 2m"}
+          </span>
         </div>
       </div>
 

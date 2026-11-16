@@ -5,9 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Quadrate pe es la app web progresiva de las playas de estacionamiento de Lima: garita digital, aforo en vivo, caja con liquidación automática y demanda visible antes de llegar.">
   <title>Quadrate pe — La app web de estacionamiento de Lima</title>
+  <link rel="canonical" href="https://quadratepe.dealforge.lat/">
+  <meta name="theme-color" content="#f4f4f4">
+  <meta property="og:type" content="website"><meta property="og:url" content="https://quadratepe.dealforge.lat/">
+  <meta property="og:title" content="Quadrate pe — La app web de estacionamiento de Lima"><meta property="og:description" content="Quadrate pe es la app web progresiva de las playas de estacionamiento de Lima: garita digital, aforo en vivo, caja con liquidación automática y demanda visible antes de llegar.">
+  <meta property="og:image" content="https://quadratepe.dealforge.lat/src/assets/logo.webp"><meta property="og:locale" content="es_PE"><meta property="og:site_name" content="Quadrate pe">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Quadrate pe — La app web de estacionamiento de Lima">
+  <meta name="twitter:description" content="Quadrate pe es la app web progresiva de las playas de estacionamiento de Lima: garita digital, aforo en vivo, caja con liquidación automática y demanda visible antes de llegar."><meta name="twitter:image" content="https://quadratepe.dealforge.lat/src/assets/logo.webp">
   <link rel="preload" href="src/assets/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="src/css/main.css">
+  <link rel="stylesheet" href="src/css/main.css?v=1.2.0">
   <link rel="icon" type="image/svg+xml" href="src/assets/favicon.svg">
+  <script>(function(){try{var t=localStorage.getItem("quadrate_theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();</script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Quadrate pe","url":"https://quadratepe.dealforge.lat/","description":"App web de playas de estacionamiento de Lima: garita digital, aforo en vivo y liquidación automática.","applicationCategory":"BusinessApplication","operatingSystem":"All","areaServed":{"@type":"AdministrativeArea","name":"Lima Metropolitana, Perú"}}
+  </script>
 </head>
 <body>
   <header class="header">
@@ -15,21 +26,27 @@
       <button class="header__menu-toggle" type="button" aria-expanded="false" aria-controls="navegacion-principal" aria-label="Abrir menú de navegación">
         <span class="header__menu-icon" aria-hidden="true"><span class="header__menu-line"></span><span class="header__menu-line"></span><span class="header__menu-line"></span></span>
       </button>
-      <a href="#inicio" class="header__brand" aria-label="Ir al inicio de Quadrate pe">
-        <img src="src/assets/logo.webp" alt="" width="34" height="37" class="header__logo-img">
-        <span class="header__logo-text">Quadrate</span>
-        <span class="header__logo-badge">pe</span>
-      </a>
+      <a href="#inicio" class="header__brand" aria-label="Ir al inicio de Quadrate pe"><img src="src/assets/logo.webp" alt="Logotipo de Quadrate pe" width="34" height="37" class="header__logo-img"><span class="header__logo-text">Quadrate</span><span class="header__logo-badge">pe</span></a>
       <nav id="navegacion-principal" class="header__nav" aria-label="Navegación principal">
         <ul class="header__nav-list">
-          <li class="header__nav-item"><a href="#inicio" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.0.etiqueta"></a></li>
-          <li class="header__nav-item"><a href="#modulos" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.1.etiqueta"></a></li>
-          <li class="header__nav-item"><a href="#como-funciona" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.2.etiqueta"></a></li>
-          <li class="header__nav-item"><a href="#tarifas" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.3.etiqueta"></a></li>
-          <li class="header__nav-item"><a href="#contacto" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.4.etiqueta"></a></li>
+          <li class="header__nav-item"><a href="#app" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.0.etiqueta">Producto</a></li>
+          <li class="header__nav-item"><a href="#modulos" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.1.etiqueta">Módulos</a></li>
+          <li class="header__nav-item"><a href="#como-funciona" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.2.etiqueta">Cómo funciona</a></li>
+          <li class="header__nav-item"><a href="#tarifas" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.3.etiqueta">Tarifas</a></li>
+          <li class="header__nav-item"><a href="#contacto" class="header__nav-link" data-texto="encabezado.enlacesNavegacion.4.etiqueta">Contacto</a></li>
         </ul>
       </nav>
-      <div class="header__actions"><a href="#contacto" class="header__cta" data-texto="encabezado.botonCtaNav"></a></div>
+      <div class="header__actions">
+        <button type="button" id="tema-toggle" class="header__theme-pill" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema (claro / oscuro)">
+          <span class="header__theme-option header__theme-option--claro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </span>
+          <span class="header__theme-option header__theme-option--oscuro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+        <a href="#contacto" class="header__cta" data-texto="encabezado.botonCtaNav">Abrir la plataforma</a>
+      </div>
     </div>
   </header>
 
@@ -39,12 +56,12 @@
       <div class="hero__container">
         <div class="hero__content">
           <h1 id="hero-titulo" class="hero__title">
-            <span class="hero__title-line hero__title-line--primary" data-texto="hero.tituloLinea1"></span>
-            <span class="hero__title-line hero__title-line--accent" data-texto="hero.tituloLinea2"></span>
+            <span class="hero__title-line hero__title-line--primary" data-texto="hero.tituloLinea1">Sin vueltas</span>
+            <span class="hero__title-line hero__title-line--accent" data-texto="hero.tituloLinea2">y pago exacto.</span>
           </h1>
-          <p class="hero__description" data-texto="hero.descripcionCorta"></p>
+          <p class="hero__description" data-texto="hero.descripcionCorta">Quadrate pe conecta conductores con playas de estacionamiento independientes. Tarifas transparentes, disponibilidad en vivo y reserva dinámica asegurada por tiempo estimado de llegada.</p>
           <div class="hero__actions">
-            <a href="demo.html" class="hero__button hero__button--primary" data-texto="hero.textoBotonPrincipal"></a>
+            <a href="demo.html" class="hero__button hero__button--primary" data-texto="hero.textoBotonPrincipal">Probar demo</a>
           </div>
         </div>
         <div class="hero__visual">
@@ -58,21 +75,50 @@
       </div>
     </section>
 
+    <!-- La app en acción: pantalla referencial del conductor (CSS puro, sin imágenes) -->
+    <section id="app" class="app-showcase" aria-labelledby="app-titulo">
+      <div class="app-showcase__container">
+        <article class="app-showcase__card">
+          <div class="app-showcase__content">
+            <h2 id="app-titulo" class="app-showcase__title"><span class="app-showcase__title-line" data-texto="appEnAccion.tituloLinea1">Dónde hay lugar </span><span class="app-showcase__title-line" data-texto="appEnAccion.tituloLinea2">y a qué precio</span></h2>
+            <p class="app-showcase__subtitle"><span class="app-showcase__subtitle-line" data-texto="appEnAccion.subtituloLinea1">antes de arrancar </span><span class="app-showcase__subtitle-line" data-texto="appEnAccion.subtituloLinea2">sin dar vueltas</span></p>
+            <div class="app-showcase__actions"><a href="#contacto" class="app-showcase__button" data-texto="appEnAccion.botonTexto">Abrir la plataforma</a></div>
+          </div>
+          <div class="app-showcase__visual">
+            <figure class="app-showcase__figure" aria-hidden="true">
+              <div class="app-showcase__device" data-screen="referencial">
+                <div class="app-showcase__screen-topbar"><span class="app-showcase__screen-marca" data-texto="appEnAccion.pantallaConductor.marca">Quadrate pe</span><span class="app-showcase__screen-estado" data-texto="appEnAccion.pantallaConductor.encabezadoEstado">Miraflores · en vivo</span></div>
+                <div class="app-showcase__screen-map">
+                  <span class="app-showcase__pin app-showcase__pin--a"><span class="app-showcase__pin-dot"></span><span class="app-showcase__pin-label" data-texto="appEnAccion.pantallaConductor.pinUno">S/ 4.00 · libre</span></span>
+                  <span class="app-showcase__pin app-showcase__pin--b app-showcase__pin--ocupado"><span class="app-showcase__pin-dot"></span><span class="app-showcase__pin-label" data-texto="appEnAccion.pantallaConductor.pinDos">Cupo lleno</span></span>
+                  <span class="app-showcase__pin app-showcase__pin--c"><span class="app-showcase__pin-dot"></span><span class="app-showcase__pin-label" data-texto="appEnAccion.pantallaConductor.pinTres">S/ 3.50 · libre</span></span>
+                </div>
+                <div class="app-showcase__sheet">
+                  <p class="app-showcase__sheet-ruta" data-texto="appEnAccion.pantallaConductor.rutaActiva">Voy hacia allá · ETA 12 min</p>
+                  <p class="app-showcase__sheet-aforo" data-texto="appEnAccion.pantallaConductor.aforoVisible">Quedan 7 espacios libres en la zona</p>
+                  <span class="app-showcase__sheet-accion" data-texto="appEnAccion.pantallaConductor.accionDestino">Reservar en camino</span>
+                </div>
+              </div>
+            </figure>
+          </div>
+        </article>
+      </div>
+    </section>
     <!-- Módulos: Bento Grid interactivo y reactivo de cuatro módulos -->
     <section id="modulos" class="modules" aria-labelledby="modulos-titulo">
       <div class="modules__container">
         <header class="modules__header">
           <span class="modules__eyebrow">Arquitectura del sistema</span>
-          <h2 id="modulos-titulo" class="modules__title" data-texto="modulos.tituloSeccion"></h2>
-          <p class="modules__description" data-texto="modulos.descripcionSeccion"></p>
+          <h2 id="modulos-titulo" class="modules__title" data-texto="modulos.tituloSeccion">Un sistema, cuatro módulos</h2>
+          <p class="modules__description" data-texto="modulos.descripcionSeccion">Quadrate pe es una app web progresiva: funciona en el navegador del celular con la soltura de una app instalada. Las dos caras del negocio comparten la misma caseta digital.</p>
         </header>
         <div class="modules__bento">
           <!-- Tarjeta 1: Garita digital (Destacada, 2 columnas internas) -->
           <article class="modules__card modules__card--featured" tabindex="0">
-            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.0.tag"></span></div>
+            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.0.tag">Acceso Rápido</span></div>
             <div class="modules__card-body">
-              <h3 class="modules__card-title" data-texto="modulos.filas.0.nombre"></h3>
-              <p class="modules__card-desc"><span class="modules__card-badge" data-texto="modulos.filas.0.badge"></span><span data-texto="modulos.filas.0.beneficio"></span></p>
+              <h3 class="modules__card-title" data-texto="modulos.filas.0.nombre">Garita digital</h3>
+              <p class="modules__card-desc"><span class="modules__card-badge" data-texto="modulos.filas.0.badge">Check-in &lt; 3 seg</span><span data-texto="modulos.filas.0.beneficio">Credencial digital con QR o PIN en el portón. Abonados y conductores frecuentes pasan directo, sin papel ni filas.</span></p>
             </div>
             <div class="modules__card-visual modules__visual--garita" aria-hidden="true">
               <div class="modules__qr-box">
@@ -83,10 +129,10 @@
           </article>
           <!-- Tarjeta 2: Aforo en vivo -->
           <article class="modules__card" tabindex="0">
-            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.1.tag"></span></div>
+            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.1.tag">Disponibilidad Real</span></div>
             <div class="modules__card-body">
-              <h3 class="modules__card-title" data-texto="modulos.filas.1.nombre"></h3>
-              <p class="modules__card-desc" data-texto="modulos.filas.1.beneficio"></p>
+              <h3 class="modules__card-title" data-texto="modulos.filas.1.nombre">Aforo en vivo</h3>
+              <p class="modules__card-desc" data-texto="modulos.filas.1.beneficio">Cada entrada y salida actualiza el cupo real del estacionamiento: se ve al instante cuántos lugares quedan.</p>
             </div>
             <div class="modules__card-visual modules__visual--aforo" aria-hidden="true">
               <div class="modules__gauge">
@@ -97,10 +143,10 @@
           </article>
           <!-- Tarjeta 3: Caja y liquidación -->
           <article class="modules__card" tabindex="0">
-            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.2.tag"></span></div>
+            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.2.tag">Cierre Automático</span></div>
             <div class="modules__card-body">
-              <h3 class="modules__card-title" data-texto="modulos.filas.2.nombre"></h3>
-              <p class="modules__card-desc" data-texto="modulos.filas.2.beneficio"></p>
+              <h3 class="modules__card-title" data-texto="modulos.filas.2.nombre">Caja y liquidación</h3>
+              <p class="modules__card-desc" data-texto="modulos.filas.2.beneficio">El registro automático concilia cada sol con el movimiento que le dio origen. El talonario de papel deja de resolver el cierre del día.</p>
             </div>
             <div class="modules__card-visual modules__visual--caja" aria-hidden="true">
               <div class="modules__ledger">
@@ -111,10 +157,10 @@
           </article>
           <!-- Tarjeta 4: Demanda en tiempo real (Ancha, 2 columnas internas) -->
           <article class="modules__card modules__card--wide" tabindex="0">
-            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.3.tag"></span></div>
+            <div class="modules__card-header"><span class="modules__card-tag" data-texto="modulos.filas.3.tag">Conexión Directa</span></div>
             <div class="modules__card-body">
-              <h3 class="modules__card-title" data-texto="modulos.filas.3.nombre"></h3>
-              <p class="modules__card-desc" data-texto="modulos.filas.3.beneficio"></p>
+              <h3 class="modules__card-title" data-texto="modulos.filas.3.nombre">Demanda en tiempo real</h3>
+              <p class="modules__card-desc" data-texto="modulos.filas.3.beneficio">La playa publica cupo y tarifas claras: el conductor elige con certidumbre antes de arrancar y la cochera recibe trámite formal.</p>
             </div>
             <div class="modules__card-visual modules__visual--demanda" aria-hidden="true">
               <div class="modules__map-panel">
@@ -133,18 +179,18 @@
       <div class="caseta">
         <div class="caseta__grid">
           <div class="caseta__content">
-            <span class="caseta__eyebrow" data-texto="comoFunciona.etiquetaSeccion"></span>
-            <h2 id="como-funciona-titulo" class="caseta__title" data-texto="comoFunciona.tituloSeccion"></h2>
-            <p class="caseta__lead" data-texto="comoFunciona.descripcionSeccion"></p>
+            <span class="caseta__eyebrow" data-texto="comoFunciona.etiquetaSeccion">Panel de Control de Caseta · Garitas conectadas ✓</span>
+            <h2 id="como-funciona-titulo" class="caseta__title" data-texto="comoFunciona.tituloSeccion">Digitalización operativa para playas sin hardware costoso</h2>
+            <p class="caseta__lead" data-texto="comoFunciona.descripcionSeccion">Opera tu estacionamiento desde cualquier smartphone o tableta existente. Cero barreras electromecánicas y cero sensores en el suelo.</p>
             <ul class="caseta__list" role="list">
-              <li class="caseta__item caseta__item--active" tabindex="0" role="button" aria-pressed="true"><h3 class="caseta__item-title" data-texto="comoFunciona.pasos.0.titulo"></h3><p class="caseta__item-detail" data-texto="comoFunciona.pasos.0.detalle"></p></li>
-              <li class="caseta__item" tabindex="0" role="button" aria-pressed="false"><h3 class="caseta__item-title" data-texto="comoFunciona.pasos.1.titulo"></h3><p class="caseta__item-detail" data-texto="comoFunciona.pasos.1.detalle"></p></li>
-              <li class="caseta__item" tabindex="0" role="button" aria-pressed="false"><h3 class="caseta__item-title" data-texto="comoFunciona.pasos.2.titulo"></h3><p class="caseta__item-detail" data-texto="comoFunciona.pasos.2.detalle"></p></li>
+              <li class="caseta__item caseta__item--active" tabindex="0" role="button" aria-pressed="true"><h3 class="caseta__item-title" data-texto="comoFunciona.pasos.0.titulo">Check-in y Check-out en menos de 3 segundos</h3><p class="caseta__item-detail" data-texto="comoFunciona.pasos.0.detalle">Escaneo veloz de pases QR o registro instantáneo por placa vehicular con la cámara del dispositivo.</p></li>
+              <li class="caseta__item" tabindex="0" role="button" aria-pressed="false"><h3 class="caseta__item-title" data-texto="comoFunciona.pasos.1.titulo">Control automático de aforo y plazas libres</h3><p class="caseta__item-detail" data-texto="comoFunciona.pasos.1.detalle">El sistema descuenta ingresos y libera plazas al egreso, evitando la saturación del local en portón.</p></li>
+              <li class="caseta__item" tabindex="0" role="button" aria-pressed="false"><h3 class="caseta__item-title" data-texto="comoFunciona.pasos.2.titulo">Monetización dinámica de franjas valle</h3><p class="caseta__item-detail" data-texto="comoFunciona.pasos.2.detalle">Tarifas promocionales en horarios de baja demanda para aumentar la rotación y rentabilidad.</p></li>
             </ul>
           </div>
           <div class="caseta__visual">
             <figure class="caseta__figure">
-              <img src="src/assets/caseta-mockup-checkin.svg" alt="Mockup interactivo del panel de caseta Quadrate pe" width="320" height="320" class="caseta__image">
+              <img src="src/assets/caseta-mockup-checkin.svg" alt="Mockup interactivo del panel de caseta Quadrate pe" width="320" height="320" loading="lazy" class="caseta__image">
             </figure>
           </div>
         </div>
@@ -155,30 +201,30 @@
     <section id="tarifas" class="rates" aria-labelledby="tarifas-titulo">
       <div class="rates__container rates__layout">
         <header class="rates__aside">
-          <span class="rates__eyebrow" data-texto="tarifas.etiquetaSeccion"></span>
-          <h2 id="tarifas-titulo" class="rates__title" data-texto="tarifas.tituloSeccion"></h2>
-          <p class="rates__description" data-texto="tarifas.descripcionSeccion"></p>
+          <span class="rates__eyebrow" data-texto="tarifas.etiquetaSeccion">Tarifas claras</span>
+          <h2 id="tarifas-titulo" class="rates__title" data-texto="tarifas.tituloSeccion">El precio que ves es el precio que pagas</h2>
+          <p class="rates__description" data-texto="tarifas.descripcionSeccion">Las tarifas claras benefician a las dos caras del sistema: el conductor conoce el precio antes de llegar y la cochera liquida cada estadía con ese mismo dato exacto.</p>
           <ol class="rates__progress" aria-hidden="true">
-            <li class="rates__progress-item" data-rate="0" data-active=""><span class="rates__progress-number">01</span><span class="rates__progress-label" data-texto="tarifas.filas.0.categoria"></span></li>
-            <li class="rates__progress-item" data-rate="1"><span class="rates__progress-number">02</span><span class="rates__progress-label" data-texto="tarifas.filas.1.categoria"></span></li>
-            <li class="rates__progress-item" data-rate="2"><span class="rates__progress-number">03</span><span class="rates__progress-label" data-texto="tarifas.filas.2.categoria"></span></li>
+            <li class="rates__progress-item" data-rate="0" data-active=""><span class="rates__progress-number">01</span><span class="rates__progress-label" data-texto="tarifas.filas.0.categoria">Primera hora</span></li>
+            <li class="rates__progress-item" data-rate="1"><span class="rates__progress-number">02</span><span class="rates__progress-label" data-texto="tarifas.filas.1.categoria">Fraccionamiento</span></li>
+            <li class="rates__progress-item" data-rate="2"><span class="rates__progress-number">03</span><span class="rates__progress-label" data-texto="tarifas.filas.2.categoria">Abonados mensuales</span></li>
           </ol>
         </header>
         <ol class="rates__stack">
           <li class="rates__card" data-rate="0" style="--rates-card-index: 0; --rates-covered: 0.000;">
-            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.0.tag"></span><span class="rates__card-number" aria-hidden="true">01 / 03</span></div>
-            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.0.categoria"></h3><p class="rates__card-description" data-texto="tarifas.filas.0.regla"></p></div>
-            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.0.impacto"></span></div>
+            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.0.tag">Tarifa plana publicada</span><span class="rates__card-number" aria-hidden="true">01 / 03</span></div>
+            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.0.categoria">Primera hora</h3><p class="rates__card-description" data-texto="tarifas.filas.0.regla">Tarifa plana publicada en el catálogo: se ve antes de llegar y rige por igual para todos los conductores.</p></div>
+            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.0.impacto">Precio visible antes de llegar</span></div>
           </li>
           <li class="rates__card" data-rate="1" style="--rates-card-index: 1; --rates-covered: 0.000;">
-            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.1.tag"></span><span class="rates__card-number" aria-hidden="true">02 / 03</span></div>
-            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.1.categoria"></h3><p class="rates__card-description" data-texto="tarifas.filas.1.regla"></p></div>
-            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.1.impacto"></span></div>
+            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.1.tag">Ley de estacionamientos</span><span class="rates__card-number" aria-hidden="true">02 / 03</span></div>
+            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.1.categoria">Fraccionamiento</h3><p class="rates__card-description" data-texto="tarifas.filas.1.regla">Cobro reglamentario por cuartos de hora (15 min) posteriores a la primera hora; el sistema calcula solo.</p></div>
+            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.1.impacto">Pago exacto del tiempo real</span></div>
           </li>
           <li class="rates__card" data-rate="2" style="--rates-card-index: 2; --rates-covered: 0.000;">
-            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.2.tag"></span><span class="rates__card-number" aria-hidden="true">03 / 03</span></div>
-            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.2.categoria"></h3><p class="rates__card-description" data-texto="tarifas.filas.2.regla"></p></div>
-            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.2.impacto"></span></div>
+            <div class="rates__card-top"><span class="rates__card-tag" data-texto="tarifas.filas.2.tag">Ingresos previsibles</span><span class="rates__card-number" aria-hidden="true">03 / 03</span></div>
+            <div class="rates__card-copy"><h3 class="rates__card-title" data-texto="tarifas.filas.2.categoria">Abonados mensuales</h3><p class="rates__card-description" data-texto="tarifas.filas.2.regla">Contratos digitales con cupo garantizado y avisos de vencimiento; ingresos previsibles para la cochera.</p></div>
+            <div class="rates__card-footer"><span class="rates__card-impact" data-texto="tarifas.filas.2.impacto">Cierre sin planillas</span></div>
           </li>
         </ol>
       </div>
@@ -188,60 +234,60 @@
     <section id="manifiesto" class="manifesto" aria-labelledby="manifiesto-titulo">
       <div class="manifesto__container">
         <header class="manifesto__header">
-          <span class="manifesto__eyebrow" data-texto="manifiesto.etiqueta"></span>
-          <h2 id="manifiesto-titulo" class="manifesto__title" data-texto="manifiesto.titulo"></h2>
-          <p class="manifesto__lead" data-texto="manifiesto.descripcion"></p>
+          <span class="manifesto__eyebrow" data-texto="manifiesto.etiqueta">Experiencias reales</span>
+          <h2 id="manifiesto-titulo" class="manifesto__title" data-texto="manifiesto.titulo">Lo que dicen quienes operan y se estacionan con Quadrate pe</h2>
+          <p class="manifesto__lead" data-texto="manifiesto.descripcion">Historias directas de administradores de playas y conductores en Lima que transformaron su rutina diaria.</p>
         </header>
         <div class="manifesto__slider" role="region" aria-label="Carrusel de testimonios de Quadrate pe">
           <div class="manifesto__track">
-            <article class="manifesto__slide" aria-label="1 de 4">
+            <article class="manifesto__slide" id="testimonio-0" role="tabpanel" aria-labelledby="testimonio-tab-0" aria-label="1 de 4" aria-hidden="false">
               <div class="manifesto__slide-top">
                 <div class="manifesto__author-card">
-                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.0.avatarInicial"></div>
-                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.0.nombre"></h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.0.rol"></p></div>
+                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.0.avatarInicial">CV</div>
+                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.0.nombre">Carlos Valdivia</h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.0.rol">Administrador de Playa · San Isidro</p></div>
                 </div>
-                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.0.calificacion"></span></div>
+                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.0.calificacion">5/5</span></div>
               </div>
-              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.0.cita"></blockquote>
+              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.0.cita">El talonario de papel era una fuga constante de dinero y tiempo. Con Quadrate pe cerramos la caja en 3 minutos y sabemos exactamente cuántos vehículos entraron y salieron en cada turno sin discutir en la garita.</blockquote>
             </article>
-            <article class="manifesto__slide" aria-label="2 de 4">
+            <article class="manifesto__slide" id="testimonio-1" role="tabpanel" aria-labelledby="testimonio-tab-1" aria-label="2 de 4" aria-hidden="true">
               <div class="manifesto__slide-top">
                 <div class="manifesto__author-card">
-                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.1.avatarInicial"></div>
-                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.1.nombre"></h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.1.rol"></p></div>
+                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.1.avatarInicial">MB</div>
+                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.1.nombre">Mariana Benavides</h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.1.rol">Conductora frecuente · Miraflores</p></div>
                 </div>
-                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.1.calificacion"></span></div>
+                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.1.calificacion">5/5</span></div>
               </div>
-              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.1.cita"></blockquote>
+              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.1.cita">Buscar estacionamiento antes de una reunión me costaba 20 minutos de vueltas inútiles. Ahora salgo con el lugar asegurado por mi tiempo estimado de llegada y pago la tarifa exacta sin sorpresas.</blockquote>
             </article>
-            <article class="manifesto__slide" aria-label="3 de 4">
+            <article class="manifesto__slide" id="testimonio-2" role="tabpanel" aria-labelledby="testimonio-tab-2" aria-label="3 de 4" aria-hidden="true">
               <div class="manifesto__slide-top">
                 <div class="manifesto__author-card">
-                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.2.avatarInicial"></div>
-                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.2.nombre"></h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.2.rol"></p></div>
+                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.2.avatarInicial">JA</div>
+                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.2.nombre">Jorge Alarcón</h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.2.rol">Gerente de Operaciones · Red Cocheras Lima</p></div>
                 </div>
-                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.2.calificacion"></span></div>
+                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.2.calificacion">5/5</span></div>
               </div>
-              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.2.cita"></blockquote>
+              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.2.cita">Monetizar las horas valle fue un cambio total. En las tardes llenamos espacios que antes estaban vacíos gracias a la visibilidad en tiempo real para los conductores de la zona.</blockquote>
             </article>
-            <article class="manifesto__slide" aria-label="4 de 4">
+            <article class="manifesto__slide" id="testimonio-3" role="tabpanel" aria-labelledby="testimonio-tab-3" aria-label="4 de 4" aria-hidden="true">
               <div class="manifesto__slide-top">
                 <div class="manifesto__author-card">
-                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.3.avatarInicial"></div>
-                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.3.nombre"></h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.3.rol"></p></div>
+                  <div class="manifesto__avatar" aria-hidden="true" data-texto="manifiesto.testimonios.3.avatarInicial">VU</div>
+                  <div class="manifesto__author-info"><h3 class="manifesto__author-name" data-texto="manifiesto.testimonios.3.nombre">Valeria Ugarte</h3><p class="manifesto__author-role" data-texto="manifiesto.testimonios.3.rol">Abonada mensual · Surco Empresarial</p></div>
                 </div>
-                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.3.calificacion"></span></div>
+                <div class="manifesto__rating" aria-label="Calificación 5 de 5 estrellas"><span class="manifesto__stars" aria-hidden="true">★★★★★</span><span data-texto="manifiesto.testimonios.3.calificacion">5/5</span></div>
               </div>
-              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.3.cita"></blockquote>
+              <blockquote class="manifesto__quote" data-texto="manifiesto.testimonios.3.cita">Tener mi credencial digital con PIN y QR en el celular hace que pase directo al portón. Se acabaron los tickets de papel que se pierden o se despintan con el sol.</blockquote>
             </article>
           </div>
         </div>
         <div class="manifesto__controls">
           <div class="manifesto__dots" role="tablist" aria-label="Controles de navegación de diapositivas">
-            <button type="button" class="manifesto__dot manifesto__dot--active" role="tab" aria-selected="true" aria-label="Ir a testimonio 1" data-slide="0"></button>
-            <button type="button" class="manifesto__dot" role="tab" aria-selected="false" aria-label="Ir a testimonio 2" data-slide="1"></button>
-            <button type="button" class="manifesto__dot" role="tab" aria-selected="false" aria-label="Ir a testimonio 3" data-slide="2"></button>
-            <button type="button" class="manifesto__dot" role="tab" aria-selected="false" aria-label="Ir a testimonio 4" data-slide="3"></button>
+            <button type="button" id="testimonio-tab-0" class="manifesto__dot manifesto__dot--active" role="tab" aria-selected="true" aria-controls="testimonio-0" aria-label="Ir a testimonio 1" data-slide="0" tabindex="0"></button>
+            <button type="button" id="testimonio-tab-1" class="manifesto__dot" role="tab" aria-selected="false" aria-controls="testimonio-1" aria-label="Ir a testimonio 2" data-slide="1" tabindex="-1"></button>
+            <button type="button" id="testimonio-tab-2" class="manifesto__dot" role="tab" aria-selected="false" aria-controls="testimonio-2" aria-label="Ir a testimonio 3" data-slide="2" tabindex="-1"></button>
+            <button type="button" id="testimonio-tab-3" class="manifesto__dot" role="tab" aria-selected="false" aria-controls="testimonio-3" aria-label="Ir a testimonio 4" data-slide="3" tabindex="-1"></button>
           </div>
           <div class="manifesto__arrows">
             <button type="button" class="manifesto__btn-arrow" data-accion="anterior" aria-label="Testimonio anterior">←</button>
@@ -255,23 +301,16 @@
     <section id="contacto" class="waitlist" aria-labelledby="contacto-titulo">
       <div class="waitlist__container">
         <header class="waitlist__header">
-          <span class="waitlist__eyebrow" data-texto="formularioEspera.etiquetaFormulario"></span>
-          <h2 id="contacto-titulo" class="waitlist__title" data-texto="formularioEspera.tituloFormulario"></h2>
-          <p class="waitlist__description" data-texto="formularioEspera.descripcionFormulario"></p>
+          <span class="waitlist__eyebrow" data-texto="formularioEspera.etiquetaFormulario">Contacto</span>
+          <h2 id="contacto-titulo" class="waitlist__title" data-texto="formularioEspera.tituloFormulario">Pide tu acceso a la plataforma</h2>
+          <p class="waitlist__description" data-texto="formularioEspera.descripcionFormulario">Ya sea que manejes o administres una playa, deja tus datos y te escribimos para abrirla contigo. Todo se opera desde el navegador del celular.</p>
         </header>
         <form class="waitlist__form" novalidate>
-          <div class="waitlist__field"><label for="lista-nombre" class="waitlist__label" data-texto="formularioEspera.campos.nombreLabel"></label><input type="text" id="lista-nombre" name="nombre" class="waitlist__input" autocomplete="name" data-placeholder="formularioEspera.campos.nombrePlaceholder"></div>
-          <div class="waitlist__field"><label for="lista-correo" class="waitlist__label" data-texto="formularioEspera.campos.correoLabel"></label><input type="email" id="lista-correo" name="correo" class="waitlist__input" autocomplete="email" data-placeholder="formularioEspera.campos.correoPlaceholder"></div>
-          <div class="waitlist__field">
-            <label for="lista-rol" class="waitlist__label" data-texto="formularioEspera.campos.rolLabel"></label>
-            <select id="lista-rol" name="rol" class="waitlist__select">
-              <option value="" disabled selected data-texto="formularioEspera.campos.opcionPlaceholder"></option>
-              <option value="conductor" data-texto="formularioEspera.campos.opcionesRol.0.texto"></option>
-              <option value="playa" data-texto="formularioEspera.campos.opcionesRol.1.texto"></option>
-            </select>
-          </div>
-          <div class="waitlist__field"><label for="lista-detalle" class="waitlist__label" data-texto="formularioEspera.campos.vehiculoOCocheraLabel"></label><input type="text" id="lista-detalle" name="detalle" class="waitlist__input" data-placeholder="formularioEspera.campos.vehiculoOCocheraPlaceholder"></div>
-          <button type="submit" class="waitlist__submit" data-texto="formularioEspera.campos.botonEnvio"></button>
+          <div class="waitlist__field"><label for="lista-nombre" class="waitlist__label" data-texto="formularioEspera.campos.nombreLabel">Nombre y apellido</label><input type="text" id="lista-nombre" name="nombre" class="waitlist__input" autocomplete="name" placeholder="Ej. Roberto Mendoza" data-placeholder="formularioEspera.campos.nombrePlaceholder"></div>
+          <div class="waitlist__field"><label for="lista-correo" class="waitlist__label" data-texto="formularioEspera.campos.correoLabel">Correo electrónico</label><input type="email" id="lista-correo" name="correo" class="waitlist__input" autocomplete="email" placeholder="roberto@ejemplo.pe" data-placeholder="formularioEspera.campos.correoPlaceholder"></div>
+          <div class="waitlist__field"><label for="lista-rol" class="waitlist__label" data-texto="formularioEspera.campos.rolLabel">Tu rol en el sistema</label><select id="lista-rol" name="rol" class="waitlist__select"><option value="" disabled selected data-texto="formularioEspera.campos.opcionPlaceholder">Elige tu rol</option><option value="conductor" data-texto="formularioEspera.campos.opcionesRol.0.texto">Soy conductor</option><option value="playa" data-texto="formularioEspera.campos.opcionesRol.1.texto">Administro una playa de estacionamiento</option></select></div>
+          <div class="waitlist__field"><label for="lista-detalle" class="waitlist__label" data-texto="formularioEspera.campos.vehiculoOCocheraLabel">Placa o nombre de la playa</label><input type="text" id="lista-detalle" name="detalle" class="waitlist__input" placeholder="Ej. Toyota Corolla / Playa San Isidro Centro" data-placeholder="formularioEspera.campos.vehiculoOCocheraPlaceholder"></div>
+          <button type="submit" class="waitlist__submit" data-texto="formularioEspera.campos.botonEnvio">Solicitar acceso</button>
           <div class="waitlist__feedback" role="status" aria-live="polite"></div>
         </form>
       </div>
@@ -282,14 +321,11 @@
     <div class="footer__container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <a href="#inicio" class="footer__lockup" aria-label="Ir al inicio de Quadrate pe">
-            <span class="footer__logo-text">Quadrate</span>
-            <span class="footer__logo-badge">pe</span>
-          </a>
-          <p class="footer__statement" data-texto="piePagina.declaracionMarca"></p>
+          <a href="#inicio" class="footer__lockup" aria-label="Ir al inicio de Quadrate pe"><span class="footer__logo-text">Quadrate</span><span class="footer__logo-badge">pe</span></a>
+          <p class="footer__statement" data-texto="piePagina.declaracionMarca">La caseta digital de las playas de estacionamiento de Lima: control de aforo, garita sin papel y liquidación automática en un solo sistema.</p>
           <div class="footer__actions">
             <a href="#contacto" class="footer__cta">
-              <span data-texto="piePagina.botonAccion"></span>
+              <span data-texto="piePagina.botonAccion">Abrir la plataforma</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="footer__cta-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
           </div>
@@ -302,50 +338,45 @@
 
         <div class="footer__columns">
           <div class="footer__column">
-            <h3 class="footer__column-title" data-texto="piePagina.columnas.producto.titulo"></h3>
+            <h3 class="footer__column-title" data-texto="piePagina.columnas.producto.titulo">Producto</h3>
             <ul class="footer__column-list">
-              <li><a href="#inicio" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.0.etiqueta"></a></li>
-              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.1.etiqueta"></a></li>
-              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.2.etiqueta"></a></li>
-              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.3.etiqueta"></a></li><li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.4.etiqueta"></a></li>
+              <li><a href="#app" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.0.etiqueta">App Web Progresiva</a></li>
+              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.1.etiqueta">Garita digital</a></li>
+              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.2.etiqueta">Aforo en vivo</a></li>
+              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.3.etiqueta">Caja y liquidación</a></li>
+              <li><a href="#modulos" class="footer__column-link" data-texto="piePagina.columnas.producto.enlaces.4.etiqueta">Demanda en tiempo real</a></li>
             </ul>
           </div>
           <div class="footer__column">
-            <h3 class="footer__column-title" data-texto="piePagina.columnas.operacion.titulo"></h3>
+            <h3 class="footer__column-title" data-texto="piePagina.columnas.operacion.titulo">Operación</h3>
             <ul class="footer__column-list">
-              <li><a href="#como-funciona" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.0.etiqueta"></a></li>
-              <li><a href="#como-funciona" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.1.etiqueta"></a></li>
-              <li><a href="#tarifas" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.2.etiqueta"></a></li>
-              <li><a href="#tarifas" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.3.etiqueta"></a></li><li><a href="#manifiesto" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.4.etiqueta"></a></li>
+              <li><a href="#como-funciona" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.0.etiqueta">Cómo funciona</a></li><li><a href="#como-funciona" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.1.etiqueta">Credencial QR y PIN</a></li><li><a href="#tarifas" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.2.etiqueta">Tarifas y fraccionamiento</a></li>
+              <li><a href="#tarifas" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.3.etiqueta">Abonados mensuales</a></li><li><a href="#manifiesto" class="footer__column-link" data-texto="piePagina.columnas.operacion.enlaces.4.etiqueta">Cierre de turno digital</a></li>
             </ul>
           </div>
           <div class="footer__column">
-            <h3 class="footer__column-title" data-texto="piePagina.columnas.cobertura.titulo"></h3>
+            <h3 class="footer__column-title" data-texto="piePagina.columnas.cobertura.titulo">Lima Metropolitana</h3>
             <ul class="footer__column-list">
-              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.0.etiqueta"></a></li>
-              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.1.etiqueta"></a></li>
-              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.2.etiqueta"></a></li>
-              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.3.etiqueta"></a></li><li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.4.etiqueta"></a></li>
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.0.etiqueta">Centro de Lima</a></li><li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.1.etiqueta">La Victoria · Gamarra</a></li><li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.2.etiqueta">Lima Norte · Puente Piedra</a></li>
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.3.etiqueta">Lima Sur · Villa El Salvador</a></li><li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.cobertura.enlaces.4.etiqueta">Red de playas afiliadas</a></li>
             </ul>
           </div>
           <div class="footer__column">
-            <h3 class="footer__column-title" data-texto="piePagina.columnas.contacto.titulo"></h3>
+            <h3 class="footer__column-title" data-texto="piePagina.columnas.contacto.titulo">Contacto y Legal</h3>
             <ul class="footer__column-list">
-              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.0.etiqueta"></a></li>
-              <li><a href="mailto:contacto@quadrate.pe" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.1.etiqueta"></a></li>
-              <li><a href="mailto:contacto@quadrate.pe" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.2.etiqueta"></a></li>
-              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.3.etiqueta"></a></li><li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.4.etiqueta"></a></li>
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.0.etiqueta">Afiliar cochera</a></li><li><a href="mailto:contacto@quadrate.pe" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.1.etiqueta">Soporte técnico</a></li><li><a href="mailto:contacto@quadrate.pe" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.2.etiqueta">contacto@quadrate.pe</a></li>
+              <li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.3.etiqueta">Términos del servicio</a></li><li><a href="#contacto" class="footer__column-link" data-texto="piePagina.columnas.contacto.enlaces.4.etiqueta">Privacidad de datos</a></li>
             </ul>
           </div>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <p class="footer__copyright" data-texto="piePagina.derechosReservados"></p>
+        <p class="footer__copyright" data-texto="piePagina.derechosReservados">© 2026 Quadrate pe. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
 
-  <script type="module" src="src/js/main.js"></script>
+  <script type="module" src="src/js/main.js?v=1.2.0"></script>
 </body>
 </html>

@@ -27,9 +27,9 @@ html {
   padding-inline: var(--container-padding-inline);
 }
 
-/* En mobile el logo se oculta para dar su lugar al botón hamburguesa */
+/* Marca e isotipo visible en mobile y desktop */
 .header__brand {
-  display: none;
+  display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   text-decoration: none;
@@ -43,8 +43,8 @@ html {
 
 .header__logo-img {
   width: auto;
-  height: 34px;
-  max-height: 34px;
+  height: 28px;
+  max-height: 28px;
   object-fit: contain;
   border-radius: var(--radius-sm, 6px);
   transition: transform var(--transition-fast);
@@ -55,7 +55,7 @@ html {
 }
 
 .header__logo-text {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
@@ -67,7 +67,7 @@ html {
   padding: 2px 6px;
   font-size: 0.72rem;
   font-weight: var(--font-weight-bold);
-  color: #ffffff;
+  color: var(--color-text-contrast);
   background-color: var(--color-accent-primary);
   border-radius: var(--radius-xs);
   line-height: 1;
@@ -201,6 +201,56 @@ button.header__nav-link {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+}
+
+.header__theme-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.header__theme-pill:hover,
+.header__theme-pill:focus-visible {
+  border-color: var(--color-accent-primary);
+  outline: none;
+}
+
+.header__theme-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-muted);
+  transition: all var(--transition-fast);
+}
+
+/* Modo Claro activo por defecto */
+.header__theme-option--claro {
+  background-color: var(--color-bg-surface);
+  color: #d97706;
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Modo Oscuro activo */
+[data-theme="dark"] .header__theme-option--claro {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .header__theme-option--oscuro {
+  background-color: var(--color-bg-surface);
+  color: #38bdf8;
+  box-shadow: var(--shadow-subtle);
 }
 
 .header__cta {

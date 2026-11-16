@@ -66,7 +66,7 @@
   padding: 1px 7px;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
-  color: #ffffff;
+  color: var(--color-text-contrast);
   background-color: var(--color-accent-primary);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-xs);
@@ -97,7 +97,7 @@
   gap: var(--space-2);
   padding: var(--space-2) var(--space-5);
   border-radius: var(--radius-pill);
-  background-color: #ffffff;
+  background-color: var(--color-bg-surface);
   color: var(--color-bg-contrast);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
@@ -149,7 +149,7 @@
 .footer__social:hover,
 .footer__social:focus-visible {
   background-color: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  color: var(--color-text-contrast);
   border-color: rgba(255, 255, 255, 0.35);
   outline: none;
 }
@@ -202,7 +202,7 @@
 
 .footer__column-link:hover,
 .footer__column-link:focus-visible {
-  color: #ffffff;
+  color: var(--color-text-contrast);
   outline: none;
 }
 

@@ -43,7 +43,6 @@ Semáforo de control interno del equipo para seguimiento de guías, enunciados y
 
 ---
 
-## Semana 11 (TanStack Query + Zustand Store y Sincronización)
-- [-] `entregables/entrega-011-etapa1.md`: Consumo REST con TanStack Query, loading/error, caché y paginación (Google Doc preparado en Drive)
-- [-] `entregables/entrega-011-etapa2.md`: Migración de Context API a Zustand, persistencia, sincronización entre pestañas e integración WebSocket (Google Doc preparado en Drive)
-
+## Semana 11 (TanStack Query + Zustand + WebSockets Desacoplados + React UI)
+- [x] `entregables/entrega-011-etapa1.md`: Planificación de Server State (TanStack Query) y Client State (Zustand), contratos de tipos y aislamiento de WebSocket local
+- [x] `entregables/entrega-011-etapa2.md`: Implementación de catálogo paginado, store atómico de tema/preferencias/toasts y sincronización en tiempo real

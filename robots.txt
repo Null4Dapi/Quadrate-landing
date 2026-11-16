@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://quadratepe.dealforge.lat/sitemap.xml

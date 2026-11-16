@@ -150,9 +150,9 @@
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
-  color: #fbbf24;
-  background-color: rgba(251, 191, 36, 0.1);
-  border: 1px solid rgba(251, 191, 36, 0.25);
+  color: var(--color-status-warning);
+  background-color: var(--color-status-warning-bg);
+  border: 1px solid rgba(245, 158, 11, 0.25);
   padding: 4px 10px;
   border-radius: var(--radius-pill);
 }
@@ -202,8 +202,8 @@
 }
 
 .manifesto__dot--active {
-  background-color: #ffffff;
-  border-color: #ffffff;
+  background-color: var(--color-text-contrast);
+  border-color: var(--color-text-contrast);
   transform: scale(1.25);
 }
 

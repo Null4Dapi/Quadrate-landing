@@ -40,19 +40,17 @@ export function inicializarTypewriter() {
   cursor.setAttribute("aria-hidden", "true");
 
   let indiceFrase = 0;
-  let estado = "escribiendo"; // "escribiendo" | "borrando"
-  let indiceLinea = 1; // 1 = linea1, 2 = linea2
-  let longitudActual = 0;
+  let estado = "borrando"; // Inicia con el texto ya completo y visible
+  let indiceLinea = 2; // Inicia al final de la segunda línea
+  let longitudActual = FRASES[0].linea2.length;
   let temporizador = null;
 
-  const INTERVALO_TIPEADO = 100; // ms exactos por carácter
-  const PAUSA_TEXTO_COMPLETO = 2400; // ms de lectura antes de iniciar borrado
-  const PAUSA_TEXTO_VACIO = 500; // ms de espera antes de cambiar a la siguiente frase
+  const INTERVALO_TIPEADO = 90; // ms por carácter
+  const PAUSA_TEXTO_COMPLETO = 3500; // ms de lectura cómoda antes de iniciar rotación
+  const PAUSA_TEXTO_VACIO = 400; // ms de espera antes de cambiar a la siguiente frase
 
-  // Limpiar contenido inicial para iniciar el tipeado
-  elementoLinea1.textContent = "";
-  elementoLinea2.textContent = "";
-  elementoLinea1.appendChild(cursor);
+  // Mantenemos el contenido ya renderizado y anexamos el cursor al final
+  elementoLinea2.appendChild(cursor);
 
   function ejecutarPasoTipeado() {
     const fraseActual = FRASES[indiceFrase];
@@ -112,7 +110,7 @@ export function inicializarTypewriter() {
     }
   }
 
-  temporizador = setTimeout(ejecutarPasoTipeado, 400);
+  temporizador = setTimeout(ejecutarPasoTipeado, PAUSA_TEXTO_COMPLETO);
 
   return () => {
     if (temporizador) {

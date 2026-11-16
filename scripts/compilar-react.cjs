@@ -26,6 +26,9 @@ const mapaComponentes = [
   { fuente: "caseta-fila.jsx", destino: "caseta-fila.js" },
   { fuente: "caseta-tour.jsx", destino: "caseta-tour.js" },
   { fuente: "contenedor-live.jsx", destino: "contenedor-live.js" },
+  { fuente: "barra-preferencias.jsx", destino: "barra-preferencias.js" },
+  { fuente: "toast-container.jsx", destino: "toast-container.js" },
+  { fuente: "catalogo-cocheras.jsx", destino: "catalogo-cocheras.js" },
   { fuente: "quadrate-live-app.jsx", destino: "quadrate-live-app.js" },
   { fuente: "index.jsx", destino: "quadrate-live.js" },
 ];

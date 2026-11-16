@@ -3,65 +3,43 @@
  */
 const React = window.React;
 const { useState, useEffect, useRef } = React;
-import { DATOS_COCHERAS_INICIALES, DISTRITOS_DISPONIBLES } from "./datos-cocheras.js";
+import { DATOS_COCHERAS_INICIALES } from "./datos-cocheras.js";
 import { SaludoUsuario } from "./saludo-usuario.js";
-import { TarjetaCochera } from "./tarjeta-cochera.js";
 import { MonitorActividad } from "./monitor-actividad.js";
 import { SimuladorReserva } from "./simulador-reserva.js";
 import { ContenedorLive } from "./contenedor-live.js";
+import { BarraPreferencias } from "./barra-preferencias.js";
+import { CatalogoCocheras } from "./catalogo-cocheras.js";
+import { ToastContainer } from "./toast-container.js";
+import { useAppStore } from "./store/app-store.js";
+import { queryClient } from "./queries/use-cocheras-query.js";
 
 /**
- * Componente principal de la demo Quadrate Live.
- * Arquitectura React con telemetría WebSocket nativa, estado reactivo,
- * catálogo de disponibilidad y simulador de reserva por ETA.
+ * Componente principal de la demo Quadrate Live (Semana 11).
+ * Arquitectura desacoplada:
+ * - TanStack Query para Server State (catálogo paginado, loading, error y caché).
+ * - Zustand para Client State (tema, preferencias de visualización y centro de toasts).
+ * - WebSocket desacoplado: en local apunta a servidor propio; en producción a Cloud Run.
  */
 export function QuadrateLiveApp() {
-  const [distritoSeleccionado, setDistritoSeleccionado] = useState("Todos");
-  const [terminoBusqueda, setTerminoBusqueda] = useState("");
+  const tema = useAppStore(state => state.tema);
+  const agregarNotificacion = useAppStore(state => state.agregarNotificacion);
   const [cocheraSeleccionada, setCocheraSeleccionada] = useState(DATOS_COCHERAS_INICIALES[0]);
-  const [cocheras, setCocheras] = useState(DATOS_COCHERAS_INICIALES);
-  const [estaCargando, setEstaCargando] = useState(false);
-  const [tiempoSesionTexto, setTiempoSesionTexto] = useState("00:00");
-  const [estadoWs, setEstadoWs] = useState("conectando");
-  const [eventosTelemetria, setEventosTelemetria] = useState([]);
   const [cocheraActualizadaId, setCocheraActualizadaId] = useState(null);
+  const [estadoWs, setEstadoWs] = useState("conectando");
   const [estaPausado, setEstaPausado] = useState(false);
-  const campoBusquedaRef = useRef(null);
+  const [tiempoSesionTexto, setTiempoSesionTexto] = useState("00:00");
   const socketRef = useRef(null);
 
-  // Filtrado reactivo por distrito con feedback asíncrono
-  useEffect(() => {
-    setEstaCargando(true);
-    const timer = setTimeout(() => {
-      const filtradas = distritoSeleccionado === "Todos" ? DATOS_COCHERAS_INICIALES : DATOS_COCHERAS_INICIALES.filter(c => c.distrito.toLowerCase() === distritoSeleccionado.toLowerCase());
-      setCocheras(filtradas);
-      setEstaCargando(false);
-    }, 350);
-    return () => clearTimeout(timer);
-  }, [distritoSeleccionado]);
-
-  // Atajo de teclado: presionar '/' para enfocar buscador, 'Esc' para limpiar
-  useEffect(() => {
-    const manejarTecladoGlobal = evento => {
-      if (evento.key === "/" && document.activeElement !== campoBusquedaRef.current) {
-        evento.preventDefault();
-        campoBusquedaRef.current?.focus();
-      } else if (evento.key === "Escape" && document.activeElement === campoBusquedaRef.current) {
-        setTerminoBusqueda("");
-        campoBusquedaRef.current?.blur();
-      }
-    };
-    window.addEventListener("keydown", manejarTecladoGlobal);
-    return () => window.removeEventListener("keydown", manejarTecladoGlobal);
-  }, []);
-
-  // Conexión WebSocket RFC 6455 nativa para telemetría operativa
+  // Conexión WebSocket RFC 6455 condicionada por entorno
   useEffect(() => {
     let ws = null;
     let reconexionTimer = null;
     function conectarWebSocket() {
+      // Política estricta: en local NUNCA apuntar a Cloud Run; usar servidor propio
+      const esLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
       const protocolo = window.location.protocol === "https:" ? "wss:" : "ws:";
-      const urlWs = `${protocolo}//${window.location.host}/ws-telemetria`;
+      const urlWs = esLocal ? `${protocolo}//${window.location.host}/ws-telemetria` : "wss://quadrate-live-365843518799.southamerica-west1.run.app/ws";
       try {
         ws = new WebSocket(urlWs);
         socketRef.current = ws;
@@ -72,30 +50,24 @@ export function QuadrateLiveApp() {
           if (estaPausado) return;
           try {
             const dato = JSON.parse(evento.data);
-            const idItem = Date.now() + Math.random().toString(36).slice(2, 6);
-            const nuevoEvento = {
-              ...dato,
-              id: idItem
-            };
-            setEventosTelemetria(previos => [nuevoEvento, ...previos.slice(0, 3)]);
-            if (dato.cocheraId && dato.datos) {
+
+            // 1. Inyectar alerta al Store global de Zustand (Centro de Toasts)
+            if (dato.titulo && dato.mensaje) {
+              agregarNotificacion({
+                tipo: dato.tipo || "info",
+                titulo: dato.titulo,
+                mensaje: dato.mensaje,
+                distrito: dato.distrito || dato.nombreCochera || "Lima"
+              });
+            }
+
+            // 2. Destello de cochera y sincronización reactiva de TanStack Query
+            if (dato.cocheraId) {
               setCocheraActualizadaId(dato.cocheraId);
               setTimeout(() => setCocheraActualizadaId(null), 2500);
-              setCocheras(cocherasPrevias => cocherasPrevias.map(c => {
-                if (c.id === dato.cocheraId) {
-                  const actualizado = {
-                    ...c,
-                    plazasDisponibles: dato.datos.plazasDisponibles ?? dato.datos.plazasLibres ?? c.plazasDisponibles,
-                    plazasLibres: dato.datos.plazasLibres ?? dato.datos.plazasDisponibles ?? c.plazasLibres,
-                    porcentajeOcupacion: dato.datos.porcentajeOcupacion ?? c.porcentajeOcupacion,
-                    estadoAforo: dato.datos.estadoAforo ?? c.estadoAforo,
-                    tarifaHora: dato.datos.tarifaHora ?? c.tarifaHora
-                  };
-                  setCocheraSeleccionada(sel => sel?.id === c.id ? actualizado : sel);
-                  return actualizado;
-                }
-                return c;
-              }));
+
+              // Invalida la caché del catálogo remoto para refrescar plazas
+              queryClient.invalidateQueries(["cocheras"]);
             }
           } catch (err) {
             console.error("Error al procesar trama de telemetría:", err);
@@ -119,7 +91,7 @@ export function QuadrateLiveApp() {
       if (ws) ws.close();
       if (reconexionTimer) clearTimeout(reconexionTimer);
     };
-  }, [estaPausado]);
+  }, [estaPausado, agregarNotificacion]);
   const simularEventoGarita = () => {
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(JSON.stringify({
@@ -132,16 +104,14 @@ export function QuadrateLiveApp() {
     const segundos = (segundosTotales % 60).toString().padStart(2, "0");
     setTiempoSesionTexto(`${minutos}:${segundos}`);
   };
-  const cocherasVisibles = cocheras.filter(item => {
-    const busquedaLimpia = terminoBusqueda.trim().toLowerCase();
-    if (!busquedaLimpia) return true;
-    return item.nombre.toLowerCase().includes(busquedaLimpia) || item.direccion.toLowerCase().includes(busquedaLimpia) || item.distrito.toLowerCase().includes(busquedaLimpia);
-  });
-  return /*#__PURE__*/React.createElement(ContenedorLive, {
-    titulo: "Centro de Operaciones y Aforo en Vivo",
+  return /*#__PURE__*/React.createElement("div", {
+    className: "qlive-app-wrapper",
+    "data-tema": tema
+  }, /*#__PURE__*/React.createElement(ContenedorLive, {
+    titulo: "Centro de Operaciones y Catálogo en Vivo",
     subtitulo: "Monitoreo de red de cocheras en Lima. Telemetría de garitas, aforo y reservas dinámicas por ETA.",
     cabeceraSaludo: /*#__PURE__*/React.createElement(SaludoUsuario, {
-      totalCocheras: cocheras.length,
+      totalCocheras: DATOS_COCHERAS_INICIALES.length,
       estadoWs: estadoWs,
       onSimularEvento: simularEventoGarita,
       estaPausado: estaPausado,
@@ -151,101 +121,14 @@ export function QuadrateLiveApp() {
       onTick: manejarTickMonitor,
       estadoWs: estadoWs
     }),
-    feedTelemetria: /*#__PURE__*/React.createElement("div", {
-      className: "quadrate-live__feed",
-      role: "region",
-      "aria-label": "Registro de telemetría operativa en vivo"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "quadrate-live__feed-header"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "quadrate-live__feed-title"
-    }, "Registro de Telemetría Operativa"), /*#__PURE__*/React.createElement("span", {
-      className: "quadrate-live__feed-status"
-    }, estaPausado ? "⏸ En pausa" : "● Recibiendo eventos")), /*#__PURE__*/React.createElement("div", {
-      className: "quadrate-live__feed-lista"
-    }, eventosTelemetria.length === 0 ? /*#__PURE__*/React.createElement("p", {
-      className: "quadrate-live__feed-empty"
-    }, "Enlace activo. Esperando el próximo reporte de garitas en Lima...") : eventosTelemetria.map(evento => /*#__PURE__*/React.createElement("div", {
-      key: evento.id,
-      className: `quadrate-live__feed-item quadrate-live__feed-item--${evento.tipo}`
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "quadrate-live__feed-time"
-    }, evento.timestamp), /*#__PURE__*/React.createElement("span", {
-      className: "quadrate-live__feed-badge"
-    }, evento.tipo === "ingreso" && "Check-in LPR", evento.tipo === "salida" && "Check-out", evento.tipo === "reserva_eta" && "Reserva ETA", evento.tipo === "tarifa_dinamica" && "Franja Valle", evento.tipo === "aforo_critico" && "Alerta Aforo", evento.tipo === "conexion" && "Enlace"), /*#__PURE__*/React.createElement("span", {
-      className: "quadrate-live__feed-cochera"
-    }, evento.nombreCochera ? `${evento.nombreCochera} · ` : ""), /*#__PURE__*/React.createElement("span", {
-      className: "quadrate-live__feed-msg"
-    }, evento.mensaje))))),
-    barraBusqueda: /*#__PURE__*/React.createElement("div", {
-      className: "quadrate-live__toolbar"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "quadrate-live__search-box"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "quadrate-live-input",
-      className: "quadrate-live__search-label"
-    }, "Buscar cochera o calle:"), /*#__PURE__*/React.createElement("div", {
-      className: "quadrate-live__search-input-group"
-    }, /*#__PURE__*/React.createElement("input", {
-      ref: campoBusquedaRef,
-      id: "quadrate-live-input",
-      type: "search",
-      className: "quadrate-live__search-input",
-      placeholder: "Begonias, Larco, Canaval... (Presioná / para buscar)",
-      value: terminoBusqueda,
-      onChange: e => setTerminoBusqueda(e.target.value)
-    }), terminoBusqueda && /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      className: "quadrate-live__search-clear",
-      onClick: () => {
-        setTerminoBusqueda("");
-        campoBusquedaRef.current?.focus();
-      },
-      "aria-label": "Limpiar búsqueda"
-    }, "✕"))), /*#__PURE__*/React.createElement("div", {
-      className: "quadrate-live__filtros"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "quadrate-live__filtros-label"
-    }, "Distritos:"), /*#__PURE__*/React.createElement("div", {
-      className: "quadrate-live__filtros-pills"
-    }, DISTRITOS_DISPONIBLES.map(distrito => /*#__PURE__*/React.createElement("button", {
-      key: distrito,
-      type: "button",
-      className: `quadrate-live__filtro-pill ${distritoSeleccionado === distrito ? "quadrate-live__filtro-pill--activo" : ""}`,
-      onClick: () => setDistritoSeleccionado(distrito)
-    }, distrito))))),
+    feedTelemetria: /*#__PURE__*/React.createElement(BarraPreferencias, null),
     panelDetalle: cocheraSeleccionada && /*#__PURE__*/React.createElement(SimuladorReserva, {
       cochera: cocheraSeleccionada,
       onCerrar: () => setCocheraSeleccionada(null)
     })
-  }, estaCargando ? /*#__PURE__*/React.createElement("div", {
-    className: "quadrate-live__loading",
-    role: "status",
-    "aria-live": "polite"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "quadrate-live__spinner",
-    "aria-hidden": "true"
-  }), /*#__PURE__*/React.createElement("p", {
-    className: "quadrate-live__loading-text"
-  }, "Consultando aforo con garitas en ", distritoSeleccionado, "...")) : cocherasVisibles.length === 0 ? /*#__PURE__*/React.createElement("div", {
-    className: "quadrate-live__empty"
-  }, /*#__PURE__*/React.createElement("p", null, "No se encontraron playas de estacionamiento para el criterio especificado."), /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "quadrate-live__btn quadrate-live__btn--secundario",
-    onClick: () => {
-      setTerminoBusqueda("");
-      setDistritoSeleccionado("Todos");
-      campoBusquedaRef.current?.focus();
-    }
-  }, "Restablecer filtros")) : /*#__PURE__*/React.createElement("div", {
-    className: "quadrate-live__grid",
-    role: "region",
-    "aria-label": "Catálogo de cocheras"
-  }, cocherasVisibles.map(cochera => /*#__PURE__*/React.createElement(TarjetaCochera, {
-    key: cochera.id,
-    cochera: cochera,
-    estaSeleccionada: cocheraSeleccionada?.id === cochera.id,
-    estaActualizada: cocheraActualizadaId === cochera.id,
+  }, /*#__PURE__*/React.createElement(CatalogoCocheras, {
+    cocheraSeleccionadaId: cocheraSeleccionada?.id,
+    cocheraActualizadaId: cocheraActualizadaId,
     onSeleccionarCochera: c => setCocheraSeleccionada(c)
-  }))));
+  })), /*#__PURE__*/React.createElement(ToastContainer, null));
 }

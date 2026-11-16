@@ -30,6 +30,18 @@ function verificarCompatibilidadWebGL() {
   }
 }
 
+function inyectarMockupEstatico(figuraPadre) {
+  if (figuraPadre && !figuraPadre.querySelector(".hero__mockup-image")) {
+    const img = document.createElement("img");
+    img.src = "src/assets/mockup-iphone-lado.webp";
+    img.alt = "Mockup en perspectiva de la aplicación Quadrate pe en iPhone";
+    img.width = 772;
+    img.height = 1256;
+    img.className = "hero__mockup-image";
+    figuraPadre.appendChild(img);
+  }
+}
+
 /**
  * Inicializa el modelo 3D del iPhone en el hero de la landing page.
  */
@@ -38,7 +50,12 @@ export function inicializarHeroTelefono3D() {
   const figuraPadre = document.getElementById("hero-mockup-figure");
   const seccionHero = document.getElementById("inicio");
 
-  if (!contenedor || !figuraPadre || !verificarCompatibilidadWebGL()) {
+  if (!contenedor || !figuraPadre) {
+    return;
+  }
+
+  if (!verificarCompatibilidadWebGL()) {
+    inyectarMockupEstatico(figuraPadre);
     return;
   }
 
@@ -63,11 +80,17 @@ export function inicializarHeroTelefono3D() {
   camara.position.set(0, 0, ZOOM_BASE);
 
   // 3. Renderizador optimizado para alto rendimiento y bajo consumo
-  const renderizador = new THREE.WebGLRenderer({
-    antialias: true,
-    alpha: true,
-    powerPreference: "high-performance",
-  });
+  let renderizador;
+  try {
+    renderizador = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      powerPreference: "high-performance",
+    });
+  } catch (e) {
+    inyectarMockupEstatico(figuraPadre);
+    return;
+  }
   renderizador.setSize(anchoInicial, altoInicial);
   renderizador.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderizador.toneMapping = THREE.ACESFilmicToneMapping;

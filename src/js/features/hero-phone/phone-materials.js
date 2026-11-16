@@ -151,45 +151,59 @@ export function crearTexturaVidrioTrasero(THREE, colorHexFondo, colorTextoLogo) 
 }
 
 /**
- * Genera textura de pantalla OLED con gradiente editorial iOS 17 Pro.
+ * Genera textura de pantalla OLED con gradiente editorial iOS o captura de la app.
  * @param {object} THREE
+ * @param {string} [rutaImagen]
  * @returns {object} THREE.CanvasTexture
  */
-export function crearTexturaPantalla(THREE) {
+export function crearTexturaPantalla(THREE, rutaImagen = "src/assets/app-screen-hero.jpg") {
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 1024;
+  canvas.width = 1024;
+  canvas.height = 2048;
   const ctx = canvas.getContext("2d");
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
 
   ctx.fillStyle = "#070709";
-  ctx.fillRect(0, 0, 512, 1024);
+  ctx.fillRect(0, 0, 1024, 2048);
 
-  const gradiente = ctx.createRadialGradient(256, 360, 20, 256, 420, 380);
+  const gradiente = ctx.createRadialGradient(512, 640, 40, 512, 750, 700);
   gradiente.addColorStop(0, "#e7dfd3");
   gradiente.addColorStop(0.35, "#9c9284");
   gradiente.addColorStop(0.7, "#3f3b36");
   gradiente.addColorStop(1, "#070709");
   ctx.fillStyle = gradiente;
-  ctx.fillRect(0, 0, 512, 1024);
+  ctx.fillRect(0, 0, 1024, 2048);
 
   ctx.fillStyle = "rgba(255, 255, 255, 0.92)";
-  ctx.font = "600 22px system-ui, -apple-system, sans-serif";
+  ctx.font = "600 40px system-ui, -apple-system, sans-serif";
   ctx.textAlign = "center";
-  ctx.fillText("Sábado, 7 de noviembre", 256, 175);
+  ctx.fillText("Sábado, 7 de noviembre", 512, 320);
+  ctx.font = "700 200px system-ui, -apple-system, sans-serif";
+  ctx.fillText("09:41", 512, 520);
 
-  ctx.font = "700 112px system-ui, -apple-system, sans-serif";
-  ctx.fillText("09:41", 256, 280);
-
-  ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-  if (ctx.roundRect) {
-    ctx.beginPath();
-    ctx.roundRect(176, 985, 160, 7, 4);
-    ctx.fill();
-  } else {
-    ctx.fillRect(176, 985, 160, 7);
+  const textura = new THREE.CanvasTexture(canvas);
+  textura.minFilter = THREE.LinearMipmapLinearFilter;
+  textura.magFilter = THREE.LinearFilter;
+  textura.generateMipmaps = true;
+  textura.anisotropy = 8;
+  if (THREE.sRGBEncoding) {
+    textura.encoding = THREE.sRGBEncoding;
   }
 
-  return new THREE.CanvasTexture(canvas);
+  if (rutaImagen) {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    const pintar = () => {
+      ctx.drawImage(img, 0, 0, 1024, 2048);
+      textura.needsUpdate = true;
+    };
+    img.onload = pintar;
+    img.src = rutaImagen;
+    if (img.complete) pintar();
+  }
+
+  return textura;
 }
 
 /**
@@ -197,13 +211,14 @@ export function crearTexturaPantalla(THREE) {
  * @param {object} THREE
  * @param {object} mapaEntorno
  * @param {string} claveColor
+ * @param {string} [rutaImagen]
  * @returns {object}
  */
-export function crearMaterialesTelefono(THREE, mapaEntorno, claveColor = "natural") {
+export function crearMaterialesTelefono(THREE, mapaEntorno, claveColor = "natural", rutaImagen = "src/assets/app-screen-hero.jpg") {
   const paleta = PALETAS_TITANIO[claveColor] || PALETAS_TITANIO.natural;
   const texturaCepillada = crearTexturaMetalCepillado(THREE);
   const texturaTrasera = crearTexturaVidrioTrasero(THREE, paleta.vidrioTrasero, paleta.logo);
-  const texturaPantalla = crearTexturaPantalla(THREE);
+  const texturaPantalla = crearTexturaPantalla(THREE, rutaImagen);
 
   return {
     chasisTitanio: new THREE.MeshStandardMaterial({
@@ -232,14 +247,9 @@ export function crearMaterialesTelefono(THREE, mapaEntorno, claveColor = "natura
       clearcoatRoughness: 0.15,
       envMap: mapaEntorno,
     }),
-    pantalla: new THREE.MeshPhysicalMaterial({
+    pantalla: new THREE.MeshBasicMaterial({
       map: texturaPantalla,
-      roughness: 0.08,
-      metalness: 0.05,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
-      envMap: mapaEntorno,
-      envMapIntensity: 0.6,
+      toneMapped: false,
     }),
     bisel: new THREE.MeshBasicMaterial({ color: 0x050505 }),
     islaDinamica: new THREE.MeshBasicMaterial({ color: 0x020202 }),

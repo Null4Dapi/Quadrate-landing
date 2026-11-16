@@ -174,11 +174,23 @@
 
 .caseta__figure {
   width: 100%;
-  max-width: 320px;
+  max-width: 360px;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.caseta__phone-canvas {
+  width: 100%;
+  max-width: 338px;
+  height: 520px;
+  display: block;
+}
+
+.caseta__figure--3d-active .caseta__image {
+  display: none;
 }
 
 .caseta__image {

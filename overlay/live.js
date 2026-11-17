@@ -196,11 +196,9 @@ function crearAsistente() {
     h("p", { class: "qlive-panel__nota" },
       "Responde con la información de esta página. La disponibilidad es de demostración. Tus mensajes no se guardan."));
   document.body.append(lanzador, panel);
-  // En la demo las alertas de la página se apilan abajo a la derecha: el asistente se coloca a la izquierda para no taparlas.
+  // En la demo el asistente se mantiene abajo a la derecha de la página.
   if (document.getElementById("quadrate-live-root")) {
-    lanzador.classList.add("qlive--izq");
-    panel.classList.add("qlive--izq");
-    document.documentElement.classList.add("qlive-en-demo"); // el CSS reubica las alertas de la página en pantallas pequeñas
+    document.documentElement.classList.add("qlive-en-demo");
   }
 
   let contador = 0;

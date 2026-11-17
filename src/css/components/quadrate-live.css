@@ -116,7 +116,10 @@
 
 /* Layout y Catálogo de Cocheras */
 .quadrate-live__layout { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
-@media (min-width: 992px) { .quadrate-live__layout { grid-template-columns: 1.8fr 1.2fr; } }
+@media (min-width: 992px) {
+  .quadrate-live__layout { grid-template-columns: 1.8fr 1.2fr; align-items: stretch; }
+  .quadrate-live__secundario { display: flex; flex-direction: column; height: 100%; }
+}
 .quadrate-live__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-6); }
 
 .quadrate-live__card {
@@ -188,7 +191,11 @@
 .quadrate-live__simulador {
   background-color: var(--color-bg-surface); border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-2xl, 20px); padding: var(--space-4) var(--space-5); box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12);
-  position: sticky; top: 80px; max-height: fit-content;
+  position: sticky; top: 80px; min-height: 100%; box-sizing: border-box;
+  display: flex; flex-direction: column;
+}
+.quadrate-live__simulador-body {
+  display: flex; flex-direction: column; flex: 1;
 }
 .quadrate-live__simulador-header {
   display: flex; justify-content: space-between; align-items: flex-start;
@@ -219,6 +226,7 @@
 }
 .quadrate-live__simulador-total-monto { font-family: var(--font-family-mono); color: var(--color-accent-primary); font-weight: var(--font-weight-bold); }
 .quadrate-live__simulador-btn-reservar {
+  margin-top: auto;
   width: 100%; padding: 0.65rem 1rem; font-family: var(--font-family-sans); font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold); background-color: var(--color-accent-primary); color: var(--color-text-contrast);
   border: none; border-radius: var(--radius-pill, 9999px); cursor: pointer; transition: all var(--transition-fast);
@@ -227,7 +235,7 @@
 .quadrate-live__simulador-btn-reservar:hover { background-color: var(--color-accent-hover); transform: translateY(-1px); }
 /* Pase Digital de Estacionamiento */
 .quadrate-live__pase {
-  margin-top: var(--space-4);
+  margin-top: auto;
   background-color: var(--color-bg-base);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-xl, 14px);

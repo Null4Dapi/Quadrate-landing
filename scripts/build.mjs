@@ -19,10 +19,10 @@ const MARCA = "<!-- quadrate-live -->";
 
 // Lo que no es parte del sitio publicado (mismo criterio que el firebase.json original de Quadrate).
 const EXCLUIDOS = [
-  /^\.(git|github|devcontainer|agents|firebase|gitignore|upstream-commit)(\/|$)/,
+  /^\.[^/]+(\/|$)/,
   /^(docs|odd|scripts|service|tests|config|overlay|dist|node_modules)(\/|$)/,
-  /^(package\.json|package-lock\.json|skills-lock\.json|AGENTS\.md|CHANGELOG\.md|README\.md|firebase\.json|\.firebaserc)$/,
-  /\.(md|jsx)$/,
+  /^(package\.json|package-lock\.json|skills-lock\.json|AGENTS\.md|CHANGELOG\.md|README\.md|firebase\.json|\.firebaserc|tsconfig\.json)$/,
+  /\.(md|jsx|tsx?)$/,
   /(^|\/)babel\.min\.js$/,
   /(^|\/)\.[^/]+$/
 ];

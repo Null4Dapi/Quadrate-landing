@@ -156,7 +156,7 @@ export function crearTexturaVidrioTrasero(THREE, colorHexFondo, colorTextoLogo) 
  * @param {string} [rutaImagen]
  * @returns {object} THREE.CanvasTexture
  */
-export function crearTexturaPantalla(THREE, rutaImagen = "src/assets/app-screen-hero.jpg") {
+export function crearTexturaPantalla(THREE, rutaImagen = "src/assets/app-screen-hero.webp") {
   const canvas = document.createElement("canvas");
   canvas.width = 1024;
   canvas.height = 2048;
@@ -214,7 +214,7 @@ export function crearTexturaPantalla(THREE, rutaImagen = "src/assets/app-screen-
  * @param {string} [rutaImagen]
  * @returns {object}
  */
-export function crearMaterialesTelefono(THREE, mapaEntorno, claveColor = "natural", rutaImagen = "src/assets/app-screen-hero.jpg") {
+export function crearMaterialesTelefono(THREE, mapaEntorno, claveColor = "natural", rutaImagen = "src/assets/app-screen-hero.webp") {
   const paleta = PALETAS_TITANIO[claveColor] || PALETAS_TITANIO.natural;
   const texturaCepillada = crearTexturaMetalCepillado(THREE);
   const texturaTrasera = crearTexturaVidrioTrasero(THREE, paleta.vidrioTrasero, paleta.logo);

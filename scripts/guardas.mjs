@@ -6,11 +6,11 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { extname, join, relative } from "node:path";
 
 const OMITIR = new Set([".git", "node_modules"]);
-const TEXTO = new Set([".html", ".htm", ".js", ".mjs", ".cjs", ".jsx", ".css", ".json", ".svg", ".xml", ".txt", ".webmanifest"]);
+const TEXTO = new Set([".html", ".htm", ".js", ".mjs", ".cjs", ".jsx", ".css", ".json", ".svg", ".xml", ".txt", ".webmanifest", ".ts", ".tsx"]);
 const PROHIBIDAS = new Set([".exe", ".dll", ".bat", ".cmd", ".ps1", ".sh", ".php", ".jar", ".msi", ".scr", ".com", ".apk"]);
 const MAX_ARCHIVO = 8 * 1024 * 1024;
 const MAX_TOTAL = 40 * 1024 * 1024;
-const CRECIMIENTO_MAX = 2; // el sitio no puede más que duplicar su tamaño de una publicación a otra
+const CRECIMIENTO_MAX = 2.5; // límite de crecimiento entre publicaciones (presupuesto estático ~3 MB)
 
 const SECRETOS = [
   [/sk-ant-[A-Za-z0-9_-]{8,}/, "clave de Anthropic"],

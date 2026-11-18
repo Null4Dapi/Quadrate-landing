@@ -18,9 +18,9 @@ const IMAGENES_MOCKUP = [
 ];
 
 const PANTALLAS_CASETA_3D = [
-  "src/assets/app-screen-checkin.jpg",
-  "src/assets/app-screen-aforo.jpg",
-  "src/assets/app-screen-cupones.jpg",
+  "src/assets/app-screen-checkin.webp",
+  "src/assets/app-screen-aforo.webp",
+  "src/assets/app-screen-cupones.webp",
 ];
 
 const INTERVALO_CAMBIO_MS = 5500;
@@ -39,6 +39,9 @@ function montarTelefonoEstaticoCaseta(contenedor, figura) {
     const renderizador = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderizador.setSize(ancho, alto);
     renderizador.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    if (THREE.sRGBEncoding) {
+      renderizador.outputEncoding = THREE.sRGBEncoding;
+    }
     renderizador.toneMapping = THREE.ACESFilmicToneMapping;
     renderizador.toneMappingExposure = 1.15;
     contenedor.appendChild(renderizador.domElement);
@@ -75,22 +78,25 @@ function montarTelefonoEstaticoCaseta(contenedor, figura) {
     escena.add(grupoTelefono);
 
     figura.classList.add("caseta__figure--3d-active");
-    renderizador.render(escena, camara);
+
+    const cambiarPaso = (indice) => {
+      const ruta = PANTALLAS_CASETA_3D[indice] || PANTALLAS_CASETA_3D[0];
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      const pintar = () => {
+        ctx.drawImage(img, 0, 0, 1024, 2048);
+        texturaPantalla.needsUpdate = true;
+        renderizador.render(escena, camara);
+      };
+      img.onload = pintar;
+      img.src = ruta;
+      if (img.complete) pintar();
+    };
+
+    cambiarPaso(0);
 
     return {
-      cambiarPaso(indice) {
-        const ruta = PANTALLAS_CASETA_3D[indice] || PANTALLAS_CASETA_3D[0];
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        const pintar = () => {
-          ctx.drawImage(img, 0, 0, 1024, 2048);
-          texturaPantalla.needsUpdate = true;
-          renderizador.render(escena, camara);
-        };
-        img.onload = pintar;
-        img.src = ruta;
-        if (img.complete) pintar();
-      },
+      cambiarPaso,
       redimensionar() {
         const w = contenedor.clientWidth;
         const h = contenedor.clientHeight;
@@ -124,7 +130,7 @@ export function inicializarTourCaseta() {
     ? montarTelefonoEstaticoCaseta(contenedorCanvas, figuraCaseta)
     : null;
 
-  let indiceActivo = 0;
+  let indiceActivo = -1;
   let idIntervalo = null;
   let temporizadorTransicion = null;
   let pausadoPorUsuario = false;

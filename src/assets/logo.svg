@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 36" width="160" height="36" fill="none" aria-label="Quadrate pe Logo">
+  <!-- Isotipo: Parking con pin y auto -->
+  <image href="logo.webp" x="2" y="1" width="32" height="34" preserveAspectRatio="xMidYMid meet" />
+
+  <!-- Tipografía de marca: Quadrate pe -->
+  <text x="44" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#12161A" letter-spacing="-0.5">Quadrate</text>
+  <rect x="127" y="10" width="26" height="17" rx="3" fill="#C25E34" />
+  <text x="133" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF" letter-spacing="0.5">pe</text>
+</svg>

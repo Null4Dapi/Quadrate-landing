@@ -1,0 +1,12 @@
+dist/
+.work/
+node_modules/
+service/.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+.env.*
+*.key
+*.pem
+.firebase/

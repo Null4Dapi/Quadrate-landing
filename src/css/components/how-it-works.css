@@ -1,0 +1,101 @@
+/**
+ * Quadrate pe — Componente Cómo Funciona
+ * Secuencia real de tres pasos numerados (contadores CSS): apila en móvil y
+ * se despliega horizontal en desktop con ritmo de líneas de corte (BEM).
+ */
+
+.how-it-works {
+  padding-block: clamp(var(--space-10), 6vw, var(--space-16));
+  background-color: var(--color-bg-base);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.how-it-works__container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.how-it-works__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 640px;
+  margin-bottom: var(--space-10);
+}
+
+.how-it-works__title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.02em;
+}
+
+.how-it-works__description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.how-it-works__list {
+  counter-reset: paso;
+  display: flex;
+  flex-direction: column;
+}
+
+.how-it-works__step {
+  counter-increment: paso;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-block: var(--space-6);
+}
+
+/* Numerales como parte de la secuencia real (01/02/03) */
+.how-it-works__step::before {
+  content: "0" counter(paso);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.03em;
+  color: var(--color-accent-primary);
+}
+
+.how-it-works__step-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.how-it-works__step-detail {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Tablet y Desktop: secuencia horizontal conectada por la misma línea de corte */
+@media (min-width: 768px) {
+  .how-it-works__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-10);
+    border-top: 1px solid var(--color-border-medium);
+  }
+
+  .how-it-works__step {
+    padding-block: var(--space-6) var(--space-2);
+    padding-inline: var(--space-6);
+    position: relative;
+  }
+
+  .how-it-works__step::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 40%;
+    height: 1px;
+    background-color: var(--color-accent-primary);
+  }
+}

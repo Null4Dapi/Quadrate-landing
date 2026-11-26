@@ -1,0 +1,232 @@
+/* Quadrate pe — Hoja de Estilos del Canvas de Design System (docs/design-system.css)
+ * Aislado exclusivamente para la inspección y prueba de componentes UI.
+ */
+
+:root {
+  --ds-canvas-max-width: 1320px;
+}
+
+body.ds-body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+  margin: 0;
+  padding: var(--space-6) var(--space-8) var(--space-16);
+  line-height: var(--line-height-normal);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.ds-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border-medium);
+  margin-bottom: var(--space-8);
+  position: sticky;
+  top: 0;
+  background-color: var(--color-bg-base);
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.ds-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ds-brand h1 {
+  font-size: var(--font-size-xl);
+  margin: 0;
+  font-family: var(--font-family-display);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.ds-badge {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-medium);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-secondary);
+}
+
+.ds-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.ds-nav {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.ds-nav a {
+  font-size: var(--font-size-xs);
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-surface);
+  transition: all var(--transition-fast);
+}
+
+.ds-nav a:hover {
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.ds-container {
+  max-width: var(--ds-canvas-max-width);
+  margin: 0 auto;
+}
+
+.ds-section {
+  margin-bottom: var(--space-14);
+  padding-top: var(--space-8);
+  border-top: 1px dashed var(--color-border-medium);
+}
+
+.ds-section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.ds-section__title {
+  font-size: var(--font-size-2xl);
+  font-family: var(--font-family-display);
+  margin: 0 0 var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ds-section__desc {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  margin: 0 0 var(--space-6);
+  max-width: 75ch;
+}
+
+.ds-grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.ds-grid--swatches {
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: var(--space-4);
+}
+
+.ds-grid--cards {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.ds-grid--bento {
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+
+.ds-row {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ds-specimen {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ds-specimen__label {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-1);
+  margin-bottom: var(--space-1);
+}
+
+/* Swatches de Color */
+.ds-swatch {
+  height: 52px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-medium);
+  margin-bottom: var(--space-2);
+}
+
+.ds-swatch-info strong {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+}
+
+.ds-swatch-info span {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* Tipografía Specimen */
+.ds-type-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ds-type-meta {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Inline Asistente Frame */
+.ds-chat-frame {
+  display: flex;
+  gap: var(--space-8);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.ds-chat-inline .qlive-panel {
+  position: static;
+  width: 100%;
+  max-width: 400px;
+  height: 520px;
+  box-shadow: var(--shadow-elevated);
+}
+
+.ds-chat-inline .qlive-lanzador {
+  position: static;
+  display: inline-flex;
+}
+
+/* Form Specimen Box */
+.ds-form-box {
+  max-width: 480px;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+}
+
+/* Override de visualización estática para tour y caseta */
+.ds-caseta-preview {
+  max-width: 480px;
+}

@@ -1,0 +1,466 @@
+/**
+ * Quadrate pe — Componente Módulos / Bento Grid Reactivo (BEM)
+ * Cuadrícula asimétrica con tarjetas 1 y 4 estructuradas internamente en dos columnas:
+ * texto a la izquierda y visual a la derecha (QR con placa / Panel de mapa).
+ */
+
+.modules {
+  padding-block: clamp(var(--space-12), 7vw, var(--space-20));
+  background-color: var(--color-bg-base);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.modules__container {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.modules__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 640px;
+  margin-bottom: var(--space-10);
+}
+
+.modules__eyebrow {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.modules__title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+}
+
+.modules__description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  text-wrap: pretty;
+}
+
+/* Bento Grid Principal */
+.modules__bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .modules__bento {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}
+
+/* Tarjeta Bento */
+.modules__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+  background-color: var(--modules-card-bg, var(--color-bg-base));
+  border: 1px solid var(--modules-card-border, var(--color-border-subtle));
+  border-radius: var(--radius-2xl);
+  padding: clamp(var(--space-5), 3vw, var(--space-8));
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  outline: none;
+}
+
+.modules__card:hover,
+.modules__card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--modules-card-border-hover, var(--color-border-medium));
+  box-shadow: var(--modules-card-shadow-hover, 0 12px 30px -10px rgba(35, 18, 18, 0.08));
+}
+
+/* Variaciones cromáticas de tono fuerte (estilo Tarifas) para tarjetas Bento */
+.modules__card:nth-child(1),
+.modules__card--celeste {
+  --modules-card-bg: #4EAEE8;
+  --modules-card-border: rgba(14, 75, 120, 0.22);
+  --modules-card-border-hover: rgba(14, 75, 120, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(14, 75, 120, 0.25);
+  --modules-card-divider: rgba(14, 75, 120, 0.18);
+  --modules-card-text: #061c2e;
+  --modules-card-text-desc: rgba(6, 28, 46, 0.88);
+  --modules-card-tag-bg: rgba(6, 28, 46, 0.08);
+  --modules-card-tag-border: rgba(6, 28, 46, 0.18);
+}
+
+.modules__card:nth-child(2),
+.modules__card--verde {
+  --modules-card-bg: #4EBE81;
+  --modules-card-border: rgba(10, 60, 30, 0.22);
+  --modules-card-border-hover: rgba(10, 60, 30, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(10, 60, 30, 0.25);
+  --modules-card-divider: rgba(10, 60, 30, 0.18);
+  --modules-card-text: #082111;
+  --modules-card-text-desc: rgba(8, 33, 17, 0.88);
+  --modules-card-tag-bg: rgba(8, 33, 17, 0.08);
+  --modules-card-tag-border: rgba(8, 33, 17, 0.18);
+}
+
+.modules__card:nth-child(3),
+.modules__card--amarillo {
+  --modules-card-bg: #F7C752;
+  --modules-card-border: rgba(110, 75, 15, 0.22);
+  --modules-card-border-hover: rgba(110, 75, 15, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(110, 75, 15, 0.25);
+  --modules-card-divider: rgba(110, 75, 15, 0.18);
+  --modules-card-text: #221703;
+  --modules-card-text-desc: rgba(34, 23, 3, 0.88);
+  --modules-card-tag-bg: rgba(34, 23, 3, 0.08);
+  --modules-card-tag-border: rgba(34, 23, 3, 0.18);
+}
+
+.modules__card:nth-child(4),
+.modules__card--naranja {
+  --modules-card-bg: #F48B47;
+  --modules-card-border: rgba(124, 45, 18, 0.22);
+  --modules-card-border-hover: rgba(124, 45, 18, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(124, 45, 18, 0.25);
+  --modules-card-divider: rgba(124, 45, 18, 0.18);
+  --modules-card-text: #2a1205;
+  --modules-card-text-desc: rgba(42, 18, 5, 0.88);
+  --modules-card-tag-bg: rgba(42, 18, 5, 0.08);
+  --modules-card-tag-border: rgba(42, 18, 5, 0.18);
+}
+
+.modules__card--lavanda,
+.modules__card--morado {
+  --modules-card-bg: #BBA2E3;
+  --modules-card-border: rgba(60, 30, 95, 0.2);
+  --modules-card-border-hover: rgba(60, 30, 95, 0.45);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(60, 30, 95, 0.25);
+  --modules-card-divider: rgba(60, 30, 95, 0.18);
+  --modules-card-text: #1C0F2C;
+  --modules-card-text-desc: rgba(28, 15, 44, 0.88);
+  --modules-card-tag-bg: rgba(28, 15, 44, 0.08);
+  --modules-card-tag-border: rgba(28, 15, 44, 0.18);
+}
+
+/* Soporte de modo oscuro para tarjetas Bento */
+[data-theme="dark"] .modules__card:nth-child(1),
+[data-theme="dark"] .modules__card--celeste {
+  --modules-card-bg: #3E92C4;
+  --modules-card-border: rgba(10, 45, 75, 0.3);
+  --modules-card-border-hover: rgba(10, 45, 75, 0.55);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(0, 0, 0, 0.4);
+  --modules-card-divider: rgba(10, 45, 75, 0.22);
+  --modules-card-text: #051624;
+  --modules-card-text-desc: rgba(5, 22, 36, 0.9);
+}
+
+[data-theme="dark"] .modules__card:nth-child(2),
+[data-theme="dark"] .modules__card--verde {
+  --modules-card-bg: #4B9C67;
+  --modules-card-border: rgba(15, 45, 25, 0.28);
+  --modules-card-border-hover: rgba(15, 45, 25, 0.55);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(0, 0, 0, 0.4);
+  --modules-card-divider: rgba(15, 45, 25, 0.22);
+  --modules-card-text: #081B0F;
+  --modules-card-text-desc: rgba(8, 27, 15, 0.9);
+}
+
+[data-theme="dark"] .modules__card:nth-child(3),
+[data-theme="dark"] .modules__card--amarillo {
+  --modules-card-bg: #E3B866;
+  --modules-card-border: rgba(85, 60, 15, 0.28);
+  --modules-card-border-hover: rgba(85, 60, 15, 0.55);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(0, 0, 0, 0.4);
+  --modules-card-divider: rgba(85, 60, 15, 0.22);
+  --modules-card-text: #1E1404;
+  --modules-card-text-desc: rgba(30, 20, 4, 0.9);
+}
+
+[data-theme="dark"] .modules__card:nth-child(4),
+[data-theme="dark"] .modules__card--naranja {
+  --modules-card-bg: #D97536;
+  --modules-card-border: rgba(75, 30, 10, 0.3);
+  --modules-card-border-hover: rgba(75, 30, 10, 0.55);
+  --modules-card-shadow-hover: 0 16px 36px -8px rgba(0, 0, 0, 0.4);
+  --modules-card-divider: rgba(75, 30, 10, 0.22);
+  --modules-card-text: #1d0c03;
+  --modules-card-text-desc: rgba(29, 12, 3, 0.9);
+}
+
+@media (min-width: 900px) {
+  .modules__card--featured {
+    grid-column: span 2;
+  }
+
+  .modules__card--wide {
+    grid-column: span 2;
+  }
+}
+
+/* Layout interno de 2 columnas para Tarjeta 1 y 4 en Tablet y Desktop */
+@media (min-width: 768px) {
+  .modules__card--featured,
+  .modules__card--wide {
+    display: grid;
+    grid-template-columns: minmax(180px, 3fr) minmax(0, 7fr);
+    grid-template-rows: auto 1fr;
+    gap: var(--space-4) var(--space-6);
+    align-items: start;
+  }
+
+  .modules__card--featured .modules__card-header,
+  .modules__card--wide .modules__card-header {
+    grid-column: 1 / -1;
+  }
+
+  .modules__card--featured .modules__card-body,
+  .modules__card--wide .modules__card-body {
+    grid-column: 1;
+    align-self: start;
+    padding-top: var(--space-1);
+  }
+
+  .modules__card--featured .modules__card-visual,
+  .modules__card--wide .modules__card-visual {
+    grid-column: 2;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    border-left: 1px solid var(--modules-card-divider, var(--color-border-subtle));
+    padding-left: var(--space-6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+  }
+}
+
+.modules__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modules__card-tag {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--modules-card-text, var(--color-text-primary));
+  background-color: var(--modules-card-tag-bg, rgba(0, 0, 0, 0.08));
+  border: 1px solid var(--modules-card-tag-border, rgba(0, 0, 0, 0.14));
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.modules__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.modules__card-title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  color: var(--modules-card-text, var(--color-text-primary));
+  margin: 0;
+}
+
+.modules__card-desc {
+  font-size: var(--font-size-sm);
+  color: var(--modules-card-text-desc, var(--color-text-secondary));
+  line-height: var(--line-height-relaxed);
+  max-width: 38ch;
+  margin: 0;
+}
+
+.modules__card-badge {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--modules-card-text, var(--color-text-primary));
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  margin-right: var(--space-2);
+  vertical-align: middle;
+}
+
+[data-theme="dark"] .modules__card-badge {
+  color: var(--modules-card-text, #101216);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Micro-interfaces Visuales */
+.modules__card-visual {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--modules-card-divider, var(--color-border-subtle));
+}
+
+/* Visual 1: Garita QR directo (sin bloque contenedor pesado) */
+.modules__visual--garita {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modules__qr-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-2xl);
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-fast);
+}
+
+.modules__card:hover .modules__qr-img {
+  transform: scale(1.03);
+}
+
+/* Visual 2: Aforo Occupancy Widget (telemetría nativa para bento) */
+.modules__occupancy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-xs);
+  width: 100%;
+  box-shadow: var(--shadow-subtle);
+}
+
+.modules__occupancy-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-muted);
+}
+
+.modules__occupancy-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+}
+
+.modules__occupancy-badge {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-status-success);
+  background-color: var(--color-status-success-bg);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.modules__occupancy-metric {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-block: 2px;
+}
+
+.modules__occupancy-count {
+  font-family: var(--font-family-mono);
+  font-size: 1.4rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.modules__occupancy-total {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.modules__occupancy-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.modules__occupancy-fill {
+  height: 100%;
+  background-color: var(--color-status-success);
+  border-radius: var(--radius-pill);
+  transition: width var(--transition-base);
+}
+
+/* Visual 3: Caja Ledger */
+.modules__ledger {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-xs);
+  box-shadow: var(--shadow-subtle);
+}
+
+.modules__ledger-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-primary);
+}
+
+.modules__ledger-row strong {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.modules__ledger-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.modules__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-status-success);
+  display: inline-block;
+}
+
+/* Visual 4: Vista Previa de la Aplicación (Demanda Activa) */
+.modules__app-preview {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.modules__app-img {
+  width: 100%;
+  max-width: 220px;
+  max-height: 220px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-card);
+}

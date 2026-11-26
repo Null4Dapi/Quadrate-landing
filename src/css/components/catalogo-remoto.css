@@ -1,0 +1,352 @@
+/**
+ * catalogo-remoto.css — Catálogo Inteligente Remoto (TanStack Query)
+ * Quadrate pe — Semana 11
+ */
+
+/* ==========================================================================
+   1. Estructura y Toolbar del Catálogo
+   ========================================================================== */
+.catalogo-remoto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 1rem);
+  width: 100%;
+}
+
+.catalogo-remoto__badge-cache .catalogo-remoto__pill {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full, 9999px);
+}
+
+.catalogo-remoto__pill--cache {
+  color: var(--color-status-success);
+  background-color: var(--color-status-success-bg);
+  border: 1px solid var(--color-status-success);
+}
+
+.catalogo-remoto__pill--sync {
+  color: var(--color-status-info);
+  background-color: var(--color-status-info-bg);
+  border: 1px solid var(--color-status-info);
+}
+
+.catalogo-remoto__toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-2xl, 18px);
+  box-shadow: var(--shadow-subtle);
+}
+
+.catalogo-remoto__search-box {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.catalogo-remoto__search-label {
+  display: inline-block;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.catalogo-remoto__search-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 220px;
+}
+
+.catalogo-remoto__search-input {
+  width: 100%;
+  padding: 0.5rem var(--space-8) 0.5rem var(--space-3);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md, 8px);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  min-height: 38px;
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.catalogo-remoto__search-input:focus {
+  outline: none;
+  border-color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  box-shadow: 0 0 0 3px var(--color-accent-focus);
+}
+
+.catalogo-remoto__search-clear {
+  position: absolute;
+  right: var(--space-3);
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.catalogo-remoto__search-clear:hover {
+  color: var(--color-text-primary);
+}
+
+.catalogo-remoto__filtros-barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.catalogo-remoto__filtros {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.catalogo-remoto__filtros-label {
+  display: none;
+}
+
+.catalogo-remoto__pills-group {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.catalogo-remoto__filtro-btn {
+  font-family: var(--font-family-sans);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  padding: 0.35rem 0.85rem;
+  min-height: 32px;
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-base);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.catalogo-remoto__filtro-btn:hover {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-medium);
+}
+
+.catalogo-remoto__filtro-btn--activo {
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-contrast);
+  border-color: var(--color-accent-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-theme="dark"] .catalogo-remoto__filtro-btn--activo {
+  background-color: #f0f2f5;
+  color: #101216;
+  border-color: #f0f2f5;
+}
+
+/* ==========================================================================
+   3. Skeletons de Carga (isPending)
+   ========================================================================== */
+.cochera-skeleton {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  gap: var(--space-4);
+  animation: pulso-skeleton 1.5s ease-in-out infinite;
+}
+
+@keyframes pulso-skeleton {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+.cochera-skeleton__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cochera-skeleton__bar {
+  height: 12px;
+  background-color: #e5e7eb;
+  border-radius: 3px;
+}
+
+.cochera-skeleton__bar--sm { width: 30%; }
+.cochera-skeleton__bar--md { width: 60%; height: 10px; }
+.cochera-skeleton__bar--lg { width: 80%; height: 16px; }
+
+.cochera-skeleton__pill {
+  width: 70px;
+  height: 18px;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+}
+
+.cochera-skeleton__metricas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.cochera-skeleton__caja {
+  height: 48px;
+  background-color: #f1f5f9;
+  border-radius: 4px;
+}
+
+.cochera-skeleton__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.cochera-skeleton__btn {
+  width: 100px;
+  height: 30px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   4. Error, Vacío y Paginación en Red
+   ========================================================================== */
+.catalogo-remoto__error-box {
+  padding: 2rem;
+  text-align: center;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md, 0.5rem);
+}
+
+.catalogo-remoto__error-titulo {
+  margin: 0 0 0.5rem;
+  color: #991b1b;
+  font-weight: 700;
+}
+
+.catalogo-remoto__error-detalle {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  color: #7f1d1d;
+}
+
+.catalogo-remoto__btn-reintentar,
+.catalogo-remoto__btn-reset {
+  padding: 0.45rem 1rem;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #111827;
+  border: none;
+  border-radius: var(--radius-sm, 0.25rem);
+  cursor: pointer;
+}
+
+.catalogo-remoto__empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--color-text-secondary, #4d3d3d);
+}
+
+.catalogo-remoto__paginacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-6, 1.5rem) 0 var(--space-4, 1rem);
+  border-top: 1px solid var(--color-border-subtle);
+  margin-top: var(--space-4);
+}
+
+.catalogo-remoto__btn-nav {
+  padding: 0.55rem 1.15rem;
+  min-height: 40px;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.catalogo-remoto__btn-nav:hover:not(:disabled) {
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-contrast);
+  border-color: var(--color-accent-primary);
+}
+
+.catalogo-remoto__btn-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  border-color: var(--color-border-subtle);
+  background-color: var(--color-bg-base);
+}
+
+.catalogo-remoto__pagina-info {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   5. Modo Nocturno (Zustand theme: "dark")
+   ========================================================================== */
+body.tema-oscuro .catalogo-remoto__toolbar,
+body.tema-oscuro .catalogo-remoto__btn-nav {
+  background-color: #111827 !important;
+  border-color: #1f2937 !important;
+  color: #f9fafb !important;
+}
+
+body.tema-oscuro .catalogo-remoto__pagina-info {
+  color: #9ca3af !important;
+}
+
+body.tema-oscuro .catalogo-remoto__search-input {
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #f9fafb !important;
+}
+
+body.tema-oscuro .catalogo-remoto__filtro-btn {
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #9ca3af !important;
+}
+
+body.tema-oscuro .catalogo-remoto__filtro-btn--activo {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: #ffffff !important;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quadrate Live: Demostración interactiva de localización y monitor de cocheras en tiempo real en Lima Metropolitana.">
+  <title>Quadrate Live — Demostración Interactiva</title>
+  <link rel="icon" type="image/svg+xml" href="src/assets/favicon.svg">
+  <link rel="preload" href="src/assets/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="src/css/main.css?v=1.2.0">
+  <link rel="stylesheet" href="src/css/components/quadrate-live.css">
+  <link rel="stylesheet" href="src/css/components/notificaciones-feed.css">
+  <link rel="stylesheet" href="src/css/components/catalogo-remoto.css">
+  <script>(function(){try{var t=localStorage.getItem("quadrate_theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();</script>
+</head>
+<body class="demo-page">
+  <header class="header">
+    <div class="header__container">
+      <a href="index.html" class="header__brand" aria-label="Volver al inicio de Quadrate pe">
+        <img src="src/assets/logo.webp" alt="Logotipo de Quadrate pe" width="34" height="37" class="header__logo-img">
+        <span class="header__logo-text">Quadrate</span>
+        <span class="header__logo-badge">pe</span>
+      </a>
+      <div class="header__actions">
+        <button type="button" id="tema-toggle" class="header__theme-pill" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema (claro / oscuro)">
+          <span class="header__theme-option header__theme-option--claro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </span>
+          <span class="header__theme-option header__theme-option--oscuro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+        <a href="index.html" class="header__cta" aria-label="Volver a la página principal de Quadrate">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14" style="margin-right: 6px;"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Volver a la landing
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido-demo">
+    <section id="vista-live" class="quadrate-live" aria-label="Demostración interactiva de Quadrate Live">
+      <div id="quadrate-live-root"></div>
+    </section>
+  </main>
+
+  <footer class="demo-footer">
+    <div class="demo-footer__container">
+      <p>© 2026 Quadrate pe · Demostrador interactivo y simulador de cocheras en Lima</p>
+    </div>
+  </footer>
+
+  <!-- Dependencias de React autoalojadas para el demostrador aislado -->
+  <script src="src/assets/vendor/react.production.min.js"></script>
+  <script src="src/assets/vendor/react-dom.production.min.js"></script>
+
+  <!-- Mapeo ESM nativo del navegador para TanStack Query y Zustand sin empaquetadores pesados -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "./src/assets/vendor/react-shim.js",
+      "react/jsx-runtime": "./src/assets/vendor/react-jsx-runtime.js",
+      "@tanstack/react-query": "./src/assets/vendor/tanstack-query.module.js",
+      "zustand": "./src/assets/vendor/zustand.module.js",
+      "zustand/middleware": "./src/assets/vendor/zustand.module.js"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import { inicializarConmutadorTema } from "./src/js/features/theme-switcher.js";
+    import { inicializarQuadrateLive } from "./src/js/react/quadrate-live.js";
+
+    inicializarConmutadorTema();
+    inicializarQuadrateLive();
+  </script>
+</body>
+</html>

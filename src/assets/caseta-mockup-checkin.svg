@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 580" width="100%" height="100%" fill="none" role="img" aria-label="Mockup de Smartphone - Escáner QR de Garita">
+  <defs>
+    <filter id="shadow-phone" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#000000" flood-opacity="0.55" />
+    </filter>
+    <linearGradient id="laser-glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C25E34" stop-opacity="0" />
+      <stop offset="50%" stop-color="#E28743" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#C25E34" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    .font-ui { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+
+  <!-- Cuerpo Exterior del Teléfono -->
+  <g filter="url(#shadow-phone)">
+    <rect x="20" y="20" width="300" height="540" rx="44" fill="#121720" stroke="#2D3748" stroke-width="5" />
+    <!-- Borde interior metálico sutil -->
+    <rect x="25" y="25" width="290" height="530" rx="40" fill="none" stroke="#4A5568" stroke-width="1.5" stroke-opacity="0.4" />
+  </g>
+
+  <!-- Superficie de Pantalla -->
+  <rect x="30" y="30" width="280" height="520" rx="36" fill="#0C1017" />
+
+  <!-- Dynamic Island / Speaker Superior -->
+  <rect x="125" y="38" width="90" height="20" rx="10" fill="#000000" />
+  <circle cx="198" cy="48" r="4.5" fill="#1A202C" />
+
+  <!-- Barra de Estado Móvil -->
+  <text x="56" y="52" class="font-ui" font-size="11" font-weight="600" fill="#E2E8F0">17:30</text>
+  <path d="M260 44h18v9h-18z" fill="none" stroke="#E2E8F0" stroke-width="1.2" rx="2" />
+  <rect x="262" y="46" width="12" height="5" fill="#48BB78" rx="1" />
+  <circle cx="248" cy="48" r="3" fill="#E2E8F0" />
+
+  <!-- Cabecera de la Aplicación de Garita -->
+  <rect x="42" y="68" width="256" height="36" rx="8" fill="#171E28" />
+  <circle cx="58" cy="86" r="6" fill="#C25E34" />
+  <text x="70" y="90" class="font-ui" font-size="12" font-weight="700" fill="#FFFFFF">Quadrate Garita</text>
+  <rect x="210" y="77" width="76" height="18" rx="9" fill="#1C2D27" stroke="#22543D" stroke-width="1" />
+  <circle cx="220" cy="86" r="3" fill="#48BB78" />
+  <text x="228" y="89" class="font-ui" font-size="9" font-weight="700" fill="#48BB78">EN VIVO</text>
+
+  <!-- Visor de Cámara con Retícula y Escaneo QR -->
+  <rect x="42" y="114" width="256" height="190" rx="14" fill="#06080C" stroke="#1E293B" stroke-width="1.5" />
+  
+  <!-- Esquinas de mira de cámara -->
+  <path d="M56 136v-14h14 M270 136v-14h-14 M56 276v14h14 M270 276v14h-14" fill="none" stroke="#C25E34" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Gráfico de Código QR -->
+  <g transform="translate(120, 155)">
+    <rect width="100" height="100" fill="none" />
+    <!-- Cuadrantes QR -->
+    <rect x="10" y="10" width="26" height="26" rx="4" fill="none" stroke="#E2E8F0" stroke-width="3" />
+    <rect x="16" y="16" width="14" height="14" rx="2" fill="#E2E8F0" />
+    <rect x="64" y="10" width="26" height="26" rx="4" fill="none" stroke="#E2E8F0" stroke-width="3" />
+    <rect x="70" y="16" width="14" height="14" rx="2" fill="#E2E8F0" />
+    <rect x="10" y="64" width="26" height="26" rx="4" fill="none" stroke="#E2E8F0" stroke-width="3" />
+    <rect x="16" y="70" width="14" height="14" rx="2" fill="#E2E8F0" />
+    <!-- Patrón interno QR -->
+    <rect x="44" y="18" width="12" height="12" fill="#CBD5E0" />
+    <rect x="44" y="40" width="20" height="20" fill="#CBD5E0" />
+    <rect x="18" y="44" width="14" height="12" fill="#CBD5E0" />
+    <rect x="72" y="44" width="16" height="14" fill="#CBD5E0" />
+    <rect x="44" y="70" width="14" height="18" fill="#CBD5E0" />
+    <rect x="68" y="70" width="18" height="12" fill="#CBD5E0" />
+  </g>
+
+  <!-- Línea de escaneo láser luminosa -->
+  <rect x="44" y="195" width="252" height="18" fill="url(#laser-glow)" />
+  <line x1="44" y1="204" x2="296" y2="204" stroke="#FF7A45" stroke-width="2" />
+  <text x="170" y="296" class="font-ui" font-size="9" fill="#94A3B8" text-anchor="middle">Alineando código QR o placa vehicular...</text>
+
+  <!-- Tarjeta de Detección Exitosa -->
+  <rect x="42" y="314" width="256" height="96" rx="12" fill="#141C26" stroke="#223145" stroke-width="1.2" />
+  <rect x="54" y="324" width="115" height="16" rx="8" fill="#1C3829" />
+  <text x="62" y="335" class="font-ui" font-size="8.5" font-weight="700" fill="#48BB78">✓ PASE VERIFICADO</text>
+  <text x="245" y="336" class="font-mono" font-size="9" font-weight="700" fill="#F6AD55">00:02.1s</text>
+
+  <text x="54" y="362" class="font-mono" font-size="16" font-weight="800" fill="#FFFFFF" letter-spacing="1">PLACA: B3C-412</text>
+  <text x="54" y="380" class="font-ui" font-size="9.5" fill="#CBD5E0">Conductor: Carlos Valdivia · ETA cumplido</text>
+  <text x="54" y="396" class="font-ui" font-size="8.5" fill="#718096">Tipo: Auto Sedan · Pago digital garantizado</text>
+
+  <!-- Botón de Acción Portón Abierto -->
+  <rect x="42" y="420" width="256" height="38" rx="8" fill="#C25E34" />
+  <text x="170" y="444" class="font-ui" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">INGRESO AUTORIZADO · PORTÓN ABIERTO</text>
+
+  <!-- Barra de Navegación Inferior (Home Bar) -->
+  <rect x="120" y="534" width="100" height="4" rx="2" fill="#4A5568" />
+</svg>
+

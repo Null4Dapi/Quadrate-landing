@@ -1,0 +1,66 @@
+name: Publicar Quadrate
+
+# Cada hora revisa el repo público de Quadrate pe y, si cambió (o cambió nuestra capa en vivo), lo publica en Firebase Hosting.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      forzar:
+        description: "Publicar aunque no haya cambios"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ["overlay/**", "scripts/**", "config/**", "tests/**", "firebase.json", ".github/workflows/publicar.yml"]
+
+concurrency:
+  group: publicar-quadrate
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write   # solo para pedir un token temporal a Google (federación de identidad, sin claves guardadas)
+
+env:
+  PROYECTO: dealforge-512304
+  PROVEEDOR_WIF: projects/365843518799/locations/global/workloadIdentityPools/github-pool/providers/quadrate-github
+  CUENTA_SERVICIO: quadrate-publisher@dealforge-512304.iam.gserviceaccount.com
+  FIREBASE_TOOLS: "15.34.2"
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Pruebas del generador y de las guardas
+        run: node --test tests/*.test.mjs
+
+      - name: ¿Hay algo que publicar?
+        id: cambios
+        run: node scripts/cambios.mjs ${{ (github.event_name == 'push' || inputs.forzar) && '--forzar' || '' }}
+
+      - name: Armar el sitio (con las guardas de seguridad)
+        if: steps.cambios.outputs.deploy == 'true'
+        run: node scripts/build.mjs
+
+      - name: Autenticar en Google Cloud (sin claves)
+        if: steps.cambios.outputs.deploy == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.PROVEEDOR_WIF }}
+          service_account: ${{ env.CUENTA_SERVICIO }}
+
+      - name: Publicar en Firebase Hosting
+        if: steps.cambios.outputs.deploy == 'true'
+        run: npx --yes firebase-tools@${{ env.FIREBASE_TOOLS }} deploy --only hosting --project ${{ env.PROYECTO }} --non-interactive
+
+      - name: Verificar la publicación
+        if: steps.cambios.outputs.deploy == 'true'
+        run: node scripts/verificar.mjs ${{ steps.cambios.outputs.sha }}
